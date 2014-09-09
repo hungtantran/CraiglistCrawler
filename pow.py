@@ -23,7 +23,8 @@ for row in rows:
 				if len(td.childNodes) > 1 and len(td.childNodes[1].childNodes) > 0:
 					# print td.childNodes[1].childNodes[0].nodeValue.strip()
 					result = result[:-1] + td.childNodes[1].childNodes[0].nodeValue.strip()
-	print result[:-1]
+	result = result[:-1]
+	outfile.write(result)
 	# result = ""
 	# contents = row.contents
 	# for content in contents:
