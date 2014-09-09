@@ -5,7 +5,7 @@ response = urllib2.urlopen("http://www.priceofweed.com/data/all")
 html = response.read()
 soup = BeautifulSoup(html)
 
-outfile = open("prices.txt", "a")
+outfile = open("/home/ec2-user/pow/pow/prices.txt", "a")
 
 rows = soup.findAll("tr")
 for row in rows:
