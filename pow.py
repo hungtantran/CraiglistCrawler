@@ -7,7 +7,7 @@ response = urllib2.urlopen("http://www.priceofweed.com/data/all")
 html = response.read()
 soup = BeautifulSoup(html)
 
-outfile = open("prices.txt", "a")
+outfile = open("/home/ec2-user/pow/pow/prices.txt", "a")
 
 rows = soup.findAll("tr")
 for row in rows:
@@ -15,7 +15,7 @@ for row in rows:
 	toplevel = xmldoc.childNodes[0]
 
 	result = ""
-	for td in toplevel.childNodes:
+        for td in toplevel.childNodes:
 		if td.nodeType != td.TEXT_NODE:
 			if (td.childNodes[0].nodeType == td.TEXT_NODE):
 				# print td.childNodes[0].nodeValue.strip(),
