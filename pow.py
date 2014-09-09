@@ -22,8 +22,8 @@ for row in rows:
 				result = result + td.childNodes[0].nodeValue.strip() + ","
 				if len(td.childNodes) > 1 and len(td.childNodes[1].childNodes) > 0:
 					# print td.childNodes[1].childNodes[0].nodeValue.strip()
-					result = result[:-1] + td.childNodes[1].childNodes[0].nodeValue.strip()
-	result = result[:-1]
+					result = result[:-1] + td.childNodes[1].childNodes[0].nodeValue.strip() + ","
+	result = result[:-1] + "\n"
 	outfile.write(result)
 	# result = ""
 	# contents = row.contents
