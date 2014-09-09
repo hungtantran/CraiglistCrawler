@@ -16,14 +16,14 @@ for row in rows:
 
 	result = ""
     for td in toplevel.childNodes:
-	if td.nodeType != td.TEXT_NODE:
-		if (td.childNodes[0].nodeType == td.TEXT_NODE):
-			# print td.childNodes[0].nodeValue.strip(),
-			result = result + td.childNodes[0].nodeValue.strip() + ","
-			if len(td.childNodes) > 1 and len(td.childNodes[1].childNodes) > 0:
-				# print td.childNodes[1].childNodes[0].nodeValue.strip()
-				result = result[:-1] + td.childNodes[1].childNodes[0].nodeValue.strip() + ","
-	result = result[:-1] + "\n"
+		if td.nodeType != td.TEXT_NODE:
+			if (td.childNodes[0].nodeType == td.TEXT_NODE):
+				# print td.childNodes[0].nodeValue.strip(),
+				result = result + td.childNodes[0].nodeValue.strip() + ","
+				if len(td.childNodes) > 1 and len(td.childNodes[1].childNodes) > 0:
+					# print td.childNodes[1].childNodes[0].nodeValue.strip()
+					result = result[:-1] + td.childNodes[1].childNodes[0].nodeValue.strip()
+	result = result[:-1]
 	outfile.write(result)
 	# result = ""
 	# contents = row.contents
