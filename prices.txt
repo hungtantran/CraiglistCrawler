@@ -1,0 +1,2400 @@
+Columbia,Missouri,$280,an ounce,high quality,September 9, 2014
+Blountstown,Florida,$270,an ounce,medium quality,September 9, 2014
+Loganville,Georgia,$100,5 grams,high quality,September 9, 2014
+Memphis,Tennessee,$20,a quarter,low quality,September 9, 2014
+Edgewater,Florida,$50,an eighth,medium quality,September 9, 2014
+Newbridge,Kildare,$40,5 grams,medium quality,September 9, 2014
+Lewis Center,Ohio,$300,an ounce,medium quality,September 9, 2014
+San Francisco,California,$180,an ounce,medium quality,September 9, 2014
+Edmonton,Alberta,$300,a half ounce,low quality,September 9, 2014
+Bunbury,Western Australia,$350,an ounce,medium quality,September 9, 2014
+Albany,New York,$20,an ounce,medium quality,September 9, 2014
+Hugo,Minnesota,$300,an ounce,medium quality,September 9, 2014
+Petersburg,Virginia,$20,10 grams,medium quality,September 9, 2014
+Bonner Springs,Kansas,$100,a quarter,medium quality,September 9, 2014
+Dayton,Ohio,$40,10 grams,medium quality,September 9, 2014
+Miami,Florida,$50,5 grams,high quality,September 9, 2014
+Topeka,Kansas,$10,10 grams,high quality,September 9, 2014
+Waterloo,Ontario,$60,a quarter,medium quality,September 9, 2014
+Ashburn,Virginia,$550,an ounce,medium quality,September 9, 2014
+Ashburn,Virginia,$560,an ounce,medium quality,September 9, 2014
+Milwaukee,Wisconsin,$40,25 grams,high quality,September 9, 2014
+Deerfield,Illinois,$310,an ounce,medium quality,September 9, 2014
+Tucson,Arizona,$5,10 grams,low quality,September 9, 2014
+Clinton,New Jersey,$100,5 grams,medium quality,September 9, 2014
+Philadelphia,Pennsylvania,$300,an ounce,high quality,September 9, 2014
+Granbury,Texas,$100,an ounce,medium quality,September 9, 2014
+Toronto,Ontario,$10,10 grams,medium quality,September 9, 2014
+Omaha,Nebraska,$240,an ounce,high quality,September 9, 2014
+Columbia,Missouri,$280,an ounce,high quality,September 9, 2014
+Blountstown,Florida,$270,an ounce,medium quality,September 9, 2014
+Loganville,Georgia,$100,5 grams,high quality,September 9, 2014
+Memphis,Tennessee,$20,a quarter,low quality,September 9, 2014
+Edgewater,Florida,$50,an eighth,medium quality,September 9, 2014
+Newbridge,Kildare,$40,5 grams,medium quality,September 9, 2014
+Lewis Center,Ohio,$300,an ounce,medium quality,September 9, 2014
+San Francisco,California,$180,an ounce,medium quality,September 9, 2014
+Edmonton,Alberta,$300,a half ounce,low quality,September 9, 2014
+Bunbury,Western Australia,$350,an ounce,medium quality,September 9, 2014
+Albany,New York,$20,an ounce,medium quality,September 9, 2014
+Hugo,Minnesota,$300,an ounce,medium quality,September 9, 2014
+Petersburg,Virginia,$20,10 grams,medium quality,September 9, 2014
+Bonner Springs,Kansas,$100,a quarter,medium quality,September 9, 2014
+Dayton,Ohio,$40,10 grams,medium quality,September 9, 2014
+Miami,Florida,$50,5 grams,high quality,September 9, 2014
+Topeka,Kansas,$10,10 grams,high quality,September 9, 2014
+Waterloo,Ontario,$60,a quarter,medium quality,September 9, 2014
+Ashburn,Virginia,$550,an ounce,medium quality,September 9, 2014
+Ashburn,Virginia,$560,an ounce,medium quality,September 9, 2014
+Milwaukee,Wisconsin,$40,25 grams,high quality,September 9, 2014
+Deerfield,Illinois,$310,an ounce,medium quality,September 9, 2014
+Houston,Texas,$350,an ounce,high quality,September 9, 2014
+Salem,Alabama,$15,an ounce,medium quality,September 9, 2014
+East Rockaway,New York,$50,an eighth,high quality,September 9, 2014
+Pampa,Texas,$100,a quarter,medium quality,September 9, 2014
+Rainham,Essex,$120,an ounce,medium quality,September 9, 2014
+Hanover,Niedersachsen,$50,5 grams,high quality,September 9, 2014
+Dayton,Ohio,$250,an ounce,medium quality,September 9, 2014
+Granbury,Texas,$100,an ounce,medium quality,September 9, 2014
+Toronto,Ontario,$10,10 grams,medium quality,September 9, 2014
+Omaha,Nebraska,$240,an ounce,high quality,September 9, 2014
+Columbia,Missouri,$280,an ounce,high quality,September 9, 2014
+Blountstown,Florida,$270,an ounce,medium quality,September 9, 2014
+Loganville,Georgia,$100,5 grams,high quality,September 9, 2014
+Memphis,Tennessee,$20,a quarter,low quality,September 9, 2014
+Edgewater,Florida,$50,an eighth,medium quality,September 9, 2014
+Newbridge,Kildare,$40,5 grams,medium quality,September 9, 2014
+Lewis Center,Ohio,$300,an ounce,medium quality,September 9, 2014
+San Francisco,California,$180,an ounce,medium quality,September 9, 2014
+Edmonton,Alberta,$300,a half ounce,low quality,September 9, 2014
+Bunbury,Western Australia,$350,an ounce,medium quality,September 9, 2014
+Albany,New York,$20,an ounce,medium quality,September 9, 2014
+Hugo,Minnesota,$300,an ounce,medium quality,September 9, 2014
+Petersburg,Virginia,$20,10 grams,medium quality,September 9, 2014
+Bonner Springs,Kansas,$100,a quarter,medium quality,September 9, 2014
+Dayton,Ohio,$40,10 grams,medium quality,September 9, 2014
+Alexander,New York,$20,5 grams,medium quality,September 9, 2014
+Atlanta,Georgia,$200,a quarter,medium quality,September 9, 2014
+Los Angeles,California,$300,an ounce,medium quality,September 9, 2014
+Oshawa,Ontario,$280,an eighth,medium quality,September 9, 2014
+San Lorenzo,California,$100,an ounce,medium quality,September 9, 2014
+Birmingham,Alabama,$20,an ounce,medium quality,September 9, 2014
+Memphis,Tennessee,$300,an ounce,high quality,September 9, 2014
+East Stroudsburg,Pennsylvania,$300,an ounce,high quality,September 9, 2014
+Boston,Massachusetts,$50,an eighth,medium quality,September 9, 2014
+Los Angeles,California,$100,25 grams,medium quality,September 9, 2014
+Athens,Alabama,$10,5 grams,high quality,September 9, 2014
+Aumsville,Oregon,$1,an ounce,high quality,September 9, 2014
+Mirabella Eclano,Campania,$10,an ounce,medium quality,September 9, 2014
+Houston,Texas,$350,an ounce,high quality,September 9, 2014
+Salem,Alabama,$15,an ounce,medium quality,September 9, 2014
+East Rockaway,New York,$50,an eighth,high quality,September 9, 2014
+Pampa,Texas,$100,a quarter,medium quality,September 9, 2014
+Rainham,Essex,$120,an ounce,medium quality,September 9, 2014
+Hanover,Niedersachsen,$50,5 grams,high quality,September 9, 2014
+Dayton,Ohio,$250,an ounce,medium quality,September 9, 2014
+Granbury,Texas,$100,an ounce,medium quality,September 9, 2014
+Toronto,Ontario,$10,10 grams,medium quality,September 9, 2014
+Omaha,Nebraska,$240,an ounce,high quality,September 9, 2014
+Columbia,Missouri,$280,an ounce,high quality,September 9, 2014
+Blountstown,Florida,$270,an ounce,medium quality,September 9, 2014
+Chicago,Illinois,$80,an eighth,high quality,September 9, 2014
+Atlanta,Georgia,$150,a half ounce,high quality,September 9, 2014
+Elmwood Park,Illinois,$65,an eighth,high quality,September 9, 2014
+Albuquerque,New Mexico,$30,an ounce,high quality,September 9, 2014
+Bathurst,New Brunswick,$35,5 grams,medium quality,September 9, 2014
+Baton Rouge,Louisiana,$100,a quarter,high quality,September 9, 2014
+Canton,Ohio,$50,an eighth,medium quality,September 9, 2014
+Exeter,New Hampshire,$100,an ounce,high quality,September 9, 2014
+Linden,New Jersey,$60,an eighth,medium quality,September 9, 2014
+Hope Mills,North Carolina,$20,5 grams,high quality,September 9, 2014
+Alexander,New York,$20,5 grams,medium quality,September 9, 2014
+Atlanta,Georgia,$200,a quarter,medium quality,September 9, 2014
+Los Angeles,California,$300,an ounce,medium quality,September 9, 2014
+Oshawa,Ontario,$280,an eighth,medium quality,September 9, 2014
+San Lorenzo,California,$100,an ounce,medium quality,September 9, 2014
+Birmingham,Alabama,$20,an ounce,medium quality,September 9, 2014
+Memphis,Tennessee,$300,an ounce,high quality,September 9, 2014
+East Stroudsburg,Pennsylvania,$300,an ounce,high quality,September 9, 2014
+Boston,Massachusetts,$50,an eighth,medium quality,September 9, 2014
+Los Angeles,California,$100,25 grams,medium quality,September 9, 2014
+Athens,Alabama,$10,5 grams,high quality,September 9, 2014
+Aumsville,Oregon,$1,an ounce,high quality,September 9, 2014
+Mirabella Eclano,Campania,$10,an ounce,medium quality,September 9, 2014
+Houston,Texas,$350,an ounce,high quality,September 9, 2014
+Salem,Alabama,$15,an ounce,medium quality,September 9, 2014
+Valdosta,Georgia,$100,5 grams,medium quality,September 9, 2014
+Edmond,Oklahoma,$200,a quarter,high quality,September 9, 2014
+Black Diamond,Washington,$160,an ounce,high quality,September 9, 2014
+Boise,Idaho,$200,an ounce,medium quality,September 9, 2014
+York,South Carolina,$10,an ounce,medium quality,September 9, 2014
+West Palm Beach,Florida,$100,an eighth,medium quality,September 9, 2014
+Live Oak,Florida,$1,an ounce,low quality,September 9, 2014
+Goleta,California,$30,an eighth,medium quality,September 9, 2014
+Chicago,Illinois,$80,an eighth,high quality,September 9, 2014
+Atlanta,Georgia,$150,a half ounce,high quality,September 9, 2014
+Elmwood Park,Illinois,$65,an eighth,high quality,September 9, 2014
+Albuquerque,New Mexico,$30,an ounce,high quality,September 9, 2014
+Bathurst,New Brunswick,$35,5 grams,medium quality,September 9, 2014
+Baton Rouge,Louisiana,$100,a quarter,high quality,September 9, 2014
+Canton,Ohio,$50,an eighth,medium quality,September 9, 2014
+Exeter,New Hampshire,$100,an ounce,high quality,September 9, 2014
+Linden,New Jersey,$60,an eighth,medium quality,September 9, 2014
+Hope Mills,North Carolina,$20,5 grams,high quality,September 9, 2014
+Alexander,New York,$20,5 grams,medium quality,September 9, 2014
+Atlanta,Georgia,$200,a quarter,medium quality,September 9, 2014
+Los Angeles,California,$300,an ounce,medium quality,September 9, 2014
+Oshawa,Ontario,$280,an eighth,medium quality,September 9, 2014
+San Lorenzo,California,$100,an ounce,medium quality,September 9, 2014
+Birmingham,Alabama,$20,an ounce,medium quality,September 9, 2014
+Memphis,Tennessee,$300,an ounce,high quality,September 9, 2014
+Sioux City,Iowa,$360,an ounce,medium quality,September 10, 2014
+Tulare,California,$200,an ounce,medium quality,September 10, 2014
+Edmonton,Alberta,$30,5 grams,high quality,September 10, 2014
+Albany,Kentucky,$200,an ounce,medium quality,September 10, 2014
+Saint Petersburg,Florida,$20,5 grams,high quality,September 10, 2014
+Fort Lauderdale,Florida,$20,a gram,medium quality,September 9, 2014
+Turlock,California,$40,an eighth,medium quality,September 9, 2014
+Rockledge,Florida,$100,5 grams,medium quality,September 9, 2014
+Battle Ground,Washington,$220,an ounce,high quality,September 9, 2014
+Houston,Texas,$65,5 grams,high quality,September 9, 2014
+Valdosta,Georgia,$100,5 grams,medium quality,September 9, 2014
+Edmond,Oklahoma,$200,a quarter,high quality,September 9, 2014
+Black Diamond,Washington,$160,an ounce,high quality,September 9, 2014
+Boise,Idaho,$200,an ounce,medium quality,September 9, 2014
+York,South Carolina,$10,an ounce,medium quality,September 9, 2014
+West Palm Beach,Florida,$100,an eighth,medium quality,September 9, 2014
+Live Oak,Florida,$1,an ounce,low quality,September 9, 2014
+Goleta,California,$30,an eighth,medium quality,September 9, 2014
+Chicago,Illinois,$80,an eighth,high quality,September 9, 2014
+Atlanta,Georgia,$150,a half ounce,high quality,September 9, 2014
+Elmwood Park,Illinois,$65,an eighth,high quality,September 9, 2014
+Albuquerque,New Mexico,$30,an ounce,high quality,September 9, 2014
+Bathurst,New Brunswick,$35,5 grams,medium quality,September 9, 2014
+Baton Rouge,Louisiana,$100,a quarter,high quality,September 9, 2014
+Canton,Ohio,$50,an eighth,medium quality,September 9, 2014
+San Jose,California,$60,a half ounce,medium quality,September 10, 2014
+Calgary,Alberta,$60,a quarter,medium quality,September 10, 2014
+Montreal,Quebec,$130,an ounce,medium quality,September 10, 2014
+Florissant,Missouri,$150,an ounce,medium quality,September 10, 2014
+Orlando,Florida,$50,5 grams,medium quality,September 10, 2014
+Los Angeles,California,$200,an ounce,high quality,September 10, 2014
+Mundelein,Illinois,$80,an eighth,medium quality,September 10, 2014
+Gary,Indiana,$85,an ounce,low quality,September 10, 2014
+Sioux City,Iowa,$360,an ounce,medium quality,September 10, 2014
+Tulare,California,$200,an ounce,medium quality,September 10, 2014
+Edmonton,Alberta,$30,5 grams,high quality,September 10, 2014
+Albany,Kentucky,$200,an ounce,medium quality,September 10, 2014
+Saint Petersburg,Florida,$20,5 grams,high quality,September 10, 2014
+Fort Lauderdale,Florida,$20,a gram,medium quality,September 9, 2014
+Turlock,California,$40,an eighth,medium quality,September 9, 2014
+Rockledge,Florida,$100,5 grams,medium quality,September 9, 2014
+Battle Ground,Washington,$220,an ounce,high quality,September 9, 2014
+Houston,Texas,$65,5 grams,high quality,September 9, 2014
+Valdosta,Georgia,$100,5 grams,medium quality,September 9, 2014
+Edmond,Oklahoma,$200,a quarter,high quality,September 9, 2014
+Black Diamond,Washington,$160,an ounce,high quality,September 9, 2014
+Boise,Idaho,$200,an ounce,medium quality,September 9, 2014
+York,South Carolina,$10,an ounce,medium quality,September 9, 2014
+West Palm Beach,Florida,$100,an eighth,medium quality,September 9, 2014
+Live Oak,Florida,$1,an ounce,low quality,September 9, 2014
+Boise,Idaho,$60,a quarter,medium quality,September 10, 2014
+Cornwall,Ontario,$100,a half ounce,medium quality,September 10, 2014
+Portland,Oregon,$600,a half ounce,medium quality,September 10, 2014
+San Jose,California,$60,a half ounce,medium quality,September 10, 2014
+Calgary,Alberta,$60,a quarter,medium quality,September 10, 2014
+Montreal,Quebec,$130,an ounce,medium quality,September 10, 2014
+Florissant,Missouri,$150,an ounce,medium quality,September 10, 2014
+Orlando,Florida,$50,5 grams,medium quality,September 10, 2014
+Los Angeles,California,$200,an ounce,high quality,September 10, 2014
+Mundelein,Illinois,$80,an eighth,medium quality,September 10, 2014
+Gary,Indiana,$85,an ounce,low quality,September 10, 2014
+Sioux City,Iowa,$360,an ounce,medium quality,September 10, 2014
+Tulare,California,$200,an ounce,medium quality,September 10, 2014
+Edmonton,Alberta,$30,5 grams,high quality,September 10, 2014
+Albany,Kentucky,$200,an ounce,medium quality,September 10, 2014
+Saint Petersburg,Florida,$20,5 grams,high quality,September 10, 2014
+Fort Lauderdale,Florida,$20,a gram,medium quality,September 9, 2014
+Turlock,California,$40,an eighth,medium quality,September 9, 2014
+Rockledge,Florida,$100,5 grams,medium quality,September 9, 2014
+Battle Ground,Washington,$220,an ounce,high quality,September 9, 2014
+Houston,Texas,$65,5 grams,high quality,September 9, 2014
+Valdosta,Georgia,$100,5 grams,medium quality,September 9, 2014
+Edmond,Oklahoma,$200,a quarter,high quality,September 9, 2014
+Black Diamond,Washington,$160,an ounce,high quality,September 9, 2014
+Boise,Idaho,$200,an ounce,medium quality,September 9, 2014
+Petaluma,California,$25,an eighth,medium quality,September 10, 2014
+Boise,Idaho,$60,a quarter,medium quality,September 10, 2014
+Cornwall,Ontario,$100,a half ounce,medium quality,September 10, 2014
+Portland,Oregon,$600,a half ounce,medium quality,September 10, 2014
+San Jose,California,$60,a half ounce,medium quality,September 10, 2014
+Calgary,Alberta,$60,a quarter,medium quality,September 10, 2014
+Montreal,Quebec,$130,an ounce,medium quality,September 10, 2014
+Florissant,Missouri,$150,an ounce,medium quality,September 10, 2014
+Orlando,Florida,$50,5 grams,medium quality,September 10, 2014
+Los Angeles,California,$200,an ounce,high quality,September 10, 2014
+Mundelein,Illinois,$80,an eighth,medium quality,September 10, 2014
+Gary,Indiana,$85,an ounce,low quality,September 10, 2014
+Sioux City,Iowa,$360,an ounce,medium quality,September 10, 2014
+Tulare,California,$200,an ounce,medium quality,September 10, 2014
+Edmonton,Alberta,$30,5 grams,high quality,September 10, 2014
+Albany,Kentucky,$200,an ounce,medium quality,September 10, 2014
+Saint Petersburg,Florida,$20,5 grams,high quality,September 10, 2014
+Fort Lauderdale,Florida,$20,a gram,medium quality,September 9, 2014
+Turlock,California,$40,an eighth,medium quality,September 9, 2014
+Rockledge,Florida,$100,5 grams,medium quality,September 9, 2014
+Battle Ground,Washington,$220,an ounce,high quality,September 9, 2014
+Houston,Texas,$65,5 grams,high quality,September 9, 2014
+Valdosta,Georgia,$100,5 grams,medium quality,September 9, 2014
+Edmond,Oklahoma,$200,a quarter,high quality,September 9, 2014
+Black Diamond,Washington,$160,an ounce,high quality,September 9, 2014
+Cypress,Texas,$50,an eighth,medium quality,September 10, 2014
+San Bernardino,California,$400,an ounce,high quality,September 10, 2014
+Milan,Lombardia,$70,5 grams,high quality,September 10, 2014
+Helena,Arkansas,$280,an ounce,high quality,September 10, 2014
+Sioux Falls,South Dakota,$50,an eighth,medium quality,September 10, 2014
+Orange,Connecticut,$200,5 grams,medium quality,September 10, 2014
+Madison,Wisconsin,$340,an ounce,high quality,September 10, 2014
+Atlanta,Georgia,$40,an eighth,medium quality,September 10, 2014
+San Antonio,Texas,$15,an ounce,high quality,September 10, 2014
+Seattle,Washington,$3,an ounce,medium quality,September 10, 2014
+Petaluma,California,$25,an eighth,medium quality,September 10, 2014
+Boise,Idaho,$60,a quarter,medium quality,September 10, 2014
+Cornwall,Ontario,$100,a half ounce,medium quality,September 10, 2014
+Portland,Oregon,$600,a half ounce,medium quality,September 10, 2014
+San Jose,California,$60,a half ounce,medium quality,September 10, 2014
+Calgary,Alberta,$60,a quarter,medium quality,September 10, 2014
+Montreal,Quebec,$130,an ounce,medium quality,September 10, 2014
+Florissant,Missouri,$150,an ounce,medium quality,September 10, 2014
+Orlando,Florida,$50,5 grams,medium quality,September 10, 2014
+Los Angeles,California,$200,an ounce,high quality,September 10, 2014
+Mundelein,Illinois,$80,an eighth,medium quality,September 10, 2014
+Gary,Indiana,$85,an ounce,low quality,September 10, 2014
+Sioux City,Iowa,$360,an ounce,medium quality,September 10, 2014
+Tulare,California,$200,an ounce,medium quality,September 10, 2014
+Edmonton,Alberta,$30,5 grams,high quality,September 10, 2014
+Valencia,Comunidad Valenciana,$25,5 grams,medium quality,September 10, 2014
+Roanoke,Virginia,$90,an ounce,medium quality,September 10, 2014
+Box Elder,South Dakota,$100,5 grams,medium quality,September 10, 2014
+Cypress,Texas,$50,an eighth,medium quality,September 10, 2014
+San Bernardino,California,$400,an ounce,high quality,September 10, 2014
+Milan,Lombardia,$70,5 grams,high quality,September 10, 2014
+Helena,Arkansas,$280,an ounce,high quality,September 10, 2014
+Sioux Falls,South Dakota,$50,an eighth,medium quality,September 10, 2014
+Orange,Connecticut,$200,5 grams,medium quality,September 10, 2014
+Madison,Wisconsin,$340,an ounce,high quality,September 10, 2014
+Atlanta,Georgia,$40,an eighth,medium quality,September 10, 2014
+San Antonio,Texas,$15,an ounce,high quality,September 10, 2014
+Seattle,Washington,$3,an ounce,medium quality,September 10, 2014
+Petaluma,California,$25,an eighth,medium quality,September 10, 2014
+Boise,Idaho,$60,a quarter,medium quality,September 10, 2014
+Cornwall,Ontario,$100,a half ounce,medium quality,September 10, 2014
+Portland,Oregon,$600,a half ounce,medium quality,September 10, 2014
+San Jose,California,$60,a half ounce,medium quality,September 10, 2014
+Calgary,Alberta,$60,a quarter,medium quality,September 10, 2014
+Montreal,Quebec,$130,an ounce,medium quality,September 10, 2014
+Florissant,Missouri,$150,an ounce,medium quality,September 10, 2014
+Orlando,Florida,$50,5 grams,medium quality,September 10, 2014
+Los Angeles,California,$200,an ounce,high quality,September 10, 2014
+Mundelein,Illinois,$80,an eighth,medium quality,September 10, 2014
+Gary,Indiana,$85,an ounce,low quality,September 10, 2014
+Valencia,Comunidad Valenciana,$25,5 grams,medium quality,September 10, 2014
+Roanoke,Virginia,$90,an ounce,medium quality,September 10, 2014
+Box Elder,South Dakota,$100,5 grams,medium quality,September 10, 2014
+Cypress,Texas,$50,an eighth,medium quality,September 10, 2014
+San Bernardino,California,$400,an ounce,high quality,September 10, 2014
+Milan,Lombardia,$70,5 grams,high quality,September 10, 2014
+Helena,Arkansas,$280,an ounce,high quality,September 10, 2014
+Sioux Falls,South Dakota,$50,an eighth,medium quality,September 10, 2014
+Orange,Connecticut,$200,5 grams,medium quality,September 10, 2014
+Madison,Wisconsin,$340,an ounce,high quality,September 10, 2014
+Atlanta,Georgia,$40,an eighth,medium quality,September 10, 2014
+San Antonio,Texas,$15,an ounce,high quality,September 10, 2014
+Seattle,Washington,$3,an ounce,medium quality,September 10, 2014
+Petaluma,California,$25,an eighth,medium quality,September 10, 2014
+Boise,Idaho,$60,a quarter,medium quality,September 10, 2014
+Cornwall,Ontario,$100,a half ounce,medium quality,September 10, 2014
+Portland,Oregon,$600,a half ounce,medium quality,September 10, 2014
+San Jose,California,$60,a half ounce,medium quality,September 10, 2014
+Calgary,Alberta,$60,a quarter,medium quality,September 10, 2014
+Montreal,Quebec,$130,an ounce,medium quality,September 10, 2014
+Florissant,Missouri,$150,an ounce,medium quality,September 10, 2014
+Orlando,Florida,$50,5 grams,medium quality,September 10, 2014
+Los Angeles,California,$200,an ounce,high quality,September 10, 2014
+Mundelein,Illinois,$80,an eighth,medium quality,September 10, 2014
+Gary,Indiana,$85,an ounce,low quality,September 10, 2014
+Athens,Ohio,$10,an ounce,high quality,September 10, 2014
+Urbana,Illinois,$20,a gram,high quality,September 10, 2014
+Valencia,Comunidad Valenciana,$25,5 grams,medium quality,September 10, 2014
+Roanoke,Virginia,$90,an ounce,medium quality,September 10, 2014
+Box Elder,South Dakota,$100,5 grams,medium quality,September 10, 2014
+Cypress,Texas,$50,an eighth,medium quality,September 10, 2014
+San Bernardino,California,$400,an ounce,high quality,September 10, 2014
+Milan,Lombardia,$70,5 grams,high quality,September 10, 2014
+Helena,Arkansas,$280,an ounce,high quality,September 10, 2014
+Sioux Falls,South Dakota,$50,an eighth,medium quality,September 10, 2014
+Orange,Connecticut,$200,5 grams,medium quality,September 10, 2014
+Madison,Wisconsin,$340,an ounce,high quality,September 10, 2014
+Atlanta,Georgia,$40,an eighth,medium quality,September 10, 2014
+San Antonio,Texas,$15,an ounce,high quality,September 10, 2014
+Seattle,Washington,$3,an ounce,medium quality,September 10, 2014
+Petaluma,California,$25,an eighth,medium quality,September 10, 2014
+Boise,Idaho,$60,a quarter,medium quality,September 10, 2014
+Cornwall,Ontario,$100,a half ounce,medium quality,September 10, 2014
+Portland,Oregon,$600,a half ounce,medium quality,September 10, 2014
+San Jose,California,$60,a half ounce,medium quality,September 10, 2014
+Calgary,Alberta,$60,a quarter,medium quality,September 10, 2014
+Montreal,Quebec,$130,an ounce,medium quality,September 10, 2014
+Florissant,Missouri,$150,an ounce,medium quality,September 10, 2014
+Orlando,Florida,$50,5 grams,medium quality,September 10, 2014
+Los Angeles,California,$200,an ounce,high quality,September 10, 2014
+Anglesea,Victoria,$90,a quarter,medium quality,September 10, 2014
+Trento,Trentino-Alto Adige,$10,5 grams,medium quality,September 10, 2014
+Athens,Ohio,$10,an ounce,high quality,September 10, 2014
+Urbana,Illinois,$20,a gram,high quality,September 10, 2014
+Valencia,Comunidad Valenciana,$25,5 grams,medium quality,September 10, 2014
+Roanoke,Virginia,$90,an ounce,medium quality,September 10, 2014
+Box Elder,South Dakota,$100,5 grams,medium quality,September 10, 2014
+Cypress,Texas,$50,an eighth,medium quality,September 10, 2014
+San Bernardino,California,$400,an ounce,high quality,September 10, 2014
+Milan,Lombardia,$70,5 grams,high quality,September 10, 2014
+Helena,Arkansas,$280,an ounce,high quality,September 10, 2014
+Sioux Falls,South Dakota,$50,an eighth,medium quality,September 10, 2014
+Orange,Connecticut,$200,5 grams,medium quality,September 10, 2014
+Madison,Wisconsin,$340,an ounce,high quality,September 10, 2014
+Atlanta,Georgia,$40,an eighth,medium quality,September 10, 2014
+San Antonio,Texas,$15,an ounce,high quality,September 10, 2014
+Seattle,Washington,$3,an ounce,medium quality,September 10, 2014
+Petaluma,California,$25,an eighth,medium quality,September 10, 2014
+Boise,Idaho,$60,a quarter,medium quality,September 10, 2014
+Cornwall,Ontario,$100,a half ounce,medium quality,September 10, 2014
+Portland,Oregon,$600,a half ounce,medium quality,September 10, 2014
+San Jose,California,$60,a half ounce,medium quality,September 10, 2014
+Calgary,Alberta,$60,a quarter,medium quality,September 10, 2014
+Montreal,Quebec,$130,an ounce,medium quality,September 10, 2014
+Florissant,Missouri,$150,an ounce,medium quality,September 10, 2014
+New Brunswick,New Jersey,$110,a quarter,medium quality,September 10, 2014
+Anglesea,Victoria,$90,a quarter,medium quality,September 10, 2014
+Trento,Trentino-Alto Adige,$10,5 grams,medium quality,September 10, 2014
+Athens,Ohio,$10,an ounce,high quality,September 10, 2014
+Urbana,Illinois,$20,a gram,high quality,September 10, 2014
+Valencia,Comunidad Valenciana,$25,5 grams,medium quality,September 10, 2014
+Roanoke,Virginia,$90,an ounce,medium quality,September 10, 2014
+Box Elder,South Dakota,$100,5 grams,medium quality,September 10, 2014
+Cypress,Texas,$50,an eighth,medium quality,September 10, 2014
+San Bernardino,California,$400,an ounce,high quality,September 10, 2014
+Milan,Lombardia,$70,5 grams,high quality,September 10, 2014
+Helena,Arkansas,$280,an ounce,high quality,September 10, 2014
+Sioux Falls,South Dakota,$50,an eighth,medium quality,September 10, 2014
+Orange,Connecticut,$200,5 grams,medium quality,September 10, 2014
+Madison,Wisconsin,$340,an ounce,high quality,September 10, 2014
+Atlanta,Georgia,$40,an eighth,medium quality,September 10, 2014
+San Antonio,Texas,$15,an ounce,high quality,September 10, 2014
+Seattle,Washington,$3,an ounce,medium quality,September 10, 2014
+Petaluma,California,$25,an eighth,medium quality,September 10, 2014
+Boise,Idaho,$60,a quarter,medium quality,September 10, 2014
+Cornwall,Ontario,$100,a half ounce,medium quality,September 10, 2014
+Portland,Oregon,$600,a half ounce,medium quality,September 10, 2014
+San Jose,California,$60,a half ounce,medium quality,September 10, 2014
+Calgary,Alberta,$60,a quarter,medium quality,September 10, 2014
+Montreal,Quebec,$130,an ounce,medium quality,September 10, 2014
+Canton,Michigan,$150,20 grams,high quality,September 10, 2014
+Boca Raton,Florida,$100,10 grams,high quality,September 10, 2014
+Columbus,Ohio,$100,a quarter,high quality,September 10, 2014
+New Brunswick,New Jersey,$110,a quarter,medium quality,September 10, 2014
+Anglesea,Victoria,$90,a quarter,medium quality,September 10, 2014
+Trento,Trentino-Alto Adige,$10,5 grams,medium quality,September 10, 2014
+Athens,Ohio,$10,an ounce,high quality,September 10, 2014
+Urbana,Illinois,$20,a gram,high quality,September 10, 2014
+Valencia,Comunidad Valenciana,$25,5 grams,medium quality,September 10, 2014
+Roanoke,Virginia,$90,an ounce,medium quality,September 10, 2014
+Box Elder,South Dakota,$100,5 grams,medium quality,September 10, 2014
+Cypress,Texas,$50,an eighth,medium quality,September 10, 2014
+San Bernardino,California,$400,an ounce,high quality,September 10, 2014
+Milan,Lombardia,$70,5 grams,high quality,September 10, 2014
+Helena,Arkansas,$280,an ounce,high quality,September 10, 2014
+Sioux Falls,South Dakota,$50,an eighth,medium quality,September 10, 2014
+Orange,Connecticut,$200,5 grams,medium quality,September 10, 2014
+Madison,Wisconsin,$340,an ounce,high quality,September 10, 2014
+Atlanta,Georgia,$40,an eighth,medium quality,September 10, 2014
+San Antonio,Texas,$15,an ounce,high quality,September 10, 2014
+Seattle,Washington,$3,an ounce,medium quality,September 10, 2014
+Petaluma,California,$25,an eighth,medium quality,September 10, 2014
+Boise,Idaho,$60,a quarter,medium quality,September 10, 2014
+Cornwall,Ontario,$100,a half ounce,medium quality,September 10, 2014
+Portland,Oregon,$600,a half ounce,medium quality,September 10, 2014
+Coeur D Alene,Idaho,$40,an eighth,medium quality,September 10, 2014
+Detroit,Michigan,$55,an eighth,medium quality,September 10, 2014
+Doylestown,Pennsylvania,$45,an eighth,high quality,September 10, 2014
+Aurora,Illinois,$40,an eighth,medium quality,September 10, 2014
+Canton,Michigan,$150,20 grams,high quality,September 10, 2014
+Boca Raton,Florida,$100,10 grams,high quality,September 10, 2014
+Columbus,Ohio,$100,a quarter,high quality,September 10, 2014
+New Brunswick,New Jersey,$110,a quarter,medium quality,September 10, 2014
+Anglesea,Victoria,$90,a quarter,medium quality,September 10, 2014
+Trento,Trentino-Alto Adige,$10,5 grams,medium quality,September 10, 2014
+Athens,Ohio,$10,an ounce,high quality,September 10, 2014
+Urbana,Illinois,$20,a gram,high quality,September 10, 2014
+Valencia,Comunidad Valenciana,$25,5 grams,medium quality,September 10, 2014
+Roanoke,Virginia,$90,an ounce,medium quality,September 10, 2014
+Box Elder,South Dakota,$100,5 grams,medium quality,September 10, 2014
+Cypress,Texas,$50,an eighth,medium quality,September 10, 2014
+San Bernardino,California,$400,an ounce,high quality,September 10, 2014
+Milan,Lombardia,$70,5 grams,high quality,September 10, 2014
+Helena,Arkansas,$280,an ounce,high quality,September 10, 2014
+Sioux Falls,South Dakota,$50,an eighth,medium quality,September 10, 2014
+Orange,Connecticut,$200,5 grams,medium quality,September 10, 2014
+Madison,Wisconsin,$340,an ounce,high quality,September 10, 2014
+Atlanta,Georgia,$40,an eighth,medium quality,September 10, 2014
+San Antonio,Texas,$15,an ounce,high quality,September 10, 2014
+Seattle,Washington,$3,an ounce,medium quality,September 10, 2014
+Shreveport,Louisiana,$65,an eighth,medium quality,September 10, 2014
+Burgaw,North Carolina,$20,an ounce,high quality,September 10, 2014
+Red Bank,New Jersey,$120,a quarter,high quality,September 10, 2014
+Coeur D Alene,Idaho,$40,an eighth,medium quality,September 10, 2014
+Detroit,Michigan,$55,an eighth,medium quality,September 10, 2014
+Doylestown,Pennsylvania,$45,an eighth,high quality,September 10, 2014
+Aurora,Illinois,$40,an eighth,medium quality,September 10, 2014
+Canton,Michigan,$150,20 grams,high quality,September 10, 2014
+Boca Raton,Florida,$100,10 grams,high quality,September 10, 2014
+Columbus,Ohio,$100,a quarter,high quality,September 10, 2014
+New Brunswick,New Jersey,$110,a quarter,medium quality,September 10, 2014
+Anglesea,Victoria,$90,a quarter,medium quality,September 10, 2014
+Trento,Trentino-Alto Adige,$10,5 grams,medium quality,September 10, 2014
+Athens,Ohio,$10,an ounce,high quality,September 10, 2014
+Urbana,Illinois,$20,a gram,high quality,September 10, 2014
+Valencia,Comunidad Valenciana,$25,5 grams,medium quality,September 10, 2014
+Roanoke,Virginia,$90,an ounce,medium quality,September 10, 2014
+Box Elder,South Dakota,$100,5 grams,medium quality,September 10, 2014
+Cypress,Texas,$50,an eighth,medium quality,September 10, 2014
+San Bernardino,California,$400,an ounce,high quality,September 10, 2014
+Milan,Lombardia,$70,5 grams,high quality,September 10, 2014
+Helena,Arkansas,$280,an ounce,high quality,September 10, 2014
+Sioux Falls,South Dakota,$50,an eighth,medium quality,September 10, 2014
+Orange,Connecticut,$200,5 grams,medium quality,September 10, 2014
+Madison,Wisconsin,$340,an ounce,high quality,September 10, 2014
+Clovis,California,$150,an ounce,high quality,September 10, 2014
+New Brunswick,New Jersey,$55,an eighth,medium quality,September 10, 2014
+Springfield,Missouri,$295,an ounce,medium quality,September 10, 2014
+Reno,Nevada,$350,an ounce,high quality,September 10, 2014
+Wilmington,Delaware,$25,an eighth,medium quality,September 10, 2014
+Mannford,Oklahoma,$30,a quarter,medium quality,September 10, 2014
+Warsaw,Indiana,$55,a half ounce,medium quality,September 10, 2014
+Czapury,Poznan,$120,25 grams,high quality,September 10, 2014
+Brooklyn,New York,$250,an ounce,medium quality,September 10, 2014
+Shreveport,Louisiana,$65,an eighth,medium quality,September 10, 2014
+Burgaw,North Carolina,$20,an ounce,high quality,September 10, 2014
+Red Bank,New Jersey,$120,a quarter,high quality,September 10, 2014
+Coeur D Alene,Idaho,$40,an eighth,medium quality,September 10, 2014
+Detroit,Michigan,$55,an eighth,medium quality,September 10, 2014
+Doylestown,Pennsylvania,$45,an eighth,high quality,September 10, 2014
+Aurora,Illinois,$40,an eighth,medium quality,September 10, 2014
+Canton,Michigan,$150,20 grams,high quality,September 10, 2014
+Boca Raton,Florida,$100,10 grams,high quality,September 10, 2014
+Columbus,Ohio,$100,a quarter,high quality,September 10, 2014
+New Brunswick,New Jersey,$110,a quarter,medium quality,September 10, 2014
+Anglesea,Victoria,$90,a quarter,medium quality,September 10, 2014
+Trento,Trentino-Alto Adige,$10,5 grams,medium quality,September 10, 2014
+Athens,Ohio,$10,an ounce,high quality,September 10, 2014
+Urbana,Illinois,$20,a gram,high quality,September 10, 2014
+Valencia,Comunidad Valenciana,$25,5 grams,medium quality,September 10, 2014
+Uji,Kyoto,$200,5 grams,medium quality,September 10, 2014
+Simcoe,Ontario,$10,a gram,medium quality,September 10, 2014
+London,Ontario,$250,an ounce,medium quality,September 10, 2014
+Meridian,Idaho,$20,an eighth,medium quality,September 10, 2014
+Columbus,Georgia,$400,an ounce,medium quality,September 10, 2014
+Clovis,California,$150,an ounce,high quality,September 10, 2014
+New Brunswick,New Jersey,$55,an eighth,medium quality,September 10, 2014
+Springfield,Missouri,$295,an ounce,medium quality,September 10, 2014
+Reno,Nevada,$350,an ounce,high quality,September 10, 2014
+Wilmington,Delaware,$25,an eighth,medium quality,September 10, 2014
+Mannford,Oklahoma,$30,a quarter,medium quality,September 10, 2014
+Warsaw,Indiana,$55,a half ounce,medium quality,September 10, 2014
+Czapury,Poznan,$120,25 grams,high quality,September 10, 2014
+Brooklyn,New York,$250,an ounce,medium quality,September 10, 2014
+Shreveport,Louisiana,$65,an eighth,medium quality,September 10, 2014
+Burgaw,North Carolina,$20,an ounce,high quality,September 10, 2014
+Red Bank,New Jersey,$120,a quarter,high quality,September 10, 2014
+Coeur D Alene,Idaho,$40,an eighth,medium quality,September 10, 2014
+Detroit,Michigan,$55,an eighth,medium quality,September 10, 2014
+Doylestown,Pennsylvania,$45,an eighth,high quality,September 10, 2014
+Aurora,Illinois,$40,an eighth,medium quality,September 10, 2014
+Canton,Michigan,$150,20 grams,high quality,September 10, 2014
+Boca Raton,Florida,$100,10 grams,high quality,September 10, 2014
+Columbus,Ohio,$100,a quarter,high quality,September 10, 2014
+New Brunswick,New Jersey,$110,a quarter,medium quality,September 10, 2014
+Burlington,Vermont,$10,an ounce,medium quality,September 10, 2014
+Brooklyn,New York,$100,an ounce,medium quality,September 10, 2014
+Bethesda,Maryland,$100,an ounce,medium quality,September 10, 2014
+Eugene,Oregon,$200,an ounce,high quality,September 10, 2014
+Cottage Grove,Oregon,$125,an ounce,medium quality,September 10, 2014
+Forest Lake,Minnesota,$280,an ounce,medium quality,September 10, 2014
+Albany,New York,$340,an ounce,high quality,September 10, 2014
+Glenwood Springs,Colorado,$80,an eighth,medium quality,September 10, 2014
+Little Rock,Arkansas,$300,an ounce,high quality,September 10, 2014
+Odin,Illinois,$120,a quarter,high quality,September 10, 2014
+Uji,Kyoto,$200,5 grams,medium quality,September 10, 2014
+Simcoe,Ontario,$10,a gram,medium quality,September 10, 2014
+London,Ontario,$250,an ounce,medium quality,September 10, 2014
+Meridian,Idaho,$20,an eighth,medium quality,September 10, 2014
+Columbus,Georgia,$400,an ounce,medium quality,September 10, 2014
+Clovis,California,$150,an ounce,high quality,September 10, 2014
+New Brunswick,New Jersey,$55,an eighth,medium quality,September 10, 2014
+Springfield,Missouri,$295,an ounce,medium quality,September 10, 2014
+Reno,Nevada,$350,an ounce,high quality,September 10, 2014
+Wilmington,Delaware,$25,an eighth,medium quality,September 10, 2014
+Mannford,Oklahoma,$30,a quarter,medium quality,September 10, 2014
+Warsaw,Indiana,$55,a half ounce,medium quality,September 10, 2014
+Czapury,Poznan,$120,25 grams,high quality,September 10, 2014
+Brooklyn,New York,$250,an ounce,medium quality,September 10, 2014
+Shreveport,Louisiana,$65,an eighth,medium quality,September 10, 2014
+Hagerstown,Maryland,$65,an eighth,medium quality,September 10, 2014
+Louisville,Kentucky,$150,a half ounce,high quality,September 10, 2014
+Pembroke Pines,Florida,$60,an eighth,high quality,September 10, 2014
+El Dorado,Kansas,$300,an ounce,high quality,September 10, 2014
+New Orleans,Louisiana,$20,a half ounce,medium quality,September 10, 2014
+Fort Myers,Florida,$160,a half ounce,high quality,September 10, 2014
+Las Vegas,Nevada,$50,an eighth,medium quality,September 10, 2014
+Bayside,New York,$450,an ounce,high quality,September 10, 2014
+La Porte,Indiana,$100,5 grams,medium quality,September 10, 2014
+Toronto,Ontario,$40,an ounce,medium quality,September 10, 2014
+Brantford,Ontario,$50,an ounce,high quality,September 10, 2014
+Albuquerque,New Mexico,$160,a half ounce,high quality,September 10, 2014
+Timisoara,Timis,$150,10 grams,high quality,September 10, 2014
+Largo,Florida,$80,a quarter,medium quality,September 10, 2014
+Brooklyn,New York,$100,an ounce,medium quality,September 10, 2014
+Burlington,Vermont,$10,an ounce,medium quality,September 10, 2014
+Brooklyn,New York,$100,an ounce,medium quality,September 10, 2014
+Bethesda,Maryland,$100,an ounce,medium quality,September 10, 2014
+Eugene,Oregon,$200,an ounce,high quality,September 10, 2014
+Cottage Grove,Oregon,$125,an ounce,medium quality,September 10, 2014
+Forest Lake,Minnesota,$280,an ounce,medium quality,September 10, 2014
+Albany,New York,$340,an ounce,high quality,September 10, 2014
+Glenwood Springs,Colorado,$80,an eighth,medium quality,September 10, 2014
+Little Rock,Arkansas,$300,an ounce,high quality,September 10, 2014
+Odin,Illinois,$120,a quarter,high quality,September 10, 2014
+Addlestone,Surrey,$20,an eighth,high quality,September 10, 2014
+Baker,Louisiana,$30,a half ounce,medium quality,September 10, 2014
+Indianapolis,Indiana,$125,a quarter,high quality,September 10, 2014
+Augusta,Georgia,$350,an ounce,high quality,September 10, 2014
+Palos Verdes Peninsula,California,$250,an ounce,high quality,September 10, 2014
+Mandeville,Louisiana,$50,a quarter,medium quality,September 10, 2014
+O Fallon,Missouri,$100,5 grams,medium quality,September 10, 2014
+Schaumburg,Illinois,$90,a quarter,high quality,September 10, 2014
+San Borja,Lima,$20,5 grams,medium quality,September 10, 2014
+San Francisco,California,$50,an eighth,high quality,September 10, 2014
+Denver,Colorado,$400,an ounce,high quality,September 10, 2014
+Hagerstown,Maryland,$65,an eighth,medium quality,September 10, 2014
+Louisville,Kentucky,$150,a half ounce,high quality,September 10, 2014
+Pembroke Pines,Florida,$60,an eighth,high quality,September 10, 2014
+El Dorado,Kansas,$300,an ounce,high quality,September 10, 2014
+New Orleans,Louisiana,$20,a half ounce,medium quality,September 10, 2014
+Fort Myers,Florida,$160,a half ounce,high quality,September 10, 2014
+Las Vegas,Nevada,$50,an eighth,medium quality,September 10, 2014
+Bayside,New York,$450,an ounce,high quality,September 10, 2014
+La Porte,Indiana,$100,5 grams,medium quality,September 10, 2014
+Toronto,Ontario,$40,an ounce,medium quality,September 10, 2014
+Brantford,Ontario,$50,an ounce,high quality,September 10, 2014
+Albuquerque,New Mexico,$160,a half ounce,high quality,September 10, 2014
+Timisoara,Timis,$150,10 grams,high quality,September 10, 2014
+Largo,Florida,$80,a quarter,medium quality,September 10, 2014
+Bethesda,Maryland,$60,an eighth,high quality,September 10, 2014
+Charleston,South Carolina,$120,a quarter,medium quality,September 10, 2014
+Daytona Beach,Florida,$45,an eighth,medium quality,September 10, 2014
+Tampa,Florida,$220,an ounce,medium quality,September 10, 2014
+Charleston,South Carolina,$60,an eighth,medium quality,September 10, 2014
+Chicago,Illinois,$40,an ounce,medium quality,September 10, 2014
+South Normanton,Derbyshire,$50,5 grams,medium quality,September 10, 2014
+Stourbridge,West Midlands,$10,an eighth,medium quality,September 10, 2014
+Inkster,Michigan,$25,a quarter,high quality,September 10, 2014
+Conifer,Colorado,$125,an ounce,medium quality,September 10, 2014
+Fort Collins,Colorado,$200,an ounce,high quality,September 10, 2014
+Addlestone,Surrey,$20,an eighth,high quality,September 10, 2014
+Baker,Louisiana,$30,a half ounce,medium quality,September 10, 2014
+Indianapolis,Indiana,$125,a quarter,high quality,September 10, 2014
+Augusta,Georgia,$350,an ounce,high quality,September 10, 2014
+Palos Verdes Peninsula,California,$250,an ounce,high quality,September 10, 2014
+Mandeville,Louisiana,$50,a quarter,medium quality,September 10, 2014
+O Fallon,Missouri,$100,5 grams,medium quality,September 10, 2014
+Schaumburg,Illinois,$90,a quarter,high quality,September 10, 2014
+San Borja,Lima,$20,5 grams,medium quality,September 10, 2014
+San Francisco,California,$50,an eighth,high quality,September 10, 2014
+Denver,Colorado,$400,an ounce,high quality,September 10, 2014
+Hagerstown,Maryland,$65,an eighth,medium quality,September 10, 2014
+Louisville,Kentucky,$150,a half ounce,high quality,September 10, 2014
+Pembroke Pines,Florida,$60,an eighth,high quality,September 10, 2014
+Campbell River,British Columbia,$20,an ounce,high quality,September 10, 2014
+Columbus,Ohio,$75,a quarter,medium quality,September 10, 2014
+Milton Keynes,Milton Keynes,$10,5 grams,medium quality,September 10, 2014
+Belfield,North Dakota,$180,an ounce,high quality,September 10, 2014
+Somerset,Kentucky,$200,a half ounce,high quality,September 10, 2014
+Amston,Connecticut,$1,a quarter,medium quality,September 10, 2014
+Bethesda,Maryland,$60,an eighth,high quality,September 10, 2014
+Charleston,South Carolina,$120,a quarter,medium quality,September 10, 2014
+Daytona Beach,Florida,$45,an eighth,medium quality,September 10, 2014
+Tampa,Florida,$220,an ounce,medium quality,September 10, 2014
+Charleston,South Carolina,$60,an eighth,medium quality,September 10, 2014
+Chicago,Illinois,$40,an ounce,medium quality,September 10, 2014
+South Normanton,Derbyshire,$50,5 grams,medium quality,September 10, 2014
+Stourbridge,West Midlands,$10,an eighth,medium quality,September 10, 2014
+Inkster,Michigan,$25,a quarter,high quality,September 10, 2014
+Conifer,Colorado,$125,an ounce,medium quality,September 10, 2014
+Fort Collins,Colorado,$200,an ounce,high quality,September 10, 2014
+Addlestone,Surrey,$20,an eighth,high quality,September 10, 2014
+Baker,Louisiana,$30,a half ounce,medium quality,September 10, 2014
+Indianapolis,Indiana,$125,a quarter,high quality,September 10, 2014
+Augusta,Georgia,$350,an ounce,high quality,September 10, 2014
+Palos Verdes Peninsula,California,$250,an ounce,high quality,September 10, 2014
+Mandeville,Louisiana,$50,a quarter,medium quality,September 10, 2014
+O Fallon,Missouri,$100,5 grams,medium quality,September 10, 2014
+Schaumburg,Illinois,$90,a quarter,high quality,September 10, 2014
+Red Deer,Alberta,$185,an ounce,medium quality,September 10, 2014
+Myrtle Beach,South Carolina,$300,an ounce,high quality,September 10, 2014
+Berwick,Nova Scotia,$60,a quarter,medium quality,September 10, 2014
+Charlotte,North Carolina,$170,an ounce,high quality,September 10, 2014
+Austin,Texas,$100,5 grams,low quality,September 10, 2014
+Seattle,Washington,$40,5 grams,medium quality,September 10, 2014
+Cleveland,Ohio,$25,a quarter,low quality,September 10, 2014
+Richmond,Virginia,$100,an ounce,medium quality,September 10, 2014
+Lafayette,Louisiana,$333,an ounce,high quality,September 10, 2014
+Campbell River,British Columbia,$20,an ounce,high quality,September 10, 2014
+Columbus,Ohio,$75,a quarter,medium quality,September 10, 2014
+Milton Keynes,Milton Keynes,$10,5 grams,medium quality,September 10, 2014
+Belfield,North Dakota,$180,an ounce,high quality,September 10, 2014
+Somerset,Kentucky,$200,a half ounce,high quality,September 10, 2014
+Amston,Connecticut,$1,a quarter,medium quality,September 10, 2014
+Bethesda,Maryland,$60,an eighth,high quality,September 10, 2014
+Charleston,South Carolina,$120,a quarter,medium quality,September 10, 2014
+Daytona Beach,Florida,$45,an eighth,medium quality,September 10, 2014
+Tampa,Florida,$220,an ounce,medium quality,September 10, 2014
+Charleston,South Carolina,$60,an eighth,medium quality,September 10, 2014
+Chicago,Illinois,$40,an ounce,medium quality,September 10, 2014
+South Normanton,Derbyshire,$50,5 grams,medium quality,September 10, 2014
+Stourbridge,West Midlands,$10,an eighth,medium quality,September 10, 2014
+Inkster,Michigan,$25,a quarter,high quality,September 10, 2014
+Conifer,Colorado,$125,an ounce,medium quality,September 10, 2014
+Deerfield Beach,Florida,$120,a half ounce,medium quality,September 10, 2014
+Brookfield,Connecticut,$50,an eighth,medium quality,September 10, 2014
+Murfreesboro,Tennessee,$360,an ounce,medium quality,September 10, 2014
+Silver Spring,Maryland,$60,an eighth,medium quality,September 10, 2014
+Front Royal,Virginia,$100,an ounce,medium quality,September 10, 2014
+Iron Mountain,Michigan,$45,an eighth,high quality,September 10, 2014
+Winchester,Virginia,$50,5 grams,high quality,September 10, 2014
+Oak Ridge,Tennessee,$300,an ounce,high quality,September 10, 2014
+Allston,Massachusetts,$120,a quarter,medium quality,September 10, 2014
+Red Deer,Alberta,$185,an ounce,medium quality,September 10, 2014
+Myrtle Beach,South Carolina,$300,an ounce,high quality,September 10, 2014
+Berwick,Nova Scotia,$60,a quarter,medium quality,September 10, 2014
+Charlotte,North Carolina,$170,an ounce,high quality,September 10, 2014
+Austin,Texas,$100,5 grams,low quality,September 10, 2014
+Seattle,Washington,$40,5 grams,medium quality,September 10, 2014
+Cleveland,Ohio,$25,a quarter,low quality,September 10, 2014
+Richmond,Virginia,$100,an ounce,medium quality,September 10, 2014
+Lafayette,Louisiana,$333,an ounce,high quality,September 10, 2014
+Campbell River,British Columbia,$20,an ounce,high quality,September 10, 2014
+Columbus,Ohio,$75,a quarter,medium quality,September 10, 2014
+Milton Keynes,Milton Keynes,$10,5 grams,medium quality,September 10, 2014
+Belfield,North Dakota,$180,an ounce,high quality,September 10, 2014
+Somerset,Kentucky,$200,a half ounce,high quality,September 10, 2014
+Amston,Connecticut,$1,a quarter,medium quality,September 10, 2014
+Bethesda,Maryland,$60,an eighth,high quality,September 10, 2014
+Hanover,Pennsylvania,$100,a quarter,medium quality,September 10, 2014
+Washington,District of Columbia,$120,a quarter,high quality,September 10, 2014
+Palm Coast,Florida,$350,an ounce,medium quality,September 10, 2014
+Kingsport,Tennessee,$120,an ounce,medium quality,September 10, 2014
+Saint Augustine,Florida,$350,an ounce,medium quality,September 10, 2014
+Canberra,Australian Capital Territory,$30,5 grams,medium quality,September 10, 2014
+Huntsville,Alabama,$70,an ounce,medium quality,September 10, 2014
+Miami,Florida,$60,a quarter,medium quality,September 10, 2014
+Phoenix,Arizona,$200,a half ounce,medium quality,September 10, 2014
+Hingham,Massachusetts,$50,an eighth,high quality,September 10, 2014
+Brampton,Ontario,$60,a quarter,medium quality,September 10, 2014
+Austin,Texas,$280,an ounce,high quality,September 10, 2014
+Naples,Florida,$10,an ounce,medium quality,September 10, 2014
+Deerfield Beach,Florida,$120,a half ounce,medium quality,September 10, 2014
+Brookfield,Connecticut,$50,an eighth,medium quality,September 10, 2014
+Murfreesboro,Tennessee,$360,an ounce,medium quality,September 10, 2014
+Silver Spring,Maryland,$60,an eighth,medium quality,September 10, 2014
+Front Royal,Virginia,$100,an ounce,medium quality,September 10, 2014
+Iron Mountain,Michigan,$45,an eighth,high quality,September 10, 2014
+Winchester,Virginia,$50,5 grams,high quality,September 10, 2014
+Oak Ridge,Tennessee,$300,an ounce,high quality,September 10, 2014
+Allston,Massachusetts,$120,a quarter,medium quality,September 10, 2014
+Red Deer,Alberta,$185,an ounce,medium quality,September 10, 2014
+Myrtle Beach,South Carolina,$300,an ounce,high quality,September 10, 2014
+Berwick,Nova Scotia,$60,a quarter,medium quality,September 10, 2014
+Hamilton,New York,$40,an ounce,medium quality,September 10, 2014
+Fort Walton Beach,Florida,$250,an ounce,medium quality,September 10, 2014
+Pittsburgh,Pennsylvania,$280,an ounce,high quality,September 10, 2014
+Longview,Texas,$250,an ounce,medium quality,September 10, 2014
+Eagle River,Alaska,$50,a half ounce,medium quality,September 10, 2014
+Nashville,Tennessee,$45,an eighth,high quality,September 10, 2014
+Philadelphia,Pennsylvania,$20,an ounce,medium quality,September 10, 2014
+Champaign,Illinois,$100,an ounce,medium quality,September 10, 2014
+Las Vegas,Nevada,$20,an ounce,medium quality,September 10, 2014
+Worthington,Minnesota,$300,an ounce,high quality,September 10, 2014
+Waukesha,Wisconsin,$100,5 grams,medium quality,September 10, 2014
+Danville,Indiana,$125,10 grams,medium quality,September 10, 2014
+Rockford,Illinois,$45,an eighth,medium quality,September 10, 2014
+Hanover,Pennsylvania,$100,a quarter,medium quality,September 10, 2014
+Washington,District of Columbia,$120,a quarter,high quality,September 10, 2014
+Palm Coast,Florida,$350,an ounce,medium quality,September 10, 2014
+Kingsport,Tennessee,$120,an ounce,medium quality,September 10, 2014
+Saint Augustine,Florida,$350,an ounce,medium quality,September 10, 2014
+Canberra,Australian Capital Territory,$30,5 grams,medium quality,September 10, 2014
+Huntsville,Alabama,$70,an ounce,medium quality,September 10, 2014
+Miami,Florida,$60,a quarter,medium quality,September 10, 2014
+Phoenix,Arizona,$200,a half ounce,medium quality,September 10, 2014
+Hingham,Massachusetts,$50,an eighth,high quality,September 10, 2014
+Brampton,Ontario,$60,a quarter,medium quality,September 10, 2014
+Austin,Texas,$280,an ounce,high quality,September 10, 2014
+Missoula,Montana,$40,5 grams,medium quality,September 11, 2014
+Milwaukee,Wisconsin,$200,an eighth,high quality,September 11, 2014
+New York,New York,$35,an eighth,medium quality,September 11, 2014
+Kansas City,Kansas,$50,an ounce,medium quality,September 11, 2014
+Jacksonville,Florida,$130,a half ounce,high quality,September 11, 2014
+Monterey,California,$40,a quarter,medium quality,September 10, 2014
+Alexis,Illinois,$20,an ounce,medium quality,September 10, 2014
+Orangedale,Nova Scotia,$100,an ounce,high quality,September 10, 2014
+Lincoln,Nebraska,$220,an ounce,high quality,September 10, 2014
+Lafayette,Louisiana,$180,a half ounce,high quality,September 10, 2014
+Chicago,Illinois,$100,a quarter,high quality,September 10, 2014
+Winnipeg,Manitoba,$100,an ounce,medium quality,September 10, 2014
+Clinton,New Jersey,$100,5 grams,high quality,September 10, 2014
+Allentown,Pennsylvania,$75,a quarter,high quality,September 10, 2014
+Aurora,Illinois,$10,a quarter,medium quality,September 10, 2014
+Avon,Colorado,$50,a quarter,high quality,September 10, 2014
+Lake Villa,Illinois,$100,5 grams,medium quality,September 10, 2014
+Waterloo,Iowa,$100,a quarter,medium quality,September 10, 2014
+Hamilton,New York,$40,an ounce,medium quality,September 10, 2014
+Fort Walton Beach,Florida,$250,an ounce,medium quality,September 10, 2014
+Pittsburgh,Pennsylvania,$280,an ounce,high quality,September 10, 2014
+Longview,Texas,$250,an ounce,medium quality,September 10, 2014
+Eagle River,Alaska,$50,a half ounce,medium quality,September 10, 2014
+Nashville,Tennessee,$45,an eighth,high quality,September 10, 2014
+Philadelphia,Pennsylvania,$20,an ounce,medium quality,September 10, 2014
+Bastrop,Texas,$100,an eighth,low quality,September 11, 2014
+Rogers,Arkansas,$100,5 grams,medium quality,September 11, 2014
+Los Angeles,California,$100,10 grams,high quality,September 11, 2014
+La Grande,Oregon,$50,a quarter,medium quality,September 11, 2014
+Craigieburn,Victoria,$50,5 grams,high quality,September 11, 2014
+Missoula,Montana,$40,5 grams,medium quality,September 11, 2014
+Milwaukee,Wisconsin,$200,an eighth,high quality,September 11, 2014
+New York,New York,$35,an eighth,medium quality,September 11, 2014
+Kansas City,Kansas,$50,an ounce,medium quality,September 11, 2014
+Jacksonville,Florida,$130,a half ounce,high quality,September 11, 2014
+Monterey,California,$40,a quarter,medium quality,September 10, 2014
+Alexis,Illinois,$20,an ounce,medium quality,September 10, 2014
+Orangedale,Nova Scotia,$100,an ounce,high quality,September 10, 2014
+Lincoln,Nebraska,$220,an ounce,high quality,September 10, 2014
+Lafayette,Louisiana,$180,a half ounce,high quality,September 10, 2014
+Chicago,Illinois,$100,a quarter,high quality,September 10, 2014
+Winnipeg,Manitoba,$100,an ounce,medium quality,September 10, 2014
+Clinton,New Jersey,$100,5 grams,high quality,September 10, 2014
+Allentown,Pennsylvania,$75,a quarter,high quality,September 10, 2014
+Aurora,Illinois,$10,a quarter,medium quality,September 10, 2014
+Avon,Colorado,$50,a quarter,high quality,September 10, 2014
+Lake Villa,Illinois,$100,5 grams,medium quality,September 10, 2014
+Waterloo,Iowa,$100,a quarter,medium quality,September 10, 2014
+Hamilton,New York,$40,an ounce,medium quality,September 10, 2014
+Fort Walton Beach,Florida,$250,an ounce,medium quality,September 10, 2014
+Hilton Head Island,South Carolina,$200,an ounce,medium quality,September 11, 2014
+Orlando,Florida,$150,a half ounce,high quality,September 11, 2014
+Muncie,Indiana,$100,5 grams,medium quality,September 11, 2014
+Surrey,British Columbia,$100,an ounce,high quality,September 11, 2014
+Ceres,California,$55,a quarter,medium quality,September 11, 2014
+Freehold,New Jersey,$20,5 grams,medium quality,September 11, 2014
+La Crosse,Wisconsin,$30,a gram,medium quality,September 11, 2014
+Bastrop,Texas,$100,an eighth,low quality,September 11, 2014
+Rogers,Arkansas,$100,5 grams,medium quality,September 11, 2014
+Los Angeles,California,$100,10 grams,high quality,September 11, 2014
+La Grande,Oregon,$50,a quarter,medium quality,September 11, 2014
+Craigieburn,Victoria,$50,5 grams,high quality,September 11, 2014
+Missoula,Montana,$40,5 grams,medium quality,September 11, 2014
+Milwaukee,Wisconsin,$200,an eighth,high quality,September 11, 2014
+New York,New York,$35,an eighth,medium quality,September 11, 2014
+Kansas City,Kansas,$50,an ounce,medium quality,September 11, 2014
+Jacksonville,Florida,$130,a half ounce,high quality,September 11, 2014
+Monterey,California,$40,a quarter,medium quality,September 10, 2014
+Alexis,Illinois,$20,an ounce,medium quality,September 10, 2014
+Orangedale,Nova Scotia,$100,an ounce,high quality,September 10, 2014
+Lincoln,Nebraska,$220,an ounce,high quality,September 10, 2014
+Lafayette,Louisiana,$180,a half ounce,high quality,September 10, 2014
+Chicago,Illinois,$100,a quarter,high quality,September 10, 2014
+Winnipeg,Manitoba,$100,an ounce,medium quality,September 10, 2014
+Clinton,New Jersey,$100,5 grams,high quality,September 10, 2014
+Morgantown,West Virginia,$340,an ounce,high quality,September 11, 2014
+Salinas,California,$200,an ounce,medium quality,September 11, 2014
+Mcminnville,Oregon,$100,10 grams,medium quality,September 11, 2014
+Saint Louis,Missouri,$250,an ounce,medium quality,September 11, 2014
+Philadelphia,Pennsylvania,$40,an eighth,high quality,September 11, 2014
+Hilton Head Island,South Carolina,$200,an ounce,medium quality,September 11, 2014
+Orlando,Florida,$150,a half ounce,high quality,September 11, 2014
+Muncie,Indiana,$100,5 grams,medium quality,September 11, 2014
+Surrey,British Columbia,$100,an ounce,high quality,September 11, 2014
+Ceres,California,$55,a quarter,medium quality,September 11, 2014
+Freehold,New Jersey,$20,5 grams,medium quality,September 11, 2014
+La Crosse,Wisconsin,$30,a gram,medium quality,September 11, 2014
+Bastrop,Texas,$100,an eighth,low quality,September 11, 2014
+Rogers,Arkansas,$100,5 grams,medium quality,September 11, 2014
+Los Angeles,California,$100,10 grams,high quality,September 11, 2014
+La Grande,Oregon,$50,a quarter,medium quality,September 11, 2014
+Craigieburn,Victoria,$50,5 grams,high quality,September 11, 2014
+Missoula,Montana,$40,5 grams,medium quality,September 11, 2014
+Milwaukee,Wisconsin,$200,an eighth,high quality,September 11, 2014
+New York,New York,$35,an eighth,medium quality,September 11, 2014
+Kansas City,Kansas,$50,an ounce,medium quality,September 11, 2014
+Jacksonville,Florida,$130,a half ounce,high quality,September 11, 2014
+Monterey,California,$40,a quarter,medium quality,September 10, 2014
+Alexis,Illinois,$20,an ounce,medium quality,September 10, 2014
+Orangedale,Nova Scotia,$100,an ounce,high quality,September 10, 2014
+California,Maryland,$60,5 grams,high quality,September 11, 2014
+Morgantown,West Virginia,$340,an ounce,high quality,September 11, 2014
+Salinas,California,$200,an ounce,medium quality,September 11, 2014
+Mcminnville,Oregon,$100,10 grams,medium quality,September 11, 2014
+Saint Louis,Missouri,$250,an ounce,medium quality,September 11, 2014
+Philadelphia,Pennsylvania,$40,an eighth,high quality,September 11, 2014
+Hilton Head Island,South Carolina,$200,an ounce,medium quality,September 11, 2014
+Orlando,Florida,$150,a half ounce,high quality,September 11, 2014
+Muncie,Indiana,$100,5 grams,medium quality,September 11, 2014
+Surrey,British Columbia,$100,an ounce,high quality,September 11, 2014
+Ceres,California,$55,a quarter,medium quality,September 11, 2014
+Freehold,New Jersey,$20,5 grams,medium quality,September 11, 2014
+La Crosse,Wisconsin,$30,a gram,medium quality,September 11, 2014
+Bastrop,Texas,$100,an eighth,low quality,September 11, 2014
+Rogers,Arkansas,$100,5 grams,medium quality,September 11, 2014
+Los Angeles,California,$100,10 grams,high quality,September 11, 2014
+La Grande,Oregon,$50,a quarter,medium quality,September 11, 2014
+Craigieburn,Victoria,$50,5 grams,high quality,September 11, 2014
+Missoula,Montana,$40,5 grams,medium quality,September 11, 2014
+Milwaukee,Wisconsin,$200,an eighth,high quality,September 11, 2014
+New York,New York,$35,an eighth,medium quality,September 11, 2014
+Kansas City,Kansas,$50,an ounce,medium quality,September 11, 2014
+Jacksonville,Florida,$130,a half ounce,high quality,September 11, 2014
+Monterey,California,$40,a quarter,medium quality,September 10, 2014
+Alexis,Illinois,$20,an ounce,medium quality,September 10, 2014
+Lafayette,Louisiana,$225,a quarter,medium quality,September 11, 2014
+California,Maryland,$60,5 grams,high quality,September 11, 2014
+Morgantown,West Virginia,$340,an ounce,high quality,September 11, 2014
+Salinas,California,$200,an ounce,medium quality,September 11, 2014
+Mcminnville,Oregon,$100,10 grams,medium quality,September 11, 2014
+Saint Louis,Missouri,$250,an ounce,medium quality,September 11, 2014
+Philadelphia,Pennsylvania,$40,an eighth,high quality,September 11, 2014
+Hilton Head Island,South Carolina,$200,an ounce,medium quality,September 11, 2014
+Orlando,Florida,$150,a half ounce,high quality,September 11, 2014
+Muncie,Indiana,$100,5 grams,medium quality,September 11, 2014
+Surrey,British Columbia,$100,an ounce,high quality,September 11, 2014
+Ceres,California,$55,a quarter,medium quality,September 11, 2014
+Freehold,New Jersey,$20,5 grams,medium quality,September 11, 2014
+La Crosse,Wisconsin,$30,a gram,medium quality,September 11, 2014
+Bastrop,Texas,$100,an eighth,low quality,September 11, 2014
+Rogers,Arkansas,$100,5 grams,medium quality,September 11, 2014
+Los Angeles,California,$100,10 grams,high quality,September 11, 2014
+La Grande,Oregon,$50,a quarter,medium quality,September 11, 2014
+Craigieburn,Victoria,$50,5 grams,high quality,September 11, 2014
+Missoula,Montana,$40,5 grams,medium quality,September 11, 2014
+Milwaukee,Wisconsin,$200,an eighth,high quality,September 11, 2014
+New York,New York,$35,an eighth,medium quality,September 11, 2014
+Kansas City,Kansas,$50,an ounce,medium quality,September 11, 2014
+Jacksonville,Florida,$130,a half ounce,high quality,September 11, 2014
+Monterey,California,$40,a quarter,medium quality,September 10, 2014
+Lafayette,Louisiana,$225,a quarter,medium quality,September 11, 2014
+California,Maryland,$60,5 grams,high quality,September 11, 2014
+Morgantown,West Virginia,$340,an ounce,high quality,September 11, 2014
+Salinas,California,$200,an ounce,medium quality,September 11, 2014
+Mcminnville,Oregon,$100,10 grams,medium quality,September 11, 2014
+Saint Louis,Missouri,$250,an ounce,medium quality,September 11, 2014
+Philadelphia,Pennsylvania,$40,an eighth,high quality,September 11, 2014
+Hilton Head Island,South Carolina,$200,an ounce,medium quality,September 11, 2014
+Orlando,Florida,$150,a half ounce,high quality,September 11, 2014
+Muncie,Indiana,$100,5 grams,medium quality,September 11, 2014
+Surrey,British Columbia,$100,an ounce,high quality,September 11, 2014
+Ceres,California,$55,a quarter,medium quality,September 11, 2014
+Freehold,New Jersey,$20,5 grams,medium quality,September 11, 2014
+La Crosse,Wisconsin,$30,a gram,medium quality,September 11, 2014
+Bastrop,Texas,$100,an eighth,low quality,September 11, 2014
+Rogers,Arkansas,$100,5 grams,medium quality,September 11, 2014
+Los Angeles,California,$100,10 grams,high quality,September 11, 2014
+La Grande,Oregon,$50,a quarter,medium quality,September 11, 2014
+Craigieburn,Victoria,$50,5 grams,high quality,September 11, 2014
+Missoula,Montana,$40,5 grams,medium quality,September 11, 2014
+Milwaukee,Wisconsin,$200,an eighth,high quality,September 11, 2014
+New York,New York,$35,an eighth,medium quality,September 11, 2014
+Kansas City,Kansas,$50,an ounce,medium quality,September 11, 2014
+Jacksonville,Florida,$130,a half ounce,high quality,September 11, 2014
+Monterey,California,$40,a quarter,medium quality,September 10, 2014
+Beaufort,South Carolina,$100,a half ounce,high quality,September 11, 2014
+Pasadena,California,$40,an eighth,high quality,September 11, 2014
+Lafayette,Louisiana,$225,a quarter,medium quality,September 11, 2014
+California,Maryland,$60,5 grams,high quality,September 11, 2014
+Morgantown,West Virginia,$340,an ounce,high quality,September 11, 2014
+Salinas,California,$200,an ounce,medium quality,September 11, 2014
+Mcminnville,Oregon,$100,10 grams,medium quality,September 11, 2014
+Saint Louis,Missouri,$250,an ounce,medium quality,September 11, 2014
+Philadelphia,Pennsylvania,$40,an eighth,high quality,September 11, 2014
+Hilton Head Island,South Carolina,$200,an ounce,medium quality,September 11, 2014
+Orlando,Florida,$150,a half ounce,high quality,September 11, 2014
+Muncie,Indiana,$100,5 grams,medium quality,September 11, 2014
+Surrey,British Columbia,$100,an ounce,high quality,September 11, 2014
+Ceres,California,$55,a quarter,medium quality,September 11, 2014
+Freehold,New Jersey,$20,5 grams,medium quality,September 11, 2014
+La Crosse,Wisconsin,$30,a gram,medium quality,September 11, 2014
+Bastrop,Texas,$100,an eighth,low quality,September 11, 2014
+Rogers,Arkansas,$100,5 grams,medium quality,September 11, 2014
+Los Angeles,California,$100,10 grams,high quality,September 11, 2014
+La Grande,Oregon,$50,a quarter,medium quality,September 11, 2014
+Craigieburn,Victoria,$50,5 grams,high quality,September 11, 2014
+Missoula,Montana,$40,5 grams,medium quality,September 11, 2014
+Milwaukee,Wisconsin,$200,an eighth,high quality,September 11, 2014
+New York,New York,$35,an eighth,medium quality,September 11, 2014
+Kansas City,Kansas,$50,an ounce,medium quality,September 11, 2014
+Hamilton,Ontario,$280,an ounce,medium quality,September 11, 2014
+Shelburne,Ontario,$500,an ounce,medium quality,September 11, 2014
+Gorham,Maine,$20,20 grams,medium quality,September 11, 2014
+Beaufort,South Carolina,$100,a half ounce,high quality,September 11, 2014
+Pasadena,California,$40,an eighth,high quality,September 11, 2014
+Lafayette,Louisiana,$225,a quarter,medium quality,September 11, 2014
+California,Maryland,$60,5 grams,high quality,September 11, 2014
+Morgantown,West Virginia,$340,an ounce,high quality,September 11, 2014
+Salinas,California,$200,an ounce,medium quality,September 11, 2014
+Mcminnville,Oregon,$100,10 grams,medium quality,September 11, 2014
+Saint Louis,Missouri,$250,an ounce,medium quality,September 11, 2014
+Philadelphia,Pennsylvania,$40,an eighth,high quality,September 11, 2014
+Hilton Head Island,South Carolina,$200,an ounce,medium quality,September 11, 2014
+Orlando,Florida,$150,a half ounce,high quality,September 11, 2014
+Muncie,Indiana,$100,5 grams,medium quality,September 11, 2014
+Surrey,British Columbia,$100,an ounce,high quality,September 11, 2014
+Ceres,California,$55,a quarter,medium quality,September 11, 2014
+Freehold,New Jersey,$20,5 grams,medium quality,September 11, 2014
+La Crosse,Wisconsin,$30,a gram,medium quality,September 11, 2014
+Bastrop,Texas,$100,an eighth,low quality,September 11, 2014
+Rogers,Arkansas,$100,5 grams,medium quality,September 11, 2014
+Los Angeles,California,$100,10 grams,high quality,September 11, 2014
+La Grande,Oregon,$50,a quarter,medium quality,September 11, 2014
+Craigieburn,Victoria,$50,5 grams,high quality,September 11, 2014
+Missoula,Montana,$40,5 grams,medium quality,September 11, 2014
+Uniontown,Pennsylvania,$100,5 grams,medium quality,September 11, 2014
+Williamsport,Pennsylvania,$170,a half ounce,high quality,September 11, 2014
+Lansing,Michigan,$75,a quarter,medium quality,September 11, 2014
+Hamilton,Ontario,$280,an ounce,medium quality,September 11, 2014
+Shelburne,Ontario,$500,an ounce,medium quality,September 11, 2014
+Gorham,Maine,$20,20 grams,medium quality,September 11, 2014
+Beaufort,South Carolina,$100,a half ounce,high quality,September 11, 2014
+Pasadena,California,$40,an eighth,high quality,September 11, 2014
+Lafayette,Louisiana,$225,a quarter,medium quality,September 11, 2014
+California,Maryland,$60,5 grams,high quality,September 11, 2014
+Morgantown,West Virginia,$340,an ounce,high quality,September 11, 2014
+Salinas,California,$200,an ounce,medium quality,September 11, 2014
+Mcminnville,Oregon,$100,10 grams,medium quality,September 11, 2014
+Saint Louis,Missouri,$250,an ounce,medium quality,September 11, 2014
+Philadelphia,Pennsylvania,$40,an eighth,high quality,September 11, 2014
+Hilton Head Island,South Carolina,$200,an ounce,medium quality,September 11, 2014
+Orlando,Florida,$150,a half ounce,high quality,September 11, 2014
+Muncie,Indiana,$100,5 grams,medium quality,September 11, 2014
+Surrey,British Columbia,$100,an ounce,high quality,September 11, 2014
+Ceres,California,$55,a quarter,medium quality,September 11, 2014
+Freehold,New Jersey,$20,5 grams,medium quality,September 11, 2014
+La Crosse,Wisconsin,$30,a gram,medium quality,September 11, 2014
+Bastrop,Texas,$100,an eighth,low quality,September 11, 2014
+Rogers,Arkansas,$100,5 grams,medium quality,September 11, 2014
+Los Angeles,California,$100,10 grams,high quality,September 11, 2014
+Providence,Rhode Island,$80,5 grams,medium quality,September 11, 2014
+Redwood City,California,$2,an ounce,medium quality,September 11, 2014
+Tuscaloosa,Alabama,$100,5 grams,high quality,September 11, 2014
+Canton,Georgia,$50,an eighth,high quality,September 11, 2014
+Uniontown,Pennsylvania,$100,5 grams,medium quality,September 11, 2014
+Williamsport,Pennsylvania,$170,a half ounce,high quality,September 11, 2014
+Lansing,Michigan,$75,a quarter,medium quality,September 11, 2014
+Hamilton,Ontario,$280,an ounce,medium quality,September 11, 2014
+Shelburne,Ontario,$500,an ounce,medium quality,September 11, 2014
+Gorham,Maine,$20,20 grams,medium quality,September 11, 2014
+Beaufort,South Carolina,$100,a half ounce,high quality,September 11, 2014
+Pasadena,California,$40,an eighth,high quality,September 11, 2014
+Lafayette,Louisiana,$225,a quarter,medium quality,September 11, 2014
+California,Maryland,$60,5 grams,high quality,September 11, 2014
+Morgantown,West Virginia,$340,an ounce,high quality,September 11, 2014
+Salinas,California,$200,an ounce,medium quality,September 11, 2014
+Mcminnville,Oregon,$100,10 grams,medium quality,September 11, 2014
+Saint Louis,Missouri,$250,an ounce,medium quality,September 11, 2014
+Philadelphia,Pennsylvania,$40,an eighth,high quality,September 11, 2014
+Hilton Head Island,South Carolina,$200,an ounce,medium quality,September 11, 2014
+Orlando,Florida,$150,a half ounce,high quality,September 11, 2014
+Muncie,Indiana,$100,5 grams,medium quality,September 11, 2014
+Surrey,British Columbia,$100,an ounce,high quality,September 11, 2014
+Ceres,California,$55,a quarter,medium quality,September 11, 2014
+Freehold,New Jersey,$20,5 grams,medium quality,September 11, 2014
+Parker,Arizona,$400,an ounce,medium quality,September 11, 2014
+Trieste,Friuli-Venezia Giulia,$35,5 grams,medium quality,September 11, 2014
+Sugar Land,Texas,$50,an ounce,high quality,September 11, 2014
+Hamilton,South Lanarkshire,$65,a quarter,medium quality,September 11, 2014
+Lake Charles,Louisiana,$100,an ounce,medium quality,September 11, 2014
+Chicago,Illinois,$300,an ounce,medium quality,September 11, 2014
+Providence,Rhode Island,$80,5 grams,medium quality,September 11, 2014
+Redwood City,California,$2,an ounce,medium quality,September 11, 2014
+Tuscaloosa,Alabama,$100,5 grams,high quality,September 11, 2014
+Canton,Georgia,$50,an eighth,high quality,September 11, 2014
+Uniontown,Pennsylvania,$100,5 grams,medium quality,September 11, 2014
+Williamsport,Pennsylvania,$170,a half ounce,high quality,September 11, 2014
+Lansing,Michigan,$75,a quarter,medium quality,September 11, 2014
+Hamilton,Ontario,$280,an ounce,medium quality,September 11, 2014
+Shelburne,Ontario,$500,an ounce,medium quality,September 11, 2014
+Gorham,Maine,$20,20 grams,medium quality,September 11, 2014
+Beaufort,South Carolina,$100,a half ounce,high quality,September 11, 2014
+Pasadena,California,$40,an eighth,high quality,September 11, 2014
+Lafayette,Louisiana,$225,a quarter,medium quality,September 11, 2014
+California,Maryland,$60,5 grams,high quality,September 11, 2014
+Morgantown,West Virginia,$340,an ounce,high quality,September 11, 2014
+Salinas,California,$200,an ounce,medium quality,September 11, 2014
+Mcminnville,Oregon,$100,10 grams,medium quality,September 11, 2014
+Saint Louis,Missouri,$250,an ounce,medium quality,September 11, 2014
+Philadelphia,Pennsylvania,$40,an eighth,high quality,September 11, 2014
+Mishawaka,Indiana,$80,a quarter,medium quality,September 11, 2014
+Panaji,Goa,$100,a half ounce,medium quality,September 11, 2014
+Dallas,Texas,$300,an ounce,high quality,September 11, 2014
+Saint Louis,Missouri,$50,5 grams,high quality,September 11, 2014
+Phoenix,Arizona,$220,an ounce,medium quality,September 11, 2014
+Dallas,Texas,$10,5 grams,low quality,September 11, 2014
+Williamsport,Pennsylvania,$35,an eighth,medium quality,September 11, 2014
+Indianapolis,Indiana,$45,an eighth,medium quality,September 11, 2014
+Parker,Arizona,$400,an ounce,medium quality,September 11, 2014
+Trieste,Friuli-Venezia Giulia,$35,5 grams,medium quality,September 11, 2014
+Sugar Land,Texas,$50,an ounce,high quality,September 11, 2014
+Hamilton,South Lanarkshire,$65,a quarter,medium quality,September 11, 2014
+Lake Charles,Louisiana,$100,an ounce,medium quality,September 11, 2014
+Chicago,Illinois,$300,an ounce,medium quality,September 11, 2014
+Providence,Rhode Island,$80,5 grams,medium quality,September 11, 2014
+Redwood City,California,$2,an ounce,medium quality,September 11, 2014
+Tuscaloosa,Alabama,$100,5 grams,high quality,September 11, 2014
+Canton,Georgia,$50,an eighth,high quality,September 11, 2014
+Uniontown,Pennsylvania,$100,5 grams,medium quality,September 11, 2014
+Williamsport,Pennsylvania,$170,a half ounce,high quality,September 11, 2014
+Lansing,Michigan,$75,a quarter,medium quality,September 11, 2014
+Hamilton,Ontario,$280,an ounce,medium quality,September 11, 2014
+Shelburne,Ontario,$500,an ounce,medium quality,September 11, 2014
+Gorham,Maine,$20,20 grams,medium quality,September 11, 2014
+Beaufort,South Carolina,$100,a half ounce,high quality,September 11, 2014
+Cleveland,Ohio,$10,a gram,high quality,September 11, 2014
+Rockville,Maryland,$60,an eighth,high quality,September 11, 2014
+Saint Louis,Missouri,$6,a gram,high quality,September 11, 2014
+Holyoke,Massachusetts,$140,a half ounce,high quality,September 11, 2014
+Phoenix,Arizona,$150,a half ounce,high quality,September 11, 2014
+Mishawaka,Indiana,$80,a quarter,medium quality,September 11, 2014
+Panaji,Goa,$100,a half ounce,medium quality,September 11, 2014
+Dallas,Texas,$300,an ounce,high quality,September 11, 2014
+Saint Louis,Missouri,$50,5 grams,high quality,September 11, 2014
+Phoenix,Arizona,$220,an ounce,medium quality,September 11, 2014
+Dallas,Texas,$10,5 grams,low quality,September 11, 2014
+Williamsport,Pennsylvania,$35,an eighth,medium quality,September 11, 2014
+Indianapolis,Indiana,$45,an eighth,medium quality,September 11, 2014
+Parker,Arizona,$400,an ounce,medium quality,September 11, 2014
+Trieste,Friuli-Venezia Giulia,$35,5 grams,medium quality,September 11, 2014
+Sugar Land,Texas,$50,an ounce,high quality,September 11, 2014
+Hamilton,South Lanarkshire,$65,a quarter,medium quality,September 11, 2014
+Lake Charles,Louisiana,$100,an ounce,medium quality,September 11, 2014
+Chicago,Illinois,$300,an ounce,medium quality,September 11, 2014
+Providence,Rhode Island,$80,5 grams,medium quality,September 11, 2014
+Redwood City,California,$2,an ounce,medium quality,September 11, 2014
+Tuscaloosa,Alabama,$100,5 grams,high quality,September 11, 2014
+Canton,Georgia,$50,an eighth,high quality,September 11, 2014
+Uniontown,Pennsylvania,$100,5 grams,medium quality,September 11, 2014
+Williamsport,Pennsylvania,$170,a half ounce,high quality,September 11, 2014
+Ottawa,Ontario,$90,a half ounce,high quality,September 11, 2014
+Flower Mound,Texas,$100,a quarter,high quality,September 11, 2014
+Babylon,New York,$150,an ounce,medium quality,September 11, 2014
+Jeffersonville,Indiana,$120,a quarter,high quality,September 11, 2014
+Delaware,Ohio,$160,a half ounce,high quality,September 11, 2014
+Eustis,Florida,$300,an ounce,high quality,September 11, 2014
+Worcester,Massachusetts,$40,an eighth,medium quality,September 11, 2014
+Milwaukee,Wisconsin,$50,an eighth,high quality,September 11, 2014
+Philadelphia,Pennsylvania,$10,an ounce,medium quality,September 11, 2014
+Cleveland,Ohio,$10,a gram,high quality,September 11, 2014
+Rockville,Maryland,$60,an eighth,high quality,September 11, 2014
+Saint Louis,Missouri,$6,a gram,high quality,September 11, 2014
+Holyoke,Massachusetts,$140,a half ounce,high quality,September 11, 2014
+Phoenix,Arizona,$150,a half ounce,high quality,September 11, 2014
+Mishawaka,Indiana,$80,a quarter,medium quality,September 11, 2014
+Panaji,Goa,$100,a half ounce,medium quality,September 11, 2014
+Dallas,Texas,$300,an ounce,high quality,September 11, 2014
+Saint Louis,Missouri,$50,5 grams,high quality,September 11, 2014
+Phoenix,Arizona,$220,an ounce,medium quality,September 11, 2014
+Dallas,Texas,$10,5 grams,low quality,September 11, 2014
+Williamsport,Pennsylvania,$35,an eighth,medium quality,September 11, 2014
+Indianapolis,Indiana,$45,an eighth,medium quality,September 11, 2014
+Parker,Arizona,$400,an ounce,medium quality,September 11, 2014
+Trieste,Friuli-Venezia Giulia,$35,5 grams,medium quality,September 11, 2014
+Sugar Land,Texas,$50,an ounce,high quality,September 11, 2014
+Atlanta,Georgia,$250,an ounce,medium quality,September 11, 2014
+Frederick,Maryland,$100,5 grams,high quality,September 11, 2014
+Santa Barbara,California,$30,an eighth,high quality,September 11, 2014
+Thayer,Illinois,$90,a half ounce,medium quality,September 11, 2014
+Colorado Springs,Colorado,$20,5 grams,medium quality,September 11, 2014
+Huntington,Indiana,$55,a half ounce,medium quality,September 11, 2014
+Ottawa,Ontario,$90,a half ounce,high quality,September 11, 2014
+Flower Mound,Texas,$100,a quarter,high quality,September 11, 2014
+Babylon,New York,$150,an ounce,medium quality,September 11, 2014
+Jeffersonville,Indiana,$120,a quarter,high quality,September 11, 2014
+Delaware,Ohio,$160,a half ounce,high quality,September 11, 2014
+Eustis,Florida,$300,an ounce,high quality,September 11, 2014
+Worcester,Massachusetts,$40,an eighth,medium quality,September 11, 2014
+Milwaukee,Wisconsin,$50,an eighth,high quality,September 11, 2014
+Philadelphia,Pennsylvania,$10,an ounce,medium quality,September 11, 2014
+Cleveland,Ohio,$10,a gram,high quality,September 11, 2014
+Rockville,Maryland,$60,an eighth,high quality,September 11, 2014
+Saint Louis,Missouri,$6,a gram,high quality,September 11, 2014
+Holyoke,Massachusetts,$140,a half ounce,high quality,September 11, 2014
+Phoenix,Arizona,$150,a half ounce,high quality,September 11, 2014
+Mishawaka,Indiana,$80,a quarter,medium quality,September 11, 2014
+Panaji,Goa,$100,a half ounce,medium quality,September 11, 2014
+Dallas,Texas,$300,an ounce,high quality,September 11, 2014
+Saint Louis,Missouri,$50,5 grams,high quality,September 11, 2014
+Phoenix,Arizona,$220,an ounce,medium quality,September 11, 2014
+Beaufort,South Carolina,$200,a half ounce,high quality,September 11, 2014
+Alert Bay,British Columbia,$55,a quarter,medium quality,September 11, 2014
+Newington,Connecticut,$20,20 grams,medium quality,September 11, 2014
+Grand Blanc,Michigan,$50,5 grams,high quality,September 11, 2014
+Manchester,Manchester,$97,a quarter,medium quality,September 11, 2014
+Pawtucket,Rhode Island,$40,an eighth,medium quality,September 11, 2014
+Atlanta,Georgia,$250,an ounce,medium quality,September 11, 2014
+Frederick,Maryland,$100,5 grams,high quality,September 11, 2014
+Santa Barbara,California,$30,an eighth,high quality,September 11, 2014
+Thayer,Illinois,$90,a half ounce,medium quality,September 11, 2014
+Colorado Springs,Colorado,$20,5 grams,medium quality,September 11, 2014
+Huntington,Indiana,$55,a half ounce,medium quality,September 11, 2014
+Ottawa,Ontario,$90,a half ounce,high quality,September 11, 2014
+Flower Mound,Texas,$100,a quarter,high quality,September 11, 2014
+Babylon,New York,$150,an ounce,medium quality,September 11, 2014
+Jeffersonville,Indiana,$120,a quarter,high quality,September 11, 2014
+Delaware,Ohio,$160,a half ounce,high quality,September 11, 2014
+Eustis,Florida,$300,an ounce,high quality,September 11, 2014
+Worcester,Massachusetts,$40,an eighth,medium quality,September 11, 2014
+Milwaukee,Wisconsin,$50,an eighth,high quality,September 11, 2014
+Philadelphia,Pennsylvania,$10,an ounce,medium quality,September 11, 2014
+Cleveland,Ohio,$10,a gram,high quality,September 11, 2014
+Rockville,Maryland,$60,an eighth,high quality,September 11, 2014
+Saint Louis,Missouri,$6,a gram,high quality,September 11, 2014
+Holyoke,Massachusetts,$140,a half ounce,high quality,September 11, 2014
+Cherry Hill,New Jersey,$250,an ounce,medium quality,September 11, 2014
+Centralia,Washington,$125,an ounce,high quality,September 11, 2014
+Ponce,Puerto Rico,$50,5 grams,medium quality,September 11, 2014
+Denver,Colorado,$10,5 grams,medium quality,September 11, 2014
+Philadelphia,Pennsylvania,$45,an eighth,high quality,September 11, 2014
+Candiac,Quebec,$100,an ounce,medium quality,September 11, 2014
+Albemarle,North Carolina,$120,an ounce,medium quality,September 11, 2014
+Springfield,Missouri,$80,a quarter,medium quality,September 11, 2014
+Beaufort,South Carolina,$200,a half ounce,high quality,September 11, 2014
+Alert Bay,British Columbia,$55,a quarter,medium quality,September 11, 2014
+Newington,Connecticut,$20,20 grams,medium quality,September 11, 2014
+Grand Blanc,Michigan,$50,5 grams,high quality,September 11, 2014
+Manchester,Manchester,$97,a quarter,medium quality,September 11, 2014
+Pawtucket,Rhode Island,$40,an eighth,medium quality,September 11, 2014
+Atlanta,Georgia,$250,an ounce,medium quality,September 11, 2014
+Frederick,Maryland,$100,5 grams,high quality,September 11, 2014
+Santa Barbara,California,$30,an eighth,high quality,September 11, 2014
+Thayer,Illinois,$90,a half ounce,medium quality,September 11, 2014
+Colorado Springs,Colorado,$20,5 grams,medium quality,September 11, 2014
+Huntington,Indiana,$55,a half ounce,medium quality,September 11, 2014
+Ottawa,Ontario,$90,a half ounce,high quality,September 11, 2014
+Flower Mound,Texas,$100,a quarter,high quality,September 11, 2014
+Babylon,New York,$150,an ounce,medium quality,September 11, 2014
+Jeffersonville,Indiana,$120,a quarter,high quality,September 11, 2014
+Delaware,Ohio,$160,a half ounce,high quality,September 11, 2014
+Miami,Florida,$320,an ounce,high quality,September 11, 2014
+Boston,Massachusetts,$280,an ounce,high quality,September 11, 2014
+Knoxville,Tennessee,$400,an ounce,high quality,September 11, 2014
+Lake Stevens,Washington,$50,5 grams,medium quality,September 11, 2014
+Allentown,Pennsylvania,$10,5 grams,high quality,September 11, 2014
+Laval,Quebec,$40,a quarter,medium quality,September 11, 2014
+Antioch,California,$150,an ounce,medium quality,September 11, 2014
+Saint Louis,Missouri,$60,5 grams,medium quality,September 11, 2014
+Windermere,Florida,$220,an ounce,high quality,September 11, 2014
+Williamsburg,Virginia,$220,an ounce,high quality,September 11, 2014
+Cherry Hill,New Jersey,$250,an ounce,medium quality,September 11, 2014
+Centralia,Washington,$125,an ounce,high quality,September 11, 2014
+Ponce,Puerto Rico,$50,5 grams,medium quality,September 11, 2014
+Denver,Colorado,$10,5 grams,medium quality,September 11, 2014
+Philadelphia,Pennsylvania,$45,an eighth,high quality,September 11, 2014
+Candiac,Quebec,$100,an ounce,medium quality,September 11, 2014
+Albemarle,North Carolina,$120,an ounce,medium quality,September 11, 2014
+Springfield,Missouri,$80,a quarter,medium quality,September 11, 2014
+Beaufort,South Carolina,$200,a half ounce,high quality,September 11, 2014
+Alert Bay,British Columbia,$55,a quarter,medium quality,September 11, 2014
+Newington,Connecticut,$20,20 grams,medium quality,September 11, 2014
+Grand Blanc,Michigan,$50,5 grams,high quality,September 11, 2014
+Manchester,Manchester,$97,a quarter,medium quality,September 11, 2014
+Pawtucket,Rhode Island,$40,an eighth,medium quality,September 11, 2014
+Atlanta,Georgia,$250,an ounce,medium quality,September 11, 2014
+East Greenwich,Rhode Island,$130,an ounce,high quality,September 11, 2014
+Jupiter,Florida,$140,a half ounce,medium quality,September 11, 2014
+Hounslow,Hounslow,$80,an ounce,medium quality,September 11, 2014
+Cocoa Beach,Florida,$20,5 grams,medium quality,September 11, 2014
+Pittsburgh,Pennsylvania,$200,an ounce,high quality,September 11, 2014
+Modesto,California,$180,an ounce,high quality,September 11, 2014
+Boise,Idaho,$300,an ounce,medium quality,September 11, 2014
+Airville,Pennsylvania,$20,an ounce,high quality,September 11, 2014
+Ketchikan,Alaska,$75,an eighth,medium quality,September 11, 2014
+Niagara Falls,Ontario,$120,an ounce,high quality,September 11, 2014
+Ketchikan,Alaska,$75,an eighth,medium quality,September 11, 2014
+Niagara Falls,New York,$20,an ounce,medium quality,September 11, 2014
+Sequim,Washington,$100,5 grams,medium quality,September 11, 2014
+London,London,$20,an eighth,medium quality,September 11, 2014
+Columbus,Ohio,$50,5 grams,high quality,September 11, 2014
+London,London,$15,an eighth,medium quality,September 11, 2014
+Nampa,Idaho,$20,20 grams,medium quality,September 11, 2014
+Lexington,Kentucky,$25,5 grams,medium quality,September 11, 2014
+Miami,Florida,$320,an ounce,high quality,September 11, 2014
+Boston,Massachusetts,$280,an ounce,high quality,September 11, 2014
+Knoxville,Tennessee,$400,an ounce,high quality,September 11, 2014
+Lake Stevens,Washington,$50,5 grams,medium quality,September 11, 2014
+Allentown,Pennsylvania,$10,5 grams,high quality,September 11, 2014
+Laval,Quebec,$40,a quarter,medium quality,September 11, 2014
+Antioch,California,$150,an ounce,medium quality,September 11, 2014
+Dallas,Texas,$300,an ounce,high quality,September 11, 2014
+Ottawa,Ontario,$60,a half ounce,high quality,September 11, 2014
+Scarborough,Ontario,$240,an ounce,medium quality,September 11, 2014
+Baltimore,Maryland,$300,an ounce,medium quality,September 11, 2014
+Prince George,British Columbia,$60,a quarter,high quality,September 11, 2014
+Brea,California,$200,an ounce,high quality,September 11, 2014
+Memphis,Tennessee,$125,a quarter,medium quality,September 11, 2014
+Phoenix,Arizona,$500,an ounce,low quality,September 11, 2014
+North Kingstown,Rhode Island,$110,an ounce,high quality,September 11, 2014
+East Greenwich,Rhode Island,$130,an ounce,high quality,September 11, 2014
+Jupiter,Florida,$140,a half ounce,medium quality,September 11, 2014
+Hounslow,Hounslow,$80,an ounce,medium quality,September 11, 2014
+Cocoa Beach,Florida,$20,5 grams,medium quality,September 11, 2014
+Pittsburgh,Pennsylvania,$200,an ounce,high quality,September 11, 2014
+Modesto,California,$180,an ounce,high quality,September 11, 2014
+Boise,Idaho,$300,an ounce,medium quality,September 11, 2014
+Airville,Pennsylvania,$20,an ounce,high quality,September 11, 2014
+Ketchikan,Alaska,$75,an eighth,medium quality,September 11, 2014
+Niagara Falls,Ontario,$120,an ounce,high quality,September 11, 2014
+Ketchikan,Alaska,$75,an eighth,medium quality,September 11, 2014
+Niagara Falls,New York,$20,an ounce,medium quality,September 11, 2014
+Sequim,Washington,$100,5 grams,medium quality,September 11, 2014
+London,London,$20,an eighth,medium quality,September 11, 2014
+Columbus,Ohio,$50,5 grams,high quality,September 11, 2014
+London,London,$15,an eighth,medium quality,September 11, 2014
+Saint Louis,Missouri,$92,5 grams,medium quality,September 11, 2014
+Manhattan,Kansas,$50,5 grams,medium quality,September 11, 2014
+Jacksonville,Florida,$300,an ounce,high quality,September 11, 2014
+Hinsdale,Illinois,$20,5 grams,low quality,September 11, 2014
+Bowie,Maryland,$10,5 grams,medium quality,September 11, 2014
+Champaign,Illinois,$75,an eighth,medium quality,September 11, 2014
+Wichita,Kansas,$15,an ounce,medium quality,September 11, 2014
+Laurentides,Quebec,$125,an ounce,medium quality,September 11, 2014
+Columbus,Nebraska,$55,an eighth,medium quality,September 11, 2014
+Hawley,Minnesota,$300,an ounce,medium quality,September 11, 2014
+Springfield,Missouri,$30,an ounce,medium quality,September 11, 2014
+Boca Raton,Florida,$150,an ounce,high quality,September 11, 2014
+Dallas,Texas,$300,an ounce,high quality,September 11, 2014
+Ottawa,Ontario,$60,a half ounce,high quality,September 11, 2014
+Scarborough,Ontario,$240,an ounce,medium quality,September 11, 2014
+Baltimore,Maryland,$300,an ounce,medium quality,September 11, 2014
+Prince George,British Columbia,$60,a quarter,high quality,September 11, 2014
+Brea,California,$200,an ounce,high quality,September 11, 2014
+Memphis,Tennessee,$125,a quarter,medium quality,September 11, 2014
+Phoenix,Arizona,$500,an ounce,low quality,September 11, 2014
+North Kingstown,Rhode Island,$110,an ounce,high quality,September 11, 2014
+East Greenwich,Rhode Island,$130,an ounce,high quality,September 11, 2014
+Jupiter,Florida,$140,a half ounce,medium quality,September 11, 2014
+Hounslow,Hounslow,$80,an ounce,medium quality,September 11, 2014
+Cocoa Beach,Florida,$20,5 grams,medium quality,September 11, 2014
+Hilton Head Island,South Carolina,$85,an ounce,low quality,September 11, 2014
+Belleville,Wisconsin,$60,an eighth,high quality,September 11, 2014
+Lakeland,Florida,$230,an ounce,medium quality,September 11, 2014
+Athens,Georgia,$40,a quarter,medium quality,September 11, 2014
+Bella Vista,Arkansas,$50,15 grams,low quality,September 11, 2014
+Little Rock,Arkansas,$100,an ounce,high quality,September 11, 2014
+Washington,District of Columbia,$110,a quarter,high quality,September 11, 2014
+Crothersville,Indiana,$100,an ounce,high quality,September 11, 2014
+New York,New York,$250,an ounce,high quality,September 11, 2014
+Saint Louis,Missouri,$92,5 grams,medium quality,September 11, 2014
+Manhattan,Kansas,$50,5 grams,medium quality,September 11, 2014
+Jacksonville,Florida,$300,an ounce,high quality,September 11, 2014
+Hinsdale,Illinois,$20,5 grams,low quality,September 11, 2014
+Bowie,Maryland,$10,5 grams,medium quality,September 11, 2014
+Champaign,Illinois,$75,an eighth,medium quality,September 11, 2014
+Wichita,Kansas,$15,an ounce,medium quality,September 11, 2014
+Laurentides,Quebec,$125,an ounce,medium quality,September 11, 2014
+Columbus,Nebraska,$55,an eighth,medium quality,September 11, 2014
+Hawley,Minnesota,$300,an ounce,medium quality,September 11, 2014
+Springfield,Missouri,$30,an ounce,medium quality,September 11, 2014
+Boca Raton,Florida,$150,an ounce,high quality,September 11, 2014
+Dallas,Texas,$300,an ounce,high quality,September 11, 2014
+Ottawa,Ontario,$60,a half ounce,high quality,September 11, 2014
+Scarborough,Ontario,$240,an ounce,medium quality,September 11, 2014
+Baltimore,Maryland,$300,an ounce,medium quality,September 11, 2014
+Clearwater,Florida,$200,an ounce,high quality,September 11, 2014
+Saint Louis,Missouri,$300,an ounce,high quality,September 11, 2014
+Kamloops,British Columbia,$140,an ounce,medium quality,September 11, 2014
+Canberra,Australian Capital Territory,$150,15 grams,medium quality,September 11, 2014
+Mount Airy,Maryland,$450,an ounce,high quality,September 11, 2014
+Boston,Massachusetts,$160,a half ounce,medium quality,September 11, 2014
+Hilton Head Island,South Carolina,$85,an ounce,low quality,September 11, 2014
+Belleville,Wisconsin,$60,an eighth,high quality,September 11, 2014
+Lakeland,Florida,$230,an ounce,medium quality,September 11, 2014
+Athens,Georgia,$40,a quarter,medium quality,September 11, 2014
+Bella Vista,Arkansas,$50,15 grams,low quality,September 11, 2014
+Little Rock,Arkansas,$100,an ounce,high quality,September 11, 2014
+Washington,District of Columbia,$110,a quarter,high quality,September 11, 2014
+Crothersville,Indiana,$100,an ounce,high quality,September 11, 2014
+New York,New York,$250,an ounce,high quality,September 11, 2014
+Saint Louis,Missouri,$92,5 grams,medium quality,September 11, 2014
+Manhattan,Kansas,$50,5 grams,medium quality,September 11, 2014
+Jacksonville,Florida,$300,an ounce,high quality,September 11, 2014
+Hinsdale,Illinois,$20,5 grams,low quality,September 11, 2014
+Bowie,Maryland,$10,5 grams,medium quality,September 11, 2014
+Champaign,Illinois,$75,an eighth,medium quality,September 11, 2014
+Wichita,Kansas,$15,an ounce,medium quality,September 11, 2014
+Laurentides,Quebec,$125,an ounce,medium quality,September 11, 2014
+Columbus,Nebraska,$55,an eighth,medium quality,September 11, 2014
+Hawley,Minnesota,$300,an ounce,medium quality,September 11, 2014
+Saint Peter,Minnesota,$100,20 grams,medium quality,September 12, 2014
+West Covina,California,$45,an eighth,high quality,September 12, 2014
+Sacramento,California,$50,a quarter,medium quality,September 12, 2014
+Olean,New York,$50,an eighth,high quality,September 11, 2014
+Houston,Texas,$10,an ounce,medium quality,September 11, 2014
+Brighton,Michigan,$300,an ounce,high quality,September 11, 2014
+Oakland,California,$50,an eighth,high quality,September 11, 2014
+Elmhurst,Illinois,$20,an ounce,medium quality,September 11, 2014
+Plano,Texas,$60,an eighth,high quality,September 11, 2014
+New York,New York,$200,an ounce,high quality,September 11, 2014
+Broome,Western Australia,$50,5 grams,high quality,September 11, 2014
+Toronto,Ontario,$50,a quarter,medium quality,September 11, 2014
+Clearwater,Florida,$200,an ounce,high quality,September 11, 2014
+Saint Louis,Missouri,$300,an ounce,high quality,September 11, 2014
+Kamloops,British Columbia,$140,an ounce,medium quality,September 11, 2014
+Canberra,Australian Capital Territory,$150,15 grams,medium quality,September 11, 2014
+Mount Airy,Maryland,$450,an ounce,high quality,September 11, 2014
+Boston,Massachusetts,$160,a half ounce,medium quality,September 11, 2014
+Hilton Head Island,South Carolina,$85,an ounce,low quality,September 11, 2014
+Belleville,Wisconsin,$60,an eighth,high quality,September 11, 2014
+Lakeland,Florida,$230,an ounce,medium quality,September 11, 2014
+Athens,Georgia,$40,a quarter,medium quality,September 11, 2014
+Bella Vista,Arkansas,$50,15 grams,low quality,September 11, 2014
+Little Rock,Arkansas,$100,an ounce,high quality,September 11, 2014
+Washington,District of Columbia,$110,a quarter,high quality,September 11, 2014
+Taylor,Michigan,$35,an eighth,medium quality,September 12, 2014
+Indianapolis,Indiana,$25,a quarter,low quality,September 12, 2014
+Berkeley,California,$50,an eighth,medium quality,September 12, 2014
+West Jordan,Utah,$100,10 grams,medium quality,September 12, 2014
+Des Moines,Iowa,$20,a quarter,medium quality,September 12, 2014
+New Castle,Pennsylvania,$20,5 grams,low quality,September 12, 2014
+Flint,Michigan,$100,15 grams,high quality,September 12, 2014
+Boca Raton,Florida,$150,an ounce,medium quality,September 12, 2014
+Fresno,California,$20,an eighth,medium quality,September 12, 2014
+Winter Garden,Florida,$25,a quarter,medium quality,September 12, 2014
+Norwich,Connecticut,$35,an eighth,medium quality,September 12, 2014
+Tucson,Arizona,$20,5 grams,high quality,September 12, 2014
+Saint Peter,Minnesota,$100,20 grams,medium quality,September 12, 2014
+West Covina,California,$45,an eighth,high quality,September 12, 2014
+Sacramento,California,$50,a quarter,medium quality,September 12, 2014
+Olean,New York,$50,an eighth,high quality,September 11, 2014
+Houston,Texas,$10,an ounce,medium quality,September 11, 2014
+Brighton,Michigan,$300,an ounce,high quality,September 11, 2014
+Oakland,California,$50,an eighth,high quality,September 11, 2014
+Elmhurst,Illinois,$20,an ounce,medium quality,September 11, 2014
+Plano,Texas,$60,an eighth,high quality,September 11, 2014
+New York,New York,$200,an ounce,high quality,September 11, 2014
+Broome,Western Australia,$50,5 grams,high quality,September 11, 2014
+Toronto,Ontario,$50,a quarter,medium quality,September 11, 2014
+Clearwater,Florida,$200,an ounce,high quality,September 11, 2014
+Austin,Texas,$250,an ounce,medium quality,September 12, 2014
+San Diego,California,$50,an eighth,medium quality,September 12, 2014
+Taylor,Michigan,$35,an eighth,medium quality,September 12, 2014
+Indianapolis,Indiana,$25,a quarter,low quality,September 12, 2014
+Berkeley,California,$50,an eighth,medium quality,September 12, 2014
+West Jordan,Utah,$100,10 grams,medium quality,September 12, 2014
+Des Moines,Iowa,$20,a quarter,medium quality,September 12, 2014
+New Castle,Pennsylvania,$20,5 grams,low quality,September 12, 2014
+Flint,Michigan,$100,15 grams,high quality,September 12, 2014
+Boca Raton,Florida,$150,an ounce,medium quality,September 12, 2014
+Fresno,California,$20,an eighth,medium quality,September 12, 2014
+Winter Garden,Florida,$25,a quarter,medium quality,September 12, 2014
+Norwich,Connecticut,$35,an eighth,medium quality,September 12, 2014
+Tucson,Arizona,$20,5 grams,high quality,September 12, 2014
+Saint Peter,Minnesota,$100,20 grams,medium quality,September 12, 2014
+West Covina,California,$45,an eighth,high quality,September 12, 2014
+Sacramento,California,$50,a quarter,medium quality,September 12, 2014
+Olean,New York,$50,an eighth,high quality,September 11, 2014
+Houston,Texas,$10,an ounce,medium quality,September 11, 2014
+Brighton,Michigan,$300,an ounce,high quality,September 11, 2014
+Oakland,California,$50,an eighth,high quality,September 11, 2014
+Elmhurst,Illinois,$20,an ounce,medium quality,September 11, 2014
+Plano,Texas,$60,an eighth,high quality,September 11, 2014
+New York,New York,$200,an ounce,high quality,September 11, 2014
+Broome,Western Australia,$50,5 grams,high quality,September 11, 2014
+Birmingham,Alabama,$100,an ounce,medium quality,September 12, 2014
+Beaverton,Oregon,$45,a quarter,high quality,September 12, 2014
+Newcastle,New South Wales,$7,an eighth,low quality,September 12, 2014
+Stockton,California,$130,an ounce,medium quality,September 12, 2014
+Stockton,California,$100,an ounce,medium quality,September 12, 2014
+Austin,Texas,$250,an ounce,medium quality,September 12, 2014
+San Diego,California,$50,an eighth,medium quality,September 12, 2014
+Taylor,Michigan,$35,an eighth,medium quality,September 12, 2014
+Indianapolis,Indiana,$25,a quarter,low quality,September 12, 2014
+Berkeley,California,$50,an eighth,medium quality,September 12, 2014
+West Jordan,Utah,$100,10 grams,medium quality,September 12, 2014
+Des Moines,Iowa,$20,a quarter,medium quality,September 12, 2014
+New Castle,Pennsylvania,$20,5 grams,low quality,September 12, 2014
+Flint,Michigan,$100,15 grams,high quality,September 12, 2014
+Boca Raton,Florida,$150,an ounce,medium quality,September 12, 2014
+Fresno,California,$20,an eighth,medium quality,September 12, 2014
+Winter Garden,Florida,$25,a quarter,medium quality,September 12, 2014
+Norwich,Connecticut,$35,an eighth,medium quality,September 12, 2014
+Tucson,Arizona,$20,5 grams,high quality,September 12, 2014
+Saint Peter,Minnesota,$100,20 grams,medium quality,September 12, 2014
+West Covina,California,$45,an eighth,high quality,September 12, 2014
+Sacramento,California,$50,a quarter,medium quality,September 12, 2014
+Olean,New York,$50,an eighth,high quality,September 11, 2014
+Houston,Texas,$10,an ounce,medium quality,September 11, 2014
+Brighton,Michigan,$300,an ounce,high quality,September 11, 2014
+Luxemburg,Luxembourg,$60,5 grams,medium quality,September 12, 2014
+Napa,California,$100,an ounce,medium quality,September 12, 2014
+Gardena,California,$100,a half ounce,medium quality,September 12, 2014
+Birmingham,Alabama,$100,an ounce,medium quality,September 12, 2014
+Beaverton,Oregon,$45,a quarter,high quality,September 12, 2014
+Newcastle,New South Wales,$7,an eighth,low quality,September 12, 2014
+Stockton,California,$130,an ounce,medium quality,September 12, 2014
+Stockton,California,$100,an ounce,medium quality,September 12, 2014
+Austin,Texas,$250,an ounce,medium quality,September 12, 2014
+San Diego,California,$50,an eighth,medium quality,September 12, 2014
+Taylor,Michigan,$35,an eighth,medium quality,September 12, 2014
+Indianapolis,Indiana,$25,a quarter,low quality,September 12, 2014
+Berkeley,California,$50,an eighth,medium quality,September 12, 2014
+West Jordan,Utah,$100,10 grams,medium quality,September 12, 2014
+Des Moines,Iowa,$20,a quarter,medium quality,September 12, 2014
+New Castle,Pennsylvania,$20,5 grams,low quality,September 12, 2014
+Flint,Michigan,$100,15 grams,high quality,September 12, 2014
+Boca Raton,Florida,$150,an ounce,medium quality,September 12, 2014
+Fresno,California,$20,an eighth,medium quality,September 12, 2014
+Winter Garden,Florida,$25,a quarter,medium quality,September 12, 2014
+Norwich,Connecticut,$35,an eighth,medium quality,September 12, 2014
+Tucson,Arizona,$20,5 grams,high quality,September 12, 2014
+Saint Peter,Minnesota,$100,20 grams,medium quality,September 12, 2014
+West Covina,California,$45,an eighth,high quality,September 12, 2014
+Sacramento,California,$50,a quarter,medium quality,September 12, 2014
+Delta,British Columbia,$40,5 grams,medium quality,September 12, 2014
+Perth,Western Australia,$50,5 grams,medium quality,September 12, 2014
+Metairie,Louisiana,$150,a half ounce,high quality,September 12, 2014
+Luxemburg,Luxembourg,$60,5 grams,medium quality,September 12, 2014
+Napa,California,$100,an ounce,medium quality,September 12, 2014
+Gardena,California,$100,a half ounce,medium quality,September 12, 2014
+Birmingham,Alabama,$100,an ounce,medium quality,September 12, 2014
+Beaverton,Oregon,$45,a quarter,high quality,September 12, 2014
+Newcastle,New South Wales,$7,an eighth,low quality,September 12, 2014
+Stockton,California,$130,an ounce,medium quality,September 12, 2014
+Stockton,California,$100,an ounce,medium quality,September 12, 2014
+Austin,Texas,$250,an ounce,medium quality,September 12, 2014
+San Diego,California,$50,an eighth,medium quality,September 12, 2014
+Taylor,Michigan,$35,an eighth,medium quality,September 12, 2014
+Indianapolis,Indiana,$25,a quarter,low quality,September 12, 2014
+Berkeley,California,$50,an eighth,medium quality,September 12, 2014
+West Jordan,Utah,$100,10 grams,medium quality,September 12, 2014
+Des Moines,Iowa,$20,a quarter,medium quality,September 12, 2014
+New Castle,Pennsylvania,$20,5 grams,low quality,September 12, 2014
+Flint,Michigan,$100,15 grams,high quality,September 12, 2014
+Boca Raton,Florida,$150,an ounce,medium quality,September 12, 2014
+Fresno,California,$20,an eighth,medium quality,September 12, 2014
+Winter Garden,Florida,$25,a quarter,medium quality,September 12, 2014
+Norwich,Connecticut,$35,an eighth,medium quality,September 12, 2014
+Tucson,Arizona,$20,5 grams,high quality,September 12, 2014
+Delta,British Columbia,$40,5 grams,medium quality,September 12, 2014
+Perth,Western Australia,$50,5 grams,medium quality,September 12, 2014
+Metairie,Louisiana,$150,a half ounce,high quality,September 12, 2014
+Luxemburg,Luxembourg,$60,5 grams,medium quality,September 12, 2014
+Napa,California,$100,an ounce,medium quality,September 12, 2014
+Gardena,California,$100,a half ounce,medium quality,September 12, 2014
+Birmingham,Alabama,$100,an ounce,medium quality,September 12, 2014
+Beaverton,Oregon,$45,a quarter,high quality,September 12, 2014
+Newcastle,New South Wales,$7,an eighth,low quality,September 12, 2014
+Stockton,California,$130,an ounce,medium quality,September 12, 2014
+Stockton,California,$100,an ounce,medium quality,September 12, 2014
+Austin,Texas,$250,an ounce,medium quality,September 12, 2014
+San Diego,California,$50,an eighth,medium quality,September 12, 2014
+Taylor,Michigan,$35,an eighth,medium quality,September 12, 2014
+Indianapolis,Indiana,$25,a quarter,low quality,September 12, 2014
+Berkeley,California,$50,an eighth,medium quality,September 12, 2014
+West Jordan,Utah,$100,10 grams,medium quality,September 12, 2014
+Des Moines,Iowa,$20,a quarter,medium quality,September 12, 2014
+New Castle,Pennsylvania,$20,5 grams,low quality,September 12, 2014
+Flint,Michigan,$100,15 grams,high quality,September 12, 2014
+Boca Raton,Florida,$150,an ounce,medium quality,September 12, 2014
+Fresno,California,$20,an eighth,medium quality,September 12, 2014
+Winter Garden,Florida,$25,a quarter,medium quality,September 12, 2014
+Norwich,Connecticut,$35,an eighth,medium quality,September 12, 2014
+Tucson,Arizona,$20,5 grams,high quality,September 12, 2014
+Athens,Attiki,$5,a gram,medium quality,September 12, 2014
+Delta,British Columbia,$40,5 grams,medium quality,September 12, 2014
+Perth,Western Australia,$50,5 grams,medium quality,September 12, 2014
+Metairie,Louisiana,$150,a half ounce,high quality,September 12, 2014
+Luxemburg,Luxembourg,$60,5 grams,medium quality,September 12, 2014
+Napa,California,$100,an ounce,medium quality,September 12, 2014
+Gardena,California,$100,a half ounce,medium quality,September 12, 2014
+Birmingham,Alabama,$100,an ounce,medium quality,September 12, 2014
+Beaverton,Oregon,$45,a quarter,high quality,September 12, 2014
+Newcastle,New South Wales,$7,an eighth,low quality,September 12, 2014
+Stockton,California,$130,an ounce,medium quality,September 12, 2014
+Stockton,California,$100,an ounce,medium quality,September 12, 2014
+Austin,Texas,$250,an ounce,medium quality,September 12, 2014
+San Diego,California,$50,an eighth,medium quality,September 12, 2014
+Taylor,Michigan,$35,an eighth,medium quality,September 12, 2014
+Indianapolis,Indiana,$25,a quarter,low quality,September 12, 2014
+Berkeley,California,$50,an eighth,medium quality,September 12, 2014
+West Jordan,Utah,$100,10 grams,medium quality,September 12, 2014
+Des Moines,Iowa,$20,a quarter,medium quality,September 12, 2014
+New Castle,Pennsylvania,$20,5 grams,low quality,September 12, 2014
+Flint,Michigan,$100,15 grams,high quality,September 12, 2014
+Boca Raton,Florida,$150,an ounce,medium quality,September 12, 2014
+Fresno,California,$20,an eighth,medium quality,September 12, 2014
+Winter Garden,Florida,$25,a quarter,medium quality,September 12, 2014
+Norwich,Connecticut,$35,an eighth,medium quality,September 12, 2014
+Manassas,Virginia,$330,an ounce,high quality,September 12, 2014
+Manassas,Virginia,$330,an ounce,medium quality,September 12, 2014
+Athens,Attiki,$5,a gram,medium quality,September 12, 2014
+Delta,British Columbia,$40,5 grams,medium quality,September 12, 2014
+Perth,Western Australia,$50,5 grams,medium quality,September 12, 2014
+Metairie,Louisiana,$150,a half ounce,high quality,September 12, 2014
+Luxemburg,Luxembourg,$60,5 grams,medium quality,September 12, 2014
+Napa,California,$100,an ounce,medium quality,September 12, 2014
+Gardena,California,$100,a half ounce,medium quality,September 12, 2014
+Birmingham,Alabama,$100,an ounce,medium quality,September 12, 2014
+Beaverton,Oregon,$45,a quarter,high quality,September 12, 2014
+Newcastle,New South Wales,$7,an eighth,low quality,September 12, 2014
+Stockton,California,$130,an ounce,medium quality,September 12, 2014
+Stockton,California,$100,an ounce,medium quality,September 12, 2014
+Austin,Texas,$250,an ounce,medium quality,September 12, 2014
+San Diego,California,$50,an eighth,medium quality,September 12, 2014
+Taylor,Michigan,$35,an eighth,medium quality,September 12, 2014
+Indianapolis,Indiana,$25,a quarter,low quality,September 12, 2014
+Berkeley,California,$50,an eighth,medium quality,September 12, 2014
+West Jordan,Utah,$100,10 grams,medium quality,September 12, 2014
+Des Moines,Iowa,$20,a quarter,medium quality,September 12, 2014
+New Castle,Pennsylvania,$20,5 grams,low quality,September 12, 2014
+Flint,Michigan,$100,15 grams,high quality,September 12, 2014
+Boca Raton,Florida,$150,an ounce,medium quality,September 12, 2014
+Fresno,California,$20,an eighth,medium quality,September 12, 2014
+Elgin,South Carolina,$5,an ounce,medium quality,September 12, 2014
+Corpus Christi,Texas,$300,an ounce,high quality,September 12, 2014
+Milwaukee,Wisconsin,$250,an ounce,high quality,September 12, 2014
+Jacksonville,Florida,$230,an ounce,high quality,September 12, 2014
+Manassas,Virginia,$330,an ounce,high quality,September 12, 2014
+Manassas,Virginia,$330,an ounce,medium quality,September 12, 2014
+Athens,Attiki,$5,a gram,medium quality,September 12, 2014
+Delta,British Columbia,$40,5 grams,medium quality,September 12, 2014
+Perth,Western Australia,$50,5 grams,medium quality,September 12, 2014
+Metairie,Louisiana,$150,a half ounce,high quality,September 12, 2014
+Luxemburg,Luxembourg,$60,5 grams,medium quality,September 12, 2014
+Napa,California,$100,an ounce,medium quality,September 12, 2014
+Gardena,California,$100,a half ounce,medium quality,September 12, 2014
+Birmingham,Alabama,$100,an ounce,medium quality,September 12, 2014
+Beaverton,Oregon,$45,a quarter,high quality,September 12, 2014
+Newcastle,New South Wales,$7,an eighth,low quality,September 12, 2014
+Stockton,California,$130,an ounce,medium quality,September 12, 2014
+Stockton,California,$100,an ounce,medium quality,September 12, 2014
+Austin,Texas,$250,an ounce,medium quality,September 12, 2014
+San Diego,California,$50,an eighth,medium quality,September 12, 2014
+Taylor,Michigan,$35,an eighth,medium quality,September 12, 2014
+Indianapolis,Indiana,$25,a quarter,low quality,September 12, 2014
+Berkeley,California,$50,an eighth,medium quality,September 12, 2014
+West Jordan,Utah,$100,10 grams,medium quality,September 12, 2014
+Des Moines,Iowa,$20,a quarter,medium quality,September 12, 2014
+Brisbane,Queensland,$25,a gram,high quality,September 12, 2014
+Orland Park,Illinois,$60,an eighth,medium quality,September 12, 2014
+Lexington,Kentucky,$350,an ounce,high quality,September 12, 2014
+Alpine,Arizona,$60,5 grams,high quality,September 12, 2014
+Elgin,South Carolina,$5,an ounce,medium quality,September 12, 2014
+Corpus Christi,Texas,$300,an ounce,high quality,September 12, 2014
+Milwaukee,Wisconsin,$250,an ounce,high quality,September 12, 2014
+Jacksonville,Florida,$230,an ounce,high quality,September 12, 2014
+Manassas,Virginia,$330,an ounce,high quality,September 12, 2014
+Manassas,Virginia,$330,an ounce,medium quality,September 12, 2014
+Athens,Attiki,$5,a gram,medium quality,September 12, 2014
+Delta,British Columbia,$40,5 grams,medium quality,September 12, 2014
+Perth,Western Australia,$50,5 grams,medium quality,September 12, 2014
+Metairie,Louisiana,$150,a half ounce,high quality,September 12, 2014
+Luxemburg,Luxembourg,$60,5 grams,medium quality,September 12, 2014
+Napa,California,$100,an ounce,medium quality,September 12, 2014
+Gardena,California,$100,a half ounce,medium quality,September 12, 2014
+Birmingham,Alabama,$100,an ounce,medium quality,September 12, 2014
+Beaverton,Oregon,$45,a quarter,high quality,September 12, 2014
+Newcastle,New South Wales,$7,an eighth,low quality,September 12, 2014
+Stockton,California,$130,an ounce,medium quality,September 12, 2014
+Stockton,California,$100,an ounce,medium quality,September 12, 2014
+Austin,Texas,$250,an ounce,medium quality,September 12, 2014
+San Diego,California,$50,an eighth,medium quality,September 12, 2014
+Taylor,Michigan,$35,an eighth,medium quality,September 12, 2014
+Boise,Idaho,$60,a quarter,high quality,September 12, 2014
+London,London,$20,an eighth,medium quality,September 12, 2014
+Brisbane,Queensland,$25,a gram,high quality,September 12, 2014
+Orland Park,Illinois,$60,an eighth,medium quality,September 12, 2014
+Lexington,Kentucky,$350,an ounce,high quality,September 12, 2014
+Alpine,Arizona,$60,5 grams,high quality,September 12, 2014
+Elgin,South Carolina,$5,an ounce,medium quality,September 12, 2014
+Corpus Christi,Texas,$300,an ounce,high quality,September 12, 2014
+Milwaukee,Wisconsin,$250,an ounce,high quality,September 12, 2014
+Jacksonville,Florida,$230,an ounce,high quality,September 12, 2014
+Manassas,Virginia,$330,an ounce,high quality,September 12, 2014
+Manassas,Virginia,$330,an ounce,medium quality,September 12, 2014
+Athens,Attiki,$5,a gram,medium quality,September 12, 2014
+Delta,British Columbia,$40,5 grams,medium quality,September 12, 2014
+Perth,Western Australia,$50,5 grams,medium quality,September 12, 2014
+Metairie,Louisiana,$150,a half ounce,high quality,September 12, 2014
+Luxemburg,Luxembourg,$60,5 grams,medium quality,September 12, 2014
+Napa,California,$100,an ounce,medium quality,September 12, 2014
+Gardena,California,$100,a half ounce,medium quality,September 12, 2014
+Birmingham,Alabama,$100,an ounce,medium quality,September 12, 2014
+Beaverton,Oregon,$45,a quarter,high quality,September 12, 2014
+Newcastle,New South Wales,$7,an eighth,low quality,September 12, 2014
+Stockton,California,$130,an ounce,medium quality,September 12, 2014
+Stockton,California,$100,an ounce,medium quality,September 12, 2014
+Austin,Texas,$250,an ounce,medium quality,September 12, 2014
+Doylestown,Ohio,$50,5 grams,high quality,September 12, 2014
+Fresno,California,$150,an ounce,medium quality,September 12, 2014
+Stockbridge,Georgia,$10,an ounce,high quality,September 12, 2014
+Little Rock,Arkansas,$200,10 grams,high quality,September 12, 2014
+Vimmerby,Kalmar Lan,$60,5 grams,medium quality,September 12, 2014
+Billings,Montana,$100,a half ounce,high quality,September 12, 2014
+Dekalb,Illinois,$50,a quarter,medium quality,September 12, 2014
+Glastonbury,Connecticut,$420,an ounce,high quality,September 12, 2014
+Boise,Idaho,$60,a quarter,high quality,September 12, 2014
+London,London,$20,an eighth,medium quality,September 12, 2014
+Brisbane,Queensland,$25,a gram,high quality,September 12, 2014
+Orland Park,Illinois,$60,an eighth,medium quality,September 12, 2014
+Lexington,Kentucky,$350,an ounce,high quality,September 12, 2014
+Alpine,Arizona,$60,5 grams,high quality,September 12, 2014
+Elgin,South Carolina,$5,an ounce,medium quality,September 12, 2014
+Corpus Christi,Texas,$300,an ounce,high quality,September 12, 2014
+Milwaukee,Wisconsin,$250,an ounce,high quality,September 12, 2014
+Jacksonville,Florida,$230,an ounce,high quality,September 12, 2014
+Manassas,Virginia,$330,an ounce,high quality,September 12, 2014
+Manassas,Virginia,$330,an ounce,medium quality,September 12, 2014
+Athens,Attiki,$5,a gram,medium quality,September 12, 2014
+Delta,British Columbia,$40,5 grams,medium quality,September 12, 2014
+Perth,Western Australia,$50,5 grams,medium quality,September 12, 2014
+Metairie,Louisiana,$150,a half ounce,high quality,September 12, 2014
+Luxemburg,Luxembourg,$60,5 grams,medium quality,September 12, 2014
+Penns Grove,New Jersey,$700,an ounce,medium quality,September 12, 2014
+Pittsburgh,Pennsylvania,$150,a half ounce,medium quality,September 12, 2014
+Doylestown,Ohio,$50,5 grams,high quality,September 12, 2014
+Fresno,California,$150,an ounce,medium quality,September 12, 2014
+Stockbridge,Georgia,$10,an ounce,high quality,September 12, 2014
+Little Rock,Arkansas,$200,10 grams,high quality,September 12, 2014
+Vimmerby,Kalmar Lan,$60,5 grams,medium quality,September 12, 2014
+Billings,Montana,$100,a half ounce,high quality,September 12, 2014
+Dekalb,Illinois,$50,a quarter,medium quality,September 12, 2014
+Glastonbury,Connecticut,$420,an ounce,high quality,September 12, 2014
+Boise,Idaho,$60,a quarter,high quality,September 12, 2014
+London,London,$20,an eighth,medium quality,September 12, 2014
+Brisbane,Queensland,$25,a gram,high quality,September 12, 2014
+Orland Park,Illinois,$60,an eighth,medium quality,September 12, 2014
+Lexington,Kentucky,$350,an ounce,high quality,September 12, 2014
+Alpine,Arizona,$60,5 grams,high quality,September 12, 2014
+Elgin,South Carolina,$5,an ounce,medium quality,September 12, 2014
+Corpus Christi,Texas,$300,an ounce,high quality,September 12, 2014
+Milwaukee,Wisconsin,$250,an ounce,high quality,September 12, 2014
+Jacksonville,Florida,$230,an ounce,high quality,September 12, 2014
+Manassas,Virginia,$330,an ounce,high quality,September 12, 2014
+Manassas,Virginia,$330,an ounce,medium quality,September 12, 2014
+Athens,Attiki,$5,a gram,medium quality,September 12, 2014
+Delta,British Columbia,$40,5 grams,medium quality,September 12, 2014
+Perth,Western Australia,$50,5 grams,medium quality,September 12, 2014
+Wylie,Texas,$40,5 grams,high quality,September 12, 2014
+Houston,Texas,$375,an ounce,medium quality,September 12, 2014
+Oklahoma City,Oklahoma,$60,an eighth,medium quality,September 12, 2014
+Sequim,Washington,$180,an ounce,medium quality,September 12, 2014
+Horsforth,Leeds,$30,5 grams,medium quality,September 12, 2014
+Penns Grove,New Jersey,$700,an ounce,medium quality,September 12, 2014
+Pittsburgh,Pennsylvania,$150,a half ounce,medium quality,September 12, 2014
+Doylestown,Ohio,$50,5 grams,high quality,September 12, 2014
+Fresno,California,$150,an ounce,medium quality,September 12, 2014
+Stockbridge,Georgia,$10,an ounce,high quality,September 12, 2014
+Little Rock,Arkansas,$200,10 grams,high quality,September 12, 2014
+Vimmerby,Kalmar Lan,$60,5 grams,medium quality,September 12, 2014
+Billings,Montana,$100,a half ounce,high quality,September 12, 2014
+Dekalb,Illinois,$50,a quarter,medium quality,September 12, 2014
+Glastonbury,Connecticut,$420,an ounce,high quality,September 12, 2014
+Boise,Idaho,$60,a quarter,high quality,September 12, 2014
+London,London,$20,an eighth,medium quality,September 12, 2014
+Brisbane,Queensland,$25,a gram,high quality,September 12, 2014
+Orland Park,Illinois,$60,an eighth,medium quality,September 12, 2014
+Lexington,Kentucky,$350,an ounce,high quality,September 12, 2014
+Alpine,Arizona,$60,5 grams,high quality,September 12, 2014
+Elgin,South Carolina,$5,an ounce,medium quality,September 12, 2014
+Corpus Christi,Texas,$300,an ounce,high quality,September 12, 2014
+Milwaukee,Wisconsin,$250,an ounce,high quality,September 12, 2014
+Jacksonville,Florida,$230,an ounce,high quality,September 12, 2014
+Ikskile,Ogres,$100,5 grams,medium quality,September 12, 2014
+Plant City,Florida,$20,20 grams,high quality,September 12, 2014
+Fort Lauderdale,Florida,$100,a quarter,medium quality,September 12, 2014
+Washington,District of Columbia,$70,an eighth,medium quality,September 12, 2014
+Selma,North Carolina,$200,an ounce,medium quality,September 12, 2014
+Hampstead,North Carolina,$60,an eighth,high quality,September 12, 2014
+Newport Beach,California,$260,an ounce,high quality,September 12, 2014
+Wylie,Texas,$40,5 grams,high quality,September 12, 2014
+Houston,Texas,$375,an ounce,medium quality,September 12, 2014
+Oklahoma City,Oklahoma,$60,an eighth,medium quality,September 12, 2014
+Sequim,Washington,$180,an ounce,medium quality,September 12, 2014
+Horsforth,Leeds,$30,5 grams,medium quality,September 12, 2014
+Penns Grove,New Jersey,$700,an ounce,medium quality,September 12, 2014
+Pittsburgh,Pennsylvania,$150,a half ounce,medium quality,September 12, 2014
+Doylestown,Ohio,$50,5 grams,high quality,September 12, 2014
+Fresno,California,$150,an ounce,medium quality,September 12, 2014
+Stockbridge,Georgia,$10,an ounce,high quality,September 12, 2014
+Little Rock,Arkansas,$200,10 grams,high quality,September 12, 2014
+Vimmerby,Kalmar Lan,$60,5 grams,medium quality,September 12, 2014
+Billings,Montana,$100,a half ounce,high quality,September 12, 2014
+Dekalb,Illinois,$50,a quarter,medium quality,September 12, 2014
+Glastonbury,Connecticut,$420,an ounce,high quality,September 12, 2014
+Boise,Idaho,$60,a quarter,high quality,September 12, 2014
+London,London,$20,an eighth,medium quality,September 12, 2014
+Brisbane,Queensland,$25,a gram,high quality,September 12, 2014
+San Diego,California,$60,5 grams,medium quality,September 12, 2014
+Austin,Texas,$560,an ounce,high quality,September 12, 2014
+Medford,New York,$400,an ounce,high quality,September 12, 2014
+Medford,New York,$400,an ounce,high quality,September 12, 2014
+Bamberg,South Carolina,$40,an ounce,high quality,September 12, 2014
+New Haven,Michigan,$30,5 grams,medium quality,September 12, 2014
+Allentown,Pennsylvania,$50,an eighth,medium quality,September 12, 2014
+Washington,District of Columbia,$50,an eighth,medium quality,September 12, 2014
+Richmond,Kentucky,$100,a half ounce,medium quality,September 12, 2014
+Kent,Washington,$140,an ounce,medium quality,September 12, 2014
+Brookfield,Connecticut,$90,a quarter,medium quality,September 12, 2014
+Henbury,Bristol,$10,an ounce,medium quality,September 12, 2014
+Boston,Massachusetts,$350,15 grams,medium quality,September 12, 2014
+Bydgoszcz,Kujawsko-Pomorskie,$46,5 grams,medium quality,September 12, 2014
+Chicago,Illinois,$100,a quarter,high quality,September 12, 2014
+Kenmore,Washington,$33,an eighth,medium quality,September 12, 2014
+Ikskile,Ogres,$100,5 grams,medium quality,September 12, 2014
+Plant City,Florida,$20,20 grams,high quality,September 12, 2014
+Fort Lauderdale,Florida,$100,a quarter,medium quality,September 12, 2014
+Washington,District of Columbia,$70,an eighth,medium quality,September 12, 2014
+Selma,North Carolina,$200,an ounce,medium quality,September 12, 2014
+Hampstead,North Carolina,$60,an eighth,high quality,September 12, 2014
+Newport Beach,California,$260,an ounce,high quality,September 12, 2014
+Wylie,Texas,$40,5 grams,high quality,September 12, 2014
+Houston,Texas,$375,an ounce,medium quality,September 12, 2014
+Selden,New York,$300,an ounce,medium quality,September 12, 2014
+Potomac,Maryland,$70,an eighth,medium quality,September 12, 2014
+Thomasville,Georgia,$45,a half ounce,medium quality,September 12, 2014
+Houston,Texas,$70,an ounce,high quality,September 12, 2014
+Mount Prospect,Illinois,$220,a half ounce,high quality,September 12, 2014
+Chicago,Illinois,$400,an ounce,medium quality,September 12, 2014
+Abilene,Texas,$220,a half ounce,high quality,September 12, 2014
+Paris,Ile-de-France,$10,a gram,medium quality,September 12, 2014
+Dudley,Dudley,$10,an ounce,medium quality,September 12, 2014
+San Diego,California,$60,5 grams,medium quality,September 12, 2014
+Austin,Texas,$560,an ounce,high quality,September 12, 2014
+Medford,New York,$400,an ounce,high quality,September 12, 2014
+Medford,New York,$400,an ounce,high quality,September 12, 2014
+Bamberg,South Carolina,$40,an ounce,high quality,September 12, 2014
+New Haven,Michigan,$30,5 grams,medium quality,September 12, 2014
+Allentown,Pennsylvania,$50,an eighth,medium quality,September 12, 2014
+Washington,District of Columbia,$50,an eighth,medium quality,September 12, 2014
+Richmond,Kentucky,$100,a half ounce,medium quality,September 12, 2014
+Kent,Washington,$140,an ounce,medium quality,September 12, 2014
+Brookfield,Connecticut,$90,a quarter,medium quality,September 12, 2014
+Henbury,Bristol,$10,an ounce,medium quality,September 12, 2014
+Boston,Massachusetts,$350,15 grams,medium quality,September 12, 2014
+Bydgoszcz,Kujawsko-Pomorskie,$46,5 grams,medium quality,September 12, 2014
+Chicago,Illinois,$100,a quarter,high quality,September 12, 2014
+Kenmore,Washington,$33,an eighth,medium quality,September 12, 2014
+Burnsville,Minnesota,$20,20 grams,medium quality,September 12, 2014
+Oklahoma City,Oklahoma,$50,an eighth,medium quality,September 12, 2014
+Chicago,Illinois,$60,an eighth,medium quality,September 12, 2014
+Selden,New York,$300,an ounce,medium quality,September 12, 2014
+Potomac,Maryland,$70,an eighth,medium quality,September 12, 2014
+Thomasville,Georgia,$45,a half ounce,medium quality,September 12, 2014
+Houston,Texas,$70,an ounce,high quality,September 12, 2014
+Mount Prospect,Illinois,$220,a half ounce,high quality,September 12, 2014
+Chicago,Illinois,$400,an ounce,medium quality,September 12, 2014
+Abilene,Texas,$220,a half ounce,high quality,September 12, 2014
+Paris,Ile-de-France,$10,a gram,medium quality,September 12, 2014
+Dudley,Dudley,$10,an ounce,medium quality,September 12, 2014
+San Diego,California,$60,5 grams,medium quality,September 12, 2014
+Austin,Texas,$560,an ounce,high quality,September 12, 2014
+Medford,New York,$400,an ounce,high quality,September 12, 2014
+Medford,New York,$400,an ounce,high quality,September 12, 2014
+Bamberg,South Carolina,$40,an ounce,high quality,September 12, 2014
+New Haven,Michigan,$30,5 grams,medium quality,September 12, 2014
+Allentown,Pennsylvania,$50,an eighth,medium quality,September 12, 2014
+Washington,District of Columbia,$50,an eighth,medium quality,September 12, 2014
+Richmond,Kentucky,$100,a half ounce,medium quality,September 12, 2014
+Kent,Washington,$140,an ounce,medium quality,September 12, 2014
+Brookfield,Connecticut,$90,a quarter,medium quality,September 12, 2014
+Henbury,Bristol,$10,an ounce,medium quality,September 12, 2014
+Boston,Massachusetts,$350,15 grams,medium quality,September 12, 2014
+Nashville,Tennessee,$275,an ounce,high quality,September 12, 2014
+Tampa,Florida,$15,a gram,high quality,September 12, 2014
+Springfield,Massachusetts,$40,an eighth,high quality,September 12, 2014
+London,London,$30,an eighth,high quality,September 12, 2014
+Auburn,Maine,$70,an ounce,medium quality,September 12, 2014
+Lubbock,Texas,$20,an ounce,medium quality,September 12, 2014
+Chicago,Illinois,$100,5 grams,high quality,September 12, 2014
+Longmont,Colorado,$50,5 grams,medium quality,September 12, 2014
+Tampa,Florida,$100,a quarter,high quality,September 12, 2014
+Cibolo,Texas,$70,a quarter,medium quality,September 12, 2014
+Burnsville,Minnesota,$20,20 grams,medium quality,September 12, 2014
+Oklahoma City,Oklahoma,$50,an eighth,medium quality,September 12, 2014
+Chicago,Illinois,$60,an eighth,medium quality,September 12, 2014
+Selden,New York,$300,an ounce,medium quality,September 12, 2014
+Potomac,Maryland,$70,an eighth,medium quality,September 12, 2014
+Thomasville,Georgia,$45,a half ounce,medium quality,September 12, 2014
+Houston,Texas,$70,an ounce,high quality,September 12, 2014
+Mount Prospect,Illinois,$220,a half ounce,high quality,September 12, 2014
+Chicago,Illinois,$400,an ounce,medium quality,September 12, 2014
+Abilene,Texas,$220,a half ounce,high quality,September 12, 2014
+Paris,Ile-de-France,$10,a gram,medium quality,September 12, 2014
+Dudley,Dudley,$10,an ounce,medium quality,September 12, 2014
+San Diego,California,$60,5 grams,medium quality,September 12, 2014
+Austin,Texas,$560,an ounce,high quality,September 12, 2014
+Medford,New York,$400,an ounce,high quality,September 12, 2014
+Van Nuys,California,$30,an eighth,medium quality,September 12, 2014
+Joshua,Texas,$100,5 grams,high quality,September 12, 2014
+Inver Grove Heights,Minnesota,$260,an ounce,medium quality,September 12, 2014
+Newark,Delaware,$300,an ounce,high quality,September 12, 2014
+San Fernando,California,$20,an ounce,medium quality,September 12, 2014
+Clarksville,Tennessee,$200,an ounce,high quality,September 12, 2014
+Bangor,North Down,$50,a quarter,high quality,September 12, 2014
+Oak Lawn,Illinois,$120,5 grams,low quality,September 12, 2014
+Nashville,Tennessee,$275,an ounce,high quality,September 12, 2014
+Tampa,Florida,$15,a gram,high quality,September 12, 2014
+Springfield,Massachusetts,$40,an eighth,high quality,September 12, 2014
+London,London,$30,an eighth,high quality,September 12, 2014
+Auburn,Maine,$70,an ounce,medium quality,September 12, 2014
+Lubbock,Texas,$20,an ounce,medium quality,September 12, 2014
+Chicago,Illinois,$100,5 grams,high quality,September 12, 2014
+Longmont,Colorado,$50,5 grams,medium quality,September 12, 2014
+Tampa,Florida,$100,a quarter,high quality,September 12, 2014
+Cibolo,Texas,$70,a quarter,medium quality,September 12, 2014
+Burnsville,Minnesota,$20,20 grams,medium quality,September 12, 2014
+Oklahoma City,Oklahoma,$50,an eighth,medium quality,September 12, 2014
+Chicago,Illinois,$60,an eighth,medium quality,September 12, 2014
+Selden,New York,$300,an ounce,medium quality,September 12, 2014
+Potomac,Maryland,$70,an eighth,medium quality,September 12, 2014
+Thomasville,Georgia,$45,a half ounce,medium quality,September 12, 2014
+Houston,Texas,$70,an ounce,high quality,September 12, 2014
+Irmo,South Carolina,$60,5 grams,medium quality,September 12, 2014
+Stoughton,Massachusetts,$40,an eighth,medium quality,September 12, 2014
+Bismarck,North Dakota,$400,an ounce,high quality,September 12, 2014
+Fort Myers,Florida,$90,a quarter,medium quality,September 12, 2014
+Ithaca,New York,$90,an ounce,medium quality,September 12, 2014
+Fort Myers Beach,Florida,$50,5 grams,medium quality,September 12, 2014
+Chicago,Illinois,$60,an eighth,high quality,September 12, 2014
+Bellmawr,New Jersey,$140,a half ounce,medium quality,September 12, 2014
+Albany,California,$10,5 grams,medium quality,September 12, 2014
+Alameda,California,$200,an ounce,medium quality,September 12, 2014
+Alameda,California,$200,an ounce,medium quality,September 12, 2014
+Belmont,Massachusetts,$10,5 grams,medium quality,September 12, 2014
+Van Nuys,California,$30,an eighth,medium quality,September 12, 2014
+Joshua,Texas,$100,5 grams,high quality,September 12, 2014
+Inver Grove Heights,Minnesota,$260,an ounce,medium quality,September 12, 2014
+Newark,Delaware,$300,an ounce,high quality,September 12, 2014
+San Fernando,California,$20,an ounce,medium quality,September 12, 2014
+Clarksville,Tennessee,$200,an ounce,high quality,September 12, 2014
+Bangor,North Down,$50,a quarter,high quality,September 12, 2014
+Oak Lawn,Illinois,$120,5 grams,low quality,September 12, 2014
+Nashville,Tennessee,$275,an ounce,high quality,September 12, 2014
+Tampa,Florida,$15,a gram,high quality,September 12, 2014
+Springfield,Massachusetts,$40,an eighth,high quality,September 12, 2014
+London,London,$30,an eighth,high quality,September 12, 2014
+Auburn,Maine,$70,an ounce,medium quality,September 12, 2014
+Pittsfield,Massachusetts,$20,15 grams,medium quality,September 12, 2014
+Portland,Oregon,$20,5 grams,medium quality,September 12, 2014
+Tarrytown,New York,$280,an ounce,medium quality,September 12, 2014
+Baton Rouge,Louisiana,$280,a half ounce,high quality,September 12, 2014
+Richmond,Virginia,$50,an eighth,high quality,September 12, 2014
+Fairfield,California,$5,an ounce,medium quality,September 12, 2014
+Chicago,Illinois,$180,an ounce,medium quality,September 12, 2014
+Los Angeles,California,$40,an eighth,medium quality,September 12, 2014
+Sterling Heights,Michigan,$450,an ounce,medium quality,September 12, 2014
+Daytona Beach,Florida,$350,an ounce,medium quality,September 12, 2014
+Irmo,South Carolina,$60,5 grams,medium quality,September 12, 2014
+Stoughton,Massachusetts,$40,an eighth,medium quality,September 12, 2014
+Bismarck,North Dakota,$400,an ounce,high quality,September 12, 2014
+Fort Myers,Florida,$90,a quarter,medium quality,September 12, 2014
+Ithaca,New York,$90,an ounce,medium quality,September 12, 2014
+Fort Myers Beach,Florida,$50,5 grams,medium quality,September 12, 2014
+Chicago,Illinois,$60,an eighth,high quality,September 12, 2014
+Bellmawr,New Jersey,$140,a half ounce,medium quality,September 12, 2014
+Albany,California,$10,5 grams,medium quality,September 12, 2014
+Alameda,California,$200,an ounce,medium quality,September 12, 2014
+Alameda,California,$200,an ounce,medium quality,September 12, 2014
+Belmont,Massachusetts,$10,5 grams,medium quality,September 12, 2014
+Van Nuys,California,$30,an eighth,medium quality,September 12, 2014
+Joshua,Texas,$100,5 grams,high quality,September 12, 2014
+Inver Grove Heights,Minnesota,$260,an ounce,medium quality,September 12, 2014
+Aliso Viejo,California,$5,5 grams,medium quality,September 12, 2014
+Cleveland,Ohio,$50,an eighth,high quality,September 12, 2014
+Champaign,Illinois,$60,an eighth,medium quality,September 12, 2014
+Chandler,Arizona,$340,an ounce,high quality,September 12, 2014
+Saint Paul,Minnesota,$80,a quarter,high quality,September 12, 2014
+Lewiston,Maine,$50,a quarter,medium quality,September 12, 2014
+Accord,New York,$50,an eighth,medium quality,September 12, 2014
+Tuscaloosa,Alabama,$25,10 grams,medium quality,September 12, 2014
+Chesterfield,Missouri,$40,an ounce,medium quality,September 12, 2014
+Reno,Nevada,$225,an ounce,medium quality,September 12, 2014
+Houston,Texas,$50,an eighth,medium quality,September 12, 2014
+Pittsfield,Massachusetts,$20,15 grams,medium quality,September 12, 2014
+Portland,Oregon,$20,5 grams,medium quality,September 12, 2014
+Tarrytown,New York,$280,an ounce,medium quality,September 12, 2014
+Baton Rouge,Louisiana,$280,a half ounce,high quality,September 12, 2014
+Richmond,Virginia,$50,an eighth,high quality,September 12, 2014
+Fairfield,California,$5,an ounce,medium quality,September 12, 2014
+Chicago,Illinois,$180,an ounce,medium quality,September 12, 2014
+Los Angeles,California,$40,an eighth,medium quality,September 12, 2014
+Sterling Heights,Michigan,$450,an ounce,medium quality,September 12, 2014
+Daytona Beach,Florida,$350,an ounce,medium quality,September 12, 2014
+Irmo,South Carolina,$60,5 grams,medium quality,September 12, 2014
+Stoughton,Massachusetts,$40,an eighth,medium quality,September 12, 2014
+Bismarck,North Dakota,$400,an ounce,high quality,September 12, 2014
+Fort Myers,Florida,$90,a quarter,medium quality,September 12, 2014
+Reading,Pennsylvania,$50,an eighth,high quality,September 13, 2014
+Boston,Massachusetts,$320,an ounce,high quality,September 13, 2014
+Castlegar,British Columbia,$25,an eighth,high quality,September 13, 2014
+Roanoke,Virginia,$275,an ounce,high quality,September 12, 2014
+Tulsa,Oklahoma,$25,an ounce,medium quality,September 12, 2014
+Gold Beach,Oregon,$300,an ounce,high quality,September 12, 2014
+Aliso Viejo,California,$5,5 grams,medium quality,September 12, 2014
+Cleveland,Ohio,$50,an eighth,high quality,September 12, 2014
+Champaign,Illinois,$60,an eighth,medium quality,September 12, 2014
+Chandler,Arizona,$340,an ounce,high quality,September 12, 2014
+Saint Paul,Minnesota,$80,a quarter,high quality,September 12, 2014
+Lewiston,Maine,$50,a quarter,medium quality,September 12, 2014
+Accord,New York,$50,an eighth,medium quality,September 12, 2014
+Tuscaloosa,Alabama,$25,10 grams,medium quality,September 12, 2014
+Chesterfield,Missouri,$40,an ounce,medium quality,September 12, 2014
+Reno,Nevada,$225,an ounce,medium quality,September 12, 2014
+Houston,Texas,$50,an eighth,medium quality,September 12, 2014
+Pittsfield,Massachusetts,$20,15 grams,medium quality,September 12, 2014
+Portland,Oregon,$20,5 grams,medium quality,September 12, 2014
+Tarrytown,New York,$280,an ounce,medium quality,September 12, 2014
+Baton Rouge,Louisiana,$280,a half ounce,high quality,September 12, 2014
+Richmond,Virginia,$50,an eighth,high quality,September 12, 2014
+Fairfield,California,$5,an ounce,medium quality,September 12, 2014
+Chicago,Illinois,$180,an ounce,medium quality,September 12, 2014
+Los Angeles,California,$40,an eighth,medium quality,September 12, 2014
+Farmington,Minnesota,$10,a gram,medium quality,September 13, 2014
+San Diego,California,$80,an ounce,medium quality,September 13, 2014
+Pittsburgh,Pennsylvania,$20,an ounce,medium quality,September 13, 2014
+Washington,District of Columbia,$100,5 grams,medium quality,September 13, 2014
+Reading,Pennsylvania,$50,an eighth,high quality,September 13, 2014
+Boston,Massachusetts,$320,an ounce,high quality,September 13, 2014
+Castlegar,British Columbia,$25,an eighth,high quality,September 13, 2014
+Roanoke,Virginia,$275,an ounce,high quality,September 12, 2014
+Tulsa,Oklahoma,$25,an ounce,medium quality,September 12, 2014
+Gold Beach,Oregon,$300,an ounce,high quality,September 12, 2014
+Aliso Viejo,California,$5,5 grams,medium quality,September 12, 2014
+Cleveland,Ohio,$50,an eighth,high quality,September 12, 2014
+Champaign,Illinois,$60,an eighth,medium quality,September 12, 2014
+Chandler,Arizona,$340,an ounce,high quality,September 12, 2014
+Saint Paul,Minnesota,$80,a quarter,high quality,September 12, 2014
+Lewiston,Maine,$50,a quarter,medium quality,September 12, 2014
+Accord,New York,$50,an eighth,medium quality,September 12, 2014
+Tuscaloosa,Alabama,$25,10 grams,medium quality,September 12, 2014
+Chesterfield,Missouri,$40,an ounce,medium quality,September 12, 2014
+Reno,Nevada,$225,an ounce,medium quality,September 12, 2014
+Houston,Texas,$50,an eighth,medium quality,September 12, 2014
+Pittsfield,Massachusetts,$20,15 grams,medium quality,September 12, 2014
+Portland,Oregon,$20,5 grams,medium quality,September 12, 2014
+Tarrytown,New York,$280,an ounce,medium quality,September 12, 2014
+Baton Rouge,Louisiana,$280,a half ounce,high quality,September 12, 2014
+Los Angeles,California,$200,an ounce,high quality,September 13, 2014
+Stockton,California,$190,an ounce,high quality,September 13, 2014
+Allentown,Pennsylvania,$40,a quarter,medium quality,September 13, 2014
+Jacksonville,North Carolina,$30,an ounce,high quality,September 13, 2014
+Farmington,Minnesota,$10,a gram,medium quality,September 13, 2014
+San Diego,California,$80,an ounce,medium quality,September 13, 2014
+Pittsburgh,Pennsylvania,$20,an ounce,medium quality,September 13, 2014
+Washington,District of Columbia,$100,5 grams,medium quality,September 13, 2014
+Reading,Pennsylvania,$50,an eighth,high quality,September 13, 2014
+Boston,Massachusetts,$320,an ounce,high quality,September 13, 2014
+Castlegar,British Columbia,$25,an eighth,high quality,September 13, 2014
+Roanoke,Virginia,$275,an ounce,high quality,September 12, 2014
+Tulsa,Oklahoma,$25,an ounce,medium quality,September 12, 2014
+Gold Beach,Oregon,$300,an ounce,high quality,September 12, 2014
+Aliso Viejo,California,$5,5 grams,medium quality,September 12, 2014
+Cleveland,Ohio,$50,an eighth,high quality,September 12, 2014
+Champaign,Illinois,$60,an eighth,medium quality,September 12, 2014
+Chandler,Arizona,$340,an ounce,high quality,September 12, 2014
+Saint Paul,Minnesota,$80,a quarter,high quality,September 12, 2014
+Lewiston,Maine,$50,a quarter,medium quality,September 12, 2014
+Accord,New York,$50,an eighth,medium quality,September 12, 2014
+Tuscaloosa,Alabama,$25,10 grams,medium quality,September 12, 2014
+Chesterfield,Missouri,$40,an ounce,medium quality,September 12, 2014
+Reno,Nevada,$225,an ounce,medium quality,September 12, 2014
+Houston,Texas,$50,an eighth,medium quality,September 12, 2014
+Acworth,Georgia,$200,an ounce,medium quality,September 13, 2014
+Victoria,British Columbia,$20,an eighth,medium quality,September 13, 2014
+West Hartford,Connecticut,$160,a half ounce,high quality,September 13, 2014
+Dayton,Ohio,$45,an eighth,medium quality,September 13, 2014
+Chattanooga,Tennessee,$120,an ounce,medium quality,September 13, 2014
+Salt Lake City,Utah,$40,an eighth,high quality,September 13, 2014
+Los Angeles,California,$200,an ounce,high quality,September 13, 2014
+Stockton,California,$190,an ounce,high quality,September 13, 2014
+Allentown,Pennsylvania,$40,a quarter,medium quality,September 13, 2014
+Jacksonville,North Carolina,$30,an ounce,high quality,September 13, 2014
+Farmington,Minnesota,$10,a gram,medium quality,September 13, 2014
+San Diego,California,$80,an ounce,medium quality,September 13, 2014
+Pittsburgh,Pennsylvania,$20,an ounce,medium quality,September 13, 2014
+Washington,District of Columbia,$100,5 grams,medium quality,September 13, 2014
+Reading,Pennsylvania,$50,an eighth,high quality,September 13, 2014
+Boston,Massachusetts,$320,an ounce,high quality,September 13, 2014
+Castlegar,British Columbia,$25,an eighth,high quality,September 13, 2014
+Roanoke,Virginia,$275,an ounce,high quality,September 12, 2014
+Tulsa,Oklahoma,$25,an ounce,medium quality,September 12, 2014
+Gold Beach,Oregon,$300,an ounce,high quality,September 12, 2014
+Aliso Viejo,California,$5,5 grams,medium quality,September 12, 2014
+Cleveland,Ohio,$50,an eighth,high quality,September 12, 2014
+Champaign,Illinois,$60,an eighth,medium quality,September 12, 2014
+Chandler,Arizona,$340,an ounce,high quality,September 12, 2014
+Saint Paul,Minnesota,$80,a quarter,high quality,September 12, 2014
+Acworth,Georgia,$200,an ounce,medium quality,September 13, 2014
+Victoria,British Columbia,$20,an eighth,medium quality,September 13, 2014
+West Hartford,Connecticut,$160,a half ounce,high quality,September 13, 2014
+Dayton,Ohio,$45,an eighth,medium quality,September 13, 2014
+Chattanooga,Tennessee,$120,an ounce,medium quality,September 13, 2014
+Salt Lake City,Utah,$40,an eighth,high quality,September 13, 2014
+Los Angeles,California,$200,an ounce,high quality,September 13, 2014
+Stockton,California,$190,an ounce,high quality,September 13, 2014
+Allentown,Pennsylvania,$40,a quarter,medium quality,September 13, 2014
+Jacksonville,North Carolina,$30,an ounce,high quality,September 13, 2014
+Farmington,Minnesota,$10,a gram,medium quality,September 13, 2014
+San Diego,California,$80,an ounce,medium quality,September 13, 2014
+Pittsburgh,Pennsylvania,$20,an ounce,medium quality,September 13, 2014
+Washington,District of Columbia,$100,5 grams,medium quality,September 13, 2014
+Reading,Pennsylvania,$50,an eighth,high quality,September 13, 2014
+Boston,Massachusetts,$320,an ounce,high quality,September 13, 2014
+Castlegar,British Columbia,$25,an eighth,high quality,September 13, 2014
+Roanoke,Virginia,$275,an ounce,high quality,September 12, 2014
+Tulsa,Oklahoma,$25,an ounce,medium quality,September 12, 2014
+Gold Beach,Oregon,$300,an ounce,high quality,September 12, 2014
+Aliso Viejo,California,$5,5 grams,medium quality,September 12, 2014
+Cleveland,Ohio,$50,an eighth,high quality,September 12, 2014
+Champaign,Illinois,$60,an eighth,medium quality,September 12, 2014
+Chandler,Arizona,$340,an ounce,high quality,September 12, 2014
+Saint Paul,Minnesota,$80,a quarter,high quality,September 12, 2014
+Tamworth,New South Wales,$500,5 grams,medium quality,September 13, 2014
+Tamworth,New South Wales,$75,5 grams,medium quality,September 13, 2014
+Los Angeles,California,$20,an ounce,medium quality,September 13, 2014
+Farmington,New Mexico,$100,a quarter,high quality,September 13, 2014
+Acworth,Georgia,$200,an ounce,medium quality,September 13, 2014
+Victoria,British Columbia,$20,an eighth,medium quality,September 13, 2014
+West Hartford,Connecticut,$160,a half ounce,high quality,September 13, 2014
+Dayton,Ohio,$45,an eighth,medium quality,September 13, 2014
+Chattanooga,Tennessee,$120,an ounce,medium quality,September 13, 2014
+Salt Lake City,Utah,$40,an eighth,high quality,September 13, 2014
+Los Angeles,California,$200,an ounce,high quality,September 13, 2014
+Stockton,California,$190,an ounce,high quality,September 13, 2014
+Allentown,Pennsylvania,$40,a quarter,medium quality,September 13, 2014
+Jacksonville,North Carolina,$30,an ounce,high quality,September 13, 2014
+Farmington,Minnesota,$10,a gram,medium quality,September 13, 2014
+San Diego,California,$80,an ounce,medium quality,September 13, 2014
+Pittsburgh,Pennsylvania,$20,an ounce,medium quality,September 13, 2014
+Washington,District of Columbia,$100,5 grams,medium quality,September 13, 2014
+Reading,Pennsylvania,$50,an eighth,high quality,September 13, 2014
+Boston,Massachusetts,$320,an ounce,high quality,September 13, 2014
+Castlegar,British Columbia,$25,an eighth,high quality,September 13, 2014
+Roanoke,Virginia,$275,an ounce,high quality,September 12, 2014
+Tulsa,Oklahoma,$25,an ounce,medium quality,September 12, 2014
+Gold Beach,Oregon,$300,an ounce,high quality,September 12, 2014
+Aliso Viejo,California,$5,5 grams,medium quality,September 12, 2014
+San Diego,California,$175,an ounce,medium quality,September 13, 2014
+Saint Paul,Minnesota,$60,an ounce,medium quality,September 13, 2014
+Tamworth,New South Wales,$500,5 grams,medium quality,September 13, 2014
+Tamworth,New South Wales,$75,5 grams,medium quality,September 13, 2014
+Los Angeles,California,$20,an ounce,medium quality,September 13, 2014
+Farmington,New Mexico,$100,a quarter,high quality,September 13, 2014
+Acworth,Georgia,$200,an ounce,medium quality,September 13, 2014
+Victoria,British Columbia,$20,an eighth,medium quality,September 13, 2014
+West Hartford,Connecticut,$160,a half ounce,high quality,September 13, 2014
+Dayton,Ohio,$45,an eighth,medium quality,September 13, 2014
+Chattanooga,Tennessee,$120,an ounce,medium quality,September 13, 2014
+Salt Lake City,Utah,$40,an eighth,high quality,September 13, 2014
+Los Angeles,California,$200,an ounce,high quality,September 13, 2014
+Stockton,California,$190,an ounce,high quality,September 13, 2014
+Allentown,Pennsylvania,$40,a quarter,medium quality,September 13, 2014
+Jacksonville,North Carolina,$30,an ounce,high quality,September 13, 2014
+Farmington,Minnesota,$10,a gram,medium quality,September 13, 2014
+San Diego,California,$80,an ounce,medium quality,September 13, 2014
+Pittsburgh,Pennsylvania,$20,an ounce,medium quality,September 13, 2014
+Washington,District of Columbia,$100,5 grams,medium quality,September 13, 2014
+Reading,Pennsylvania,$50,an eighth,high quality,September 13, 2014
+Boston,Massachusetts,$320,an ounce,high quality,September 13, 2014
+Castlegar,British Columbia,$25,an eighth,high quality,September 13, 2014
+Roanoke,Virginia,$275,an ounce,high quality,September 12, 2014
+Tulsa,Oklahoma,$25,an ounce,medium quality,September 12, 2014
+Ashland,Virginia,$140,20 grams,medium quality,September 13, 2014
+Ashford,Kent,$20,an eighth,medium quality,September 13, 2014
+Philadelphia,Pennsylvania,$150,a half ounce,high quality,September 13, 2014
+San Diego,California,$175,an ounce,medium quality,September 13, 2014
+Saint Paul,Minnesota,$60,an ounce,medium quality,September 13, 2014
+Tamworth,New South Wales,$500,5 grams,medium quality,September 13, 2014
+Tamworth,New South Wales,$75,5 grams,medium quality,September 13, 2014
+Los Angeles,California,$20,an ounce,medium quality,September 13, 2014
+Farmington,New Mexico,$100,a quarter,high quality,September 13, 2014
+Acworth,Georgia,$200,an ounce,medium quality,September 13, 2014
+Victoria,British Columbia,$20,an eighth,medium quality,September 13, 2014
+West Hartford,Connecticut,$160,a half ounce,high quality,September 13, 2014
+Dayton,Ohio,$45,an eighth,medium quality,September 13, 2014
+Chattanooga,Tennessee,$120,an ounce,medium quality,September 13, 2014
+Salt Lake City,Utah,$40,an eighth,high quality,September 13, 2014
+Los Angeles,California,$200,an ounce,high quality,September 13, 2014
+Stockton,California,$190,an ounce,high quality,September 13, 2014
+Allentown,Pennsylvania,$40,a quarter,medium quality,September 13, 2014
+Jacksonville,North Carolina,$30,an ounce,high quality,September 13, 2014
+Farmington,Minnesota,$10,a gram,medium quality,September 13, 2014
+San Diego,California,$80,an ounce,medium quality,September 13, 2014
+Pittsburgh,Pennsylvania,$20,an ounce,medium quality,September 13, 2014
+Washington,District of Columbia,$100,5 grams,medium quality,September 13, 2014
+Reading,Pennsylvania,$50,an eighth,high quality,September 13, 2014
+Boston,Massachusetts,$320,an ounce,high quality,September 13, 2014
+New York,New York,$40,an eighth,high quality,September 13, 2014
+Detroit,Michigan,$200,an ounce,high quality,September 13, 2014
+Philadelphia,Pennsylvania,$350,an ounce,high quality,September 13, 2014
+Ashland,Virginia,$140,20 grams,medium quality,September 13, 2014
+Ashford,Kent,$20,an eighth,medium quality,September 13, 2014
+Philadelphia,Pennsylvania,$150,a half ounce,high quality,September 13, 2014
+San Diego,California,$175,an ounce,medium quality,September 13, 2014
+Saint Paul,Minnesota,$60,an ounce,medium quality,September 13, 2014
+Tamworth,New South Wales,$500,5 grams,medium quality,September 13, 2014
+Tamworth,New South Wales,$75,5 grams,medium quality,September 13, 2014
+Los Angeles,California,$20,an ounce,medium quality,September 13, 2014
+Farmington,New Mexico,$100,a quarter,high quality,September 13, 2014
+Acworth,Georgia,$200,an ounce,medium quality,September 13, 2014
+Victoria,British Columbia,$20,an eighth,medium quality,September 13, 2014
+West Hartford,Connecticut,$160,a half ounce,high quality,September 13, 2014
+Dayton,Ohio,$45,an eighth,medium quality,September 13, 2014
+Chattanooga,Tennessee,$120,an ounce,medium quality,September 13, 2014
+Salt Lake City,Utah,$40,an eighth,high quality,September 13, 2014
+Los Angeles,California,$200,an ounce,high quality,September 13, 2014
+Stockton,California,$190,an ounce,high quality,September 13, 2014
+Allentown,Pennsylvania,$40,a quarter,medium quality,September 13, 2014
+Jacksonville,North Carolina,$30,an ounce,high quality,September 13, 2014
+Farmington,Minnesota,$10,a gram,medium quality,September 13, 2014
+San Diego,California,$80,an ounce,medium quality,September 13, 2014
+Pittsburgh,Pennsylvania,$20,an ounce,medium quality,September 13, 2014
+Frederick,Maryland,$50,5 grams,medium quality,September 13, 2014
+New York,New York,$40,an eighth,high quality,September 13, 2014
+Detroit,Michigan,$200,an ounce,high quality,September 13, 2014
+Philadelphia,Pennsylvania,$350,an ounce,high quality,September 13, 2014
+Ashland,Virginia,$140,20 grams,medium quality,September 13, 2014
+Ashford,Kent,$20,an eighth,medium quality,September 13, 2014
+Philadelphia,Pennsylvania,$150,a half ounce,high quality,September 13, 2014
+San Diego,California,$175,an ounce,medium quality,September 13, 2014
+Saint Paul,Minnesota,$60,an ounce,medium quality,September 13, 2014
+Tamworth,New South Wales,$500,5 grams,medium quality,September 13, 2014
+Tamworth,New South Wales,$75,5 grams,medium quality,September 13, 2014
+Los Angeles,California,$20,an ounce,medium quality,September 13, 2014
+Farmington,New Mexico,$100,a quarter,high quality,September 13, 2014
+Acworth,Georgia,$200,an ounce,medium quality,September 13, 2014
+Victoria,British Columbia,$20,an eighth,medium quality,September 13, 2014
+West Hartford,Connecticut,$160,a half ounce,high quality,September 13, 2014
+Dayton,Ohio,$45,an eighth,medium quality,September 13, 2014
+Chattanooga,Tennessee,$120,an ounce,medium quality,September 13, 2014
+Salt Lake City,Utah,$40,an eighth,high quality,September 13, 2014
+Los Angeles,California,$200,an ounce,high quality,September 13, 2014
+Stockton,California,$190,an ounce,high quality,September 13, 2014
+Allentown,Pennsylvania,$40,a quarter,medium quality,September 13, 2014
+Jacksonville,North Carolina,$30,an ounce,high quality,September 13, 2014
+Farmington,Minnesota,$10,a gram,medium quality,September 13, 2014
+San Diego,California,$80,an ounce,medium quality,September 13, 2014
+Palatine,Illinois,$60,5 grams,medium quality,September 13, 2014
+Saint Petersburg,Florida,$40,an eighth,high quality,September 13, 2014
+Seattle,Washington,$100,an ounce,high quality,September 13, 2014
+Gatineau,Quebec,$75,5 grams,high quality,September 13, 2014
+Delanson,New York,$20,5 grams,high quality,September 13, 2014
+Frederick,Maryland,$50,5 grams,medium quality,September 13, 2014
+New York,New York,$40,an eighth,high quality,September 13, 2014
+Detroit,Michigan,$200,an ounce,high quality,September 13, 2014
+Philadelphia,Pennsylvania,$350,an ounce,high quality,September 13, 2014
+Ashland,Virginia,$140,20 grams,medium quality,September 13, 2014
+Ashford,Kent,$20,an eighth,medium quality,September 13, 2014
+Philadelphia,Pennsylvania,$150,a half ounce,high quality,September 13, 2014
+San Diego,California,$175,an ounce,medium quality,September 13, 2014
+Saint Paul,Minnesota,$60,an ounce,medium quality,September 13, 2014
+Tamworth,New South Wales,$500,5 grams,medium quality,September 13, 2014
+Tamworth,New South Wales,$75,5 grams,medium quality,September 13, 2014
+Los Angeles,California,$20,an ounce,medium quality,September 13, 2014
+Farmington,New Mexico,$100,a quarter,high quality,September 13, 2014
+Acworth,Georgia,$200,an ounce,medium quality,September 13, 2014
+Victoria,British Columbia,$20,an eighth,medium quality,September 13, 2014
+West Hartford,Connecticut,$160,a half ounce,high quality,September 13, 2014
+Dayton,Ohio,$45,an eighth,medium quality,September 13, 2014
+Chattanooga,Tennessee,$120,an ounce,medium quality,September 13, 2014
+Salt Lake City,Utah,$40,an eighth,high quality,September 13, 2014
+Los Angeles,California,$200,an ounce,high quality,September 13, 2014
+Tulsa,Oklahoma,$400,an ounce,high quality,September 13, 2014
+Gateshead,Gateshead,$20,a gram,medium quality,September 13, 2014
+Asheville,North Carolina,$55,an eighth,high quality,September 13, 2014
+Merrill,Wisconsin,$60,an eighth,medium quality,September 13, 2014
+Palatine,Illinois,$60,5 grams,medium quality,September 13, 2014
+Saint Petersburg,Florida,$40,an eighth,high quality,September 13, 2014
+Seattle,Washington,$100,an ounce,high quality,September 13, 2014
+Gatineau,Quebec,$75,5 grams,high quality,September 13, 2014
+Delanson,New York,$20,5 grams,high quality,September 13, 2014
+Frederick,Maryland,$50,5 grams,medium quality,September 13, 2014
+New York,New York,$40,an eighth,high quality,September 13, 2014
+Detroit,Michigan,$200,an ounce,high quality,September 13, 2014
+Philadelphia,Pennsylvania,$350,an ounce,high quality,September 13, 2014
+Ashland,Virginia,$140,20 grams,medium quality,September 13, 2014
+Ashford,Kent,$20,an eighth,medium quality,September 13, 2014
+Philadelphia,Pennsylvania,$150,a half ounce,high quality,September 13, 2014
+San Diego,California,$175,an ounce,medium quality,September 13, 2014
+Saint Paul,Minnesota,$60,an ounce,medium quality,September 13, 2014
+Tamworth,New South Wales,$500,5 grams,medium quality,September 13, 2014
+Tamworth,New South Wales,$75,5 grams,medium quality,September 13, 2014
+Los Angeles,California,$20,an ounce,medium quality,September 13, 2014
+Farmington,New Mexico,$100,a quarter,high quality,September 13, 2014
+Acworth,Georgia,$200,an ounce,medium quality,September 13, 2014
+Victoria,British Columbia,$20,an eighth,medium quality,September 13, 2014
+West Hartford,Connecticut,$160,a half ounce,high quality,September 13, 2014
+Indio,California,$25,an eighth,medium quality,September 13, 2014
+Tucson,Arizona,$300,an ounce,medium quality,September 13, 2014
+Seattle,Washington,$200,an ounce,high quality,September 13, 2014
+Bloomington,Illinois,$80,an ounce,low quality,September 13, 2014
+Tulsa,Oklahoma,$400,an ounce,high quality,September 13, 2014
+Gateshead,Gateshead,$20,a gram,medium quality,September 13, 2014
+Asheville,North Carolina,$55,an eighth,high quality,September 13, 2014
+Merrill,Wisconsin,$60,an eighth,medium quality,September 13, 2014
+Palatine,Illinois,$60,5 grams,medium quality,September 13, 2014
+Saint Petersburg,Florida,$40,an eighth,high quality,September 13, 2014
+Seattle,Washington,$100,an ounce,high quality,September 13, 2014
+Gatineau,Quebec,$75,5 grams,high quality,September 13, 2014
+Delanson,New York,$20,5 grams,high quality,September 13, 2014
+Frederick,Maryland,$50,5 grams,medium quality,September 13, 2014
+New York,New York,$40,an eighth,high quality,September 13, 2014
+Detroit,Michigan,$200,an ounce,high quality,September 13, 2014
+Philadelphia,Pennsylvania,$350,an ounce,high quality,September 13, 2014
+Ashland,Virginia,$140,20 grams,medium quality,September 13, 2014
+Ashford,Kent,$20,an eighth,medium quality,September 13, 2014
+Philadelphia,Pennsylvania,$150,a half ounce,high quality,September 13, 2014
+San Diego,California,$175,an ounce,medium quality,September 13, 2014
+Saint Paul,Minnesota,$60,an ounce,medium quality,September 13, 2014
+Tamworth,New South Wales,$500,5 grams,medium quality,September 13, 2014
+Tamworth,New South Wales,$75,5 grams,medium quality,September 13, 2014
+Los Angeles,California,$20,an ounce,medium quality,September 13, 2014
+Ann Arbor,Michigan,$250,an ounce,medium quality,September 13, 2014
+Atlanta,Georgia,$140,a half ounce,high quality,September 13, 2014
+Valley Stream,New York,$240,an ounce,medium quality,September 13, 2014
+Cullman,Alabama,$20,5 grams,medium quality,September 13, 2014
+Eau Claire,Wisconsin,$40,an eighth,medium quality,September 13, 2014
+Grand Forks,North Dakota,$60,an eighth,medium quality,September 13, 2014
+Barnstable,Massachusetts,$50,an eighth,high quality,September 13, 2014
+Brossard,Quebec,$45,5 grams,medium quality,September 13, 2014
+Chicago,Illinois,$250,an ounce,medium quality,September 13, 2014
+Broken Arrow,Oklahoma,$100,an ounce,medium quality,September 13, 2014
+Boynton Beach,Florida,$120,an eighth,high quality,September 13, 2014
+New York,New York,$40,an eighth,medium quality,September 13, 2014
+Saint Petersburg,Florida,$60,5 grams,medium quality,September 13, 2014
+Indio,California,$25,an eighth,medium quality,September 13, 2014
+Tucson,Arizona,$300,an ounce,medium quality,September 13, 2014
+Seattle,Washington,$200,an ounce,high quality,September 13, 2014
+Bloomington,Illinois,$80,an ounce,low quality,September 13, 2014
+Tulsa,Oklahoma,$400,an ounce,high quality,September 13, 2014
+Gateshead,Gateshead,$20,a gram,medium quality,September 13, 2014
+Asheville,North Carolina,$55,an eighth,high quality,September 13, 2014
+Merrill,Wisconsin,$60,an eighth,medium quality,September 13, 2014
+Palatine,Illinois,$60,5 grams,medium quality,September 13, 2014
+Saint Petersburg,Florida,$40,an eighth,high quality,September 13, 2014
+Seattle,Washington,$100,an ounce,high quality,September 13, 2014
+Gatineau,Quebec,$75,5 grams,high quality,September 13, 2014
+Birmingham,Alabama,$15,an ounce,medium quality,September 13, 2014
+Port Saint Lucie,Florida,$80,a quarter,medium quality,September 13, 2014
+Clearwater,Florida,$1,a quarter,medium quality,September 13, 2014
+Chalmette,Louisiana,$100,an ounce,low quality,September 13, 2014
+Clearwater,Florida,$100,5 grams,medium quality,September 13, 2014
+San Fernando,California,$260,an ounce,high quality,September 13, 2014
+Portland,Indiana,$100,5 grams,high quality,September 13, 2014
+Laurel,Montana,$220,an ounce,high quality,September 13, 2014
+Cortland,New York,$200,a half ounce,medium quality,September 13, 2014
+Brooklyn,New York,$40,an eighth,medium quality,September 13, 2014
+Frankfort,Illinois,$360,an ounce,high quality,September 13, 2014
+Ann Arbor,Michigan,$250,an ounce,medium quality,September 13, 2014
+Ann Arbor,Michigan,$250,an ounce,medium quality,September 13, 2014
+Atlanta,Georgia,$140,a half ounce,high quality,September 13, 2014
+Valley Stream,New York,$240,an ounce,medium quality,September 13, 2014
+Cullman,Alabama,$20,5 grams,medium quality,September 13, 2014
+Eau Claire,Wisconsin,$40,an eighth,medium quality,September 13, 2014
+Grand Forks,North Dakota,$60,an eighth,medium quality,September 13, 2014
+Barnstable,Massachusetts,$50,an eighth,high quality,September 13, 2014
+Brossard,Quebec,$45,5 grams,medium quality,September 13, 2014
+Chicago,Illinois,$250,an ounce,medium quality,September 13, 2014
+Broken Arrow,Oklahoma,$100,an ounce,medium quality,September 13, 2014
+Boynton Beach,Florida,$120,an eighth,high quality,September 13, 2014
+New York,New York,$40,an eighth,medium quality,September 13, 2014
+Saint Petersburg,Florida,$60,5 grams,medium quality,September 13, 2014
+San Diego,California,$140,an ounce,medium quality,September 13, 2014
+Fall River,Massachusetts,$100,a quarter,high quality,September 13, 2014
+Arlington,Texas,$400,an ounce,high quality,September 13, 2014
+Peoria,Illinois,$200,a half ounce,high quality,September 13, 2014
+North Bay,Ontario,$70,a quarter,high quality,September 13, 2014
+Fort Worth,Texas,$60,an eighth,medium quality,September 13, 2014
+Tampa,Florida,$15,5 grams,medium quality,September 13, 2014
+Birmingham,Alabama,$15,an ounce,medium quality,September 13, 2014
+Port Saint Lucie,Florida,$80,a quarter,medium quality,September 13, 2014
+Clearwater,Florida,$1,a quarter,medium quality,September 13, 2014
+Chalmette,Louisiana,$100,an ounce,low quality,September 13, 2014
+Clearwater,Florida,$100,5 grams,medium quality,September 13, 2014
+San Fernando,California,$260,an ounce,high quality,September 13, 2014
+Portland,Indiana,$100,5 grams,high quality,September 13, 2014
+Laurel,Montana,$220,an ounce,high quality,September 13, 2014
+Cortland,New York,$200,a half ounce,medium quality,September 13, 2014
+Brooklyn,New York,$40,an eighth,medium quality,September 13, 2014
+Frankfort,Illinois,$360,an ounce,high quality,September 13, 2014
+Ann Arbor,Michigan,$250,an ounce,medium quality,September 13, 2014
+Ann Arbor,Michigan,$250,an ounce,medium quality,September 13, 2014
+Atlanta,Georgia,$140,a half ounce,high quality,September 13, 2014
+Valley Stream,New York,$240,an ounce,medium quality,September 13, 2014
+Cullman,Alabama,$20,5 grams,medium quality,September 13, 2014
+Eau Claire,Wisconsin,$40,an eighth,medium quality,September 13, 2014
+Grand Forks,North Dakota,$60,an eighth,medium quality,September 13, 2014
+Toronto,Ontario,$60,a quarter,high quality,September 13, 2014
+Portland,Maine,$80,a quarter,high quality,September 13, 2014
+Jacksonville,Florida,$40,a half ounce,medium quality,September 13, 2014
+North Richland Hills,Texas,$260,an ounce,medium quality,September 13, 2014
+Clifton,New Jersey,$60,an eighth,medium quality,September 13, 2014
+San Diego,California,$140,an ounce,medium quality,September 13, 2014
+Fall River,Massachusetts,$100,a quarter,high quality,September 13, 2014
+Arlington,Texas,$400,an ounce,high quality,September 13, 2014
+Peoria,Illinois,$200,a half ounce,high quality,September 13, 2014
+North Bay,Ontario,$70,a quarter,high quality,September 13, 2014
+Fort Worth,Texas,$60,an eighth,medium quality,September 13, 2014
+Tampa,Florida,$15,5 grams,medium quality,September 13, 2014
+Birmingham,Alabama,$15,an ounce,medium quality,September 13, 2014
+Port Saint Lucie,Florida,$80,a quarter,medium quality,September 13, 2014
+Clearwater,Florida,$1,a quarter,medium quality,September 13, 2014
+Chalmette,Louisiana,$100,an ounce,low quality,September 13, 2014
+Clearwater,Florida,$100,5 grams,medium quality,September 13, 2014
+San Fernando,California,$260,an ounce,high quality,September 13, 2014
+Portland,Indiana,$100,5 grams,high quality,September 13, 2014
+Laurel,Montana,$220,an ounce,high quality,September 13, 2014
+Cortland,New York,$200,a half ounce,medium quality,September 13, 2014
+Brooklyn,New York,$40,an eighth,medium quality,September 13, 2014
+Frankfort,Illinois,$360,an ounce,high quality,September 13, 2014
+Ann Arbor,Michigan,$250,an ounce,medium quality,September 13, 2014
+Ann Arbor,Michigan,$250,an ounce,medium quality,September 13, 2014
+Wichita,Kansas,$70,an ounce,high quality,September 13, 2014
+Peoria,Illinois,$50,an ounce,high quality,September 13, 2014
+Fort Lauderdale,Florida,$100,an ounce,high quality,September 13, 2014
+Dayton,Ohio,$50,an eighth,medium quality,September 13, 2014
+Seminole,Texas,$100,5 grams,medium quality,September 13, 2014
+Harriman,Tennessee,$20,5 grams,medium quality,September 13, 2014
+Fayetteville,Arkansas,$80,an ounce,high quality,September 13, 2014
+Columbia,Maryland,$50,an ounce,medium quality,September 13, 2014
+Richmond,Kentucky,$120,an ounce,low quality,September 13, 2014
+Mesquite,Nevada,$450,an ounce,high quality,September 13, 2014
+Jean,Nevada,$15,a half ounce,medium quality,September 13, 2014
+Canby,Oregon,$50,a quarter,high quality,September 13, 2014
+Orlando,Florida,$20,5 grams,high quality,September 13, 2014
+Nashville,Tennessee,$50,a quarter,high quality,September 13, 2014
+Atlanta,Georgia,$60,an eighth,medium quality,September 13, 2014
+Phoenix,Arizona,$10,20 grams,low quality,September 13, 2014
+Toronto,Ontario,$60,a quarter,high quality,September 13, 2014
+Portland,Maine,$80,a quarter,high quality,September 13, 2014
+Jacksonville,Florida,$40,a half ounce,medium quality,September 13, 2014
+North Richland Hills,Texas,$260,an ounce,medium quality,September 13, 2014
+Clifton,New Jersey,$60,an eighth,medium quality,September 13, 2014
+San Diego,California,$140,an ounce,medium quality,September 13, 2014
+Fall River,Massachusetts,$100,a quarter,high quality,September 13, 2014
+Arlington,Texas,$400,an ounce,high quality,September 13, 2014
+Peoria,Illinois,$200,a half ounce,high quality,September 13, 2014
