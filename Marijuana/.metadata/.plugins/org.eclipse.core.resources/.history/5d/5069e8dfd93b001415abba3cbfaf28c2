@@ -1,0 +1,9 @@
+package marijuanaCrawler;
+
+public class CraiglistLocationLinkCrawl {
+	private final String startLink = "http://craiglist.org";
+	
+	public CraiglistLocationLinkCrawl() {
+		
+	}
+}

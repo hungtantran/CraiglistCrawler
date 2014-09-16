@@ -1,0 +1,44 @@
+package marijuanaCrawler;
+
+import org.jsoup.nodes.Document;
+
+public class CraiglistEntryParser {
+	private final int numRetryDownloadPage = 2;
+	
+	protected String link = null;
+	protected Document doc = null;
+	protected String content = null;
+	protected String timeCreated = null;
+	protected String dateCreated = null;
+	
+	public CraiglistEntryParser(String link) {
+		if (link == null)
+			return;
+		
+		this.link = link;
+		downloadHtmlContent(this.link, this.numRetryDownloadPage);
+	}
+	
+	public CraiglistEntryParser(Document doc) {
+		if (doc == null)
+			return;
+		
+		this.link = null;
+		this.doc = doc;
+		this.content = this.doc.outerHtml();
+	}
+	
+	protected void downloadHtmlContent(String url, int numRetryDownloadPage) {
+		this.doc = NetworkingFunctions.downloadHtmlContent(url,
+				numRetryDownloadPage);
+
+		if (this.doc != null) {
+			this.content = this.doc.outerHtml();
+		} else
+			this.content = null;
+	}
+	
+	public boolean isValid() {
+		return (this.doc != null && this.content != null);
+	}
+}

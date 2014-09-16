@@ -1,0 +1,82 @@
+package marijuanaCrawler;
+
+import org.jsoup.nodes.Document;
+
+public class CraiglistLocationLinkCrawl {
+	private final int numRetryDownloadPage = 2;
+	private final String startLink = "http://craiglist.org";
+	private final String startStateString = "//geo.craigslist.org/iso/us/";
+
+	public CraiglistLocationLinkCrawl() {
+
+	}
+
+	public boolean parseCity(String stateLink) {
+		if (stateLink == null)
+			return false;
+
+		Document doc = NetworkingFunctions.downloadHtmlContent(stateLink,
+				this.numRetryDownloadPage);
+
+		if (doc == null)
+			return false;
+		
+		String htmlContent = doc.outerHtml();
+		
+		String startList = "<div id=\"list\">";
+		boolean listPage = (htmlContent.indexOf("<div id=\"list\">") != -1);
+		
+		if (listPage) {
+			htmlContent = htmlContent.substring(htmlContent.indexOf(ch));
+			String[] cityLinks = htmlContent.split("<a href=\"");
+			String[] cities = new String[cityLinks.length];
+			
+			for (int i = 1; i < cityLinks.length; i++) {
+				String linkElem = cityLinks[i];
+				cityLinks[i] = linkElem.substring(0, linkElem.indexOf("\""));
+				cities[i] = linkElem.substring(linkElem.indexOf("\">")+2, linkElem.indexOf("</a>"));
+				
+				if (linkElem.indexOf(">") != -1)
+					cities[i] = linkElem.substring(linkElem.indexOf(">")+1, linkElem.indexOf("<"));
+				
+				System.out.println(cities[i] + " : " + cityLinks[i]);
+			}
+		}
+		
+		return true;
+	}
+
+	public boolean parseDoc() {
+		Document doc = NetworkingFunctions.downloadHtmlContent(this.startLink,
+				this.numRetryDownloadPage);
+
+		if (doc == null)
+			return false;
+
+		String htmlContent = doc.outerHtml();
+		String[] stateLinks = htmlContent.split(this.startStateString);
+		String[] states = new String[stateLinks.length];
+
+		for (int i = 1; i < stateLinks.length; i++) {
+			String linkElem = stateLinks[i];
+			stateLinks[i] = "http:" + this.startStateString
+					+ linkElem.substring(0, linkElem.indexOf("\""));
+			states[i] = linkElem.substring(linkElem.indexOf(">") + 1,
+					linkElem.indexOf("<"));
+			
+			System.out.println();
+			System.out.println(states[i] + " : " + stateLinks[i]);
+			this.parseCity(stateLinks[i]);
+		}
+
+		return true;
+	}
+
+	public static void main(String[] args) {
+		CraiglistLocationLinkCrawl crawler = new CraiglistLocationLinkCrawl();
+
+		if (crawler.parseDoc()) {
+
+		}
+	}
+}

@@ -1,0 +1,38 @@
+package marijuanaCrawler;
+
+import org.jsoup.nodes.Document;
+
+public class CraiglistLocationLinkCrawl {
+	private final int numRetryDownloadPage = 2;
+	private final String startLink = "http://craiglist.org";
+	private final String startStateString = "//geo.craigslist.org/iso/us/";
+	
+	public CraiglistLocationLinkCrawl() {
+
+	}
+
+	public boolean parseDoc() {
+		Document doc = NetworkingFunctions.downloadHtmlContent(this.startLink,
+				this.numRetryDownloadPage);
+		
+		if (doc == null)
+			return false;
+		
+		String htmlContent = doc.outerHtml();
+		String[] stateLinks = htmlContent.split(this.startStateString);
+		
+		for (int i = 1; i < stateLinks.length; i++) {
+			stateLinks[i] = stateLinks[i].substring(0, stateLinks[i].indexOf("\""))
+		}
+		
+		return true;
+	}
+
+	public static void main(String[] args) {
+		CraiglistLocationLinkCrawl crawler = new CraiglistLocationLinkCrawl();
+		
+		if (crawler.parseDoc()) {
+			
+		}
+	}
+}
