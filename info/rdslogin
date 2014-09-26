@@ -1,0 +1,3 @@
+mysql -h pow-db.clfpwrv3fbfn.us-west-2.rds.amazonaws.com -P 4200 -u cedro -p
+
+pw: password
