@@ -1,0 +1,18 @@
+package marijuanaCrawler;
+
+import org.jsoup.nodes.Document;
+
+public class CraiglistLocationLinkCrawl {
+	private final int numRetryDownloadPage = 2;
+	private final String startLink = "http://craiglist.org";
+	
+	
+	public CraiglistLocationLinkCrawl() {
+		
+	}
+	
+	public static void main(String[] args) {
+		Document doc = NetworkingFunctions.downloadHtmlContent(url,
+				numRetryDownloadPage);
+	}
+}

@@ -1,0 +1,8 @@
+package marijuanaCrawler;
+
+public class CraiglistEntryParser {
+	private final int numRetryDownloadPage = 2;
+	
+	private String url = null;
+	private 
+}

@@ -1,0 +1,12 @@
+package marijuanaCrawler;
+
+public class CraiglistCrawler {
+	public static void main(String[] args) {
+		CraiglistLocationLinkCrawl crawler = new CraiglistLocationLinkCrawl();
+		
+		// Fail to get the craiglis state links
+		if (crawler.getLink()()) {
+			return;
+		}
+	}
+}

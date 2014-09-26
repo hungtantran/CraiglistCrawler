@@ -1,0 +1,7 @@
+package marijuanaCrawler;
+
+public class CraiglistEntryLinkCrawl {
+	public CraiglistEntryLinkCrawl() {
+		
+	}
+}

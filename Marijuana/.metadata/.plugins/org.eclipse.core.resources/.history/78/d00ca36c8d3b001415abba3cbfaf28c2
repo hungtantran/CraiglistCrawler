@@ -1,0 +1,11 @@
+package marijuanaCrawler;
+
+public class CraiglistEntryParser {
+	private final int numRetryDownloadPage = 2;
+	
+	protected String link = null;
+	protected Document doc = null;
+	protected String content = null;
+	protected String timeCreated = null;
+	protected String dateCreated = null;
+}
