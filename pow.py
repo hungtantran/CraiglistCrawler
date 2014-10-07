@@ -15,7 +15,7 @@ for row in rows:
 	toplevel = xmldoc.childNodes[0]
 
 	result = ""
-        for td in toplevel.childNodes:
+    for td in toplevel.childNodes:
 		if td.nodeType != td.TEXT_NODE:
 			if (td.childNodes[0].nodeType == td.TEXT_NODE):
 				# print td.childNodes[0].nodeValue.strip(),
