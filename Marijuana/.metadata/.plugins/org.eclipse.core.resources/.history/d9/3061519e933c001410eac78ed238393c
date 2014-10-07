@@ -1,8 +1,0 @@
-package marijuanaCrawler;
-
-public class CraiglistEntryLinkCrawl {
-	private String locationLink = "";
-	public CraiglistEntryLinkCrawl() {
-		
-	}
-}
