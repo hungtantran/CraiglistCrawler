@@ -28,7 +28,8 @@ def extract_prices(text):
   return prices
 
 def extract_quantities(text):
-  quantityPatterns = ["\d+/\d+", "eighth", "eighths", "quarter", "quart", "quarters", "half oz", "ounce", "oz", "\d+[-+]?[0-9]*\.?[0-9]+ grams"]
+  quantityPatterns = open("quantityPatterns.txt", "r").readlines()
+  quantityPatterns = [x.strip() for x in quantityPatterns]
   quantityPattern = "|".join(quantityPatterns)
   regex = re.compile(quantityPattern)
   quantities = regex.findall(text)
