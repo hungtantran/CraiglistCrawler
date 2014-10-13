@@ -3,6 +3,12 @@ import re
 
 from bs4 import BeautifulSoup
 from HTMLParser import HTMLParser
+import MySQLdb
+
+db = MySQLdb.connect(host="pow-db.clfpwrv3fbfn.us-west-2.rds.amazonaws.com",
+                     port=4200,user="cedro",
+                     passwd="password",
+                     db="powdb")
 
 class MLStripper(HTMLParser):
   def __init__(self):
@@ -19,7 +25,7 @@ def strip_tags(html):
   return s.get_data()
 
 def extract_prices(text):
-  moneyPatterns = open("moneyPatterns.txt", "r").readlines()
+  moneyPatterns = open("moneypatterns.txt", "r").readlines()
   moneyPatterns = [x.strip() for x in moneyPatterns]
   moneyPattern = "|".join(moneyPatterns)
   print moneyPattern
@@ -27,18 +33,30 @@ def extract_prices(text):
   prices = regex.findall(text)
   return prices
 
-def extract_quantities(text):
-  quantityPatterns = open("quantityPatterns.txt", "r").readlines()
+def extract_quantities(text, quantitypatterns):
+  quantityPatterns = open(quantitypatterns, "r").readlines()
   quantityPatterns = [x.strip() for x in quantityPatterns]
   quantityPattern = "|".join(quantityPatterns)
   regex = re.compile(quantityPattern)
   quantities = regex.findall(text)
   return quantities
 
+def extract_quantities(text):
+  quantities_english = extract_quantities(text, "quantitypatterns_english.txt")
+  quantities_metric = extract_quantities(text, "quantitypatterns_metrix.txt")
+
+def write_to_db(prices, quantities):
+  
+
+  pass
+
 def index(htmlFile):
-  html_doc = open(htmlFile, 'r')
-  soup = BeautifulSoup(html_doc.read())
-  posting = soup.find_all("body")[0]
+  # html_doc = open(htmlFile, 'r')
+  # soup = BeautifulSoup(html_doc.read())
+  html_doc = htmlFile
+  soup = BeautifulSoup(html_doc)
+  posting = soup.find(id="postingbody")
+
   text = strip_tags(str(posting))
   print text
 
@@ -48,8 +66,15 @@ def index(htmlFile):
   print quantities
 
 def main():
-  htmlFile = sys.argv[1]
-  index(htmlFile)
+  cursor = db.cursor()
+  cursor.execute("SELECT * FROM RawHTML")
+  for row in cursor.fetchall():
+    htmltext = row[2]
+    # print htmltext
+    index(htmltext)
+
+  # htmlFile = sys.argv[1]
+  # index(htmlFile)
 
 if __name__ == "__main__":
   main()
