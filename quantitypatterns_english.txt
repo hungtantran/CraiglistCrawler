@@ -1,0 +1,10 @@
+\d+/\d+
+eighth
+eighths
+quarter
+quart
+quarters
+half
+half oz
+ounce
+oz
