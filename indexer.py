@@ -46,7 +46,7 @@ def get_quantity_mapping():
 
 def extract_prices(text):
   moneyPatterns = open("moneypatterns.txt", "r").readlines()
-  moneyPatterns = [x.strip() for x in moneyPatterns]
+  moneyPatterns = [x.replace('$','').strip() for x in moneyPatterns]
   moneyPattern = "|".join(moneyPatterns)
   regex = re.compile(moneyPattern)
   prices = regex.findall(text)
@@ -105,14 +105,14 @@ def write_to_db(prices, quantities):
   pass
 
 def index(htmlFile):
-  html_doc = open(htmlFile, 'r')
-  soup = BeautifulSoup(html_doc.read())
-  # html_doc = htmlFile
-  # soup = BeautifulSoup(html_doc)
+  # html_doc = open(htmlFile, 'r')
+  # soup = BeautifulSoup(html_doc.read())
+  html_doc = htmlFile
+  soup = BeautifulSoup(html_doc)
   posting = soup.find(id="postingbody")
 
   text = strip_tags(str(posting))
-  print text,"\n"
+  # print text,"\n"
   prices = extract_prices(text)
   
   extracted_quantities = extract_quantities(text)
@@ -121,19 +121,22 @@ def index(htmlFile):
   elif len(extracted_quantities[1])==len(prices):
     print extracted_quantities[1]
   else:
-    return
+    print text
+    pass
   print prices
 
 def main():
   cursor = db.cursor()
   cursor.execute("SELECT * FROM RawHTML")
+  count = 0
   for row in cursor.fetchall():
+    count = count + 1
     htmltext = row[2]
     # print htmltext
-    # index(htmltext)
+    index(htmltext)
 
-  htmlFile = sys.argv[1]
-  index(htmlFile)
+  # htmlFile = sys.argv[1]
+  # index(htmlFile)
 
 if __name__ == "__main__":
   main()
