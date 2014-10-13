@@ -1,10 +1,11 @@
-\d+/\d+
-eighth
-eighths
-quarter
-quart
-quarters
-half
-half oz
-ounce
-oz
+\d+/\d+, 0
+eighth, .125
+eighths, .125
+quarter, .25
+quarter oz, .25
+quart, .25
+quarters, .25
+half, .5
+half oz, .5
+ounce, 1
+oz, 1
