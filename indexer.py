@@ -128,9 +128,7 @@ def index(htmlFile):
 def main():
   cursor = db.cursor()
   cursor.execute("SELECT * FROM RawHTML")
-  count = 0
   for row in cursor.fetchall():
-    count = count + 1
     htmltext = row[2]
     # print htmltext
     index(htmltext)
