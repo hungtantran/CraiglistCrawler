@@ -118,13 +118,13 @@ def index(htmlFile):
   
   extracted_quantities = extract_quantities(text)
   if len(extracted_quantities[0])==len(prices):
-    print extracted_quantities[0]
+    print "quantities:", extracted_quantities[0]
   elif len(extracted_quantities[1])==len(prices):
     print extracted_quantities[1]
   else:
-    print text
+    # print text
     pass
-  print prices
+  print "prices:", prices
 
 def index_from_db():
   cursor = db.cursor()
@@ -139,7 +139,12 @@ def index_from_db():
 
 def index_from_files():
   files = os.listdir(positiveDir)
-  print files
+  for fileName in files:
+    filePath = os.path.join(positiveDir, fileName)
+    if os.path.isfile(filePath):
+      f = open(filePath, 'r')
+      fileText = f.read()
+      index(fileText)
 
 
 def main():
