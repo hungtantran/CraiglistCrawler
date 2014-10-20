@@ -1,4 +1,5 @@
 import numpy as np
+import os
 import re
 import quantities as pq
 import sys
@@ -7,7 +8,7 @@ from bs4 import BeautifulSoup
 from HTMLParser import HTMLParser
 import MySQLdb
 
-
+positiveDir = "./crawled_files/positive"
 db = MySQLdb.connect(host="pow-db.clfpwrv3fbfn.us-west-2.rds.amazonaws.com",
                      port=4200,user="cedro",
                      passwd="password",
@@ -125,16 +126,25 @@ def index(htmlFile):
     pass
   print prices
 
-def main():
+def index_from_db():
   cursor = db.cursor()
   cursor.execute("SELECT * FROM RawHTML")
   for row in cursor.fetchall():
     htmltext = row[2]
-    # print htmltext
+    print htmltext
     index(htmltext)
 
-  # htmlFile = sys.argv[1]
-  # index(htmlFile)
+  htmlFile = sys.argv[1]
+  index(htmlFile)
+
+def index_from_files():
+  files = os.listdir(positiveDir)
+  print files
+
+
+def main():
+  index_from_files()
+
 
 if __name__ == "__main__":
   main()
