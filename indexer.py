@@ -3,6 +3,7 @@ import os
 import re
 import quantities as pq
 import sys
+import unicodedata
 
 from bs4 import BeautifulSoup
 from HTMLParser import HTMLParser
@@ -46,12 +47,28 @@ def get_quantity_mapping():
   return quantityMapping
 
 def extract_prices(text):
+  # remove all quantity matches from text here
+  englishQuantityPatterns = open("quantitypatterns_english.txt", "r").readlines()
+  metricQuantityPatterns = open("quantitypatterns_metric.txt", "r").readlines()
+  
+  quantityPatterns = englishQuantityPatterns + metricQuantityPatterns
+  quantityPattern = "|".join([x.split(',')[0].strip() for x in quantityPatterns])
+  compiledQuantityPattern = re.compile(quantityPattern)
+  text = compiledQuantityPattern.sub('', text)
+
   moneyPatterns = open("moneypatterns.txt", "r").readlines()
-  moneyPatterns = [x.replace('$','').strip() for x in moneyPatterns]
+  moneyPatterns = [x.strip() for x in moneyPatterns]
   moneyPattern = "|".join(moneyPatterns)
   regex = re.compile(moneyPattern)
   prices = regex.findall(text)
-  prices = [float(x.split(' ')[0].strip()) for x in prices]
+
+  cleanPrices = []
+  for price in prices:
+    if "/" not in price:
+      cleanPrices.append(price)
+  prices = cleanPrices
+
+  prices = [float(x.split(' ')[0].strip().replace('$','')) for x in prices]
   return prices
 
 def extract_quantities_with_pattern(text, pattern):
@@ -66,18 +83,24 @@ def map_quantityPattern_to_quantity(quantityMapping, quantities):
   mappedQuantities = []
   for q in quantities:
     if q in quantityMapping:
+      print q, quantityMapping[q]
       mappedQuantities.append(quantityMapping[q])
       continue
     
     if '/' in q:
-      fraction = q.split(" ")[0].split("/")
+      non_decimal = re.compile(r'[^\d.]+')
+      fraction = non_decimal.sub(' ', q).split()
+
       numerator = float(fraction[0])
       denominator = float(fraction[1])
       result = numerator / denominator
+      print q, result
       mappedQuantities.append(result)
       continue
 
-    decimal = float(q.split(" ")[0])
+    non_decimal = re.compile(r'[^\d.]+')
+    decimal = float(non_decimal.sub('', q))
+    # decimal = float(q.split(" ")[0])
     mappedQuantities.append(decimal)
 
   return mappedQuantities
@@ -110,25 +133,30 @@ def index(htmlFile):
   # soup = BeautifulSoup(html_doc.read())
   html_doc = htmlFile
   soup = BeautifulSoup(html_doc)
+  
+  title = soup.title.string
+  title = str(unicodedata.normalize('NFKD', title).encode('ascii', 'ignore'))
+  print title
+  h2 = soup.h2.text
+  h2 = str(unicodedata.normalize('NFKD', h2).encode('ascii', 'ignore'))
+  print h2
   posting = soup.find(id="postingbody")
 
-  text = strip_tags(str(posting))
+  text = strip_tags(title + h2 + str(posting))
   # print text,"\n"
   prices = extract_prices(text)
   
   extracted_quantities = extract_quantities(text)
-  if len(extracted_quantities[0])==len(prices):
-    print "quantities:", extracted_quantities[0]
-  elif len(extracted_quantities[1])==len(prices):
-    print extracted_quantities[1]
-  else:
-    print text
-    if (len(extracted_quantities[0]) > len(extracted_quantities[1])):
-      print extracted_quantities[0]
-    else:
-      print extracted_quantities[1]
-    pass
+
+  if len(extracted_quantities[0]) > 0:
+    print "metric quantities:", extracted_quantities[0]
+  if len(extracted_quantities[1]) > 0:
+    print "english quantities:", extracted_quantities[1]
   print "prices:", prices
+
+  if len(extracted_quantities[0])==0 and len(extracted_quantities[1])==0 or len(prices)==0:
+    print text
+    sys.exit(1)
 
 def index_from_db():
   cursor = db.cursor()
@@ -146,7 +174,10 @@ def index_from_file(fileName):
   if os.path.isfile(filePath):
     f = open(filePath, 'r')
     fileText = f.read()
+    print filePath
     index(fileText)
+  else:
+    print "not valid file"
 
 def index_from_files():
   files = os.listdir(positiveDir)
