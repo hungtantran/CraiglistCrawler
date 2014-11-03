@@ -3,6 +3,7 @@ import os
 import re
 import quantities as pq
 import sys
+import unicodedata
 
 from bs4 import BeautifulSoup
 from HTMLParser import HTMLParser
@@ -46,12 +47,28 @@ def get_quantity_mapping():
   return quantityMapping
 
 def extract_prices(text):
+  # remove all quantity matches from text here
+  # englishQuantityPatterns = open("quantitypatterns_english.txt", "r").readlines()
+  # metricQuantityPatterns = open("quantitypatterns_metric.txt", "r").readlines()
+  # quantityPatterns = englishQuantityPatterns + metricQuantityPatterns
+  # quantityPattern = "|".join([x.split(',')[0].strip() for x in quantityPatterns])
+
+  compiledQuantityPattern = re.compile("\d+?[0-9]*\.?[0-9]+%")
+  text = compiledQuantityPattern.sub('', text)
+
   moneyPatterns = open("moneypatterns.txt", "r").readlines()
-  moneyPatterns = [x.replace('$','').strip() for x in moneyPatterns]
+  moneyPatterns = [x.strip() for x in moneyPatterns]
   moneyPattern = "|".join(moneyPatterns)
   regex = re.compile(moneyPattern)
   prices = regex.findall(text)
-  prices = [float(x.split(' ')[0].strip()) for x in prices]
+
+  cleanPrices = []
+  for price in prices:
+    if "/" not in price:
+      cleanPrices.append(price)
+  prices = cleanPrices
+
+  prices = [float(x.split(' ')[0].strip().replace('$','')) for x in prices]
   return prices
 
 def extract_quantities_with_pattern(text, pattern):
@@ -70,14 +87,18 @@ def map_quantityPattern_to_quantity(quantityMapping, quantities):
       continue
     
     if '/' in q:
-      fraction = q.split(" ")[0].split("/")
+      non_decimal = re.compile(r'[^\d.]+')
+      fraction = non_decimal.sub(' ', q).split()
+
       numerator = float(fraction[0])
       denominator = float(fraction[1])
       result = numerator / denominator
       mappedQuantities.append(result)
       continue
 
-    decimal = float(q.split(" ")[0])
+    non_decimal = re.compile(r'[^\d.]+')
+    decimal = float(non_decimal.sub('', q))
+    # decimal = float(q.split(" ")[0])
     mappedQuantities.append(decimal)
 
   return mappedQuantities
@@ -102,51 +123,70 @@ def extract_quantities(text):
   return quantities_metric, quantities_english
 
 
-def write_to_db(prices, quantities):
-  pass
+def write_to_db(rowId, metricQuantities, englishQuantities, prices):
+  print rowId
+  print "metric quantities:", str(metricQuantities)
+  print "english quantities:", str(englishQuantities)
+  print "prices:", str(prices)
+  query = "UPDATE rawhtml SET alt_quantities=\"%s\", alt_prices=\"%s\" WHERE id=%s;" % \
+    (str(metricQuantities)+str(englishQuantities), str(prices), str(rowId))
+  print "query:", query
 
-def index(htmlFile):
+  cursor = db.cursor()
+  cursor.execute(query)
+  db.commit()
+  # cursor.execute ("""
+  #  UPDATE rawhtml
+  #  SET alt_quantities=%s, alt_prices=%s
+  #  WHERE id=%s""", (str(metricQuantities)+str(englishQuantities), str(prices), rowId))
+
+def index(rowId, htmlFile):
   # html_doc = open(htmlFile, 'r')
   # soup = BeautifulSoup(html_doc.read())
   html_doc = htmlFile
   soup = BeautifulSoup(html_doc)
+  
+  title = soup.title.string
+  title = str(unicodedata.normalize('NFKD', title).encode('ascii', 'ignore'))
+  h2 = soup.h2.text
+  h2 = str(unicodedata.normalize('NFKD', h2).encode('ascii', 'ignore'))
   posting = soup.find(id="postingbody")
 
-  text = strip_tags(str(posting))
-  # print text,"\n"
+  text = strip_tags(title + h2 + str(posting))
   prices = extract_prices(text)
+  prices = [price for price in prices if price!=420 and price!=215 and price!=502 and price>9]
   
   extracted_quantities = extract_quantities(text)
-  if len(extracted_quantities[0])==len(prices):
-    print "quantities:", extracted_quantities[0]
-  elif len(extracted_quantities[1])==len(prices):
-    print extracted_quantities[1]
-  else:
-    print text
-    if (len(extracted_quantities[0]) > len(extracted_quantities[1])):
-      print extracted_quantities[0]
-    else:
-      print extracted_quantities[1]
-    pass
-  print "prices:", prices
+
+  # print "metric quantities:", extracted_quantities[0]
+  # print "english quantities:", extracted_quantities[1]
+  # print "prices:", prices, '\n'
+
+  if len(extracted_quantities[0])==0 and len(extracted_quantities[1])==0 or len(prices)==0:
+    # print text
+    print "could not find prices or quantities"
+    return
+
+  write_to_db(rowId, extracted_quantities[0], extracted_quantities[1], prices)
 
 def index_from_db():
   cursor = db.cursor()
-  cursor.execute("SELECT * FROM RawHTML")
+  cursor.execute("SELECT * FROM rawhtml where positive=1")
   for row in cursor.fetchall():
+    rowId = row[0]
     htmltext = row[2]
-    print htmltext
-    index(htmltext)
+    index(rowId, htmltext)
 
-  htmlFile = sys.argv[1]
-  index(htmlFile)
 
 def index_from_file(fileName):
   filePath = os.path.join(positiveDir, fileName)
   if os.path.isfile(filePath):
     f = open(filePath, 'r')
     fileText = f.read()
-    index(fileText)
+    print filePath
+    index(0, fileText)
+  else:
+    print "not valid file"
 
 def index_from_files():
   files = os.listdir(positiveDir)
@@ -157,7 +197,8 @@ def main():
   if len(sys.argv) > 1:
     index_from_file(sys.argv[1])
   else:
-    index_from_files()  
+    index_from_db()
+    # index_from_files()  
 
 
 if __name__ == "__main__":
