@@ -10,10 +10,14 @@ from HTMLParser import HTMLParser
 import MySQLdb
 
 positiveDir = "./crawled_files/positive"
-db = MySQLdb.connect(host="pow-db.clfpwrv3fbfn.us-west-2.rds.amazonaws.com",
-                     port=4200,user="cedro",
-                     passwd="password",
-                     db="powdb")
+# db = MySQLdb.connect(host="pow-db.clfpwrv3fbfn.us-west-2.rds.amazonaws.com",
+#                      port=4200,user="cedro",
+#                      passwd="password",
+#                      db="powdb")
+db = MySQLdb.connect(host="localhost",
+                     user="root",
+                     passwd="",
+                     db="weedpricelink")
 
 class MLStripper(HTMLParser):
   def __init__(self):

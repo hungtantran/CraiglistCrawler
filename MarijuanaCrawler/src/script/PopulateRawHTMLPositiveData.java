@@ -26,19 +26,19 @@ public class PopulateRawHTMLPositiveData {
 
 		int lowerBound = 0;
 		int maxNumResult = 200;
-		
+
 		// Get 2000 articles at a time, until exhaust all the articles
 		while (true) {
-			MySqlConnection mysqlConnection = new MySqlConnection(
-					Globals.username, Globals.password, Globals.server,
-					Globals.database);
-
-			ResultSet resultSet = mysqlConnection.GetRawHTML(lowerBound,
-					maxNumResult);
-			if (resultSet == null)
-				break;
-
 			try {
+				MySqlConnection mysqlConnection = new MySqlConnection(
+						Globals.username, Globals.password, Globals.server,
+						Globals.database);
+
+				ResultSet resultSet = mysqlConnection.GetRawHTML(lowerBound,
+						maxNumResult);
+				if (resultSet == null)
+					break;
+
 				int count = 0;
 				// Iterate through the result set to populate the information
 				while (resultSet.next()) {

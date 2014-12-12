@@ -13,38 +13,37 @@ import commonlib.Globals;
 import commonlib.Helper;
 
 public class MySqlConnection {
-	private Connection con = null;
 	private String username = null;
 	private String password = null;
 	private String server = null;
 	private String database = null;
 
 	public MySqlConnection(String username, String password, String server,
-			String database) {
+			String database) throws ClassNotFoundException {
 		this.username = username;
 		this.password = password;
 		this.server = server;
 		this.database = database;
+		Class.forName("com.mysql.jdbc.Driver");
+	}
 
-		// Set up sql connection
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			this.con = DriverManager.getConnection("jdbc:mysql://"
-					+ this.server, this.username, this.password);
-		} catch (ClassNotFoundException e) {
-			Globals.crawlerLogManager.writeLog("Driver not found");
-		} catch (SQLException e) {
-			Globals.crawlerLogManager.writeLog(e.getMessage());
-		}
+	private Connection getConnection() throws SQLException {
+		return DriverManager.getConnection("jdbc:mysql://" + this.server,
+				this.username, this.password);
 	}
 
 	// Populate information of type
 	@SuppressWarnings("unused")
 	private void getTypeInfo() {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
 		try {
-			Statement st = this.con.createStatement();
+			connection = this.getConnection();
+			Statement st = connection.createStatement();
 			st.executeQuery("USE " + this.database);
-			ResultSet resultSet = st.executeQuery("SELECT * FROM type_table");
+			resultSet = st.executeQuery("SELECT * FROM type_table");
 
 			// Iterate through the result set to populate the information
 			while (resultSet.next()) {
@@ -53,13 +52,20 @@ public class MySqlConnection {
 			Globals.crawlerLogManager
 					.writeLog("Get type_table information fails");
 			Globals.crawlerLogManager.writeLog(e.getMessage());
+		} finally {
+			DAOUtil.close(connection, preparedStatement, resultSet);
 		}
 	}
 
 	// Get link from the queue given the domainId
 	public ResultSet getLinkQueue(int domainId) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
 		try {
-			Statement st = this.con.createStatement();
+			connection = this.getConnection();
+			Statement st = connection.createStatement();
 			st.executeQuery("USE " + this.database);
 
 			String query = "SELECT link FROM link_queue_table WHERE domain_table_id_1 = "
@@ -69,6 +75,8 @@ public class MySqlConnection {
 		} catch (SQLException e) {
 			Globals.crawlerLogManager.writeLog("Get link_queue_table fails");
 			Globals.crawlerLogManager.writeLog(e.getMessage());
+		} finally {
+			DAOUtil.close(connection, preparedStatement, resultSet);
 		}
 
 		return null;
@@ -76,8 +84,13 @@ public class MySqlConnection {
 
 	// Get link from the crawled set given the domainId
 	public ResultSet getLinkCrawled(int domainId) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
 		try {
-			Statement st = this.con.createStatement();
+			connection = this.getConnection();
+			Statement st = connection.createStatement();
 			st.executeQuery("USE " + this.database);
 
 			String query = "SELECT * FROM link_crawled_table WHERE domain_table_id_1 = "
@@ -87,6 +100,8 @@ public class MySqlConnection {
 		} catch (SQLException e) {
 			Globals.crawlerLogManager.writeLog("Get link_crawled_table fails");
 			Globals.crawlerLogManager.writeLog(e.getMessage());
+		} finally {
+			DAOUtil.close(connection, preparedStatement, resultSet);
 		}
 
 		return null;
@@ -94,14 +109,19 @@ public class MySqlConnection {
 
 	public void UpdateLinkCrawl(String link, int priority, String country,
 			String state, String city) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
 		try {
-			Statement st = this.con.createStatement();
+			connection = this.getConnection();
+			Statement st = connection.createStatement();
 			st.executeQuery("USE " + this.database);
 
 			// Insert into watch_price_stat_table
 			String prepareStmt = "UPDATE link_crawled_table SET priority = ?, country = ?, state = ?, city = ? WHERE link = ?";
 
-			PreparedStatement stmt = this.con.prepareStatement(prepareStmt);
+			PreparedStatement stmt = connection.prepareStatement(prepareStmt);
 			stmt.setInt(1, priority);
 			stmt.setString(2, country);
 			stmt.setString(3, state);
@@ -115,6 +135,8 @@ public class MySqlConnection {
 			Globals.crawlerLogManager
 					.writeLog("Update link_crawled_table fails");
 			Globals.crawlerLogManager.writeLog(e.getMessage());
+		} finally {
+			DAOUtil.close(connection, preparedStatement, resultSet);
 		}
 	}
 
@@ -130,9 +152,14 @@ public class MySqlConnection {
 			timeCrawled = Helper.getCurrentTime();
 			dateCrawled = Helper.getCurrentDate();
 		}
-
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
 		try {
-			Statement st = this.con.createStatement();
+			connection = this.getConnection();
+			Statement st = connection.createStatement();
 			st.executeQuery("USE " + this.database);
 
 			// Insert into watch_price_stat_table
@@ -141,7 +168,7 @@ public class MySqlConnection {
 					+ "time_crawled, "
 					+ "date_crawled) values (?, ?, ?, ?, ?, ?)";
 
-			PreparedStatement stmt = this.con.prepareStatement(prepareStmt);
+			PreparedStatement stmt = connection.prepareStatement(prepareStmt);
 			stmt.setString(1, link);
 			stmt.setInt(2, domainId);
 
@@ -166,6 +193,8 @@ public class MySqlConnection {
 					.writeLog("Insert into link_queue_table fails");
 			Globals.crawlerLogManager.writeLog(e.getMessage());
 			return false;
+		} finally {
+			DAOUtil.close(connection, preparedStatement, resultSet);
 		}
 
 		return true;
@@ -182,15 +211,20 @@ public class MySqlConnection {
 			timeCrawled = Helper.getCurrentTime();
 			dateCrawled = Helper.getCurrentDate();
 		}
-
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
 		try {
-			Statement st = this.con.createStatement();
+			connection = this.getConnection();
+			Statement st = connection.createStatement();
 			st.executeQuery("USE " + this.database);
 
 			// Insert into watch_price_stat_table
 			String prepareStmt = "INSERT INTO link_crawled_table (link, domain_table_id_1, priority, time_crawled, date_crawled, country, state, city) values (?, ?, ?, ?, ?, ?, ?, ?)";
 
-			PreparedStatement stmt = this.con.prepareStatement(prepareStmt,
+			PreparedStatement stmt = connection.prepareStatement(prepareStmt,
 					Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, link);
 			stmt.setInt(2, domainId);
@@ -235,6 +269,8 @@ public class MySqlConnection {
 					.writeLog("Insert into link_crawled_table fails");
 			Globals.crawlerLogManager.writeLog(e.getMessage());
 			return -1;
+		} finally {
+			DAOUtil.close(connection, preparedStatement, resultSet);
 		}
 
 		return -1;
@@ -245,15 +281,20 @@ public class MySqlConnection {
 			Integer predict2, String country, String state, String city) {
 		if (link == null || htmlContent == null)
 			return false;
-
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
 		try {
-			Statement st = this.con.createStatement();
+			connection = this.getConnection();
+			Statement st = connection.createStatement();
 			st.executeQuery("USE " + this.database);
 
 			// Insert into watch_price_stat_table
 			String prepareStmt = "INSERT INTO RawHTML (id, url, html, positive, predict1, predict2, country, state, city) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-			PreparedStatement stmt = this.con.prepareStatement(prepareStmt);
+			PreparedStatement stmt = connection.prepareStatement(prepareStmt);
 			stmt.setInt(1, id);
 			stmt.setString(2, link);
 			stmt.setString(3, htmlContent);
@@ -289,14 +330,21 @@ public class MySqlConnection {
 					.writeLog("Insert into table RawHTML fails");
 			Globals.crawlerLogManager.writeLog(e.getMessage());
 			return false;
+		} finally {
+			DAOUtil.close(connection, preparedStatement, resultSet);
 		}
 
 		return true;
 	}
 
 	public ResultSet GetRawHTML(int lowerBound, int maxNumResult) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
 		try {
-			Statement st = this.con.createStatement();
+			connection = this.getConnection();
+			Statement st = connection.createStatement();
 			st.executeQuery("USE " + this.database);
 
 			String query = "SELECT * FROM RawHTML";
@@ -308,6 +356,8 @@ public class MySqlConnection {
 		} catch (SQLException e) {
 			Globals.crawlerLogManager.writeLog("Get RawHTML fails");
 			Globals.crawlerLogManager.writeLog(e.getMessage());
+		} finally {
+			DAOUtil.close(connection, preparedStatement, resultSet);
 		}
 
 		return null;
@@ -316,14 +366,19 @@ public class MySqlConnection {
 	public void UpdateRawHTML(String link, String htmlContent,
 			Integer positivePage, Integer predict1, Integer predict2,
 			String country, String state, String city) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
 		try {
-			Statement st = this.con.createStatement();
+			connection = this.getConnection();
+			Statement st = connection.createStatement();
 			st.executeQuery("USE " + this.database);
 
 			// Insert into watch_price_stat_table
 			String prepareStmt = "UPDATE RawHTML SET html = ?, positive = ?, predict1 = ?, predict2 = ?, country = ?, state = ?, city = ? WHERE url = ?";
 
-			PreparedStatement stmt = this.con.prepareStatement(prepareStmt);
+			PreparedStatement stmt = connection.prepareStatement(prepareStmt);
 			stmt.setString(1, htmlContent);
 
 			if (positivePage != null) {
@@ -357,6 +412,8 @@ public class MySqlConnection {
 		} catch (SQLException e) {
 			Globals.crawlerLogManager.writeLog("Update RawHTML fails");
 			Globals.crawlerLogManager.writeLog(e.getMessage());
+		} finally {
+			DAOUtil.close(connection, preparedStatement, resultSet);
 		}
 	}
 
@@ -364,15 +421,20 @@ public class MySqlConnection {
 			String state, String city) {
 		if (link == null || country == null || state == null || city == null)
 			return false;
-
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
 		try {
-			Statement st = this.con.createStatement();
+			connection = this.getConnection();
+			Statement st = connection.createStatement();
 			st.executeQuery("USE " + this.database);
 
 			// Insert into watch_price_stat_table
 			String prepareStmt = "INSERT INTO location_link (link, country, state, city) values (?, ?, ?, ?)";
 
-			PreparedStatement stmt = this.con.prepareStatement(prepareStmt);
+			PreparedStatement stmt = connection.prepareStatement(prepareStmt);
 			stmt.setString(1, link);
 			stmt.setString(2, country);
 			stmt.setString(3, state);
@@ -386,21 +448,28 @@ public class MySqlConnection {
 					.writeLog("Insert into table location_link fails");
 			Globals.crawlerLogManager.writeLog(e.getMessage());
 			return false;
+		} finally {
+			DAOUtil.close(connection, preparedStatement, resultSet);
 		}
 
 		return true;
 	}
 
 	public Map<String, Globals.Location> GetLocationLink() {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		
 		try {
-			Statement st = this.con.createStatement();
+			connection = this.getConnection();
+			Statement st = connection.createStatement();
 			st.executeQuery("USE " + this.database);
 
 			String query = "SELECT * FROM location_link";
 
 			Map<String, Globals.Location> linkToLocationMap = new HashMap<String, Globals.Location>();
 
-			ResultSet resultSet = st.executeQuery(query);
+			resultSet = st.executeQuery(query);
 			while (resultSet.next()) {
 				String link = resultSet.getString("link");
 				String country = resultSet.getString("country");
@@ -416,6 +485,8 @@ public class MySqlConnection {
 		} catch (SQLException e) {
 			Globals.crawlerLogManager.writeLog("Get location_link fails");
 			Globals.crawlerLogManager.writeLog(e.getMessage());
+		} finally {
+			DAOUtil.close(connection, preparedStatement, resultSet);
 		}
 
 		return null;

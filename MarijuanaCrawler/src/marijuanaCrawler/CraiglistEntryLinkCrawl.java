@@ -11,6 +11,7 @@ import org.jsoup.select.Elements;
 import commonlib.Globals;
 import commonlib.NetworkingFunctions;
 
+// TODO don't use Globals
 public class CraiglistEntryLinkCrawl {
 	private final String searchPageSurfix = "/search/sss?query=";
 	private final String sortParam = "&sort=rel&s=";

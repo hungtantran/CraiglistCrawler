@@ -25,8 +25,14 @@ public class CraiglistCrawler {
 			return;
 
 		this.urlsCrawled = new HashSet<String>();
-		this.mysqlConnection = new MySqlConnection(Globals.username,
-				Globals.password, Globals.server, Globals.database);
+		
+		try {
+			this.mysqlConnection = new MySqlConnection(Globals.username,
+					Globals.password, Globals.server, Globals.database);
+		} catch (ClassNotFoundException e) {
+			Globals.crawlerLogManager.writeLog(e.getMessage());
+			return;
+		}
 
 		// Get start urls (location links for now)
 		if (!this.getStartLinks()) {
@@ -85,9 +91,6 @@ public class CraiglistCrawler {
 			}
 
 			String url = this.urlsQueue.remove();
-			// this.urlsCrawled.add(url);
-			// this.mysqlConnection.insertIntoLinkCrawledTable(url,
-			// Domain.CRAIGLIST.value, 1, null, null);
 
 			Globals.Location curLocation = this.linkToLocationMap.get(url);
 			if (curLocation == null)

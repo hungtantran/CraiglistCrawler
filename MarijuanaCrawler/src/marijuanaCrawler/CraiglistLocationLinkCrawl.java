@@ -99,9 +99,15 @@ public class CraiglistLocationLinkCrawl {
 		if (linkToLocationMap == null)
 			return;
 		
-		MySqlConnection mysqlConnection = new MySqlConnection(
-				Globals.username, Globals.password, Globals.server,
-				Globals.database);
+		MySqlConnection mysqlConnection;
+		try {
+			mysqlConnection = new MySqlConnection(
+					Globals.username, Globals.password, Globals.server,
+					Globals.database);
+		} catch (ClassNotFoundException e) {
+			Globals.crawlerLogManager.writeLog(e.getMessage());
+			return;
+		}
 		
 		for (Map.Entry<String, Globals.Location> entry : linkToLocationMap.entrySet()) {
 			String link = entry.getKey();

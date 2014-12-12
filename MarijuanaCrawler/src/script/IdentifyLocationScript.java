@@ -8,8 +8,14 @@ import dbconnection.MySqlConnection;
 
 public class IdentifyLocationScript {
 	public static void identifyLocationRawHTML() {
-		MySqlConnection mysqlConnection = new MySqlConnection(Globals.username,
-				Globals.password, Globals.server, Globals.database);
+		MySqlConnection mysqlConnection = null;
+		try {
+			mysqlConnection = new MySqlConnection(Globals.username,
+					Globals.password, Globals.server, Globals.database);
+		} catch (Exception e) {
+			Globals.crawlerLogManager.writeLog(e.getMessage());
+			return;
+		}
 
 		Map<String, Globals.Location> linkToLocationMap = mysqlConnection
 				.GetLocationLink();
@@ -20,15 +26,15 @@ public class IdentifyLocationScript {
 
 		// Get 2000 articles at a time, until exhaust all the articles
 		while (true) {
-			mysqlConnection = new MySqlConnection(Globals.username,
-					Globals.password, Globals.server, Globals.database);
-
-			ResultSet resultSet = mysqlConnection.GetRawHTML(lowerBound,
-					maxNumResult);
-			if (resultSet == null)
-				break;
-
 			try {
+				mysqlConnection = new MySqlConnection(Globals.username,
+						Globals.password, Globals.server, Globals.database);
+
+				ResultSet resultSet = mysqlConnection.GetRawHTML(lowerBound,
+						maxNumResult);
+				if (resultSet == null)
+					break;
+
 				int count = 0;
 				// Iterate through the result set to populate the information
 				while (resultSet.next()) {
@@ -58,10 +64,9 @@ public class IdentifyLocationScript {
 
 						if (link.contains(linkMap)) {
 							if (Globals.DEBUG)
-								System.out
-										.println("(" + htmlCount
-												+ ") Check HTML id " + id
-												+ ": " + link);
+								System.out.println("(" + htmlCount
+										+ ") Check HTML id " + id + ": "
+										+ link);
 
 							mysqlConnection.UpdateRawHTML(link, htmlContent,
 									positivePage, predict1, predict2,
@@ -84,15 +89,13 @@ public class IdentifyLocationScript {
 		}
 	}
 
-	public static void identifyLocationLinkCrawl() {
+	public static void identifyLocationLinkCrawl()
+			throws ClassNotFoundException {
 		MySqlConnection mysqlConnection = new MySqlConnection(Globals.username,
 				Globals.password, Globals.server, Globals.database);
 
 		Map<String, Globals.Location> linkToLocationMap = mysqlConnection
 				.GetLocationLink();
-
-		mysqlConnection = new MySqlConnection(Globals.username,
-				Globals.password, Globals.server, Globals.database);
 
 		ResultSet resultSet = mysqlConnection.getLinkCrawled(1);
 		if (resultSet == null)
@@ -129,7 +132,12 @@ public class IdentifyLocationScript {
 	}
 
 	public static void main(String[] args) {
-		IdentifyLocationScript.identifyLocationLinkCrawl();
+		try {
+			IdentifyLocationScript.identifyLocationLinkCrawl();
+		} catch (ClassNotFoundException e) {
+			return;
+		}
+		
 		IdentifyLocationScript.identifyLocationRawHTML();
 	}
 }
