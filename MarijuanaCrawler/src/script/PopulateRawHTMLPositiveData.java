@@ -1,14 +1,17 @@
 package script;
 
 import java.io.File;
-import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
+
 import commonlib.Globals;
-import dbconnection.MySqlConnection;
+
+import dbconnection.DAOFactory;
+import dbconnection.RawHTML;
+import dbconnection.RawHTMLDAOJDBC;
 
 public class PopulateRawHTMLPositiveData {
-	public static void populateRawHTMLPositiveDataGivenPath(String path,
-			int positive) {
+	public static void populateRawHTMLPositiveDataGivenPath(String path, short positive) {
 		if (path == null)
 			return;
 
@@ -30,41 +33,25 @@ public class PopulateRawHTMLPositiveData {
 		// Get 2000 articles at a time, until exhaust all the articles
 		while (true) {
 			try {
-				MySqlConnection mysqlConnection = new MySqlConnection(
-						Globals.username, Globals.password, Globals.server,
+				RawHTMLDAOJDBC rawHTMLDAOJDBC = new RawHTMLDAOJDBC(DAOFactory.getInstance(
+						Globals.username, Globals.password, Globals.server),
 						Globals.database);
-
-				ResultSet resultSet = mysqlConnection.GetRawHTML(lowerBound,
+				List<RawHTML> htmls = rawHTMLDAOJDBC.get(lowerBound,
 						maxNumResult);
-				if (resultSet == null)
+				if (htmls == null)
 					break;
 
 				int count = 0;
 				// Iterate through the result set to populate the information
-				while (resultSet.next()) {
+				for (RawHTML rawHTML : htmls) {
 					count++;
-					String link = resultSet.getString("url");
-					String htmlContent = resultSet.getString("html");
-
-					Integer predict1 = resultSet.getInt("predict1");
-					if (resultSet.wasNull())
-						predict1 = null;
-
-					Integer predict2 = resultSet.getInt("predict2");
-					if (resultSet.wasNull())
-						predict2 = null;
-
-					String country = resultSet.getString("country");
-					String state = resultSet.getString("state");
-					String city = resultSet.getString("city");
+					String link = rawHTML.getUrl();
 
 					for (String fileName : fileNamesInPath) {
 						if (link.contains(fileName)) {
-							Integer positivePage = positive;
+							rawHTML.setPositive(positive);
 
-							mysqlConnection.UpdateRawHTML(link, htmlContent,
-									positivePage, predict1, predict2, country,
-									state, city);
+							rawHTMLDAOJDBC.update(rawHTML);
 
 							break;
 						}
@@ -85,18 +72,18 @@ public class PopulateRawHTMLPositiveData {
 	public static void main(String[] args) {
 		String negativePath = "testingSet" + File.separator + "negative";
 		PopulateRawHTMLPositiveData.populateRawHTMLPositiveDataGivenPath(
-				negativePath, 0);
+				negativePath, (short) 0);
 
 		negativePath = "trainingSet" + File.separator + "negative";
 		PopulateRawHTMLPositiveData.populateRawHTMLPositiveDataGivenPath(
-				negativePath, 0);
+				negativePath, (short) 0);
 
 		String positivePath = "testingSet" + File.separator + "positive";
 		PopulateRawHTMLPositiveData.populateRawHTMLPositiveDataGivenPath(
-				positivePath, 1);
+				positivePath, (short) 1);
 
 		positivePath = "trainingSet" + File.separator + "positive";
 		PopulateRawHTMLPositiveData.populateRawHTMLPositiveDataGivenPath(
-				positivePath, 1);
+				positivePath, (short) 1);
 	}
 }

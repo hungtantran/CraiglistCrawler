@@ -1,12 +1,14 @@
 package script;
 
-import java.sql.ResultSet;
+import java.util.List;
 
 import marijuanaCrawler.Classifier;
 
 import commonlib.Globals;
 
-import dbconnection.MySqlConnection;
+import dbconnection.DAOFactory;
+import dbconnection.RawHTML;
+import dbconnection.RawHTMLDAOJDBC;
 
 public class ClassifyRawHTML {
 	public static void main(String[] args) {
@@ -18,47 +20,33 @@ public class ClassifyRawHTML {
 		// Get 2000 articles at a time, until exhaust all the articles
 		while (true) {
 			try {
-				MySqlConnection mysqlConnection = new MySqlConnection(
-						Globals.username, Globals.password, Globals.server,
+				RawHTMLDAOJDBC rawHTMLDAOJDBC = new RawHTMLDAOJDBC(DAOFactory.getInstance(
+						Globals.username, Globals.password, Globals.server),
 						Globals.database);
-
-				ResultSet resultSet = mysqlConnection.GetRawHTML(lowerBound,
+				List<RawHTML> htmls = rawHTMLDAOJDBC.get(lowerBound,
 						maxNumResult);
-				if (resultSet == null)
+				if (htmls == null)
 					break;
 
 				int count = 0;
 				// Iterate through the result set to populate the information
-				while (resultSet.next()) {
+				for (RawHTML rawHTML : htmls) {
 					count++;
 					htmlCount++;
 
-					int id = resultSet.getInt("id");
-					String link = resultSet.getString("url");
-					String htmlContent = resultSet.getString("html");
-
-					Integer positivePage = resultSet.getInt("positive");
-					if (resultSet.wasNull())
-						positivePage = null;
-
-					Integer predict2 = resultSet.getInt("predict2");
-					if (resultSet.wasNull())
-						predict2 = null;
-
-					String country = resultSet.getString("country");
-					String state = resultSet.getString("state");
-					String city = resultSet.getString("city");
+					int id = rawHTML.getId();
+					String link = rawHTML.getUrl();
+					String htmlContent = rawHTML.getHtml();
 
 					if (Globals.DEBUG)
 						System.out.println("(" + htmlCount + ") Check HTML id "
 								+ id + ": " + link);
 
 					// Classify the page
-					int predict1 = Classifier.classify(htmlContent);
-
-					mysqlConnection.UpdateRawHTML(link, htmlContent,
-							positivePage, predict1, predict2, country, state,
-							city);
+					Short predict1 = Classifier.classify(htmlContent);
+					
+					rawHTML.setPredict1(predict1);
+					rawHTMLDAOJDBC.update(rawHTML);
 				}
 
 				if (count == 0)

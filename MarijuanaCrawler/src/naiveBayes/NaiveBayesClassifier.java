@@ -53,7 +53,7 @@ public class NaiveBayesClassifier {
 		}
 	}
 
-	public int ClassifyContent(String content) {
+	public short ClassifyContent(String content) {
 		if (content == null)
 			return -1;
 

@@ -3,8 +3,8 @@ package naiveBayes;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
@@ -12,7 +12,10 @@ import java.util.TreeSet;
 
 import commonlib.Globals;
 import commonlib.Helper;
-import dbconnection.MySqlConnection;
+
+import dbconnection.DAOFactory;
+import dbconnection.RawHTML;
+import dbconnection.RawHTMLDAOJDBC;
 
 public class Dictionary {
 	private String filePath = "dictionary.txt";
@@ -88,26 +91,24 @@ public class Dictionary {
 
 		// Get 2000 articles at a time, until exhaust all the articles
 		while (true) {
-			MySqlConnection mysqlConnection = null;
-			
 			try {
-				mysqlConnection = new MySqlConnection(Globals.username,
-						Globals.password, Globals.server, Globals.database);
-
-				 ResultSet resultSet = mysqlConnection.GetRawHTML(lowerBound,
+				RawHTMLDAOJDBC rawHTMLDAO = new RawHTMLDAOJDBC(DAOFactory.getInstance(
+						Globals.username, Globals.password, Globals.server),
+						Globals.database);
+				List<RawHTML> htmls = rawHTMLDAO.get(lowerBound,
 						maxNumResult);
-				if (resultSet == null)
+				if (htmls == null)
 					break;
 	
 				int count = 0;
 				// Iterate through the result set to populate the information
-				while (resultSet.next()) {
+				for (RawHTML rawHTML : htmls) {
 					count++;
-					int positive = resultSet.getInt("positive");
+					short positive = rawHTML.getPositive();
 					if (positive != 1)
 						continue;
 
-					String htmlContent = resultSet.getString("html");
+					String htmlContent = rawHTML.getHtml();
 
 					String htmlBody = Helper
 							.getPostingBodyFromHtmlContent(htmlContent);

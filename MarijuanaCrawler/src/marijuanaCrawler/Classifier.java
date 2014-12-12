@@ -8,7 +8,7 @@ public class Classifier {
 		
 	}
 	
-	public static int classify(String htmlContent) {
+	public static Short classify(String htmlContent) {
 		String htmlBody = Helper
 				.getPostingBodyFromHtmlContent(htmlContent);
 		
@@ -21,7 +21,7 @@ public class Classifier {
 		
 		int numImportantWordsOccur = Helper.numWordsOccur(htmlBody, Globals.importantWords);
 		
-		int predict1 = 1;
+		short predict1 = 1;
 		
 		if (numImportantWordsOccur < 3) {
 			// TODO don't use Global classifier

@@ -11,13 +11,18 @@ import commonlib.Globals;
 import commonlib.NetworkingFunctions;
 import commonlib.Globals.Domain;
 import commonlib.Helper;
+import dbconnection.DAOFactory;
 import dbconnection.MySqlConnection;
+import dbconnection.RawHTML;
+import dbconnection.RawHTMLDAO;
+import dbconnection.RawHTMLDAOJDBC;
 
 public class CraiglistCrawler {
 	protected Map<String, Globals.Location> linkToLocationMap = null;
 	protected Set<String> urlsCrawled = null;
 	protected PriorityQueue<String> urlsQueue = null;
 	protected MySqlConnection mysqlConnection = null;
+	protected RawHTMLDAO rawHTMLDAO = null;
 	protected int numRetriesDownloadLink = 2;
 
 	public CraiglistCrawler() {
@@ -29,6 +34,9 @@ public class CraiglistCrawler {
 		try {
 			this.mysqlConnection = new MySqlConnection(Globals.username,
 					Globals.password, Globals.server, Globals.database);
+			this.rawHTMLDAO = new RawHTMLDAOJDBC(DAOFactory.getInstance(
+					Globals.username, Globals.password, Globals.server),
+					Globals.database);
 		} catch (ClassNotFoundException e) {
 			Globals.crawlerLogManager.writeLog(e.getMessage());
 			return;
@@ -124,17 +132,30 @@ public class CraiglistCrawler {
 						continue;
 					}
 
-					Integer positivePage = null;
-					int predict1 = Classifier.classify(htmlContent);
-					Integer predict2 = null;
+					Short positivePage = null;
+					Short predict1 = Classifier.classify(htmlContent);
+					Short predict2 = null;
 					
-					if (!this.mysqlConnection.insertIntoRawHTMLTable(id,
-							entryLink, htmlContent, positivePage, predict1,
-							predict2, curLocation.country, curLocation.state,
-							curLocation.city)) {
-						Globals.crawlerLogManager
-								.writeLog("Insert content of link " + entryLink
-										+ " into RawHTML table fails");
+					RawHTML rawHTML = new RawHTML();
+					rawHTML.setId(id);
+					rawHTML.setUrl(entryLink);
+					rawHTML.setHtml(htmlContent);
+					rawHTML.setPositive(positivePage);
+					rawHTML.setPredict1(predict1);
+					rawHTML.setPredict2(predict2);
+					rawHTML.setCountry(curLocation.country);
+					rawHTML.setState(curLocation.state);
+					rawHTML.setCity(curLocation.city);
+					
+					try {
+						if (!this.rawHTMLDAO.create(rawHTML)) {
+							Globals.crawlerLogManager
+									.writeLog("Insert content of link " + entryLink
+											+ " into RawHTML table fails");
+						}
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 
 					// this.mysqlConnection.insertIntoLinkQueueTable(entryLink,

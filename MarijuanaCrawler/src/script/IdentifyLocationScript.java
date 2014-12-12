@@ -1,10 +1,14 @@
 package script;
 
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.Map;
 
 import commonlib.Globals;
+import dbconnection.DAOFactory;
 import dbconnection.MySqlConnection;
+import dbconnection.RawHTML;
+import dbconnection.RawHTMLDAOJDBC;
 
 public class IdentifyLocationScript {
 	public static void identifyLocationRawHTML() {
@@ -27,35 +31,22 @@ public class IdentifyLocationScript {
 		// Get 2000 articles at a time, until exhaust all the articles
 		while (true) {
 			try {
-				mysqlConnection = new MySqlConnection(Globals.username,
-						Globals.password, Globals.server, Globals.database);
-
-				ResultSet resultSet = mysqlConnection.GetRawHTML(lowerBound,
+				RawHTMLDAOJDBC rawHTMLDAOJDBC = new RawHTMLDAOJDBC(DAOFactory.getInstance(
+						Globals.username, Globals.password, Globals.server),
+						Globals.database);
+				List<RawHTML> htmls = rawHTMLDAOJDBC.get(lowerBound,
 						maxNumResult);
-				if (resultSet == null)
+				if (htmls == null)
 					break;
 
 				int count = 0;
 				// Iterate through the result set to populate the information
-				while (resultSet.next()) {
+				for (RawHTML rawHTML : htmls) {
 					count++;
 					htmlCount++;
 
-					int id = resultSet.getInt("id");
-					String link = resultSet.getString("url");
-					String htmlContent = resultSet.getString("html");
-
-					Integer positivePage = resultSet.getInt("positive");
-					if (resultSet.wasNull())
-						positivePage = null;
-
-					Integer predict1 = resultSet.getInt("predict1");
-					if (resultSet.wasNull())
-						predict1 = null;
-
-					Integer predict2 = resultSet.getInt("predict2");
-					if (resultSet.wasNull())
-						predict2 = null;
+					int id = rawHTML.getId();
+					String link = rawHTML.getUrl();
 
 					for (Map.Entry<String, Globals.Location> entry : linkToLocationMap
 							.entrySet()) {
@@ -67,11 +58,12 @@ public class IdentifyLocationScript {
 								System.out.println("(" + htmlCount
 										+ ") Check HTML id " + id + ": "
 										+ link);
-
-							mysqlConnection.UpdateRawHTML(link, htmlContent,
-									positivePage, predict1, predict2,
-									location.country, location.state,
-									location.city);
+							
+							rawHTML.setCountry(location.country);
+							rawHTML.setState(location.state);
+							rawHTML.setCity(location.city);
+							
+							rawHTMLDAOJDBC.update(rawHTML);
 
 							break;
 						}
