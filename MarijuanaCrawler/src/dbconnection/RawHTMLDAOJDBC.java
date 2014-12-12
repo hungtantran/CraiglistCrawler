@@ -70,7 +70,7 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 			Statement st = connection.createStatement();
 			st.executeQuery("USE " + this.database);
 
-			String query = "SELECT * FROM RawHTML WHERE id = " + id;
+			String query = "SELECT * FROM rawhtml WHERE id = " + id;
 
 			resultSet = st.executeQuery(query);
 
@@ -102,7 +102,7 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 			Statement st = connection.createStatement();
 			st.executeQuery("USE " + this.database);
 
-			String query = "SELECT * FROM RawHTML";
+			String query = "SELECT * FROM rawhtml";
 
 			resultSet = st.executeQuery(query);
 
@@ -137,7 +137,7 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 			Statement st = connection.createStatement();
 			st.executeQuery("USE " + this.database);
 
-			String query = "SELECT * FROM RawHTML";
+			String query = "SELECT * FROM rawhtml";
 
 			if (lowerBound > 0 || maxNumResult > 0)
 				query += " LIMIT " + lowerBound + "," + maxNumResult;
@@ -179,7 +179,7 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 			st.executeQuery("USE " + this.database);
 
 			// Insert into watch_price_stat_table
-			String prepareStmt = "INSERT INTO RawHTML (id, url, html, positive, predict1, predict2, country, state, city) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String prepareStmt = "INSERT INTO rawhtml (id, url, html, positive, predict1, predict2, country, state, city) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 			PreparedStatement stmt = connection.prepareStatement(prepareStmt);
 			stmt.setInt(1, rawHTML.getId());
@@ -251,7 +251,7 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 			st.executeQuery("USE " + this.database);
 
 			// Insert into watch_price_stat_table
-			String prepareStmt = "UPDATE RawHTML SET html = ?, positive = ?, predict1 = ?, predict2 = ?, country = ?, state = ?, city = ? WHERE url = ?";
+			String prepareStmt = "UPDATE rawhtml SET html = ?, positive = ?, predict1 = ?, predict2 = ?, country = ?, state = ?, city = ? WHERE url = ?";
 
 			stmt = connection.prepareStatement(prepareStmt);
 

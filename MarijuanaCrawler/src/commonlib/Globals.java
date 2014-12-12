@@ -13,8 +13,8 @@ import naiveBayes.NaiveBayesClassifier;
 public class Globals {
 	public static final LogManager crawlerLogManager = new LogManager("crawlerLog", "crawlerLog");
 	public static final boolean DEBUG = true;
-	public static int DEFAULTLOWERBOUNDWAITTIMESEC = 30;
-	public static int DEFAULTUPPERBOUNDWAITTIMESEC = 60;
+	public static int DEFAULTLOWERBOUNDWAITTIMESEC = 5;
+	public static int DEFAULTUPPERBOUNDWAITTIMESEC = 10;
 	public static String pathSeparator = File.separator;
 	
 	public static String username = "cedro";
