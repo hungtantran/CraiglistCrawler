@@ -13,6 +13,7 @@ import commonlib.Helper;
 import commonlib.Globals;
 import commonlib.NetworkingFunctions;
 
+// TODO don't use Globals
 public class CraiglistEntryParser {
 	private final double gramsInOunce = 28.3495;
 	private final int numRetryDownloadPage = 2;

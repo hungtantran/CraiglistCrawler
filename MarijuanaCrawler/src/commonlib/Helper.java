@@ -175,7 +175,7 @@ public class Helper {
 		for (int i = 0; i < str.length(); i++) {
 			char curChar = str.charAt(i);
 
-			if (Character.isLetter(curChar))
+			if (Character.isAlphabetic(curChar))
 				hasLetter = true;
 
 			if (Character.isDigit(curChar))

@@ -114,7 +114,8 @@ public class LogManager {
 			System.out.println("Log: "+logLine);
 			if (writeToDisk) {
 				try {
-					PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fileName, true)));
+					PrintWriter out = new PrintWriter(new BufferedWriter(
+							new FileWriter(fileName, true)));
 					out.println(logLine);
 					out.close();
 				} catch (IOException e) {
