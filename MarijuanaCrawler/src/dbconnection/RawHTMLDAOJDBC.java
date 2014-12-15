@@ -4,19 +4,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import commonlib.Globals;
 
 public class RawHTMLDAOJDBC implements RawHTMLDAO {
+	private final String SQL_SELECT_BY_ID = "SELECT * FROM rawhtml WHERE id = ?";
+	private final String SQL_SELECT_ALL = "SELECT * FROM rawhtml";
+	private final String SQL_SELECT_WITH_LIMIT = "SELECT * FROM rawhtml LIMIT ?, ?";
+	private final String SQL_INSERT = "INSERT INTO rawhtml (id, url, html, positive, predict1, predict2, country, state, city) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private final String SQL_UPDATE = "UPDATE rawhtml SET url = ?, html = ?, positive = ?, predict1 = ?, predict2 = ?, country = ?, state = ?, city = ? WHERE id = ?";
+	
 	private DAOFactory daoFactory;
-	private String database = null;
 
-	public RawHTMLDAOJDBC(DAOFactory daoFactory, String database) {
+	public RawHTMLDAOJDBC(DAOFactory daoFactory) throws SQLException {
 		this.daoFactory = daoFactory;
-		this.database = database;
 	}
 
 	private RawHTML constructRawHTMLObject(ResultSet resultSet)
@@ -67,15 +70,10 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 
 		try {
 			connection = this.daoFactory.getConnection();
-			Statement st = connection.createStatement();
-			st.executeQuery("USE " + this.database);
-
-			String query = "SELECT * FROM rawhtml WHERE id = " + id;
-
-			resultSet = st.executeQuery(query);
-
+			preparedStatement = DAOUtil.prepareStatement(connection, SQL_SELECT_BY_ID, false, id);
+			resultSet = preparedStatement.executeQuery();
+			
 			RawHTML rawHTML = null;
-
 			if (resultSet.next()) {
 				rawHTML = this.constructRawHTMLObject(resultSet);
 			}
@@ -99,18 +97,12 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 
 		try {
 			connection = this.daoFactory.getConnection();
-			Statement st = connection.createStatement();
-			st.executeQuery("USE " + this.database);
-
-			String query = "SELECT * FROM rawhtml";
-
-			resultSet = st.executeQuery(query);
+			preparedStatement = DAOUtil.prepareStatement(connection, SQL_SELECT_ALL, false);
+			resultSet = preparedStatement.executeQuery();
 
 			ArrayList<RawHTML> htmls = new ArrayList<RawHTML>();
-
 			while (resultSet.next()) {
 				RawHTML rawHTML = this.constructRawHTMLObject(resultSet);
-
 				htmls.add(rawHTML);
 			}
 
@@ -134,21 +126,21 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 
 		try {
 			connection = this.daoFactory.getConnection();
-			Statement st = connection.createStatement();
-			st.executeQuery("USE " + this.database);
-
-			String query = "SELECT * FROM rawhtml";
 
 			if (lowerBound > 0 || maxNumResult > 0)
-				query += " LIMIT " + lowerBound + "," + maxNumResult;
+			{
+				preparedStatement = DAOUtil.prepareStatement(connection, SQL_SELECT_WITH_LIMIT, false, lowerBound, maxNumResult);
+			}
+			else
+			{
+				preparedStatement = DAOUtil.prepareStatement(connection, SQL_SELECT_ALL, false);
+			}
 
-			resultSet = st.executeQuery(query);
+			resultSet = preparedStatement.executeQuery();
 
 			ArrayList<RawHTML> htmls = new ArrayList<RawHTML>();
-
 			while (resultSet.next()) {
 				RawHTML rawHTML = this.constructRawHTMLObject(resultSet);
-
 				htmls.add(rawHTML);
 			}
 
@@ -164,9 +156,9 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 	}
 
 	@Override
-	public boolean create(RawHTML rawHTML) throws SQLException {
+	public int create(RawHTML rawHTML) throws SQLException {
 		if (rawHTML == null || !rawHTML.isValid()) {
-			return false;
+			return -1;
 		}
 
 		Connection connection = null;
@@ -175,139 +167,86 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 
 		try {
 			connection = this.daoFactory.getConnection();
-			Statement st = connection.createStatement();
-			st.executeQuery("USE " + this.database);
-
-			// Insert into watch_price_stat_table
-			String prepareStmt = "INSERT INTO rawhtml (id, url, html, positive, predict1, predict2, country, state, city) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-			PreparedStatement stmt = connection.prepareStatement(prepareStmt);
-			stmt.setInt(1, rawHTML.getId());
-			stmt.setString(2, rawHTML.getUrl());
-			stmt.setString(3, rawHTML.getHtml());
-
-			if (rawHTML.getPositive() != null) {
-				stmt.setInt(4, rawHTML.getPositive());
-			} else {
-				stmt.setNull(4, java.sql.Types.INTEGER);
-			}
-
-			if (rawHTML.getPredict1() != null) {
-				stmt.setInt(5, rawHTML.getPredict1());
-			} else {
-				stmt.setNull(5, java.sql.Types.INTEGER);
-			}
-
-			if (rawHTML.getPredict2() != null) {
-				stmt.setInt(6, rawHTML.getPredict2());
-			} else {
-				stmt.setNull(6, java.sql.Types.INTEGER);
-			}
-
-			if (rawHTML.getCountry() != null) {
-				stmt.setString(7, rawHTML.getCountry());
-			} else {
-				stmt.setNull(7, java.sql.Types.VARCHAR);
-			}
-
-			if (rawHTML.getState() != null) {
-				stmt.setString(8, rawHTML.getState());
-			} else {
-				stmt.setNull(8, java.sql.Types.VARCHAR);
-			}
-
-			if (rawHTML.getCity() != null) {
-				stmt.setString(9, rawHTML.getCity());
-			} else {
-				stmt.setNull(9, java.sql.Types.VARCHAR);
-			}
+			
+			Object[] values = {
+				rawHTML.getId(),
+				rawHTML.getUrl(),
+				rawHTML.getHtml(),
+				rawHTML.getPositive(),
+				rawHTML.getPredict1(),
+				rawHTML.getPredict2(),
+				rawHTML.getCountry(),
+				rawHTML.getState(),
+				rawHTML.getCity()
+			};
+			
+			preparedStatement = DAOUtil.prepareStatement(connection, SQL_INSERT, true, values);
 
 			if (Globals.DEBUG)
-				Globals.crawlerLogManager.writeLog("INSERT INTO RawHTML ("
+				Globals.crawlerLogManager.writeLog("INSERT INTO RawHTML "
 						+ rawHTML.getUrl() + ", Content Length = "
 						+ rawHTML.getHtml().length());
-			stmt.executeUpdate();
+			
+			preparedStatement.executeUpdate();
+			
+			// Get the generated key (id)
+			resultSet = preparedStatement.getGeneratedKeys();
+			int generatedKey = -1;
+			
+			if (resultSet.next()) {
+				generatedKey = resultSet.getInt(1);
+			}
+			
+			return generatedKey;
 		} catch (SQLException e) {
 			Globals.crawlerLogManager
 					.writeLog("Insert into table RawHTML fails");
 			Globals.crawlerLogManager.writeLog(e.getMessage());
-			return false;
+			return -1;
 		} finally {
 			DAOUtil.close(connection, preparedStatement, resultSet);
 		}
-
-		return true;
 	}
 
 	@Override
 	public boolean update(RawHTML rawHTML) throws SQLException {
 		Connection connection = null;
-		PreparedStatement stmt = null;
+		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 
 		try {
 			connection = this.daoFactory.getConnection();
-			Statement st = connection.createStatement();
-			st.executeQuery("USE " + this.database);
-
-			// Insert into watch_price_stat_table
-			String prepareStmt = "UPDATE rawhtml SET html = ?, positive = ?, predict1 = ?, predict2 = ?, country = ?, state = ?, city = ? WHERE url = ?";
-
-			stmt = connection.prepareStatement(prepareStmt);
-
-			stmt.setString(1, rawHTML.getHtml());
-
-			if (rawHTML.getPositive() != null) {
-				stmt.setInt(2, rawHTML.getPositive());
-			} else {
-				stmt.setNull(2, java.sql.Types.INTEGER);
-			}
-
-			if (rawHTML.getPredict1() != null) {
-				stmt.setInt(3, rawHTML.getPredict1());
-			} else {
-				stmt.setNull(3, java.sql.Types.INTEGER);
-			}
-
-			if (rawHTML.getPredict2() != null) {
-				stmt.setInt(4, rawHTML.getPredict2());
-			} else {
-				stmt.setNull(4, java.sql.Types.INTEGER);
-			}
-
-			if (rawHTML.getCountry() != null) {
-				stmt.setString(5, rawHTML.getCountry());
-			} else {
-				stmt.setNull(5, java.sql.Types.VARCHAR);
-			}
-
-			if (rawHTML.getState() != null) {
-				stmt.setString(6, rawHTML.getState());
-			} else {
-				stmt.setNull(6, java.sql.Types.VARCHAR);
-			}
-
-			if (rawHTML.getCity() != null) {
-				stmt.setString(7, rawHTML.getCity());
-			} else {
-				stmt.setNull(7, java.sql.Types.VARCHAR);
-			}
-
-			stmt.setString(8, rawHTML.getUrl());
-
+			
+			Object[] values = {
+				rawHTML.getUrl(),
+				rawHTML.getHtml(),
+				rawHTML.getPositive(),
+				rawHTML.getPredict1(),
+				rawHTML.getPredict2(),
+				rawHTML.getCountry(),
+				rawHTML.getState(),
+				rawHTML.getCity(),
+				rawHTML.getId()
+			};
+			
+			preparedStatement = DAOUtil.prepareStatement(connection, SQL_UPDATE, false, values);
+			
 			if (Globals.DEBUG)
 				Globals.crawlerLogManager.writeLog("Update RawHTML ("
 						+ rawHTML.getUrl() + ", Content Length = "
 						+ rawHTML.getHtml().length());
-			stmt.executeUpdate();
+			
+			preparedStatement.executeUpdate();
+			
+			return true;
 		} catch (SQLException e) {
 			Globals.crawlerLogManager.writeLog("Update RawHTML fails");
 			Globals.crawlerLogManager.writeLog(e.getMessage());
+			
+			return false;
 		} finally {
-			DAOUtil.close(connection, stmt, resultSet);
+			DAOUtil.close(connection, preparedStatement, resultSet);
 		}
-
-		return false;
 	}
 
 }

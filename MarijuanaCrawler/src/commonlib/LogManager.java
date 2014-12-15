@@ -68,23 +68,28 @@ public class LogManager {
 		final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
 		// 0 is getStackTrace, 1 is the writeLog function, 2 is the writeLog's caller
 		String functionName = ste[2].getMethodName();
+		String fileName = Thread.currentThread().getStackTrace()[2].getFileName();
+		int lineNumber = Thread.currentThread().getStackTrace()[2].getLineNumber();
 
-		return this.writeLog(functionName, log, this.defaultWriteToDisk);
+		return this.writeLog(fileName, lineNumber, functionName, log, this.defaultWriteToDisk);
 	}
 
-	public boolean writeLog(String functionName, String log) {
-		return this.writeLog(functionName, log, this.defaultWriteToDisk);
+	public boolean writeLog(String fileName, int lineNumber, String functionName, String log) {
+		return this.writeLog(fileName, lineNumber, functionName, log, this.defaultWriteToDisk);
 	}
 	
 	public boolean writeLog(String log, boolean writeToDisk) {
 		final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
 		// 0 is getStackTrace, 1 is the writeLog function, 2 is the writeLog's caller
 		String functionName = ste[2].getMethodName();
-		return this.writeLog(functionName, log, writeToDisk);
+		String fileName = Thread.currentThread().getStackTrace()[2].getFileName();
+		int lineNumber = Thread.currentThread().getStackTrace()[2].getLineNumber();
+		
+		return this.writeLog(fileName, lineNumber, functionName, log, writeToDisk);
 	}
 
 	@SuppressWarnings("deprecation")
-	public boolean writeLog(String functionName, String log, boolean writeToDisk) {
+	public boolean writeLog(String fileName, int lineNumber, String functionName, String log, boolean writeToDisk) {
 		if (this.logDir == null || this.baseFileName == null
 				|| functionName == null || log == null)
 			return false;
@@ -97,25 +102,25 @@ public class LogManager {
 			}
 	
 			Date currentDate = new Date();
-			String fileName = this.logDir + Globals.pathSeparator + this.baseFileName + "."
+			String logFileName = this.logDir + Globals.pathSeparator + this.baseFileName + "."
 					+ Helper.getCurrentDate() + "-" + currentDate.getHours()
 					+ ".log";
-			File logFileName = new File(fileName);
-			if (!logFileName.exists() && this.createFile(fileName)) {
-				System.out.println("File " + fileName + " created");
-			} else if (!logFileName.exists()) {
-				System.out.println("File " + fileName + " can't be created");
+			File logFile = new File(logFileName);
+			if (!logFile.exists() && this.createFile(logFileName)) {
+				System.out.println("File " + logFileName + " created");
+			} else if (!logFile.exists()) {
+				System.out.println("File " + logFileName + " can't be created");
 				return false;
 			}
 	
-			String logLine = "[" + Helper.getCurrentDate() + "] ["
+			String logLine = "[" + fileName + ":" + lineNumber + "] [" + Helper.getCurrentDate() + "] ["
 					+ Helper.getCurrentTime() + "] [" + functionName + "]: " + log;
 			
 			System.out.println("Log: "+logLine);
 			if (writeToDisk) {
 				try {
 					PrintWriter out = new PrintWriter(new BufferedWriter(
-							new FileWriter(fileName, true)));
+							new FileWriter(logFileName, true)));
 					out.println(logLine);
 					out.close();
 				} catch (IOException e) {

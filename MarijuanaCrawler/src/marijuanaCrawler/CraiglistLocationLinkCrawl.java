@@ -1,5 +1,6 @@
 package marijuanaCrawler;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +10,11 @@ import org.jsoup.select.Elements;
 
 import commonlib.Globals;
 import commonlib.NetworkingFunctions;
-import dbconnection.MySqlConnection;
+
+import dbconnection.DAOFactory;
+import dbconnection.LocationLink;
+import dbconnection.LocationLinkDAO;
+import dbconnection.LocationLinkDAOJDBC;
 
 public class CraiglistLocationLinkCrawl {
 	private final int numRetryDownloadPage = 2;
@@ -86,7 +91,7 @@ public class CraiglistLocationLinkCrawl {
 		return true;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		CraiglistLocationLinkCrawl crawler = new CraiglistLocationLinkCrawl();
 
 		// Fail to get the craiglist location links
@@ -99,22 +104,20 @@ public class CraiglistLocationLinkCrawl {
 		if (linkToLocationMap == null)
 			return;
 		
-		MySqlConnection mysqlConnection;
-		try {
-			mysqlConnection = new MySqlConnection(
-					Globals.username, Globals.password, Globals.server,
-					Globals.database);
-		} catch (ClassNotFoundException e) {
-			Globals.crawlerLogManager.writeLog(e.getMessage());
-			return;
-		}
+		LocationLinkDAO locationLinkDAO = new LocationLinkDAOJDBC(DAOFactory.getInstance(
+				Globals.username, Globals.password, Globals.server + Globals.database));
 		
 		for (Map.Entry<String, Globals.Location> entry : linkToLocationMap.entrySet()) {
 			String link = entry.getKey();
 			Globals.Location location = entry.getValue();
 			
-			if (!mysqlConnection.insertIntoLocationLink(link, location.country, location.state, location.city))
-				System.out.println("Fail to insert");
+			LocationLink locationLink = new LocationLink();
+			locationLink.setLink(link);
+			locationLink.setCountry(location.country);
+			locationLink.setState(location.state);
+			locationLink.setCity(location.city);
+			
+			locationLinkDAO.create(locationLink);
 		}
 	}
 }

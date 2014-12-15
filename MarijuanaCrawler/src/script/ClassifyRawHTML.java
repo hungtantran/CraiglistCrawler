@@ -21,8 +21,7 @@ public class ClassifyRawHTML {
 		while (true) {
 			try {
 				RawHTMLDAOJDBC rawHTMLDAOJDBC = new RawHTMLDAOJDBC(DAOFactory.getInstance(
-						Globals.username, Globals.password, Globals.server),
-						Globals.database);
+						Globals.username, Globals.password, Globals.server + Globals.database));
 				List<RawHTML> htmls = rawHTMLDAOJDBC.get(lowerBound,
 						maxNumResult);
 				if (htmls == null)

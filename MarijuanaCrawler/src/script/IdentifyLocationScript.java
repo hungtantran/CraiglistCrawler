@@ -1,41 +1,56 @@
 package script;
 
-import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import commonlib.Globals;
+
 import dbconnection.DAOFactory;
-import dbconnection.MySqlConnection;
+import dbconnection.LinkCrawled;
+import dbconnection.LinkCrawledDAO;
+import dbconnection.LinkCrawledDAOJDBC;
+import dbconnection.LocationLink;
+import dbconnection.LocationLinkDAO;
+import dbconnection.LocationLinkDAOJDBC;
 import dbconnection.RawHTML;
+import dbconnection.RawHTMLDAO;
 import dbconnection.RawHTMLDAOJDBC;
 
 public class IdentifyLocationScript {
-	public static void identifyLocationRawHTML() {
-		MySqlConnection mysqlConnection = null;
-		try {
-			mysqlConnection = new MySqlConnection(Globals.username,
-					Globals.password, Globals.server, Globals.database);
-		} catch (Exception e) {
-			Globals.crawlerLogManager.writeLog(e.getMessage());
-			return;
-		}
+	public static void identifyLocationRawHTML() throws ClassNotFoundException,
+			SQLException {
+		LocationLinkDAO locationLinkDAO = new LocationLinkDAOJDBC(
+				DAOFactory.getInstance(Globals.username, Globals.password,
+						Globals.server + Globals.database));
 
-		Map<String, Globals.Location> linkToLocationMap = mysqlConnection
-				.GetLocationLink();
+		Map<String, Globals.Location> linkToLocationMap = new HashMap<String, Globals.Location>();
+
+		List<LocationLink> locationLinks = locationLinkDAO.get();
+		for (LocationLink locationLink : locationLinks) {
+			String link = locationLink.getLink();
+			String country = locationLink.getCity();
+			String state = locationLink.getState();
+			String city = locationLink.getCity();
+			Globals.Location location = new Globals.Location(country, state,
+					city);
+
+			linkToLocationMap.put(link, location);
+		}
 
 		int lowerBound = 0;
 		int maxNumResult = 200;
 		int htmlCount = lowerBound;
 
+		RawHTMLDAO rawHTMLDAO = new RawHTMLDAOJDBC(DAOFactory.getInstance(
+				Globals.username, Globals.password, Globals.server
+						+ Globals.database));
+
 		// Get 2000 articles at a time, until exhaust all the articles
 		while (true) {
 			try {
-				RawHTMLDAOJDBC rawHTMLDAOJDBC = new RawHTMLDAOJDBC(DAOFactory.getInstance(
-						Globals.username, Globals.password, Globals.server),
-						Globals.database);
-				List<RawHTML> htmls = rawHTMLDAOJDBC.get(lowerBound,
-						maxNumResult);
+				List<RawHTML> htmls = rawHTMLDAO.get(lowerBound, maxNumResult);
 				if (htmls == null)
 					break;
 
@@ -55,15 +70,16 @@ public class IdentifyLocationScript {
 
 						if (link.contains(linkMap)) {
 							if (Globals.DEBUG)
-								System.out.println("(" + htmlCount
-										+ ") Check HTML id " + id + ": "
-										+ link);
-							
+								System.out
+										.println("(" + htmlCount
+												+ ") Check HTML id " + id
+												+ ": " + link);
+
 							rawHTML.setCountry(location.country);
 							rawHTML.setState(location.state);
 							rawHTML.setCity(location.city);
-							
-							rawHTMLDAOJDBC.update(rawHTML);
+
+							rawHTMLDAO.update(rawHTML);
 
 							break;
 						}
@@ -82,24 +98,37 @@ public class IdentifyLocationScript {
 	}
 
 	public static void identifyLocationLinkCrawl()
-			throws ClassNotFoundException {
-		MySqlConnection mysqlConnection = new MySqlConnection(Globals.username,
-				Globals.password, Globals.server, Globals.database);
+			throws ClassNotFoundException, SQLException {
+		LocationLinkDAO locationLinkDAO = new LocationLinkDAOJDBC(
+				DAOFactory.getInstance(Globals.username, Globals.password,
+						Globals.server + Globals.database));
 
-		Map<String, Globals.Location> linkToLocationMap = mysqlConnection
-				.GetLocationLink();
+		Map<String, Globals.Location> linkToLocationMap = new HashMap<String, Globals.Location>();
 
-		ResultSet resultSet = mysqlConnection.getLinkCrawled(1);
-		if (resultSet == null)
-			return;
+		List<LocationLink> locationLinks = locationLinkDAO.get();
+		for (LocationLink locationLink : locationLinks) {
+			String link = locationLink.getLink();
+			String country = locationLink.getCity();
+			String state = locationLink.getState();
+			String city = locationLink.getCity();
+			Globals.Location location = new Globals.Location(country, state,
+					city);
+
+			linkToLocationMap.put(link, location);
+		}
+
+		LinkCrawledDAO linkCrawledDAO = new LinkCrawledDAOJDBC(
+				DAOFactory.getInstance(Globals.username, Globals.password,
+						Globals.server + Globals.database));
+
+		List<LinkCrawled> linksCrawled = linkCrawledDAO
+				.get(Globals.Domain.CRAIGLIST.value);
 
 		try {
 			// Iterate through the result set to populate the information
-			while (resultSet.next()) {
-				int id = resultSet.getInt("id");
-				String link = resultSet.getString("link");
-				int priority = resultSet.getInt("priority");
-
+			for (LinkCrawled linkCrawled : linksCrawled) {
+				Integer id = linkCrawled.getId();
+				String link = linkCrawled.getLink();
 				for (Map.Entry<String, Globals.Location> entry : linkToLocationMap
 						.entrySet()) {
 					String linkMap = entry.getKey();
@@ -109,10 +138,11 @@ public class IdentifyLocationScript {
 						if (Globals.DEBUG)
 							System.out.println("Check id " + id + ": " + link);
 
-						mysqlConnection
-								.UpdateLinkCrawl(link, priority,
-										location.country, location.state,
-										location.city);
+						linkCrawled.setCountry(location.country);
+						linkCrawled.setState(location.state);
+						linkCrawled.setCity(location.city);
+
+						linkCrawledDAO.update(linkCrawled);
 
 						break;
 					}
@@ -126,10 +156,10 @@ public class IdentifyLocationScript {
 	public static void main(String[] args) {
 		try {
 			IdentifyLocationScript.identifyLocationLinkCrawl();
-		} catch (ClassNotFoundException e) {
+
+			IdentifyLocationScript.identifyLocationRawHTML();
+		} catch (Exception e) {
 			return;
 		}
-		
-		IdentifyLocationScript.identifyLocationRawHTML();
 	}
 }

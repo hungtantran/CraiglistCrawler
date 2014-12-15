@@ -1,18 +1,25 @@
 package marijuanaCrawler;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 
 import commonlib.Globals;
-import commonlib.NetworkingFunctions;
 import commonlib.Globals.Domain;
 import commonlib.Helper;
+import commonlib.NetworkingFunctions;
+
 import dbconnection.DAOFactory;
-import dbconnection.MySqlConnection;
+import dbconnection.LinkCrawled;
+import dbconnection.LinkCrawledDAO;
+import dbconnection.LinkCrawledDAOJDBC;
+import dbconnection.LocationLink;
+import dbconnection.LocationLinkDAO;
+import dbconnection.LocationLinkDAOJDBC;
 import dbconnection.RawHTML;
 import dbconnection.RawHTMLDAO;
 import dbconnection.RawHTMLDAOJDBC;
@@ -21,45 +28,54 @@ public class CraiglistCrawler {
 	protected Map<String, Globals.Location> linkToLocationMap = null;
 	protected Set<String> urlsCrawled = null;
 	protected PriorityQueue<String> urlsQueue = null;
-	protected MySqlConnection mysqlConnection = null;
-	protected RawHTMLDAO rawHTMLDAO = null;
 	protected int numRetriesDownloadLink = 2;
 
-	public CraiglistCrawler() {
+	protected RawHTMLDAO rawHTMLDAO = null;
+	protected LinkCrawledDAO linkCrawledDAO = null;
+	protected LocationLinkDAO locationLinkDAO = null;
+
+	public CraiglistCrawler() throws SQLException, ClassNotFoundException {
 		if (!readConfig())
 			return;
 
 		this.urlsCrawled = new HashSet<String>();
-		
-		try {
-			this.mysqlConnection = new MySqlConnection(Globals.username,
-					Globals.password, Globals.server, Globals.database);
-			this.rawHTMLDAO = new RawHTMLDAOJDBC(DAOFactory.getInstance(
-					Globals.username, Globals.password, Globals.server),
-					Globals.database);
-		} catch (ClassNotFoundException e) {
-			Globals.crawlerLogManager.writeLog(e.getMessage());
-			return;
-		}
+
+		this.rawHTMLDAO = new RawHTMLDAOJDBC(DAOFactory.getInstance(
+				Globals.username, Globals.password, Globals.server
+						+ Globals.database));
+
+		this.linkCrawledDAO = new LinkCrawledDAOJDBC(DAOFactory.getInstance(
+				Globals.username, Globals.password, Globals.server
+						+ Globals.database));
+
+		this.locationLinkDAO = new LocationLinkDAOJDBC(DAOFactory.getInstance(
+				Globals.username, Globals.password, Globals.server
+						+ Globals.database));
 
 		// Get start urls (location links for now)
-		if (!this.getStartLinks()) {
-			return;
+		this.linkToLocationMap = new HashMap<String, Globals.Location>();
+
+		List<LocationLink> locationLinks = this.locationLinkDAO.get();
+		for (LocationLink locationLink : locationLinks) {
+			String link = locationLink.getLink();
+			String country = locationLink.getCity();
+			String state = locationLink.getState();
+			String city = locationLink.getCity();
+			Globals.Location location = new Globals.Location(country, state,
+					city);
+
+			this.linkToLocationMap.put(link, location);
 		}
 
-		try {
-			ResultSet crawled = this.mysqlConnection
-					.getLinkCrawled(Domain.CRAIGLIST.value);
-			while (crawled.next()) {
-				this.urlsCrawled.add(crawled.getString("link"));
-			}
-
-			if (Globals.DEBUG)
-				Globals.crawlerLogManager.writeLog("Urls in Crawled Set : "
-						+ this.urlsCrawled.size());
-		} catch (SQLException e) {
-			Globals.crawlerLogManager.writeLog(e.getMessage());
+		List<LinkCrawled> linksCrawled = this.linkCrawledDAO
+				.get(Domain.CRAIGLIST.value);
+		for (LinkCrawled linkCrawled : linksCrawled) {
+			this.urlsCrawled.add(linkCrawled.getLink());
 		}
+
+		if (Globals.DEBUG)
+			Globals.crawlerLogManager.writeLog("Urls in Crawled Set : "
+					+ this.urlsCrawled.size());
 	}
 
 	private boolean readConfig() {
@@ -67,15 +83,8 @@ public class CraiglistCrawler {
 		return true;
 	}
 
-	private boolean getStartLinks() {
-		this.linkToLocationMap = this.mysqlConnection.GetLocationLink();
-
-		return (this.linkToLocationMap != null);
-	}
-
 	public boolean crawl() {
-		if (this.urlsCrawled == null || this.mysqlConnection == null
-				|| this.linkToLocationMap == null)
+		if (this.urlsCrawled == null || this.linkToLocationMap == null)
 			return false;
 
 		while (true) {
@@ -113,18 +122,44 @@ public class CraiglistCrawler {
 			for (String entryLink : entryLinks) {
 				if (!this.urlsCrawled.contains(entryLink)) {
 					// this.urlsQueue.add(entryLink);
-					// Add html into the RawHTML table
 					this.urlsCrawled.add(entryLink);
+					// TODO add urlsCrawled to database
 					String htmlContent = NetworkingFunctions
 							.downloadHtmlContentToString(entryLink,
 									this.numRetriesDownloadLink);
 					if (htmlContent == null)
 						continue;
 
-					int id = this.mysqlConnection.insertIntoLinkCrawledTable(
-							entryLink, Domain.CRAIGLIST.value, 1, null, null,
-							curLocation.country, curLocation.state,
-							curLocation.city);
+					LinkCrawled linkCrawled = new LinkCrawled();
+					linkCrawled.setLink(entryLink);
+					linkCrawled.setDomainTableId1(Domain.CRAIGLIST.value);
+					linkCrawled.setPriority(1);
+					linkCrawled.setTimeCrawled(null);
+					linkCrawled.setDateCrawled(null);
+					linkCrawled.setCountry(curLocation.country);
+					linkCrawled.setState(curLocation.state);
+					linkCrawled.setCity(curLocation.city);
+
+					int id = -1;
+
+					try {
+						id = this.linkCrawledDAO.create(linkCrawled);
+
+						if (id < 0) {
+							Globals.crawlerLogManager
+									.writeLog("Insert content of link "
+											+ entryLink
+											+ " into RawHTML table fails");
+							continue;
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+						Globals.crawlerLogManager
+								.writeLog("Insert content of link " + entryLink
+										+ " into RawHTML table fails");
+						continue;
+					}
+
 					if (id < 0) {
 						Globals.crawlerLogManager
 								.writeLog("Fail to insert link " + entryLink
@@ -135,7 +170,7 @@ public class CraiglistCrawler {
 					Short positivePage = null;
 					Short predict1 = Classifier.classify(htmlContent);
 					Short predict2 = null;
-					
+
 					RawHTML rawHTML = new RawHTML();
 					rawHTML.setId(id);
 					rawHTML.setUrl(entryLink);
@@ -146,21 +181,25 @@ public class CraiglistCrawler {
 					rawHTML.setCountry(curLocation.country);
 					rawHTML.setState(curLocation.state);
 					rawHTML.setCity(curLocation.city);
-					
+
 					try {
-						if (!this.rawHTMLDAO.create(rawHTML)) {
+						if (this.rawHTMLDAO.create(rawHTML) < 0) {
 							Globals.crawlerLogManager
-									.writeLog("Insert content of link " + entryLink
+									.writeLog("Insert content of link "
+											+ entryLink
 											+ " into RawHTML table fails");
 						}
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						Globals.crawlerLogManager
+								.writeLog("Insert content of link " + entryLink
+										+ " into RawHTML table fails");
+						continue;
 					}
 
 					// this.mysqlConnection.insertIntoLinkQueueTable(entryLink,
 					// Domain.CRAIGLIST.value, 1, 0, null, null);
-					Helper.waitSec(Globals.DEFAULTLOWERBOUNDWAITTIMESEC, Globals.DEFAULTUPPERBOUNDWAITTIMESEC);
+					Helper.waitSec(Globals.DEFAULTLOWERBOUNDWAITTIMESEC,
+							Globals.DEFAULTUPPERBOUNDWAITTIMESEC);
 				}
 			}
 		}
@@ -169,9 +208,18 @@ public class CraiglistCrawler {
 	}
 
 	public static void main(String[] args) {
-		CraiglistCrawler crawler = new CraiglistCrawler();
+		CraiglistCrawler crawler = null;
 
-		if (!crawler.crawl())
-			Globals.crawlerLogManager.writeLog("Fail to crawl");
+		try {
+			crawler = new CraiglistCrawler();
+
+			if (!crawler.crawl()) {
+				Globals.crawlerLogManager.writeLog("Fail to crawl");
+			}
+		} catch (Exception e) {
+			Globals.crawlerLogManager
+					.writeLog("Fail to create CraiglistCrawler object");
+			e.printStackTrace();
+		}
 	}
 }

@@ -93,8 +93,7 @@ public class Dictionary {
 		while (true) {
 			try {
 				RawHTMLDAOJDBC rawHTMLDAO = new RawHTMLDAOJDBC(DAOFactory.getInstance(
-						Globals.username, Globals.password, Globals.server),
-						Globals.database);
+						Globals.username, Globals.password, Globals.server + Globals.database));
 				List<RawHTML> htmls = rawHTMLDAO.get(lowerBound,
 						maxNumResult);
 				if (htmls == null)
