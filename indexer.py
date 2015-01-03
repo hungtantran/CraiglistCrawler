@@ -10,14 +10,14 @@ from HTMLParser import HTMLParser
 import MySQLdb
 
 positiveDir = "./crawled_files/positive"
-# db = MySQLdb.connect(host="pow-db.clfpwrv3fbfn.us-west-2.rds.amazonaws.com",
-#                      port=4200,user="cedro",
-#                      passwd="password",
-#                      db="powdb")
-db = MySQLdb.connect(host="localhost",
-                     user="root",
-                     passwd="",
-                     db="weedpricelink")
+db = MySQLdb.connect(host="pow-db.clfpwrv3fbfn.us-west-2.rds.amazonaws.com",
+                     port=4200,user="cedro",
+                     passwd="password",
+                     db="powdb")
+# db = MySQLdb.connect(host="localhost",
+#                      user="root",
+#                      passwd="",
+#                      db="weedpricelink")
 
 class MLStripper(HTMLParser):
   def __init__(self):
@@ -96,6 +96,7 @@ def map_quantityPattern_to_quantity(quantityMapping, quantities):
 
       numerator = float(fraction[0])
       denominator = float(fraction[1])
+      if denominator==0: continue
       result = numerator / denominator
       mappedQuantities.append(result)
       continue
@@ -155,8 +156,14 @@ def index(rowId, htmlFile):
   h2 = soup.h2.text
   h2 = str(unicodedata.normalize('NFKD', h2).encode('ascii', 'ignore'))
   posting = soup.find(id="postingbody")
+  postingStr = ""
+  try:
+    postingStr = str(posting)
+  except (RuntimeError):
+    print "posting " + str(rowId) + " was too large"
+    return
 
-  text = strip_tags(title + h2 + str(posting))
+  text = strip_tags(title + h2 + postingStr)
   prices = extract_prices(text)
   prices = [price for price in prices if price!=420 and price!=215 and price!=502 and price>9]
   
@@ -175,7 +182,7 @@ def index(rowId, htmlFile):
 
 def index_from_db():
   cursor = db.cursor()
-  cursor.execute("SELECT * FROM rawhtml where positive=1")
+  cursor.execute("SELECT * FROM rawhtml where predict1=1")
   for row in cursor.fetchall():
     rowId = row[0]
     htmltext = row[2]
