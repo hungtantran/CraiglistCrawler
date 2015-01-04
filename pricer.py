@@ -29,10 +29,18 @@ def process_grams(rowId, grams, prices, stddev, avg):
       outfile.write("{0},{1},,\n".format(rowId, quantity))
     else:
       for price in normalized_prices:
-        outfile.write("{0},{1},{2}\n".format(rowId, quantity,price,price/quantity))
-  pass
+        print ("{0},{1},{2},{3}\n".format(rowId, quantity,price,price/quantity))
+        query = "INSERT INTO prices (price_fk, price, quantity, unit, human_generated) \
+VALUE (%s,%s,%s,%s,%s);" % (str(rowId), str(price), str(quantity), "\"gram\"", "0")
+
+        cursor = db.cursor()
+        cursor.execute(query)
+        db.commit()
 
 def parse_row(rowId, alt_quantities, alt_prices):
+  if alt_prices[-1]!=']':
+    alt_prices = alt_prices[:-1] + ']'
+
   quantity_regex = "(\[[0-9 .A-Za-z]*\])( g)?(\[[0-9 .A-Za-z+-]*\])( oz)?"
   regex = re.compile(quantity_regex)
   quantities_groups = regex.findall(alt_quantities)

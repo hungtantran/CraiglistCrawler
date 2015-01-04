@@ -23,11 +23,13 @@ if (isset($_GET["confirmation"])) {
 $RawHTMLDB = new RawHTMLDB();
 
 //Provide config setting
+echo "before";
 $RawHTMLDB->SetConfig($default_hostname, $default_username, $default_password, $default_db);
+echo "after";
 
-if ($confirmation == "null") {    
+if ($confirmation == "null") {
     $result = $RawHTMLDB->getOrder($order);
-
+    echo sizeof($result);
     if (sizeof($result) == 1) {
         $result = $result[0];
 
