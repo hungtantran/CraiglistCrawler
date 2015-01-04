@@ -1,5 +1,5 @@
 <?php
-class RawHTMLDB {
+class rawhtmlDB {
 	var $hostname;
 	var $username;
 	var $password;
@@ -12,7 +12,7 @@ class RawHTMLDB {
 		$this->username = $user;
 		$this->password = $pass;
 		$this->db = $db;
-		$db = new PDO("mysql:host=".$this->hostname.";dbname=".$this->db, $this->username, $this->password);
+		$db = new PDO("mysql:host=".$this->hostname.";port=4200;dbname=".$this->db, $this->username, $this->password);
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);		
 		$this->dbcon = $db;
@@ -24,7 +24,7 @@ class RawHTMLDB {
 		$db = $this->dbcon;	
 
 		/* Select all rawhtml */
-		$sql = "SELECT * FROM RawHTML";
+		$sql = "SELECT * FROM rawhtml";
 		$sql = $db->prepare($sql);
 		$sql->execute();
 
@@ -38,7 +38,7 @@ class RawHTMLDB {
 		$db = $this->dbcon;	
 
 		/* Select all rawhtml */
-		$sql = "SELECT * FROM RawHTML WHERE id = ".$order;
+		$sql = "SELECT * FROM rawhtml WHERE id = ".$order;
 		$sql = $db->prepare($sql);
 		$sql->execute();
 
@@ -51,7 +51,7 @@ class RawHTMLDB {
 		$db = $this->dbcon;	
 
 		/* Select all rawhtml */
-		$sql = "SELECT * FROM RawHTML WHERE alt_quantities IS NOT NULL AND alt_prices IS NOT NULL LIMIT ".($order-1).", 1";
+		$sql = "SELECT * FROM rawhtml WHERE alt_quantities IS NOT NULL AND alt_prices IS NOT NULL LIMIT ".($order-1).", 1";
 		$sql = $db->prepare($sql);
 		$sql->execute();
 
@@ -64,7 +64,7 @@ class RawHTMLDB {
 		$db = $this->dbcon;
 
 		/* Clear all the has updated price flag*/
-		$sql = "UPDATE RawHTML SET positive = ".$positive." WHERE id = ".$order;
+		$sql = "UPDATE rawhtml SET positive = ".$positive." WHERE id = ".$order;
 		echo $sql."<br/>";
 		$sql = $db->prepare($sql);
 		$sql->execute();

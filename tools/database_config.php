@@ -1,6 +1,6 @@
 <?php
-$default_hostname = 'localhost';
-$default_username = 'root';
-$default_password = '';
-$default_db = 'weedpricelink';
+$default_hostname = 'pow-db.clfpwrv3fbfn.us-west-2.rds.amazonaws.com';
+$default_username = 'cedro';
+$default_password = 'password';
+$default_db = 'powdb';
 ?>
