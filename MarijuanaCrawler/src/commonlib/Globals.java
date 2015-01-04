@@ -17,15 +17,15 @@ public class Globals {
 	public static int DEFAULTUPPERBOUNDWAITTIMESEC = 20;
 	public static String pathSeparator = File.separator;
 	
-	 public static String username = "root";
-	 public static String password = "";
-	 public static String server = "localhost/";
-	 public static String database = "weedpricelink";
+	// public static String username = "root";
+	// public static String password = "";
+	// public static String server = "localhost/";
+	// public static String database = "weedpricelink";
 
-//	public static String username = "cedro"; 
-//	public static String password = "password"; 
-//	public static String server = "pow-db.clfpwrv3fbfn.us-west-2.rds.amazonaws.com:4200/"; 
-//	public static String database = "powdb";
+	public static String username = "cedro"; 
+	public static String password = "password"; 
+	public static String server = "pow-db.clfpwrv3fbfn.us-west-2.rds.amazonaws.com:4200/"; 
+	public static String database = "powdb";
 	
 	public static final String[] fileExtenstions = { "jpg", "xml", "gif",
 			"pdf", "png", "jpeg" };
