@@ -1,5 +1,7 @@
 package dbconnection;
 
+import commonlib.Location;
+
 public class LinkCrawled {
 	// Constants
 	// ----------------------------------------------------------------------------------
@@ -92,6 +94,12 @@ public class LinkCrawled {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+	
+	public void setLocation(Location loc) {
+		this.country = loc.country;
+		this.state = loc.state;
+		this.city = loc.city;
 	}
 
 	// Object overrides

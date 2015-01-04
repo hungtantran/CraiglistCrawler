@@ -13,8 +13,7 @@ public class NaiveBayesClassifier {
 	private double[] probFeatureGivenPositive = null;
 	private double[] probFeatureGivenNegative = null;
 	private FeaturesCalculator cal = null;
-	private Dictionary dic = null;
-
+	
 	public NaiveBayesClassifier(ModelTrainer model, FeaturesCalculator cal,
 			Dictionary dic) {
 		if (model == null)
@@ -28,7 +27,6 @@ public class NaiveBayesClassifier {
 				.getNumFeatureOccurenceNegative();
 
 		this.cal = cal;
-		this.dic = dic;
 		this.featureVectorSize = model.getSizeFeatureVector();
 		this.probPositive = (double) numPositiveEntries
 				/ (numPositiveEntries + numNegativeEntries);

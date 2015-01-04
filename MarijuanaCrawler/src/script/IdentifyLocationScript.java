@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import commonlib.Globals;
-
+import commonlib.Location;
 import dbconnection.DAOFactory;
 import dbconnection.LinkCrawled;
 import dbconnection.LinkCrawledDAO;
@@ -25,7 +25,7 @@ public class IdentifyLocationScript {
 				DAOFactory.getInstance(Globals.username, Globals.password,
 						Globals.server + Globals.database));
 
-		Map<String, Globals.Location> linkToLocationMap = new HashMap<String, Globals.Location>();
+		Map<String, Location> linkToLocationMap = new HashMap<String, Location>();
 
 		List<LocationLink> locationLinks = locationLinkDAO.get();
 		for (LocationLink locationLink : locationLinks) {
@@ -33,8 +33,7 @@ public class IdentifyLocationScript {
 			String country = locationLink.getCity();
 			String state = locationLink.getState();
 			String city = locationLink.getCity();
-			Globals.Location location = new Globals.Location(country, state,
-					city);
+			Location location = new Location(country, state, city);
 
 			linkToLocationMap.put(link, location);
 		}
@@ -63,10 +62,9 @@ public class IdentifyLocationScript {
 					int id = rawHTML.getId();
 					String link = rawHTML.getUrl();
 
-					for (Map.Entry<String, Globals.Location> entry : linkToLocationMap
-							.entrySet()) {
+					for (Map.Entry<String, Location> entry : linkToLocationMap.entrySet()) {
 						String linkMap = entry.getKey();
-						Globals.Location location = entry.getValue();
+						Location location = entry.getValue();
 
 						if (link.contains(linkMap)) {
 							if (Globals.DEBUG)
@@ -103,7 +101,7 @@ public class IdentifyLocationScript {
 				DAOFactory.getInstance(Globals.username, Globals.password,
 						Globals.server + Globals.database));
 
-		Map<String, Globals.Location> linkToLocationMap = new HashMap<String, Globals.Location>();
+		Map<String, Location> linkToLocationMap = new HashMap<String, Location>();
 
 		List<LocationLink> locationLinks = locationLinkDAO.get();
 		for (LocationLink locationLink : locationLinks) {
@@ -111,7 +109,7 @@ public class IdentifyLocationScript {
 			String country = locationLink.getCity();
 			String state = locationLink.getState();
 			String city = locationLink.getCity();
-			Globals.Location location = new Globals.Location(country, state,
+			Location location = new Location(country, state,
 					city);
 
 			linkToLocationMap.put(link, location);
@@ -129,10 +127,9 @@ public class IdentifyLocationScript {
 			for (LinkCrawled linkCrawled : linksCrawled) {
 				Integer id = linkCrawled.getId();
 				String link = linkCrawled.getLink();
-				for (Map.Entry<String, Globals.Location> entry : linkToLocationMap
-						.entrySet()) {
+				for (Map.Entry<String, Location> entry : linkToLocationMap.entrySet()) {
 					String linkMap = entry.getKey();
-					Globals.Location location = entry.getValue();
+					Location location = entry.getValue();
 
 					if (link.contains(linkMap)) {
 						if (Globals.DEBUG)

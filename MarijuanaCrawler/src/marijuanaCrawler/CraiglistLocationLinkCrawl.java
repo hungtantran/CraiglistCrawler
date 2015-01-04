@@ -9,8 +9,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import commonlib.Globals;
+import commonlib.Location;
 import commonlib.NetworkingFunctions;
-
 import dbconnection.DAOFactory;
 import dbconnection.LocationLink;
 import dbconnection.LocationLinkDAO;
@@ -20,13 +20,13 @@ public class CraiglistLocationLinkCrawl {
 	private final int numRetryDownloadPage = 2;
 	private final String startLink = "http://www.craigslist.org/about/sites";
 
-	private Map<String, Globals.Location> linkToLocationMap = null;
+	private Map<String, Location> linkToLocationMap = null;
 
 	public CraiglistLocationLinkCrawl() {
-		this.linkToLocationMap = new HashMap<String, Globals.Location>();
+		this.linkToLocationMap = new HashMap<String, Location>();
 	}
 
-	public Map<String, Globals.Location> getLinkToLocationMap() {
+	public Map<String, Location> getLinkToLocationMap() {
 		return this.linkToLocationMap;
 	}
 
@@ -79,7 +79,7 @@ public class CraiglistLocationLinkCrawl {
 						.toString();
 				Globals.crawlerLogManager.writeLog(cityName + ": " + link);
 				
-				Globals.Location loc =  new Globals.Location();
+				Location loc =  new Location();
 				loc.country = "US";
 				loc.state = stateName;
 				loc.city = cityName;
@@ -98,7 +98,7 @@ public class CraiglistLocationLinkCrawl {
 		if (!crawler.getLink())
 			return;
 
-		Map<String, Globals.Location> linkToLocationMap = crawler
+		Map<String, Location> linkToLocationMap = crawler
 				.getLinkToLocationMap();
 
 		if (linkToLocationMap == null)
@@ -107,9 +107,9 @@ public class CraiglistLocationLinkCrawl {
 		LocationLinkDAO locationLinkDAO = new LocationLinkDAOJDBC(DAOFactory.getInstance(
 				Globals.username, Globals.password, Globals.server + Globals.database));
 		
-		for (Map.Entry<String, Globals.Location> entry : linkToLocationMap.entrySet()) {
+		for (Map.Entry<String, Location> entry : linkToLocationMap.entrySet()) {
 			String link = entry.getKey();
-			Globals.Location location = entry.getValue();
+			Location location = entry.getValue();
 			
 			LocationLink locationLink = new LocationLink();
 			locationLink.setLink(link);

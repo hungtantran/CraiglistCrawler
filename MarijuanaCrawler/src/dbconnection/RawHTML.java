@@ -2,6 +2,8 @@ package dbconnection;
 
 import java.io.Serializable;
 
+import commonlib.Location;
+
 public class RawHTML implements Serializable {
 	// Constants
 	// ----------------------------------------------------------------------------------
@@ -112,6 +114,12 @@ public class RawHTML implements Serializable {
 
 	public void setAlt_prices(String alt_prices) {
 		this.alt_prices = alt_prices;
+	}
+	
+	public void setLocation(Location loc) {
+		this.country = loc.country;
+		this.state = loc.state;
+		this.city = loc.city;
 	}
 
 	// Object overrides
