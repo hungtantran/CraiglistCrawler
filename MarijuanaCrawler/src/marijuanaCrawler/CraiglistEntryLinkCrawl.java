@@ -55,8 +55,8 @@ public class CraiglistEntryLinkCrawl implements EntryLinkCrawler {
 	public String getNextEntryLink() {
 		curLinkListIndex++;
 		
-		if (curLinkListIndex < entryLinkList.size()) {
-			return entryLinkList.get(curLinkListIndex);
+		if (curLinkListIndex < this.entryLinkList.size()) {
+			return this.entryLinkList.get(curLinkListIndex);
 		}
 		
 		// Run out of link on the current page, try the next page		
@@ -88,7 +88,7 @@ public class CraiglistEntryLinkCrawl implements EntryLinkCrawler {
 	}
 
 	private boolean isValid() {
-		return (this.entryLinkList != null && this.domain != null && this.locationLink != null);
+		return (this.domain != null && this.locationLink != null);
 	}
 
 	private String constructPageLink(String searchTerm, int pageNum) {
@@ -169,6 +169,8 @@ public class CraiglistEntryLinkCrawl implements EntryLinkCrawler {
 			return false;
 		}
 		
+		this.curPage = 0;
+
 		this.entryLinkList = new ArrayList<String>();
 		
 		return true;
