@@ -10,14 +10,10 @@ from HTMLParser import HTMLParser
 import MySQLdb
 
 positiveDir = "./crawled_files/positive"
-db = MySQLdb.connect(host="pow-db.clfpwrv3fbfn.us-west-2.rds.amazonaws.com",
+db = MySQLdb.connect(host="powdb.clfpwrv3fbfn.us-west-2.rds.amazonaws.com",
                      port=4200,user="cedro",
                      passwd="password",
                      db="powdb")
-# db = MySQLdb.connect(host="localhost",
-#                      user="root",
-#                      passwd="",
-#                      db="weedpricelink")
 
 class MLStripper(HTMLParser):
   def __init__(self):
@@ -50,13 +46,19 @@ def get_quantity_mapping():
 
   return quantityMapping
 
-def extract_prices(text):
-  # remove all quantity matches from text here
-  # englishQuantityPatterns = open("quantitypatterns_english.txt", "r").readlines()
-  # metricQuantityPatterns = open("quantitypatterns_metric.txt", "r").readlines()
-  # quantityPatterns = englishQuantityPatterns + metricQuantityPatterns
-  # quantityPattern = "|".join([x.split(',')[0].strip() for x in quantityPatterns])
+def extract_locations(text):
+  latitudePattern = re.compile("data-latitude=\"(-?\d+?[0-9]*\.?[0-9]+)\"")
+  longitudePattern = re.compile("data-longitude=\"(-?\d+?[0-9]*\.?[0-9]+)\"")
 
+  latMatches = latitudePattern.findall(text)
+  lonMatches = longitudePattern.findall(text)
+  if (len(latMatches) != len(lonMatches) or len(latMatches) != 1):
+    return [None, None]
+
+  return [latMatches[0], lonMatches[0]]
+
+def extract_prices(text):
+  # remove percentages, these aren't legit prices
   compiledQuantityPattern = re.compile("\d+?[0-9]*\.?[0-9]+%")
   text = compiledQuantityPattern.sub('', text)
 
@@ -76,9 +78,6 @@ def extract_prices(text):
   return prices
 
 def extract_quantities_with_pattern(text, pattern):
-  # quantityPatterns = open(quantitypatterns, "r").readlines()
-  # quantityPatterns = [x.split(',')[0].strip() for x in quantityPatterns]
-  # quantityPattern = "|".join(quantityPatterns)
   regex = re.compile(pattern)
   quantities = regex.findall(text)
   return quantities
@@ -128,26 +127,24 @@ def extract_quantities(text):
   return quantities_metric, quantities_english
 
 
-def write_to_db(rowId, metricQuantities, englishQuantities, prices):
+def write_to_db(rowId, metricQuantities, englishQuantities, prices, locations):
   print rowId
   print "metric quantities:", str(metricQuantities)
   print "english quantities:", str(englishQuantities)
   print "prices:", str(prices)
-  query = "UPDATE rawhtml SET alt_quantities=\"%s\", alt_prices=\"%s\" WHERE id=%s;" % \
-    (str(metricQuantities)+str(englishQuantities), str(prices), str(rowId))
-  print "query:", query
+  # query = "UPDATE rawhtml SET id=2 where id=2"
+  # query = "UPDATE rawhtml SET alt_quantities=\"%s\", alt_prices=\"%s\", rawhtml.latitude=\"%s\", rawhtml.longitude=\"%s\" \
+  #   WHERE id=%s;" % (str(metricQuantities)+str(englishQuantities), str(prices), locations[0], locations[1], str(rowId))
+  query = "UPDATE rawhtml SET alt_quantities=\"%s\", alt_prices=\"%s\", latitude=\"%s\", longitude=\"%s\" WHERE id=%s;" % (str(metricQuantities)+str(englishQuantities), str(prices), str(locations[0]), str(locations[1]), str(rowId))
+  # query = """UPDATE rawhtml SET alt_quantities=%s, alt_prices=%s, latitude=%s WHERE id=%s"""
+  print query
 
   cursor = db.cursor()
   cursor.execute(query)
+  # cursor.execute(query, (str(metricQuantities)+str(englishQuantities), str(prices), str(locations[0]), str(rowId)))
   db.commit()
-  # cursor.execute ("""
-  #  UPDATE rawhtml
-  #  SET alt_quantities=%s, alt_prices=%s
-  #  WHERE id=%s""", (str(metricQuantities)+str(englishQuantities), str(prices), rowId))
 
 def index(rowId, htmlFile):
-  # html_doc = open(htmlFile, 'r')
-  # soup = BeautifulSoup(html_doc.read())
   html_doc = htmlFile
   soup = BeautifulSoup(html_doc)
   
@@ -165,24 +162,26 @@ def index(rowId, htmlFile):
 
   text = strip_tags(title + h2 + postingStr)
   prices = extract_prices(text)
-  prices = [price for price in prices if price!=420 and price!=215 and price!=502 and price>9]
+  prices = [price for price in prices if price!=420 and price!=215 and price!=502] # and price>9
   
   extracted_quantities = extract_quantities(text)
 
-  # print "metric quantities:", extracted_quantities[0]
-  # print "english quantities:", extracted_quantities[1]
-  # print "prices:", prices, '\n'
+  extracted_locations = extract_locations(htmlFile)
+
+  print "metric quantities:", extracted_quantities[0]
+  print "english quantities:", extracted_quantities[1]
+  print "location:", extracted_locations
+  print "prices:", prices, '\n'
 
   if len(extracted_quantities[0])==0 and len(extracted_quantities[1])==0 or len(prices)==0:
-    # print text
     print "could not find prices or quantities"
     return
 
-  write_to_db(rowId, extracted_quantities[0], extracted_quantities[1], prices)
+  write_to_db(rowId, extracted_quantities[0], extracted_quantities[1], prices, extracted_locations)
 
 def index_from_db():
   cursor = db.cursor()
-  cursor.execute("SELECT * FROM rawhtml where predict1=1")
+  cursor.execute("SELECT * FROM rawhtml where predict1=1 and alt_quantities IS NULL and alt_prices IS NULL")
   for row in cursor.fetchall():
     rowId = row[0]
     htmltext = row[2]

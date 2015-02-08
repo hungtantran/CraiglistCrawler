@@ -31,7 +31,8 @@ def process_grams(rowId, grams, prices, stddev, avg):
       for price in normalized_prices:
         print ("{0},{1},{2},{3}\n".format(rowId, quantity,price,price/quantity))
         query = "INSERT INTO prices (price_fk, price, quantity, unit, human_generated) \
-VALUE (%s,%s,%s,%s,%s);" % (str(rowId), str(price), str(quantity), "\"gram\"", "0")
+        VALUE (%s,%s,%s,%s,%s) \
+        ON DUPLICATE KEY UPDATE ;" % (str(rowId), str(price), str(quantity), "\"gram\"", "0")
 
         cursor = db.cursor()
         cursor.execute(query)
@@ -62,7 +63,7 @@ def parse_row(rowId, alt_quantities, alt_prices):
 
 def guess_prices():
   cursor = db.cursor()
-  cursor.execute("SELECT * FROM rawhtml where alt_prices IS NOT NULL")
+  cursor.execute("SELECT * FROM rawhtml where alt_prices IS NOT NULL and rawhtml.id NOT IN (SELECT prices.price_fk from prices)")
   for row in cursor.fetchall():
     rowId = row[0]
     alt_quantities = row[9]
