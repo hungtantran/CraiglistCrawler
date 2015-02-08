@@ -32,7 +32,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>jars/</classpathPrefix>
-              <mainClass>marijuanaCrawler.CraiglistCrawler</mainClass>
+              <mainClass>marijuanaCrawler.Main</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -62,7 +62,7 @@
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.31</version>
+      <version>5.1.30</version>
     </dependency>
   </dependencies>
 </project>
