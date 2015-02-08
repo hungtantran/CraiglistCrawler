@@ -4,6 +4,7 @@ public class LinkQueue {
 	// Constants
 	// ----------------------------------------------------------------------------------
 
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	// Properties

@@ -36,7 +36,7 @@ public class CraiglistEntryLinkCrawl implements EntryLinkCrawler {
 
 		this.locationLink = locationLink;
 
-		URL locationUrl = new URL(this.locationLink);
+		final URL locationUrl = new URL(this.locationLink);
 		this.domain = locationUrl.getHost();
 	}
 
@@ -53,38 +53,42 @@ public class CraiglistEntryLinkCrawl implements EntryLinkCrawler {
 
 	@Override
 	public String getNextEntryLink() {
-		curLinkListIndex++;
-		
-		if (curLinkListIndex < this.entryLinkList.size()) {
-			return this.entryLinkList.get(curLinkListIndex);
+		this.curLinkListIndex++;
+
+		if (this.curLinkListIndex < this.entryLinkList.size()) {
+			return this.entryLinkList.get(this.curLinkListIndex);
 		}
-		
-		// Run out of link on the current page, try the next page		
+
+		// Run out of link on the current page, try the next page
 		this.curPage++;
-		
+
 		List<String> curPageLink = null;
 		try {
-			curPageLink = parseEntryLinksOnePage(this.searchTerm, this.curPage);
-		} catch (MalformedURLException e) {
+			curPageLink = this.parseEntryLinksOnePage(this.searchTerm,
+					this.curPage);
+		} catch (final MalformedURLException e) {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 		if (curPageLink == null || curPageLink.size() == 0) {
-			Globals.crawlerLogManager.writeLog("Found no link for page:" + locationLink + ", page#:" + this.curPage + ", with search term:"+ searchTerm);
+			Globals.crawlerLogManager.writeLog("Found no link for page:"
+					+ this.locationLink + ", page#:" + this.curPage
+					+ ", with search term:" + this.searchTerm);
 			return null;
 		}
-		
-		for (String link : curPageLink) {
+
+		for (final String link : curPageLink) {
 			this.entryLinkList.add(link);
 		}
-		
-		if (curLinkListIndex >= this.entryLinkList.size()) {
-			Globals.crawlerLogManager.writeLog("Index " + curLinkListIndex + " is unexpected");
+
+		if (this.curLinkListIndex >= this.entryLinkList.size()) {
+			Globals.crawlerLogManager.writeLog("Index " + this.curLinkListIndex
+					+ " is unexpected");
 			return null;
 		}
-		
-		return this.entryLinkList.get(curLinkListIndex);
+
+		return this.entryLinkList.get(this.curLinkListIndex);
 	}
 
 	private boolean isValid() {
@@ -96,66 +100,78 @@ public class CraiglistEntryLinkCrawl implements EntryLinkCrawler {
 			return null;
 		}
 
-		String pageLink = this.locationLink + this.searchPageSurfix + searchTerm + this.sortParam + (pageNum - 1) * 100;
+		final String pageLink = this.locationLink + this.searchPageSurfix
+				+ searchTerm + this.sortParam + (pageNum - 1) * 100;
 
 		return pageLink;
 	}
 
 	// Return the number of links found
-	private List<String> parseEntryLinksOnePage(String searchTerm, int pageNum) throws MalformedURLException {
-		List<String> linksFound = new ArrayList<String>();
+	private List<String> parseEntryLinksOnePage(String searchTerm, int pageNum)
+			throws MalformedURLException {
+		final List<String> linksFound = new ArrayList<String>();
 
 		if (searchTerm == null) {
-			Globals.crawlerLogManager.writeLog("There are no search term to get entry links");
+			Globals.crawlerLogManager
+					.writeLog("There are no search term to get entry links");
 			return linksFound;
 		}
-		
-		Globals.crawlerLogManager.writeLog("Attempt to get parse entry links from page:" + locationLink + ", page#:" + pageNum + ", with search term:"+ searchTerm);
 
-		String pageLink = this.constructPageLink(this.searchTerm, pageNum);
+		Globals.crawlerLogManager
+				.writeLog("Attempt to get parse entry links from page:"
+						+ this.locationLink + ", page#:" + pageNum
+						+ ", with search term:" + searchTerm);
+
+		final String pageLink = this
+				.constructPageLink(this.searchTerm, pageNum);
 
 		if (pageLink == null) {
-			Globals.crawlerLogManager.writeLog("Fail to construct page:" + locationLink + ", page#:" + pageNum + ", with search term:"+ searchTerm);
+			Globals.crawlerLogManager.writeLog("Fail to construct page:"
+					+ this.locationLink + ", page#:" + pageNum
+					+ ", with search term:" + searchTerm);
 			return linksFound;
 		}
 
 		Globals.crawlerLogManager.writeLog("Search page: " + pageLink);
-		Document doc = NetworkingFunctions.downloadHtmlContentToDoc(pageLink, numRetryDownloadPage);
+		final Document doc = NetworkingFunctions.downloadHtmlContentToDoc(
+				pageLink, this.numRetryDownloadPage);
 
 		// If fail to download the page, return found no links
 		if (doc == null) {
-			Globals.crawlerLogManager.writeLog("Fail to download html of page " + pageLink);
+			Globals.crawlerLogManager.writeLog("Fail to download html of page "
+					+ pageLink);
 			return linksFound;
 		}
 
-		Elements contentElems = doc.select("div[class=content]");
+		final Elements contentElems = doc.select("div[class=content]");
 
 		// There should be only one content div containing all the links
 		if (contentElems.size() != 1) {
 			return linksFound;
 		}
-		
-		Elements rowElems = contentElems.get(0).select("p[class=row]");
-		int numRows = rowElems.size();
+
+		final Elements rowElems = contentElems.get(0).select("p[class=row]");
+		final int numRows = rowElems.size();
 
 		for (int i = 0; i < numRows; i++) {
-			Elements linkElems = rowElems.get(i).select("a[href]");
+			final Elements linkElems = rowElems.get(i).select("a[href]");
 
 			// If there is no link on the row
-			if (linkElems.size() == 0)
+			if (linkElems.size() == 0) {
 				continue;
+			}
 
-			String entryLink = linkElems.get(0).attr("href");
+			final String entryLink = linkElems.get(0).attr("href");
 
-			URL entryUrl = new URL(this.locationLink);
-			URL absoluteUrl = new URL(entryUrl, entryLink);
-			String absoluteLink = absoluteUrl.toString();
+			final URL entryUrl = new URL(this.locationLink);
+			final URL absoluteUrl = new URL(entryUrl, entryLink);
+			final String absoluteLink = absoluteUrl.toString();
 
 			// The link found is not from the same domain or from the same area
 			if (absoluteLink.indexOf(this.domain) == -1) {
 				continue;
 			}
-			
+
 			linksFound.add(absoluteLink);
 		}
 
@@ -163,16 +179,18 @@ public class CraiglistEntryLinkCrawl implements EntryLinkCrawler {
 	}
 
 	// Implements EntryLinkCrawler interface startUp function
+	@Override
 	public boolean startUp() {
 		if (!this.isValid()) {
-			Globals.crawlerLogManager.writeLog("Fail to start up Craiglist Entry Crawler");
+			Globals.crawlerLogManager
+					.writeLog("Fail to start up Craiglist Entry Crawler");
 			return false;
 		}
-		
+
 		this.curPage = 0;
 
 		this.entryLinkList = new ArrayList<String>();
-		
+
 		return true;
 	}
 
@@ -180,18 +198,19 @@ public class CraiglistEntryLinkCrawl implements EntryLinkCrawler {
 		CraiglistEntryLinkCrawl crawler = null;
 
 		try {
-			crawler = new CraiglistEntryLinkCrawl("http://seattle.craigslist.org");
+			crawler = new CraiglistEntryLinkCrawl(
+					"http://seattle.craigslist.org");
 			crawler.startUp();
 			crawler.setQueryTerm("420 weed");
-			
+
 			while (true) {
-				String nextLink = crawler.getNextEntryLink();
+				final String nextLink = crawler.getNextEntryLink();
 				System.out.println(nextLink);
 				if (nextLink == null) {
 					break;
 				}
 			}
-		} catch (MalformedURLException e) {
+		} catch (final MalformedURLException e) {
 			e.printStackTrace();
 			System.out.println("Fail to create craiglist entry link crawl");
 		}

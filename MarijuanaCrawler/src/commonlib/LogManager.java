@@ -90,9 +90,9 @@ public class LogManager {
 
 	@SuppressWarnings("deprecation")
 	public boolean writeLog(String fileName, int lineNumber, String functionName, String log, boolean writeToDisk) {
-		if (this.logDir == null || this.baseFileName == null
-				|| functionName == null || log == null)
+		if (this.logDir == null || this.baseFileName == null || functionName == null || log == null) {
 			return false;
+		}
 		
 		this.mutex.lock();
 		

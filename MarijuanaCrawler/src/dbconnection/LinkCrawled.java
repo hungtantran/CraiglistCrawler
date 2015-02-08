@@ -6,6 +6,7 @@ public class LinkCrawled {
 	// Constants
 	// ----------------------------------------------------------------------------------
 
+	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 
 	// Properties

@@ -8,9 +8,16 @@ public abstract class DAOFactory {
 	// Constants
 	// ----------------------------------------------------------------------------------
 
+	@SuppressWarnings("unused")
 	private static final String PROPERTY_USERNAME = null;
+	
+	@SuppressWarnings("unused")
 	private static final String PROPERTY_PASSWORD = null;
+	
+	@SuppressWarnings("unused")
 	private static final String PROPERTY_SERVER = null;
+	
+	@SuppressWarnings("unused")
 	private static final String PROPERTY_DATABASE = null;
 
 	// Actions

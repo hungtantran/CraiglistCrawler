@@ -24,6 +24,8 @@ public class RawHTML implements Serializable {
 	private String city;
 	private String alt_quantities;
 	private String alt_prices;
+	private String latitude;
+	private String longtitude;
 
 	// Getters/setters
 	// ----------------------------------------------------------------------------
@@ -120,6 +122,22 @@ public class RawHTML implements Serializable {
 		this.country = loc.country;
 		this.state = loc.state;
 		this.city = loc.city;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongtitude() {
+		return longtitude;
+	}
+
+	public void setLongtitude(String longtitude) {
+		this.longtitude = longtitude;
 	}
 
 	// Object overrides
