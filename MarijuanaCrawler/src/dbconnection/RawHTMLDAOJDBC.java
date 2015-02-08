@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import commonlib.Globals;
+import commonlib.HTMLCompressor;
 
 public class RawHTMLDAOJDBC implements RawHTMLDAO {
 	private final String SQL_SELECT_BY_ID = "SELECT * FROM rawhtml WHERE id = ?";
@@ -192,8 +193,9 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 		try {
 			connection = this.daoFactory.getConnection();
 
-			final Object[] values = { rawHTML.getId(), rawHTML.getUrl(),
-					rawHTML.getHtml(), rawHTML.getPositive(),
+			final Object[] values = {
+			        rawHTML.getId(), rawHTML.getUrl(),
+					HTMLCompressor.compressHtmlContent(rawHTML.getHtml()), rawHTML.getPositive(),
 					rawHTML.getPredict1(), rawHTML.getPredict2(),
 					rawHTML.getCountry(), rawHTML.getState(), rawHTML.getCity() };
 
@@ -218,8 +220,7 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 
 			return generatedKey;
 		} catch (final SQLException e) {
-			Globals.crawlerLogManager
-					.writeLog("Insert into table RawHTML fails");
+			Globals.crawlerLogManager.writeLog("Insert into table RawHTML fails");
 			Globals.crawlerLogManager.writeLog(e.getMessage());
 			return -1;
 		} finally {
