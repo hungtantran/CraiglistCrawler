@@ -1,0 +1,57 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    float: left;
+    height: 10%;
+    width: 100%;
+}
+
+#content {
+    float: left;
+    width: 100%;
+    height: 80%;
+}
+
+#left_pane {
+    float: left;
+    width: 75%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#right_pane {
+    float: left;
+    width: 25%;
+    height: 100%;
+}
+
+#map-canvas {
+    float: left;
+    height: 70%;
+    width: 90%;
+    margin: 3%;
+    padding: 0;
+}
+
+#price_bin {
+    float: left;
+    width: 100%;
+}
+
+#price_bin_dist_by_state {
+    float: left;
+    width: 80%;
+}
+
+#price_per_unit {
+    float: left;
+}
+
+#footer {
+    float: left;
+    width: 100%;
+}
