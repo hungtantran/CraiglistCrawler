@@ -8,12 +8,14 @@ html, body {
     float: left;
     height: 10%;
     width: 100%;
+    overflow: hidden;
 }
 
 #content {
     float: left;
     width: 100%;
     height: 80%;
+    overflow: hidden;
 }
 
 #left_pane {
@@ -27,31 +29,79 @@ html, body {
     float: left;
     width: 25%;
     height: 100%;
+    overflow: hidden;
+}
+
+#right_pane_header {
+    float: left;
+    width: 100%;
+    height: 5%;
+    overflow: hidden;
+}
+
+#right_pane_content {
+    float: left;
+    width: 100%;
+    height: 95%;
+    overflow: hidden;
+}
+
+#latest_prices_content {
+    float: left;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#locations {
+    float: left;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#quantities {
+    float: left;
+    width: 25%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#prices {
+    float: left;
+    width: 20%;
+    height: 100%;
+    overflow: hidden;
 }
 
 #map-canvas {
     float: left;
     height: 70%;
-    width: 90%;
-    margin: 3%;
+    width: 97%;
+    margin: 5px;
     padding: 0;
+    overflow: hidden;
 }
 
 #price_bin {
     float: left;
     width: 100%;
+    overflow: hidden;
 }
 
 #price_bin_dist_by_state {
     float: left;
     width: 80%;
+    overflow: hidden;
 }
 
 #price_per_unit {
     float: left;
+    overflow: hidden;
 }
 
 #footer {
     float: left;
     width: 100%;
+    overflow: hidden;
 }

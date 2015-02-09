@@ -14,7 +14,6 @@ import commonlib.Globals.Domain;
 import commonlib.Helper;
 import commonlib.Location;
 import commonlib.NetworkingFunctions;
-
 import dbconnection.DAOFactory;
 import dbconnection.LinkCrawled;
 import dbconnection.LinkCrawledDAO;
@@ -22,6 +21,9 @@ import dbconnection.LinkCrawledDAOJDBC;
 import dbconnection.LocationLink;
 import dbconnection.LocationLinkDAO;
 import dbconnection.LocationLinkDAOJDBC;
+import dbconnection.PostingLocation;
+import dbconnection.PostingLocationDAO;
+import dbconnection.PostingLocationDAOJDBC;
 import dbconnection.RawHTML;
 import dbconnection.RawHTMLDAO;
 import dbconnection.RawHTMLDAOJDBC;
@@ -31,10 +33,11 @@ public class CraiglistCrawler implements WebsiteCrawler {
 	private Set<String> urlsCrawled = null;
 	private Queue<String> urlsQueue = null;
 	private final int numRetriesDownloadLink = 2;
-
+	
 	private RawHTMLDAO rawHTMLDAO = null;
 	private LinkCrawledDAO linkCrawledDAO = null;
 	private LocationLinkDAO locationLinkDAO = null;
+	private PostingLocationDAO postingLocationDAO = null;
 
 	private final String[] searchTerms = { "420 weed", "marijuana" };
 
@@ -51,6 +54,8 @@ public class CraiglistCrawler implements WebsiteCrawler {
 		this.linkCrawledDAO = new LinkCrawledDAOJDBC(daoFactory);
 
 		this.locationLinkDAO = new LocationLinkDAOJDBC(daoFactory);
+		
+		this.postingLocationDAO = new PostingLocationDAOJDBC(daoFactory);
 
 		// Get start urls (location links for now)
 		this.linkToLocationMap = new HashMap<String, Location>();
@@ -132,13 +137,25 @@ public class CraiglistCrawler implements WebsiteCrawler {
 		rawHTML.setLocation(loc);
 
 		try {
-			if (this.rawHTMLDAO.create(rawHTML) < 0) {
-				Globals.crawlerLogManager.writeLog("Insert content of link "
-						+ entryLink + " into RawHTML table fails");
+			int rawHTMLId = this.rawHTMLDAO.create(rawHTML);
+			
+			if (rawHTMLId < 0) {
+				Globals.crawlerLogManager.writeLog("Insert content of link " + entryLink + " into RawHTML table fails");
+				return false;
+			}
+			else
+			{
+			    PostingLocation location = new PostingLocation();
+			    location.setState(rawHTML.getState());
+			    location.setCity(rawHTML.getCity());
+			    location.setLocation_fk(rawHTMLId);
+			    if (!this.postingLocationDAO.create(location)) {
+			        Globals.crawlerLogManager.writeLog("Fails to insert location for " + entryLink + " into posting_location table");
+	                return false;
+			    }
 			}
 		} catch (final SQLException e) {
-			Globals.crawlerLogManager.writeLog("Insert content of link "
-					+ entryLink + " into RawHTML table fails");
+			Globals.crawlerLogManager.writeLog("Insert content of link " + entryLink + " into RawHTML table fails");
 			throw e;
 		}
 

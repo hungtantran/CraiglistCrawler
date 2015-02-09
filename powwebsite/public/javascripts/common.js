@@ -17,8 +17,6 @@ function newMap(latitude, longtitude, zoom, divId, markers) {
     if (markers[i]['latitude'] != null &&
       markers[i]['longitude'] != null) {
 
-      console.log(i + ' : ' + markers[i]['latitude']);
-
       var marker = new google.maps.Marker({
         position: new google.maps.LatLng(markers[i]['latitude'], markers[i]['longitude']),
         map: map

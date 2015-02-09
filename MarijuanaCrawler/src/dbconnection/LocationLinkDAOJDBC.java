@@ -19,8 +19,7 @@ public class LocationLinkDAOJDBC implements LocationLinkDAO {
 		this.daoFactory = daoFactory;
 	}
 
-	private LocationLink constructLocationLinkObject(ResultSet resultSet)
-			throws SQLException {
+	private LocationLink constructLocationLinkObject(ResultSet resultSet) throws SQLException {
 		final LocationLink locationLink = new LocationLink();
 
 		locationLink.setId(resultSet.getInt("id"));
@@ -83,9 +82,7 @@ public class LocationLinkDAOJDBC implements LocationLinkDAO {
 
 	@Override
 	public int create(LocationLink locationLink) throws SQLException {
-		if (locationLink.getLink() == null || locationLink.getCountry() == null
-				|| locationLink.getState() == null
-				|| locationLink.getCity() == null) {
+		if (!locationLink.isValid()) {
 			return -1;
 		}
 

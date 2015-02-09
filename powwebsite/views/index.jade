@@ -46,7 +46,17 @@ html
             | Price (per gram) (bin)
 
       div(id='right_pane')
-        | Latest Prices
+        div(id='right_pane_header')
+          | Latest Prices
+        div(id='right_pane_content')
+          table(id='latest_prices_content')
+            tr
+              td(id='locations')
+                | Locations
+              td(id='quantities')
+                | Quantities
+              td(id='prices')
+                | Prices
 
     div(id='footer')
       | Footer
