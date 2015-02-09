@@ -29,7 +29,7 @@ import dbconnection.RawHTML;
 import dbconnection.RawHTMLDAO;
 import dbconnection.RawHTMLDAOJDBC;
 
-public class CraiglistCrawler implements WebsiteCrawler {
+public class CraiglistCrawler implements IWebsiteCrawler {
 	private Map<String, Location> linkToLocationMap = null;
 	private Set<LocationLink> locationLinkLists = null;
 	private Set<String> urlsCrawled = null;
@@ -167,7 +167,7 @@ public class CraiglistCrawler implements WebsiteCrawler {
 					+ locationUrl + " is not poresent in the map");
 		}
 
-		final EntryLinkCrawler crawler = new CraiglistEntryLinkCrawl(
+		final IEntryLinkCrawler crawler = new CraiglistEntryLinkCrawl(
 				locationUrl);
 
 		// Process each search term at a time

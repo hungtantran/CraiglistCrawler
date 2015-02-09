@@ -12,7 +12,7 @@ import commonlib.Globals;
 import commonlib.NetworkingFunctions;
 
 // TODO don't use Globals
-public class CraiglistEntryLinkCrawl implements EntryLinkCrawler {
+public class CraiglistEntryLinkCrawl implements IEntryLinkCrawler {
 	private final String searchPageSurfix = "/search/sss?query=";
 	private final String sortParam = "&sort=rel&s=";
 

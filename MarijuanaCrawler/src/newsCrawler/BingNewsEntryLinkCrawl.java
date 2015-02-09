@@ -2,6 +2,7 @@ package newsCrawler;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -11,7 +12,9 @@ import commonlib.NetworkingFunctions;
 
 public class BingNewsEntryLinkCrawl {
 	private final int numRetryDownloadPage = 2;
-	private final String formatStringLink = "http://www.bing.com/news/search?q=%s&qft=sortbydate%3d\"1\"&first=%s&FORM=PENR";
+	
+	@SuppressWarnings("unused")
+    private final String formatStringLink = "http://www.bing.com/news/search?q=%s&qft=sortbydate%3d\"1\"&first=%s&FORM=PENR";
 	private final String[] searchTerms = { "marijuana" };
 
 	public BingNewsEntryLinkCrawl() {

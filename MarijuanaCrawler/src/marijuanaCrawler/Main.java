@@ -4,7 +4,7 @@ import commonlib.Globals;
 
 public class Main {
 	public static void main(String[] args) {
-		WebsiteCrawler crawler = null;
+		IWebsiteCrawler crawler = null;
 
 		try {
 			crawler = new CraiglistCrawler();
