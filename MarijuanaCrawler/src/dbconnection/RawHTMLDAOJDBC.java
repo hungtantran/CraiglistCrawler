@@ -81,6 +81,16 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 		if (resultSet.wasNull()) {
 			rawHTML.setAlt_prices(null);
 		}
+		
+		rawHTML.setLatitude(resultSet.getString("latitude"));
+        if (resultSet.wasNull()) {
+            rawHTML.setLatitude(null);
+        }
+        
+        rawHTML.setLongtitude(resultSet.getString("longitude"));
+        if (resultSet.wasNull()) {
+            rawHTML.setLongtitude(null);
+        }
 
 		return rawHTML;
 	}
@@ -194,31 +204,23 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 			connection = this.daoFactory.getConnection();
 
 			final Object[] values = {
-			        rawHTML.getId(), rawHTML.getUrl(),
-					HTMLCompressor.compressHtmlContent(rawHTML.getHtml()), rawHTML.getPositive(),
-					rawHTML.getPredict1(), rawHTML.getPredict2(),
-					rawHTML.getCountry(), rawHTML.getState(), rawHTML.getCity() };
+		        rawHTML.getId(), rawHTML.getUrl(),
+				HTMLCompressor.compressHtmlContent(rawHTML.getHtml()), rawHTML.getPositive(),
+				rawHTML.getPredict1(), rawHTML.getPredict2(),
+				rawHTML.getCountry(), rawHTML.getState(), rawHTML.getCity() };
 
 			preparedStatement = DAOUtil.prepareStatement(connection,
 					this.SQL_INSERT, true, values);
 
 			if (Globals.DEBUG) {
 				Globals.crawlerLogManager.writeLog("INSERT INTO RawHTML "
-						+ rawHTML.getUrl() + ", Content Length = "
-						+ rawHTML.getHtml().length());
+					+ rawHTML.getUrl() + ", Content Length = "
+					+ rawHTML.getHtml().length());
 			}
 
 			preparedStatement.executeUpdate();
 
-			// Get the generated key (id)
-			resultSet = preparedStatement.getGeneratedKeys();
-			int generatedKey = -1;
-
-			if (resultSet.next()) {
-				generatedKey = resultSet.getInt(1);
-			}
-
-			return generatedKey;
+			return rawHTML.getId();
 		} catch (final SQLException e) {
 			Globals.crawlerLogManager.writeLog("Insert into table RawHTML fails");
 			Globals.crawlerLogManager.writeLog(e.getMessage());

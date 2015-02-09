@@ -11,7 +11,7 @@ import commonlib.Globals;
 
 public class LocationLinkDAOJDBC implements LocationLinkDAO {
 	private final String SQL_SELECT_ALL = "SELECT * FROM location_link";
-	private final String SQL_INSERT = "INSERT INTO location_link (link, country, state, city) values (?, ?, ?, ?)";
+	private final String SQL_INSERT = "INSERT INTO location_link (link, country, state, city, num_positive_pages_found) values (?, ?, ?, ?)";
 
 	private final DAOFactory daoFactory;
 
@@ -46,6 +46,11 @@ public class LocationLinkDAOJDBC implements LocationLinkDAO {
 		if (resultSet.wasNull()) {
 			locationLink.setCity(null);
 		}
+		
+		locationLink.setNumPositivePagesFound(resultSet.getInt("num_positive_pages_found"));
+        if (resultSet.wasNull()) {
+            locationLink.setNumPositivePagesFound(null);
+        }
 
 		return locationLink;
 	}

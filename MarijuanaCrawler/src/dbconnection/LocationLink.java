@@ -15,6 +15,7 @@ public class LocationLink {
 	String country;
 	String state;
 	String city;
+	Integer numPositivePagesFound;
 
 	// Getters/setters
 	// ----------------------------------------------------------------------------
@@ -58,6 +59,14 @@ public class LocationLink {
 	public void setCity(String city) {
 		this.city = city;
 	}
+
+    public Integer getNumPositivePagesFound() {
+        return numPositivePagesFound;
+    }
+
+    public void setNumPositivePagesFound(Integer numPositivePagesFound) {
+        this.numPositivePagesFound = numPositivePagesFound;
+    }
 
 	// Object overrides
 	// ---------------------------------------------------------------------------

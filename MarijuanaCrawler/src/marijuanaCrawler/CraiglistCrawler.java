@@ -13,6 +13,7 @@ import commonlib.Globals;
 import commonlib.Globals.Domain;
 import commonlib.Helper;
 import commonlib.Location;
+import commonlib.LocationLinkComparator;
 import commonlib.NetworkingFunctions;
 import dbconnection.DAOFactory;
 import dbconnection.LinkCrawled;
@@ -30,8 +31,9 @@ import dbconnection.RawHTMLDAOJDBC;
 
 public class CraiglistCrawler implements WebsiteCrawler {
 	private Map<String, Location> linkToLocationMap = null;
+	private Set<LocationLink> locationLinkLists = null;
 	private Set<String> urlsCrawled = null;
-	private Queue<String> urlsQueue = null;
+	private Queue<LocationLink> urlsQueue = null;
 	private final int numRetriesDownloadLink = 2;
 	
 	private RawHTMLDAO rawHTMLDAO = null;
@@ -59,7 +61,8 @@ public class CraiglistCrawler implements WebsiteCrawler {
 
 		// Get start urls (location links for now)
 		this.linkToLocationMap = new HashMap<String, Location>();
-
+		this.locationLinkLists = new HashSet<LocationLink>();
+		
 		final List<LocationLink> locationLinks = this.locationLinkDAO.get();
 		for (final LocationLink locationLink : locationLinks) {
 			final String link = locationLink.getLink();
@@ -69,6 +72,7 @@ public class CraiglistCrawler implements WebsiteCrawler {
 			final Location location = new Location(country, state, city);
 
 			this.linkToLocationMap.put(link, location);
+			this.locationLinkLists.add(locationLink);
 		}
 
 		final List<LinkCrawled> linksCrawled = this.linkCrawledDAO
@@ -139,21 +143,15 @@ public class CraiglistCrawler implements WebsiteCrawler {
 		try {
 			int rawHTMLId = this.rawHTMLDAO.create(rawHTML);
 			
-			if (rawHTMLId < 0) {
-				Globals.crawlerLogManager.writeLog("Insert content of link " + entryLink + " into RawHTML table fails");
-				return false;
-			}
-			else
-			{
-			    PostingLocation location = new PostingLocation();
-			    location.setState(rawHTML.getState());
-			    location.setCity(rawHTML.getCity());
-			    location.setLocation_fk(rawHTMLId);
-			    if (!this.postingLocationDAO.create(location)) {
-			        Globals.crawlerLogManager.writeLog("Fails to insert location for " + entryLink + " into posting_location table");
-	                return false;
-			    }
-			}
+		    Globals.crawlerLogManager.writeLog("Insert content of link " + entryLink + " into RawHTML table succeeds with id = " + rawHTMLId);
+		    PostingLocation location = new PostingLocation();
+		    location.setState(rawHTML.getState());
+		    location.setCity(rawHTML.getCity());
+		    location.setLocation_fk(rawHTMLId);
+		    if (!this.postingLocationDAO.create(location)) {
+		        Globals.crawlerLogManager.writeLog("Fails to insert location for " + entryLink + " into posting_location table");
+                return false;
+		    }
 		} catch (final SQLException e) {
 			Globals.crawlerLogManager.writeLog("Insert content of link " + entryLink + " into RawHTML table fails");
 			throw e;
@@ -207,8 +205,7 @@ public class CraiglistCrawler implements WebsiteCrawler {
 					continue;
 				}
 
-				Helper.waitSec(Globals.DEFAULTLOWERBOUNDWAITTIMESEC,
-						Globals.DEFAULTUPPERBOUNDWAITTIMESEC);
+				Helper.waitSec(Globals.DEFAULTLOWERBOUNDWAITTIMESEC, Globals.DEFAULTUPPERBOUNDWAITTIMESEC);
 			}
 		}
 
@@ -226,8 +223,7 @@ public class CraiglistCrawler implements WebsiteCrawler {
 		}
 
 		if (this.linkToLocationMap.size() == 0) {
-			Globals.crawlerLogManager
-					.writeLog("There is no location links to start from");
+			Globals.crawlerLogManager.writeLog("There is no location links to start from");
 			return false;
 		}
 
@@ -237,22 +233,19 @@ public class CraiglistCrawler implements WebsiteCrawler {
 				// If this is the first crawl time, initilize the queue.
 				// Otherwise, wait for 10 to 15 minutes before the next crawl.
 				if (this.urlsQueue == null) {
-					this.urlsQueue = new PriorityQueue<String>(100, null);
+					this.urlsQueue = new PriorityQueue<LocationLink>(100, new LocationLinkComparator());
 				} else {
-					Globals.crawlerLogManager
-							.writeLog("Finish crawling once, wait before recrawl again");
+					Globals.crawlerLogManager.writeLog("Finish crawling once, wait before recrawl again");
 					Helper.waitSec(30 * 60, 60 * 60);
-					Globals.crawlerLogManager
-							.writeLog("Finish waiting, restart crawling again");
+					Globals.crawlerLogManager.writeLog("Finish waiting, restart crawling again");
 				}
 
-				for (final Map.Entry<String, Location> entry : this.linkToLocationMap
-						.entrySet()) {
-					this.urlsQueue.add(entry.getKey());
+				for (final LocationLink locationLink : this.locationLinkLists) {
+					this.urlsQueue.add(locationLink);
 				}
 			}
 
-			final String locationUrl = this.urlsQueue.remove();
+			final String locationUrl = this.urlsQueue.remove().getLink();
 
 			final boolean processLocLinkSuccess = this
 					.processOneLocationLink(locationUrl);

@@ -133,8 +133,7 @@ public class LinkCrawledDAOJDBC implements LinkCrawledDAO {
 					this.SQL_INSERT, true, values);
 
 			if (Globals.DEBUG) {
-				Globals.crawlerLogManager
-						.writeLog(preparedStatement.toString());
+				Globals.crawlerLogManager.writeLog(preparedStatement.toString());
 			}
 
 			preparedStatement.executeUpdate();
@@ -149,8 +148,7 @@ public class LinkCrawledDAOJDBC implements LinkCrawledDAO {
 
 			return generatedKey;
 		} catch (final SQLException e) {
-			Globals.crawlerLogManager
-					.writeLog("Insert into link_crawled_table fails");
+			Globals.crawlerLogManager.writeLog("Insert into link_crawled_table fails");
 			Globals.crawlerLogManager.writeLog(e.getMessage());
 
 			return -1;

@@ -117,18 +117,17 @@ public class CraiglistEntryLinkCrawl implements EntryLinkCrawler {
 			return linksFound;
 		}
 
-		Globals.crawlerLogManager
-				.writeLog("Attempt to get parse entry links from page:"
-						+ this.locationLink + ", page#:" + pageNum
-						+ ", with search term:" + searchTerm);
+		Globals.crawlerLogManager.writeLog("Attempt to get parse entry links from page:"
+			+ this.locationLink + ", page#:" + pageNum
+			+ ", with search term:" + searchTerm);
 
 		final String pageLink = this
 				.constructPageLink(this.searchTerm, pageNum);
 
 		if (pageLink == null) {
 			Globals.crawlerLogManager.writeLog("Fail to construct page:"
-					+ this.locationLink + ", page#:" + pageNum
-					+ ", with search term:" + searchTerm);
+				+ this.locationLink + ", page#:" + pageNum
+				+ ", with search term:" + searchTerm);
 			return linksFound;
 		}
 
@@ -138,8 +137,7 @@ public class CraiglistEntryLinkCrawl implements EntryLinkCrawler {
 
 		// If fail to download the page, return found no links
 		if (doc == null) {
-			Globals.crawlerLogManager.writeLog("Fail to download html of page "
-					+ pageLink);
+			Globals.crawlerLogManager.writeLog("Fail to download html of page " + pageLink);
 			return linksFound;
 		}
 
@@ -182,8 +180,7 @@ public class CraiglistEntryLinkCrawl implements EntryLinkCrawler {
 	@Override
 	public boolean startUp() {
 		if (!this.isValid()) {
-			Globals.crawlerLogManager
-					.writeLog("Fail to start up Craiglist Entry Crawler");
+			Globals.crawlerLogManager.writeLog("Fail to start up Craiglist Entry Crawler");
 			return false;
 		}
 
@@ -198,8 +195,7 @@ public class CraiglistEntryLinkCrawl implements EntryLinkCrawler {
 		CraiglistEntryLinkCrawl crawler = null;
 
 		try {
-			crawler = new CraiglistEntryLinkCrawl(
-					"http://seattle.craigslist.org");
+			crawler = new CraiglistEntryLinkCrawl("http://seattle.craigslist.org");
 			crawler.startUp();
 			crawler.setQueryTerm("420 weed");
 

@@ -43,7 +43,7 @@ public abstract class DAOFactory {
 	 * @throws SQLException
 	 *             If acquiring the connection fails.
 	 */
-	abstract Connection getConnection() throws SQLException;
+	public abstract Connection getConnection() throws SQLException;
 }
 
 // Default DAOFactory implementations
@@ -67,7 +67,7 @@ class MySQLDAOFactory extends DAOFactory {
 	}
 
 	@Override
-	Connection getConnection() throws SQLException {
+    public Connection getConnection() throws SQLException {
 		return DriverManager.getConnection("jdbc:mysql://" + this.server,
 				this.username, this.password);
 	}
