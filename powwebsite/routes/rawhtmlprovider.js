@@ -34,7 +34,7 @@ RawHTMLProvider = function() {
 
 // Find the size of article_table
 RawHTMLProvider.prototype.getLocations = function(callback) {
-  this.connection.query('SELECT id, country, state, city, latitude, longitude FROM rawHTML WHERE predict1 = 1', function(err, rows) {
+  this.connection.query('SELECT id, country, state, city, latitude, longitude FROM rawhtml WHERE predict1 = 1', function(err, rows) {
     if (err) {
       callback (err);
     } else {
