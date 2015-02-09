@@ -14,6 +14,9 @@ db = MySQLdb.connect(host="powdb.clfpwrv3fbfn.us-west-2.rds.amazonaws.com",
                      port=4200,user="cedro",
                      passwd="password",
                      db="powdb")
+quanitityPatternsEnglishFile = "/home/ec2-user/pow/pow/quantitypatterns_english.txt"
+quanitityPatternsMetricFile = "/home/ec2-user/pow/pow/quantitypatterns_english.txt"
+moneyPatternsFile = "/home/ec2-user/pow/pow/moneypatterns.txt"
 
 class MLStripper(HTMLParser):
   def __init__(self):
@@ -32,13 +35,13 @@ def strip_tags(html):
 def get_quantity_mapping():
   quantityMapping = {}
 
-  quantityPatterns_english = open("quantitypatterns_english.txt", "r").readlines()
+  quantityPatterns_english = open(quanitityPatternsEnglishFile, "r").readlines()
   for line in quantityPatterns_english:
     key = line.split(',')[0]
     value = float(line.split(',')[1])
     quantityMapping[key] = value
 
-  quantityPatterns_metric = open("quantitypatterns_metric.txt", "r").readlines()
+  quantityPatterns_metric = open(quanitityPatternsMetricFile, "r").readlines()
   for line in quantityPatterns_metric:
     key = line.split(',')[0]
     value = float(line.split(',')[1])
@@ -62,7 +65,7 @@ def extract_prices(text):
   compiledQuantityPattern = re.compile("\d+?[0-9]*\.?[0-9]+%")
   text = compiledQuantityPattern.sub('', text)
 
-  moneyPatterns = open("moneypatterns.txt", "r").readlines()
+  moneyPatterns = open(moneyPatternsFile, "r").readlines()
   moneyPatterns = [x.strip() for x in moneyPatterns]
   moneyPattern = "|".join(moneyPatterns)
   regex = re.compile(moneyPattern)
@@ -110,14 +113,14 @@ def map_quantityPattern_to_quantity(quantityMapping, quantities):
 def extract_quantities(text):
   quantityMapping = get_quantity_mapping() 
 
-  quantityPatterns = open("quantitypatterns_english.txt", "r").readlines()
+  quantityPatterns = open(quanitityPatternsEnglishFile, "r").readlines()
   quantityPattern = "|".join([x.split(',')[0].strip() for x in quantityPatterns])
   quantities_english = extract_quantities_with_pattern(text, quantityPattern)
   mapped_quantities_english = map_quantityPattern_to_quantity(quantityMapping, quantities_english)
   if len(mapped_quantities_english) > 0:
     quantities_english = mapped_quantities_english * pq.oz
 
-  quantityPatterns = open("quantitypatterns_metric.txt", "r").readlines()
+  quantityPatterns = open(quanitityPatternsMetricFile, "r").readlines()
   quantityPattern = "|".join([x.split(',')[0].strip() for x in quantityPatterns])
   quantities_metric = extract_quantities_with_pattern(text, quantityPattern)
   mapped_quantities_metric = map_quantityPattern_to_quantity(quantityMapping, quantities_metric)
@@ -128,20 +131,16 @@ def extract_quantities(text):
 
 
 def write_to_db(rowId, metricQuantities, englishQuantities, prices, locations):
-  print rowId
-  print "metric quantities:", str(metricQuantities)
-  print "english quantities:", str(englishQuantities)
-  print "prices:", str(prices)
-  # query = "UPDATE rawhtml SET id=2 where id=2"
-  # query = "UPDATE rawhtml SET alt_quantities=\"%s\", alt_prices=\"%s\", rawhtml.latitude=\"%s\", rawhtml.longitude=\"%s\" \
-  #   WHERE id=%s;" % (str(metricQuantities)+str(englishQuantities), str(prices), locations[0], locations[1], str(rowId))
   query = "UPDATE rawhtml SET alt_quantities=\"%s\", alt_prices=\"%s\", latitude=\"%s\", longitude=\"%s\" WHERE id=%s;" % (str(metricQuantities)+str(englishQuantities), str(prices), str(locations[0]), str(locations[1]), str(rowId))
-  # query = """UPDATE rawhtml SET alt_quantities=%s, alt_prices=%s, latitude=%s WHERE id=%s"""
-  print query
-
+  # print query
   cursor = db.cursor()
   cursor.execute(query)
-  # cursor.execute(query, (str(metricQuantities)+str(englishQuantities), str(prices), str(locations[0]), str(rowId)))
+
+  query = "INSERT INTO posting_location (location_fk, latitude, longitude) VALUES(%d, \"%s\", \"%s\") ON DUPLICATE KEY UPDATE latitude=\"%s\", longitude=\"%s\"" %(rowId, str(locations[0]), str(locations[1]), str(locations[0]), str(locations[1]));
+  # print query
+  cursor = db.cursor()
+  cursor.execute(query)
+
   db.commit()
 
 def index(rowId, htmlFile):
@@ -168,20 +167,20 @@ def index(rowId, htmlFile):
 
   extracted_locations = extract_locations(htmlFile)
 
-  print "metric quantities:", extracted_quantities[0]
-  print "english quantities:", extracted_quantities[1]
-  print "location:", extracted_locations
-  print "prices:", prices, '\n'
-
+  # print "metric quantities:", extracted_quantities[0]
+  # print "english quantities:", extracted_quantities[1]
+  # print "location:", extracted_locations
+  # print "prices:", prices, '\n'
+  
   if len(extracted_quantities[0])==0 and len(extracted_quantities[1])==0 or len(prices)==0:
-    print "could not find prices or quantities"
+    print "could not find prices or quantities for rowid:" + str(rowId)
     return
 
   write_to_db(rowId, extracted_quantities[0], extracted_quantities[1], prices, extracted_locations)
 
 def index_from_db():
   cursor = db.cursor()
-  cursor.execute("SELECT * FROM rawhtml where predict1=1 and alt_quantities IS NULL and alt_prices IS NULL")
+  cursor.execute("SELECT * FROM rawhtml where predict1=1 ") #and alt_quantities IS NULL and alt_prices IS NULL
   for row in cursor.fetchall():
     rowId = row[0]
     htmltext = row[2]
