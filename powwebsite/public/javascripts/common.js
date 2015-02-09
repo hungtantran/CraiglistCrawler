@@ -14,12 +14,18 @@ function newMap(latitude, longtitude, zoom, divId, markers) {
   var markerArray = [];
   for (var i = 0; i < markers.length; ++i)
   {
-    var marker = new google.maps.Marker({
-      position: new google.maps.LatLng(markers[i]['latitude'], markers[i]['longtitude']),
-      map: map
-    });
+    if (markers[i]['latitude'] != null &&
+      markers[i]['longitude'] != null) {
 
-    markerArray.push(marker);
+      console.log(i + ' : ' + markers[i]['latitude']);
+
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(markers[i]['latitude'], markers[i]['longitude']),
+        map: map
+      });
+
+      markerArray.push(marker);
+    }
   }
 
   var markerCluster = new MarkerClusterer(map, markerArray);

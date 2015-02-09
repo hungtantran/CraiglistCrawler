@@ -22,8 +22,7 @@ public class ClassifyRawHTML {
 			try {
 				RawHTMLDAOJDBC rawHTMLDAOJDBC = new RawHTMLDAOJDBC(DAOFactory.getInstance(
 						Globals.username, Globals.password, Globals.server + Globals.database));
-				List<RawHTML> htmls = rawHTMLDAOJDBC.get(lowerBound,
-						maxNumResult);
+				List<RawHTML> htmls = rawHTMLDAOJDBC.get(lowerBound, maxNumResult);
 				if (htmls == null)
 					break;
 
@@ -38,8 +37,7 @@ public class ClassifyRawHTML {
 					String htmlContent = rawHTML.getHtml();
 
 					if (Globals.DEBUG)
-						System.out.println("(" + htmlCount + ") Check HTML id "
-								+ id + ": " + link);
+						System.out.println("(" + htmlCount + ") Check HTML id " + id + ": " + link);
 
 					// Classify the page
 					Short predict1 = Classifier.classify(htmlContent);
