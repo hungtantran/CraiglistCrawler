@@ -86,13 +86,39 @@ html, body {
 #price_bin {
     float: left;
     width: 100%;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 #price_bin_dist_by_state {
     float: left;
     width: 80%;
-    overflow: hidden;
+    overflow: scroll;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+    font: 8px sans-seriff;
+}
+
+.bar {
+    fill:steelblue;
+}
+
+.x.axis path {
+    display: none;
+}
+
+.chart rect {
+    fill: steelblue;
+}
+
+.chart text {
+    fill: white;
+    font: 10px sans-seriff;
+    text-anchor: end;
 }
 
 #price_per_unit {
