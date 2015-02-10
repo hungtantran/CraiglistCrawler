@@ -7,8 +7,8 @@ var connection = mysql.createConnection({
   password : configs.dbpassword
 });
 
-RawHTMLProvider = function() {
-  console.log("New RawHTMLProvider");
+PostingLocationProvider = function() {
+  console.log("New PostingLocationProvider");
   this.connection = mysql.createConnection({
     host     : configs.dbhost,
     port     : configs.dbport,
@@ -32,4 +32,15 @@ RawHTMLProvider = function() {
   });
 };
 
-exports.RawHTMLProvider = RawHTMLProvider;
+PostingLocationProvider.prototype.getLocations = function(callback) {
+  this.connection.query('SELECT location_fk as id, state, city, latitude, longitude FROM posting_location', function(err, rows) {
+    if (err) {
+      callback (err);
+    } else {
+      callback(null, rows);
+    }
+  });
+};
+
+exports.PostingLocationProvider = PostingLocationProvider;
+
