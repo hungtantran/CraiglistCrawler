@@ -3,6 +3,7 @@ html
   head
     title= title
     link(rel='stylesheet', type='text/css', href='/stylesheets/index.css')
+    script(type='text/javascript' src="http://d3js.org/d3.v3.min.js" charset="utf-8")
     script(type='text/javascript', src='/javascripts/common.js')
     script(type='text/javascript')
       | var xmlhttp;
@@ -23,12 +24,37 @@ html
       |   {
       |     var markers = JSON.parse(xmlhttp.responseText);
 
-      |     initialize(markers);
+      |     initializeMap(markers);
       |   }
       | }
 
       | xmlhttp.open("GET","/locations",true);
       | xmlhttp.send();
+
+      | var xmlhttpPrices;
+      | // code for IE7+, Firefox, Chrome, Opera, Safari
+      | if (window.XMLHttpRequest)
+      | {
+      |   xmlhttpPrices=new XMLHttpRequest();
+      | }
+      | // code for IE6, IE5
+      | else
+      | {
+      |   xmlhttpPrices=new ActiveXObject("Microsoft.XMLHTTP");
+      | }
+
+      | xmlhttpPrices.onreadystatechange=function()
+      | {
+      |   if (xmlhttpPrices.readyState==4 && xmlhttpPrices.status==200)
+      |   {
+      |     var prices = JSON.parse(xmlhttpPrices.responseText);
+
+      |     initializePrices(prices);
+      |   }
+      | }
+
+      | xmlhttpPrices.open("GET","/prices",true);
+      | xmlhttpPrices.send();
   body
     div(id='header')
       | Header
@@ -47,16 +73,16 @@ html
 
       div(id='right_pane')
         div(id='right_pane_header')
-          | Latest Prices
-        div(id='right_pane_content')
-          table(id='latest_prices_content')
-            tr
-              td(id='locations')
-                | Locations
-              td(id='quantities')
-                | Quantities
-              td(id='prices')
-                | Prices
+-          | Latest Prices
+-       div(id='right_pane_content')
+-          table(id='latest_prices_content')
+-            tr
+-              td(id='locations')
+-                | Locations
+-              td(id='quantities')
+-                | Quantities
+-              td(id='prices')
+-                | Prices
 
     div(id='footer')
       | Footer

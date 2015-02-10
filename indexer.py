@@ -180,7 +180,7 @@ def index(rowId, htmlFile):
 
 def index_from_db():
   cursor = db.cursor()
-  cursor.execute("SELECT * FROM rawhtml where predict1=1 ") #and alt_quantities IS NULL and alt_prices IS NULL
+  cursor.execute("SELECT * FROM rawhtml where predict1=1 and alt_quantities IS NULL and alt_prices IS NULL")
   for row in cursor.fetchall():
     rowId = row[0]
     htmltext = row[2]
