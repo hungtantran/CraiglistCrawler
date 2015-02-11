@@ -23,7 +23,6 @@ html
       |   if (xmlhttp.readyState==4 && xmlhttp.status==200)
       |   {
       |     var markers = JSON.parse(xmlhttp.responseText);
-
       |     initializeMap(markers);
       |   }
       | }
@@ -48,13 +47,36 @@ html
       |   if (xmlhttpPrices.readyState==4 && xmlhttpPrices.status==200)
       |   {
       |     var prices = JSON.parse(xmlhttpPrices.responseText);
-
       |     initializePrices(prices);
       |   }
       | }
 
       | xmlhttpPrices.open("GET","/prices",true);
       | xmlhttpPrices.send();
+
+      | var xmlhttpPostings;
+      | // code for IE7+, Firefox, Chrome, Opera, Safari
+      | if (window.XMLHttpRequest)
+      | {
+      |   xmlhttpPostings=new XMLHttpRequest();
+      | }
+      | // code for IE6, IE5
+      | else
+      | {
+      |   xmlhttpPostings=new ActiveXObject("Microsoft.XMLHTTP");
+      | }
+
+      | xmlhttpPostings.onreadystatechange=function()
+      | {
+      |   if (xmlhttpPostings.readyState==4 && xmlhttpPostings.status==200)
+      |   {
+      |     var postings = JSON.parse(xmlhttpPostings.responseText);
+      |     initializePostings(postings);
+      |   }
+      | }
+
+      | xmlhttpPostings.open("GET","/postings",true);
+      | xmlhttpPostings.send();
   body
     div(id='header')
       | Header

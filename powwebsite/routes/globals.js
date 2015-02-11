@@ -25,5 +25,16 @@ pricesProvider.getPrices(function(error, docs) {
     exports.prices = prices;
 })
 
+var postings = null;
+pricesProvider.getPostings(function(error, docs) {
+    if (error != null) {
+        console.error('error to get postings: ' + error.stack);
+        process.exit(1);
+    }
+
+    postings = docs;
+    exports.postings = postings;
+})
+
 exports.pricesProvider = pricesProvider;
 exports.postingLocationProvider = postingLocationProvider;

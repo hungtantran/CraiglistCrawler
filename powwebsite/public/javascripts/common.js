@@ -1,5 +1,5 @@
 function initializePrices(prices) {
-  return newPriceBin('price_bin_dist_by_state', prices)
+  return newPriceBin('price_bin_dist_by_state', prices);
 }
 
 function newPriceBin(divId, prices) {
@@ -286,6 +286,40 @@ function newMap(latitude, longtitude, zoom, divId, markers) {
   var markerCluster = new MarkerClusterer(map, markerArray);
 
   return map;
+}
+
+function initializePostings(postings) {
+  var table = document.getElementById('latest_prices_content');
+
+  for (var i = 0; i < postings.length; ++i)
+  {
+    if (!postings[i]['city']) {
+      continue;
+    }
+
+    var row = table.insertRow(table.length);
+    
+    // Location cell
+    var location = row.insertCell(0);
+    location.innerHTML = postings[i]['city'];
+    location.setAttribute('id', 'location')
+
+    // Quantity cell
+    var quantity = row.insertCell(1);
+    if (!postings[i]['quantity'] || !postings[i]['unit']) {
+      continue;
+    }
+
+    quantity.innerHTML = postings[i]['quantity'] + ' ' + postings[i]['unit'];
+
+    // Price cell
+    var price = row.insertCell(2);
+    if (!postings[i]['price']) {
+      continue;
+    }
+
+    price.innerHTML = '$' + postings[i]['price'];
+  }
 }
 
 window.google = window.google || {};
