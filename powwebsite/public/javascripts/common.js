@@ -21,14 +21,14 @@ function newPriceBin(divId, prices) {
   //   var bin = Math.floor(pricePerGram / 5)
   //   if (bin < 9) {
   //     bins[bin] = bins[bin] + 1;
-  //   } else {
+  //   } else { 
   //     bins[9] = bins[9] + 1;
   //   }
   // }
 
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    height = 150 - margin.top - margin.bottom;
   
   var x0 = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1);
@@ -43,7 +43,7 @@ function newPriceBin(divId, prices) {
 
   var xAxis = d3.svg.axis()
       .scale(x0)
-      .orient("bottom");
+      .orient("bottm");
 
   var yAxis = d3.svg.axis()
       .scale(y)
@@ -152,36 +152,6 @@ function newPriceBin(divId, prices) {
         
       })
       .style("fill", function(d) { return color(d.name); });
-  // }
-  // }
-
-  // code to draw up chart
-  // var width = 420,
-  //     barheight = 20;
-
-  // // scaling factor
-  // var x = d3.scale.linear()
-  //   .domain([0, d3.max(bins)])
-  //   .range([0, width]);
-
-  // var chart = d3.select(".chart")
-  //     .attr("width", width)
-  //     .attr("height", barheight * bins.length)
-
-  // var bar = chart.selectAll("g")
-  //     .data(bins)
-  //     .enter().append("g")
-  //     .attr("transform", function(d, i) { return "translate(0," + i * barheight + ")"; });
-
-  // bar.append("rect")
-  //    .attr("width", x)
-  //    .attr("height", barheight - 1);
-
-  // bar.append("text")
-  //   .attr("x", function(d) { return x(d) - 3; })
-  //   .attr("y", barheight / 2)
-  //   .attr("dy", ".35em")
-  //   .text(function(d) { return d; });
 }
 
 function initializeMap(markers) {
