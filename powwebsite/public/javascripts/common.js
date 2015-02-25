@@ -5,9 +5,9 @@ function initializePrices(prices) {
 function newPriceBin(divId, prices) {
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
-    height = 1000;//250 - margin.top - margin.bottom;
+    height = 2000;//250 - margin.top - margin.bottom;
 
-  console.log($("#price_bin").innerHeight())
+  // console.log($("#price_bin").innerHeight())
   
   var y0 = d3.scale.ordinal()
     .rangeRoundBands([0, height], .1);
@@ -29,13 +29,17 @@ function newPriceBin(divId, prices) {
       .scale(y0)
       .orient("left");
 
+  var yAxisBins = d3.svg.axis()
+      .scale(y1)
+      .orient("left");
+
   var svg = d3.select('#' + divId).append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  var binNames = ['0-5', '5-10', '10-15', '15-20', '20-25', '25-30', '30-35', '35-40','40-45','45-50'];
+  var binNames = ['0-5', '5-10', '10-15', '15-20', '20-25', '25-30', '30-35', '35-40','40-45','45+'];
   data = {}
   for (var i=0; i<prices.length; ++i)
   {
@@ -61,6 +65,7 @@ function newPriceBin(divId, prices) {
     
     var binKey = binNames[bin]
     bins[binKey] = bins[binKey] + 1;
+    // console.log(pricePerGram + " " + binKey)
   }
 
   arr = [];
@@ -70,7 +75,7 @@ function newPriceBin(divId, prices) {
 
     arr.push(data[k]);
   }
-  console.log(arr);
+  // console.log(arr);
 
   y0.domain(Object.keys(data));
   y1.domain(binNames).rangeRoundBands([0, y0.rangeBand()]);
@@ -83,7 +88,7 @@ function newPriceBin(divId, prices) {
 
   svg.append("g")
       .attr("class", "y axis")
-      .attr("transform", "translate("+100+",0)")
+      .attr("transform", "translate("+50+",0)")
       .call(yAxis);
 
   var state = svg.selectAll(".state")
@@ -92,7 +97,12 @@ function newPriceBin(divId, prices) {
         .attr("class", "g")
         .attr("transform", function(d) { return "translate(100," + y0(d.state) + ")"; });
 
-  console.log(data);
+  state.append("g")
+    .attr("class", "y axis")
+    .attr("transform", "translate(0,0)")
+    .call(yAxisBins);
+
+  // console.log(data);
   state.selectAll("rect")
       .data(function(d) {
         // console.log(d);
@@ -108,9 +118,10 @@ function newPriceBin(divId, prices) {
       .attr("x", 0)
       .attr("y", function(d) {
         // console.log(y1);
-        // console.log(d.name);
-        // console.log(y1(d.name));
-        return y1(d.name) * binNames.indexOf(d.name);
+        console.log("y1(d.name)" + y1(d.name));
+        console.log("binNames.indexOf(" + d.name + ")" + binNames.indexOf(d.name));
+        console.log(y1(d.name) + 12 * (binNames.indexOf(d.name)));
+        return y1(d.name);
       })
       .attr("height", y1.rangeBand())
       .style("fill", function(d) { return color(d.name); });
