@@ -86,13 +86,15 @@ html, body {
 #price_bin {
     float: left;
     width: 100%;
-    overflow: scroll;
+    max-height: 250px;
 }
 
 #price_bin_dist_by_state {
     float: left;
     width: 80%;
-    overflow: scroll;
+    height: 100%;
+    max-height: inherit;
+    overflow-y: scroll;
 }
 
 .axis path,
@@ -101,6 +103,10 @@ html, body {
     stroke: #000;
     shape-rendering: crispEdges;
     font: 8px sans-seriff;
+}
+
+.y.axis text {
+    text-anchor: start;
 }
 
 .bar {
@@ -118,7 +124,7 @@ html, body {
 .chart text {
     fill: white;
     font: 10px sans-seriff;
-    text-anchor: end;
+    text-anchor: start;
 }
 
 #price_per_unit {

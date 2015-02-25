@@ -3,52 +3,31 @@ function initializePrices(prices) {
 }
 
 function newPriceBin(divId, prices) {
-  // var svg = d3.select('#' + divId).append("svg").classed({'chart':true});
-  // console.log(prices)
-
-  // var bins = [0,0,0,0,0,0,0,0,0,0];
-  // for (var i=0; i<prices.length; ++i)
-  // {
-  //   var entry = prices[i];
-  //   var price = entry['price']
-  //   var unit = entry['unit'];
-  //   var quantityGrams = entry['quantity'];
-  //   // convet ounces to grams
-  //   if (unit=='oz') { quantityGrams = quantityGrams * 28.3495; }
-  //   var pricePerGram = price / quantityGrams;
-
-  //   // // find appropriate bin to increment
-  //   var bin = Math.floor(pricePerGram / 5)
-  //   if (bin < 9) {
-  //     bins[bin] = bins[bin] + 1;
-  //   } else {
-  //     bins[9] = bins[9] + 1;
-  //   }
-  // }
-
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    height = 1000;//250 - margin.top - margin.bottom;
+
+  console.log($("#price_bin").innerHeight())
   
-  var x0 = d3.scale.ordinal()
-    .rangeRoundBands([0, width], .1);
+  var y0 = d3.scale.ordinal()
+    .rangeRoundBands([0, height], .1);
 
-  var x1 = d3.scale.ordinal();
+  var y1 = d3.scale.ordinal();
 
-  var y = d3.scale.linear()
-      .range([height, 0]);
+  var x = d3.scale.linear()
+      .range([0, width]);
 
   var color = d3.scale.ordinal()
       .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00", "#ff8c00", "#ff8c00"]);
 
   var xAxis = d3.svg.axis()
-      .scale(x0)
-      .orient("bottom");
+      .scale(x)
+      .orient("top")
+      .tickFormat(d3.format('.2s'));
 
   var yAxis = d3.svg.axis()
-      .scale(y)
-      .orient("left")
-      .tickFormat(d3.format(".2s"));
+      .scale(y0)
+      .orient("left");
 
   var svg = d3.select('#' + divId).append("svg")
       .attr("width", width + margin.left + margin.right)
@@ -84,7 +63,6 @@ function newPriceBin(divId, prices) {
     bins[binKey] = bins[binKey] + 1;
   }
 
-  console.log(data);
   arr = [];
   for (k in data) {
     data[k]['state'] = k;
@@ -94,94 +72,48 @@ function newPriceBin(divId, prices) {
   }
   console.log(arr);
 
-  // data.forEach(function(d) {
-  //   d.ages = binNames.map(function(name) { return {name:name, value:+d}})
-  // });
-  // var binMap = {0:'0-5', 5:'5-10', 10:'10-15', 15:'15-20', 20:'20-25', 25:'25-30', 30:'30-35', 35:'35-40',40:'40-45',45:'45-50'};
-  // console.log(Object.keys(data))
-  x0.domain(Object.keys(data));
-  // console.log(x0.rangeBand());
-  x1.domain(binNames).rangeRoundBands([0, x0.rangeBand()]);
-  // console.log(x0.range)
-  // console.log(x1.rangeBand());
-  y.domain([0, d3.max(arr, function(d) { return d3.max(d['bins'], function(d) { return d.value; }); })]);
+  y0.domain(Object.keys(data));
+  y1.domain(binNames).rangeRoundBands([0, y0.rangeBand()]);
+  x.domain([0, d3.max(arr, function(d) { return d3.max(d['bins'], function(d) { return d.value; }); })]);
 
   svg.append("g")
     .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
+    .attr("transform", "translate(100,0)")
     .call(xAxis);
 
   svg.append("g")
       .attr("class", "y axis")
-      .call(yAxis)
-    .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("Population");
-
-// console.log(Object.keys(data).length)
-
+      .attr("transform", "translate("+100+",0)")
+      .call(yAxis);
 
   var state = svg.selectAll(".state")
     .data(arr)
       .enter().append("g")
         .attr("class", "g")
-        .attr("transform", function(d) { return "translate(" + x0(d.state) + ",0)"; });
+        .attr("transform", function(d) { return "translate(100," + y0(d.state) + ")"; });
 
-    // console.log(x1.rangeBand());
-
+  console.log(data);
   state.selectAll("rect")
-      .data(function(d) { return d['bins']; })
+      .data(function(d) {
+        // console.log(d);
+        return d['bins']; })
     .enter().append("rect")
-      .attr("width", x1.rangeBand())
-      .attr("x", function(d) { return x1(d.name); })
-      .attr("y", function(d) {
-        if (d.value == null) {
-          return 0;
-        }
-        return y(d.value);
-      })
-      .attr("height", function(d) { 
+      .attr("width", function(d) { 
         if (d.value == null) {
           return 0;
         } else {
-          return height - y(d.value);
+          return x(d.value);
         }
-        
       })
+      .attr("x", 0)
+      .attr("y", function(d) {
+        // console.log(y1);
+        // console.log(d.name);
+        // console.log(y1(d.name));
+        return y1(d.name) * binNames.indexOf(d.name);
+      })
+      .attr("height", y1.rangeBand())
       .style("fill", function(d) { return color(d.name); });
-  // }
-  // }
-
-  // code to draw up chart
-  // var width = 420,
-  //     barheight = 20;
-
-  // // scaling factor
-  // var x = d3.scale.linear()
-  //   .domain([0, d3.max(bins)])
-  //   .range([0, width]);
-
-  // var chart = d3.select(".chart")
-  //     .attr("width", width)
-  //     .attr("height", barheight * bins.length)
-
-  // var bar = chart.selectAll("g")
-  //     .data(bins)
-  //     .enter().append("g")
-  //     .attr("transform", function(d, i) { return "translate(0," + i * barheight + ")"; });
-
-  // bar.append("rect")
-  //    .attr("width", x)
-  //    .attr("height", barheight - 1);
-
-  // bar.append("text")
-  //   .attr("x", function(d) { return x(d) - 3; })
-  //   .attr("y", barheight / 2)
-  //   .attr("dy", ".35em")
-  //   .text(function(d) { return d; });
 }
 
 function initializeMap(markers) {
