@@ -8,7 +8,6 @@ router.get('/', function(req, res) {
   res.render('index', {
     title: 'Weed Price Index',
     markers: globals.locations,
-    prices: globals.prices
   });
 });
 

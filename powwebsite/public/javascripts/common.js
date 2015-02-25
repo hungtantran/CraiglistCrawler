@@ -1,5 +1,5 @@
 function initializePrices(prices) {
-  return newPriceBin('price_bin_dist_by_state', prices)
+  return newPriceBin('price_bin_dist_by_state', prices);
 }
 
 function newPriceBin(divId, prices) {
@@ -147,6 +147,87 @@ function newMap(latitude, longtitude, zoom, divId, markers) {
   var markerCluster = new MarkerClusterer(map, markerArray);
 
   return map;
+}
+
+function initializePostings(postings) {
+  console.log('wtf');
+  var table = document.getElementById('latest_prices_content');
+
+  for (var i = 0; i < postings.length; ++i)
+  {
+    if (!postings[i]['city']) {
+      continue;
+    }
+
+    var row = table.insertRow(table.length);
+    
+    // Location cell
+    var location = row.insertCell(0);
+    location.innerHTML = postings[i]['city'];
+    location.setAttribute('id', 'locations')
+
+    // Quantity cell
+    var quantity = row.insertCell(1);
+    if (!postings[i]['quantity'] || !postings[i]['unit']) {
+      continue;
+    }
+
+    quantity.innerHTML = postings[i]['quantity'] + ' ' + postings[i]['unit'];
+    quantity.setAttribute('id', 'quantities')
+
+    // Price cell
+    var price = row.insertCell(2);
+    if (!postings[i]['price']) {
+      continue;
+    }
+
+    price.innerHTML = '$' + postings[i]['price'];
+    price.setAttribute('id', 'prices')
+  }
+}
+
+function newXMLRequest(func) {
+  var xmlhttp;
+
+  // code for IE7+, Firefox, Chrome, Opera, Safari
+  if (window.XMLHttpRequest)
+  {
+    xmlhttp=new XMLHttpRequest();
+  }
+  // code for IE6, IE5
+  else
+  {
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+  xmlhttp.onreadystatechange=function()
+  {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+      var docs = JSON.parse(xmlhttp.responseText);
+      console.log(docs);
+      func(docs);
+    }
+  }
+
+  return xmlhttp;
+}
+
+function loadData() {
+  // Locations xml request
+  var xmlhttpLocations = newXMLRequest(initializeMap);
+  xmlhttpLocations.open("POST","/locations",true);
+  xmlhttpLocations.send();
+
+  // Prices xml request
+  var xmlhttpPrices = newXMLRequest(initializePrices);
+  xmlhttpPrices.open("POST","/prices",true);
+  xmlhttpPrices.send();
+
+  // Postings xml request
+  var xmlhttpPostings = new newXMLRequest(initializePostings);
+  xmlhttpPostings.open("POST","/postings",true);
+  xmlhttpPostings.send();
 }
 
 window.google = window.google || {};

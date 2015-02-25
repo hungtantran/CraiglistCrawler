@@ -5,7 +5,7 @@ var globals         = require('./globals');
 
 // Get all location json
 router.post('/', function(req,res){
-    res.json(globals.locations);
+    res.json(globals.postings);
 });
 
 module.exports = router;

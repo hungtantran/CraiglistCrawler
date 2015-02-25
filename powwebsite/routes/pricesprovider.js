@@ -32,7 +32,7 @@ PricesProvider = function() {
   });
 };
 
-// Find the size of article_table
+// Get all prices
 PricesProvider.prototype.getPrices = function(callback) {
   var query =
     'SELECT \
@@ -52,6 +52,32 @@ PricesProvider.prototype.getPrices = function(callback) {
   INNER JOIN `posting_location` ON ( \
     `prices`.`price_fk` = `posting_location`.`location_fk` \
   )';
+
+  this.connection.query(query, function(err, rows) {
+    if (err) {
+      callback (err);
+    } else {
+      callback(null, rows);
+    }
+  });
+};
+
+// Get all posting
+PricesProvider.prototype.getPostings = function(callback) {
+  var query =
+    '(SELECT location_fk AS id, price, quantity, unit, \
+      state, city, latitude, longitude \
+    FROM \
+      posting_location, prices \
+    WHERE \
+      price_fk = location_fk) \
+    UNION \
+      (SELECT location_fk AS id, NULL AS price, NULL AS quantity, \
+        NULL AS unit, state, city, latitude, longitude \
+      FROM \
+        posting_location \
+      WHERE \
+        location_fk NOT IN (SELECT price_fk FROM prices))';
 
   this.connection.query(query, function(err, rows) {
     if (err) {

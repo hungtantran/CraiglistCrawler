@@ -7,55 +7,8 @@ html
     script(type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" charset="utf-8")
     script(type='text/javascript', src='/javascripts/common.js')
     script(type='text/javascript')
-      | var xmlhttp;
-      | // code for IE7+, Firefox, Chrome, Opera, Safari
-      | if (window.XMLHttpRequest)
-      | {
-      |   xmlhttp=new XMLHttpRequest();
-      | }
-      | // code for IE6, IE5
-      | else
-      | {
-      |   xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-      | }
+      | window.onload = loadData;
 
-      | xmlhttp.onreadystatechange=function()
-      | {
-      |   if (xmlhttp.readyState==4 && xmlhttp.status==200)
-      |   {
-      |     var markers = JSON.parse(xmlhttp.responseText);
-
-      |     initializeMap(markers);
-      |   }
-      | }
-
-      | xmlhttp.open("GET","/locations",true);
-      | xmlhttp.send();
-
-      | var xmlhttpPrices;
-      | // code for IE7+, Firefox, Chrome, Opera, Safari
-      | if (window.XMLHttpRequest)
-      | {
-      |   xmlhttpPrices=new XMLHttpRequest();
-      | }
-      | // code for IE6, IE5
-      | else
-      | {
-      |   xmlhttpPrices=new ActiveXObject("Microsoft.XMLHTTP");
-      | }
-
-      | xmlhttpPrices.onreadystatechange=function()
-      | {
-      |   if (xmlhttpPrices.readyState==4 && xmlhttpPrices.status==200)
-      |   {
-      |     var prices = JSON.parse(xmlhttpPrices.responseText);
-
-      |     initializePrices(prices);
-      |   }
-      | }
-
-      | xmlhttpPrices.open("GET","/prices",true);
-      | xmlhttpPrices.send();
   body
     div(id='header')
       | Header
