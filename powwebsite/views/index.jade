@@ -3,7 +3,8 @@ html
   head
     title= title
     link(rel='stylesheet', type='text/css', href='/stylesheets/index.css')
-    script(type='text/javascript' src="http://d3js.org/d3.v3.min.js" charset="utf-8")
+    script(type='text/javascript' src="http://d3js.org/d3.v3.min.js")
+    script(type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" charset="utf-8")
     script(type='text/javascript', src='/javascripts/common.js')
     script(type='text/javascript')
       | window.onload = loadData;
@@ -19,7 +20,6 @@ html
 
         div(id='price_bin')
           div(id='price_bin_dist_by_state')
-            | Price Distribution by State
 
           div(id='price_per_unit')
             | Price (per gram) (bin)
