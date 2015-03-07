@@ -161,40 +161,40 @@ function newMap(latitude, longtitude, zoom, divId, markers) {
 }
 
 function initializePostings(postings) {
-  console.log('wtf');
-  var table = document.getElementById('latest_prices_content');
+  // console.log('wtf');
+  // var table = document.getElementById('latest_prices_content');
 
-  for (var i = 0; i < postings.length; ++i)
-  {
-    if (!postings[i]['city']) {
-      continue;
-    }
+  // for (var i = 0; i < postings.length; ++i)
+  // {
+  //   if (!postings[i]['city']) {
+  //     continue;
+  //   }
 
-    var row = table.insertRow(table.length);
+  //   var row = table.insertRow(table.length);
     
-    // Location cell
-    var location = row.insertCell(0);
-    location.innerHTML = postings[i]['city'];
-    location.setAttribute('id', 'locations')
+  //   // Location cell
+  //   var location = row.insertCell(0);
+  //   location.innerHTML = postings[i]['city'];
+  //   location.setAttribute('id', 'locations')
 
-    // Quantity cell
-    var quantity = row.insertCell(1);
-    if (!postings[i]['quantity'] || !postings[i]['unit']) {
-      continue;
-    }
+  //   // Quantity cell
+  //   var quantity = row.insertCell(1);
+  //   if (!postings[i]['quantity'] || !postings[i]['unit']) {
+  //     continue;
+  //   }
 
-    quantity.innerHTML = postings[i]['quantity'] + ' ' + postings[i]['unit'];
-    quantity.setAttribute('id', 'quantities')
+  //   quantity.innerHTML = postings[i]['quantity'] + ' ' + postings[i]['unit'];
+  //   quantity.setAttribute('id', 'quantities')
 
-    // Price cell
-    var price = row.insertCell(2);
-    if (!postings[i]['price']) {
-      continue;
-    }
+  //   // Price cell
+  //   var price = row.insertCell(2);
+  //   if (!postings[i]['price']) {
+  //     continue;
+  //   }
 
-    price.innerHTML = '$' + postings[i]['price'];
-    price.setAttribute('id', 'prices')
-  }
+  //   price.innerHTML = '<a href="/posting/' + postings[i]['id'] + '">$' + postings[i]['price'] + '</a>';
+  //   price.setAttribute('id', 'prices')
+  // }
 }
 
 function newXMLRequest(func) {

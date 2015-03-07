@@ -32,4 +32,24 @@ RawHTMLProvider = function() {
   });
 };
 
+// Get raw content with given id only for page identified by human or machine that it's weed page
+RawHTMLProvider.prototype.getContent = function(contentId, callback) {
+  var query =
+    'SELECT * FROM rawhtml WHERE id = ' + contentId + ' AND (positive = 1 OR predict1 = 1 OR predict2 = 1)';
+
+  this.connection.query(query, function(err, rows) {
+    if (err) {
+      callback (err);
+    } else {
+      var content = null;
+
+      if (rows.length >= 0) {
+        content = rows[0];
+      }
+
+      callback(null, content);
+    }
+  });
+};
+
 exports.RawHTMLProvider = RawHTMLProvider;

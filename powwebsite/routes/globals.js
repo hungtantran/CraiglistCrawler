@@ -2,6 +2,8 @@ var PostingLocationProvider = require('./postinglocationprovider').PostingLocati
 var postingLocationProvider = new PostingLocationProvider();
 var PricesProvider = require('./pricesprovider').PricesProvider;
 var pricesProvider = new PricesProvider();
+var RawHTMLProvider = require('./rawhtmlprovider').RawHTMLProvider;
+var rawHTMLProvider = new RawHTMLProvider();
 
 var locations = null;
 postingLocationProvider.getLocations(function(error, docs) {
@@ -38,3 +40,5 @@ pricesProvider.getPostings(function(error, docs) {
 
 exports.pricesProvider = pricesProvider;
 exports.postingLocationProvider = postingLocationProvider;
+exports.rawHTMLProvider = rawHTMLProvider;
+

@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title= title
+    script(type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" charset="utf-8")
+
+  body
+    div(id='header')
+      | Header
+
+    div(id='content')
+      content!= content['html']
+
+    div(id='footer')
+      | Footer

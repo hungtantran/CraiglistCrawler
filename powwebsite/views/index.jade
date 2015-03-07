@@ -36,6 +36,19 @@ html
                 | Quantities
               td(id='prices')
                 | Prices
+            each posting in postings
+              if (posting['city'])
+                tr
+                  td(id='locations')
+                    = posting['city']
+                  td(id='quantities')
+                    = posting['quantity'] + ' ' + posting['unit']
+                  td(id='prices')
+                    != '<a href="/posting/'
+                    = posting['id']
+                    != '">$'
+                    = posting['price']
+                    != '</a>'
 
     div(id='footer')
       | Footer

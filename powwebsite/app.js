@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
+var posting = require('./routes/posting');
 var locations = require('./routes/locations');
 var prices = require('./routes/prices')
 var postings = require('./routes/postings')
@@ -27,6 +28,7 @@ app.use('/', index);
 app.use('/locations', locations);
 app.use('/prices', prices)
 app.use('/postings', postings)
+app.use('/posting', posting)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
