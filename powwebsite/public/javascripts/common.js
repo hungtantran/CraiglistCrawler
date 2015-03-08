@@ -128,7 +128,14 @@ function newPriceBin(divId, prices) {
 }
 
 function initializeMap(markers) {
-  return newMap(39.6948, -104.7881, 5, 'map-canvas', markers);
+  map = newMap(39.6948, -104.7881, 5, 'map-canvas', markers);
+  mapBound = map.getBounds();
+
+  google.maps.event.addListener(map, 'idle', function() {
+    mapBound = map.getBounds();
+  });
+
+  return map;
 }
 
 function newMap(latitude, longtitude, zoom, divId, markers) {
@@ -137,7 +144,7 @@ function newMap(latitude, longtitude, zoom, divId, markers) {
     zoom: zoom
   };
 
-  var map = new google.maps.Map(document.getElementById(divId),
+  map = new google.maps.Map(document.getElementById(divId),
     mapOptions);
 
   var markerArray = [];
@@ -243,6 +250,7 @@ function loadData() {
 
 window.google = window.google || {};
 google.maps = google.maps || {};
+
 (function() {
 
   function getScript(src) {
@@ -283,4 +291,3 @@ function D(a,b){var c=[];c.push("background-image:url("+a.ea+");");c.push("backg
 "px; width:"+a.p+"px; text-align:center;");c.push("cursor:pointer; top:"+b.y+"px; left:"+b.x+"px; color:"+(a.N?a.N:"black")+"; position:absolute; font-size:"+(a.O?a.O:11)+"px; font-family:Arial,sans-serif; font-weight:bold");return c.join("")}window.MarkerClusterer=l;l.prototype.addMarker=l.prototype.q;l.prototype.addMarkers=l.prototype.C;l.prototype.clearMarkers=l.prototype.S;l.prototype.fitMapToMarkers=l.prototype.T;l.prototype.getCalculator=l.prototype.H;l.prototype.getGridSize=l.prototype.I;
 l.prototype.getExtendedBounds=l.prototype.v;l.prototype.getMap=l.prototype.getMap;l.prototype.getMarkers=l.prototype.o;l.prototype.getMaxZoom=l.prototype.J;l.prototype.getStyles=l.prototype.w;l.prototype.getTotalClusters=l.prototype.V;l.prototype.getTotalMarkers=l.prototype.W;l.prototype.redraw=l.prototype.i;l.prototype.removeMarker=l.prototype.Z;l.prototype.removeMarkers=l.prototype.$;l.prototype.resetViewport=l.prototype.m;l.prototype.repaint=l.prototype.M;l.prototype.setCalculator=l.prototype.aa;
 l.prototype.setGridSize=l.prototype.ba;l.prototype.setMaxZoom=l.prototype.ca;l.prototype.onAdd=l.prototype.onAdd;l.prototype.draw=l.prototype.draw;v.prototype.getCenter=v.prototype.getCenter;v.prototype.getSize=v.prototype.U;v.prototype.getMarkers=v.prototype.o;w.prototype.onAdd=w.prototype.onAdd;w.prototype.draw=w.prototype.draw;w.prototype.onRemove=w.prototype.onRemove;Object.keys=Object.keys||function(a){var b=[],c;for(c in a)a.hasOwnProperty(c)&&b.push(c);return b};
-
