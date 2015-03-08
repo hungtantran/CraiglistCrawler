@@ -87,6 +87,7 @@ html, body {
     float: left;
     width: 100%;
     max-height: 250px;
+    position: relative;
 }
 
 #price_bin_dist_by_state {
@@ -125,6 +126,21 @@ html, body {
     fill: white;
     font: 10px sans-seriff;
     text-anchor: start;
+}
+
+.tooltip {
+    background: #eee;
+    box-shadow: 0 0 5px #999999;
+    color: #333;
+    display: none;
+    font-size: 12px;
+    left: 850px;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    width: 160px;
+    height: 55px;
+    z-index: 10;
 }
 
 #price_per_unit {

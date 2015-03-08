@@ -33,6 +33,17 @@ function newPriceBin(divId, prices) {
       .scale(y1)
       .orient("left");
 
+  var tooltip = d3.select('#price_bin')
+    .append('div')
+    .attr('class', 'tooltip');
+
+  tooltip.append('div')
+    .attr('class', 'state');
+  tooltip.append('div')
+    .attr('class', 'label');
+  tooltip.append('div')
+    .attr('class', 'count');
+
   var svg = d3.select('#' + divId).append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
@@ -71,7 +82,7 @@ function newPriceBin(divId, prices) {
   arr = [];
   for (k in data) {
     data[k]['state'] = k;
-    data[k]['bins'] = binNames.map( function(name) { return {name:name, value:data[k][name]} });
+    data[k]['bins'] = binNames.map( function(name) { return {name:name, value:data[k][name], state:k} });
 
     arr.push(data[k]);
   }
@@ -124,6 +135,20 @@ function newPriceBin(divId, prices) {
         return y1(d.name);
       })
       .attr("height", y1.rangeBand())
+      .on('mouseover', function(d) {
+        var xPosition = parseInt(d3.select(this).attr("x") );
+        var yPosition = parseInt(d3.select(this).attr("y") );
+
+        tooltip.select(".state").html(d.state);
+        tooltip.select(".label").html("Price Range: " + d.name);
+        tooltip.select('.count').html("Number of postings:" + d.value);
+        tooltip.style('left', xPosition + "px");
+        tooltip.style('top', yPosition + "px");
+        tooltip.style('display', 'block');
+        })
+      .on('mouseout', function(d) {
+        tooltip.style('display', 'none');
+        })
       .style("fill", function(d) { return color(d.name); });
 }
 
