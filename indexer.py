@@ -55,7 +55,7 @@ def extract_inferred_location(id):
   cursor.execute("SELECT * FROM posting_location INNER JOIN location_link ON + \
     ((posting_location.city=location_link.city) AND \
       (posting_location.state=location_link.state)) \
-        where posting_location.location_fk=" + id)
+        where posting_location.location_fk=" + str(id))
   rows = cursor.fetchall()
   if len(rows) > 1:
     print("ERROR: more than one key for extract_inferred_location")
@@ -65,7 +65,7 @@ def extract_inferred_location(id):
     country = row[8]
 
     url = "http://maps.google.com/maps/api/geocode/json?address="
-    url = (url + city + "+" + state + "+" + country).replace('+', ' ')
+    url = (url + city + "+" + state + "+" + country).replace(' ', '+')
     print (url)
 
     response = urllib2.urlopen(url)
