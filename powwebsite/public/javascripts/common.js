@@ -1,3 +1,9 @@
+// Function that reupdate the display with the newest filter
+function updateDisplay() {
+  initializeMap();
+  initializePostings(postings);
+}
+
 function initializePrices(prices) {
   return newPriceBin('price_bin_dist_by_state', prices);
 }
@@ -143,6 +149,7 @@ function newPriceBin(divId, prices) {
         if (stateFilter == d.state) stateFilter = null;
         else stateFilter = d.state;
         $('#price_bin_dist_by_state').empty();
+        updateDisplay();
         initializePrices(prices);
         })
       .style("fill", function(d) {
@@ -159,6 +166,8 @@ function newPriceBin(divId, prices) {
 function handleMapChange() {
   mapBound = map.getBounds();
   console.log('map change');
+
+  updateDisplay();
 }
 
 // Function that draw marker on map
@@ -184,15 +193,20 @@ function drawMarker(map, markers) {
 
 // Reinitialize the map, call to redraw the map
 function initializeMap(markers, redrawMap) {
+  // Initialize maps
   if (map == null || (redrawMap != null && redrawMap == true)) {
     map = newMap(39.6948, -104.7881, 5, 'map-canvas');
 
     google.maps.event.addListener(map, 'idle', handleMapChange);
   }
 
-  mapBound = map.getBounds();
+  // Initialize markers
+  if (markers != null) {
+    var markerClusters = drawMarker(map, markers);
+  }
 
-  var markerClusters = drawMarker(map, markers);
+  console.log('initialize map')
+  mapBound = map.getBounds();
 
   return map;
 }
@@ -211,40 +225,53 @@ function newMap(latitude, longtitude, zoom, divId) {
 }
 
 function initializePostings(postings) {
-  // console.log('wtf');
-  // var table = document.getElementById('latest_prices_content');
+  if (postings == null) {
+    return;
+  }
 
-  // for (var i = 0; i < postings.length; ++i)
-  // {
-  //   if (!postings[i]['city']) {
-  //     continue;
-  //   }
+  console.log('initializePostings');
+  var table = document.getElementById('latest_prices_content');
 
-  //   var row = table.insertRow(table.length);
+  for(var i = table.rows.length - 1; i > 0; i--)
+  {
+      table.deleteRow(i);
+  }
+
+  for (var i = 0; i < postings.length; ++i)
+  {
+    if (stateFilter != null && postings[i]['state'] != stateFilter) {
+      continue;
+    }
+
+    if (!postings[i]['city']) {
+      continue;
+    }
+
+    var row = table.insertRow(table.length);
     
-  //   // Location cell
-  //   var location = row.insertCell(0);
-  //   location.innerHTML = postings[i]['city'];
-  //   location.setAttribute('id', 'locations')
+    // Location cell
+    var location = row.insertCell(0);
+    location.innerHTML = postings[i]['city'];
+    location.setAttribute('id', 'locations')
 
-  //   // Quantity cell
-  //   var quantity = row.insertCell(1);
-  //   if (!postings[i]['quantity'] || !postings[i]['unit']) {
-  //     continue;
-  //   }
+    // Quantity cell
+    var quantity = row.insertCell(1);
+    if (!postings[i]['quantity'] || !postings[i]['unit']) {
+      continue;
+    }
 
-  //   quantity.innerHTML = postings[i]['quantity'] + ' ' + postings[i]['unit'];
-  //   quantity.setAttribute('id', 'quantities')
+    quantity.innerHTML = postings[i]['quantity'] + ' ' + postings[i]['unit'];
+    quantity.setAttribute('id', 'quantities')
 
-  //   // Price cell
-  //   var price = row.insertCell(2);
-  //   if (!postings[i]['price']) {
-  //     continue;
-  //   }
+    // Price cell
+    var price = row.insertCell(2);
+    if (!postings[i]['price']) {
+      continue;
+    }
 
-  //   price.innerHTML = '<a href="/posting/' + postings[i]['id'] + '">$' + postings[i]['price'] + '</a>';
-  //   price.setAttribute('id', 'prices')
-  // }
+    price.innerHTML = '<a href="/posting/' + postings[i]['id'] + '">$' + postings[i]['price'] + '</a>';
+    price.setAttribute('id', 'prices')
+  }
 }
 
 function newXMLRequest(func, storedResponse) {
@@ -266,8 +293,16 @@ function newXMLRequest(func, storedResponse) {
     if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
       var docs = JSON.parse(xmlhttp.responseText);
-      storedResponse = docs;
-      func(docs);
+      // Store response
+      // TODO: BUGBUG fix this hack
+      if (storedResponse !== undefined) {
+        postings = docs;
+      }
+
+      // Invoke callback function
+      if (func != null) {
+        func(docs);
+      }
     }
   }
 
@@ -286,7 +321,7 @@ function loadData() {
   xmlhttpPrices.send();
 
   // Postings xml request
-  var xmlhttpPostings = new newXMLRequest(initializePostings, postings);
+  var xmlhttpPostings = new newXMLRequest(null, postings);
   xmlhttpPostings.open("POST","/postings",true);
   xmlhttpPostings.send();
 }
