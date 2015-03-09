@@ -4,6 +4,7 @@ import os
 import re
 import quantities as pq
 import sys
+import time
 import unicodedata
 import urllib2
 
@@ -69,9 +70,12 @@ def extract_inferred_location(id):
     url = (url + city + "+" + state + "+" + country).replace(' ', '+')
     print (url)
 
-    response = urllib2.urlopen(url).read()
+    time.sleep(.2)
+    response = urllib2.urlopen(url)
     data = json.load(response)
+    print data
     location = data['results'][0]['geometry']['location']
+    print [location['lat'], location['lng']]
     return [location['lat'], location['lng']]
 
   return [None, None]
