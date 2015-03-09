@@ -6,8 +6,6 @@ function newPriceBin(divId, prices) {
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
     height = 2000;//250 - margin.top - margin.bottom;
-
-  // console.log($("#price_bin").innerHeight())
   
   var y0 = d3.scale.ordinal()
     .rangeRoundBands([0, height], .1);
@@ -76,7 +74,6 @@ function newPriceBin(divId, prices) {
     
     var binKey = binNames[bin]
     bins[binKey] = bins[binKey] + 1;
-    // console.log(pricePerGram + " " + binKey)
   }
 
   arr = [];
@@ -86,7 +83,6 @@ function newPriceBin(divId, prices) {
 
     arr.push(data[k]);
   }
-  // console.log(arr);
 
   y0.domain(Object.keys(data));
   y1.domain(binNames).rangeRoundBands([0, y0.rangeBand()]);
@@ -113,10 +109,8 @@ function newPriceBin(divId, prices) {
     .attr("transform", "translate(0,0)")
     .call(yAxisBins);
 
-  // console.log(data);
   state.selectAll("rect")
       .data(function(d) {
-        // console.log(d);
         return d['bins']; })
     .enter().append("rect")
       .attr("width", function(d) { 
@@ -128,10 +122,6 @@ function newPriceBin(divId, prices) {
       })
       .attr("x", 0)
       .attr("y", function(d) {
-        // console.log(y1);
-        console.log("y1(d.name)" + y1(d.name));
-        console.log("binNames.indexOf(" + d.name + ")" + binNames.indexOf(d.name));
-        console.log(y1(d.name) + 12 * (binNames.indexOf(d.name)));
         return y1(d.name);
       })
       .attr("height", y1.rangeBand())
@@ -152,27 +142,16 @@ function newPriceBin(divId, prices) {
       .style("fill", function(d) { return color(d.name); });
 }
 
-function initializeMap(markers) {
-  map = newMap(39.6948, -104.7881, 5, 'map-canvas', markers);
+// Callback function to handle change in map
+function handleMapChange() {
   mapBound = map.getBounds();
-
-  google.maps.event.addListener(map, 'idle', function() {
-    mapBound = map.getBounds();
-  });
-
-  return map;
+  console.log('map change');
 }
 
-function newMap(latitude, longtitude, zoom, divId, markers) {
-  var mapOptions = {
-    center: { lat: latitude, lng: longtitude},
-    zoom: zoom
-  };
-
-  map = new google.maps.Map(document.getElementById(divId),
-    mapOptions);
-
+// Function that draw marker on map
+function drawMarker(map, markers) {
   var markerArray = [];
+
   for (var i = 0; i < markers.length; ++i)
   {
     if (markers[i]['latitude'] != null &&
@@ -187,7 +166,33 @@ function newMap(latitude, longtitude, zoom, divId, markers) {
     }
   }
 
-  var markerCluster = new MarkerClusterer(map, markerArray);
+  return new MarkerClusterer(map, markerArray);
+}
+
+// Reinitialize the map, call to redraw the map
+function initializeMap(markers, redrawMap) {
+  if (map == null || (redrawMap != null && redrawMap == true)) {
+    map = newMap(39.6948, -104.7881, 5, 'map-canvas');
+
+    google.maps.event.addListener(map, 'idle', handleMapChange);
+  }
+
+  mapBound = map.getBounds();
+
+  var markerClusters = drawMarker(map, markers);
+
+  return map;
+}
+
+// Function to create a new map
+function newMap(latitude, longtitude, zoom, divId) {
+  var mapOptions = {
+    center: { lat: latitude, lng: longtitude},
+    zoom: zoom
+  };
+
+  map = new google.maps.Map(document.getElementById(divId),
+    mapOptions);
 
   return map;
 }
@@ -229,7 +234,7 @@ function initializePostings(postings) {
   // }
 }
 
-function newXMLRequest(func) {
+function newXMLRequest(func, storedResponse) {
   var xmlhttp;
 
   // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -248,7 +253,7 @@ function newXMLRequest(func) {
     if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
       var docs = JSON.parse(xmlhttp.responseText);
-      console.log(docs);
+      storedResponse = docs;
       func(docs);
     }
   }
@@ -268,7 +273,7 @@ function loadData() {
   xmlhttpPrices.send();
 
   // Postings xml request
-  var xmlhttpPostings = new newXMLRequest(initializePostings);
+  var xmlhttpPostings = new newXMLRequest(initializePostings, postings);
   xmlhttpPostings.open("POST","/postings",true);
   xmlhttpPostings.send();
 }
