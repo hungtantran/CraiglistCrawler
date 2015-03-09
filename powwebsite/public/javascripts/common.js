@@ -1,7 +1,8 @@
 // Function that reupdate the display with the newest filter
 function updateDisplay() {
-  initializeMap();
-  initializePostings(postings);
+  initializePrices(cache['prices']);
+  initializeMap(cache['locations']);
+  initializePostings(cache['postings']);
 }
 
 function initializePrices(prices) {
@@ -150,7 +151,6 @@ function newPriceBin(divId, prices) {
         else stateFilter = d.state;
         $('#price_bin_dist_by_state').empty();
         updateDisplay();
-        initializePrices(prices);
         })
       .style("fill", function(d) {
         if (stateFilter == null || d.state == stateFilter) {
@@ -172,10 +172,24 @@ function handleMapChange() {
 
 // Function that draw marker on map
 function drawMarker(map, markers) {
-  var markerArray = [];
+  // Clear all existing markers first
+  for (var i = 0; i < markerArray.length; i++) {
+    markerArray[i].setMap(null);
+  }
+
+  markerArray.length = 0;
 
   for (var i = 0; i < markers.length; ++i)
   {
+    if (stateFilter != null && markers[i]['state'] != stateFilter) {
+      console.log(stateFilter + ' ' + markers[i]['state']);
+      continue;
+    }
+    else 
+    {
+      console.log(stateFilter + ' ' + markers[i]['state']);
+    }
+
     if (markers[i]['latitude'] != null &&
       markers[i]['longitude'] != null) {
 
@@ -188,7 +202,8 @@ function drawMarker(map, markers) {
     }
   }
 
-  return new MarkerClusterer(map, markerArray);
+  markerClusterer = new MarkerClusterer(map, markerArray);
+  return markerClusterer;
 }
 
 // Reinitialize the map, call to redraw the map
@@ -274,7 +289,7 @@ function initializePostings(postings) {
   }
 }
 
-function newXMLRequest(func, storedResponse) {
+function newXMLRequest(func, cacheEntry) {
   var xmlhttp;
 
   // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -294,9 +309,8 @@ function newXMLRequest(func, storedResponse) {
     {
       var docs = JSON.parse(xmlhttp.responseText);
       // Store response
-      // TODO: BUGBUG fix this hack
-      if (storedResponse !== undefined) {
-        postings = docs;
+      if (cacheEntry !== undefined) {
+        cache[cacheEntry] = docs;
       }
 
       // Invoke callback function
@@ -311,17 +325,17 @@ function newXMLRequest(func, storedResponse) {
 
 function loadData() {
   // Locations xml request
-  var xmlhttpLocations = newXMLRequest(initializeMap);
+  var xmlhttpLocations = newXMLRequest(initializeMap, 'locations');
   xmlhttpLocations.open("POST","/locations",true);
   xmlhttpLocations.send();
 
   // Prices xml request
-  var xmlhttpPrices = newXMLRequest(initializePrices);
+  var xmlhttpPrices = newXMLRequest(initializePrices, 'prices');
   xmlhttpPrices.open("POST","/prices",true);
   xmlhttpPrices.send();
 
   // Postings xml request
-  var xmlhttpPostings = new newXMLRequest(null, postings);
+  var xmlhttpPostings = new newXMLRequest(null, 'postings');
   xmlhttpPostings.open("POST","/postings",true);
   xmlhttpPostings.send();
 }

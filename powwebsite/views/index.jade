@@ -8,7 +8,11 @@ html
     script(type='text/javascript', src='/javascripts/common.js')
     script(type='text/javascript')
       | var map = null;
-      | var postings = null;
+      | var markerClusterer = null;
+      | var markerArray = [];
+
+      | var cache = [];
+
       | var mapBound = null;
       | var stateFilter = null;
       | window.onload = loadData();
