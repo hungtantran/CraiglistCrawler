@@ -139,7 +139,20 @@ function newPriceBin(divId, prices) {
       .on('mouseout', function(d) {
         tooltip.style('display', 'none');
         })
-      .style("fill", function(d) { return color(d.name); });
+      .on('click', function(d) {
+        if (stateFilter == d.state) stateFilter = null;
+        else stateFilter = d.state;
+        $('#price_bin_dist_by_state').empty();
+        initializePrices(prices);
+        })
+      .style("fill", function(d) {
+        if (stateFilter == null || d.state == stateFilter) {
+          return color(d.name);
+        } else {
+          return "#F5F5F5"
+        }
+        
+        });
 }
 
 // Callback function to handle change in map
