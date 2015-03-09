@@ -1,3 +1,10 @@
+// Function that reupdate the display with the newest filter
+function updateDisplay() {
+  initializePrices(cache['prices']);
+  initializeMap(cache['locations']);
+  initializePostings(cache['postings']);
+}
+
 function initializePrices(prices) {
   return newPriceBin('price_bin_dist_by_state', prices);
 }
@@ -6,8 +13,6 @@ function newPriceBin(divId, prices) {
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
     height = 2000;//250 - margin.top - margin.bottom;
-
-  // console.log($("#price_bin").innerHeight())
   
   var y0 = d3.scale.ordinal()
     .rangeRoundBands([0, height], .1);
@@ -76,7 +81,6 @@ function newPriceBin(divId, prices) {
     
     var binKey = binNames[bin]
     bins[binKey] = bins[binKey] + 1;
-    // console.log(pricePerGram + " " + binKey)
   }
 
   arr = [];
@@ -86,7 +90,6 @@ function newPriceBin(divId, prices) {
 
     arr.push(data[k]);
   }
-  // console.log(arr);
 
   y0.domain(Object.keys(data));
   y1.domain(binNames).rangeRoundBands([0, y0.rangeBand()]);
@@ -113,10 +116,8 @@ function newPriceBin(divId, prices) {
     .attr("transform", "translate(0,0)")
     .call(yAxisBins);
 
-  // console.log(data);
   state.selectAll("rect")
       .data(function(d) {
-        // console.log(d);
         return d['bins']; })
     .enter().append("rect")
       .attr("width", function(d) { 
@@ -128,10 +129,6 @@ function newPriceBin(divId, prices) {
       })
       .attr("x", 0)
       .attr("y", function(d) {
-        // console.log(y1);
-        console.log("y1(d.name)" + y1(d.name));
-        console.log("binNames.indexOf(" + d.name + ")" + binNames.indexOf(d.name));
-        console.log(y1(d.name) + 12 * (binNames.indexOf(d.name)));
         return y1(d.name);
       })
       .attr("height", y1.rangeBand())
@@ -153,7 +150,7 @@ function newPriceBin(divId, prices) {
         if (stateFilter == d.state) stateFilter = null;
         else stateFilter = d.state;
         $('#price_bin_dist_by_state').empty();
-        initializePrices(prices);
+        updateDisplay();
         })
       .style("fill", function(d) {
         if (stateFilter == null || d.state == stateFilter) {
@@ -165,29 +162,34 @@ function newPriceBin(divId, prices) {
         });
 }
 
-function initializeMap(markers) {
-  map = newMap(39.6948, -104.7881, 5, 'map-canvas', markers);
+// Callback function to handle change in map
+function handleMapChange() {
   mapBound = map.getBounds();
+  console.log('map change');
 
-  google.maps.event.addListener(map, 'idle', function() {
-    mapBound = map.getBounds();
-  });
-
-  return map;
+  updateDisplay();
 }
 
-function newMap(latitude, longtitude, zoom, divId, markers) {
-  var mapOptions = {
-    center: { lat: latitude, lng: longtitude},
-    zoom: zoom
-  };
+// Function that draw marker on map
+function drawMarker(map, markers) {
+  // Clear all existing markers first
+  for (var i = 0; i < markerArray.length; i++) {
+    markerArray[i].setMap(null);
+  }
 
-  map = new google.maps.Map(document.getElementById(divId),
-    mapOptions);
+  markerArray.length = 0;
 
-  var markerArray = [];
   for (var i = 0; i < markers.length; ++i)
   {
+    if (stateFilter != null && markers[i]['state'] != stateFilter) {
+      console.log(stateFilter + ' ' + markers[i]['state']);
+      continue;
+    }
+    else 
+    {
+      console.log(stateFilter + ' ' + markers[i]['state']);
+    }
+
     if (markers[i]['latitude'] != null &&
       markers[i]['longitude'] != null) {
 
@@ -200,49 +202,94 @@ function newMap(latitude, longtitude, zoom, divId, markers) {
     }
   }
 
-  var markerCluster = new MarkerClusterer(map, markerArray);
+  markerClusterer = new MarkerClusterer(map, markerArray);
+  return markerClusterer;
+}
+
+// Reinitialize the map, call to redraw the map
+function initializeMap(markers, redrawMap) {
+  // Initialize maps
+  if (map == null || (redrawMap != null && redrawMap == true)) {
+    map = newMap(39.6948, -104.7881, 5, 'map-canvas');
+
+    google.maps.event.addListener(map, 'idle', handleMapChange);
+  }
+
+  // Initialize markers
+  if (markers != null) {
+    var markerClusters = drawMarker(map, markers);
+  }
+
+  console.log('initialize map')
+  mapBound = map.getBounds();
+
+  return map;
+}
+
+// Function to create a new map
+function newMap(latitude, longtitude, zoom, divId) {
+  var mapOptions = {
+    center: { lat: latitude, lng: longtitude},
+    zoom: zoom
+  };
+
+  map = new google.maps.Map(document.getElementById(divId),
+    mapOptions);
 
   return map;
 }
 
 function initializePostings(postings) {
-  // console.log('wtf');
-  // var table = document.getElementById('latest_prices_content');
+  if (postings == null) {
+    return;
+  }
 
-  // for (var i = 0; i < postings.length; ++i)
-  // {
-  //   if (!postings[i]['city']) {
-  //     continue;
-  //   }
+  console.log('initializePostings');
+  var table = document.getElementById('latest_prices_content');
 
-  //   var row = table.insertRow(table.length);
+  for(var i = table.rows.length - 1; i > 0; i--)
+  {
+      table.deleteRow(i);
+  }
+
+  for (var i = 0; i < postings.length; ++i)
+  {
+    if (stateFilter != null && postings[i]['state'] != stateFilter) {
+      continue;
+    }
+
+    if (!postings[i]['city']) {
+      continue;
+    }
+
+    var row = table.insertRow(table.length);
     
-  //   // Location cell
-  //   var location = row.insertCell(0);
-  //   location.innerHTML = postings[i]['city'];
-  //   location.setAttribute('id', 'locations')
+    // Location cell
+    var location = row.insertCell(0);
+    location.innerHTML = postings[i]['city'];
+    location.setAttribute('id', 'locations')
 
-  //   // Quantity cell
-  //   var quantity = row.insertCell(1);
-  //   if (!postings[i]['quantity'] || !postings[i]['unit']) {
-  //     continue;
-  //   }
+    // Quantity cell
+    var quantity = row.insertCell(1);
+    if (!postings[i]['quantity'] || !postings[i]['unit']) {
+      continue;
+    }
 
-  //   quantity.innerHTML = postings[i]['quantity'] + ' ' + postings[i]['unit'];
-  //   quantity.setAttribute('id', 'quantities')
+    quantity.innerHTML = postings[i]['quantity'] + ' ' + postings[i]['unit'];
+    quantity.setAttribute('id', 'quantities')
 
-  //   // Price cell
-  //   var price = row.insertCell(2);
-  //   if (!postings[i]['price']) {
-  //     continue;
-  //   }
+    // Price cell
+    var price = row.insertCell(2);
+    if (!postings[i]['price']) {
+      continue;
+    }
 
-  //   price.innerHTML = '<a href="/posting/' + postings[i]['id'] + '">$' + postings[i]['price'] + '</a>';
-  //   price.setAttribute('id', 'prices')
-  // }
+    price.innerHTML = '<a href="/posting/' + postings[i]['id'] + '">$' + postings[i]['price'] + '</a>';
+    price.setAttribute('id', 'prices')
+  }
 }
 
-function newXMLRequest(func) {
+function newXMLRequest(func, cacheEntry) {
   var xmlhttp;
 
   // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -261,8 +308,15 @@ function newXMLRequest(func) {
     if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
       var docs = JSON.parse(xmlhttp.responseText);
-      console.log(docs);
-      func(docs);
+      // Store response
+      if (cacheEntry !== undefined) {
+        cache[cacheEntry] = docs;
+      }
+
+      // Invoke callback function
+      if (func != null) {
+        func(docs);
+      }
     }
   }
 
@@ -271,17 +325,17 @@ function newXMLRequest(func) {
 
 function loadData() {
   // Locations xml request
-  var xmlhttpLocations = newXMLRequest(initializeMap);
+  var xmlhttpLocations = newXMLRequest(initializeMap, 'locations');
   xmlhttpLocations.open("POST","/locations",true);
   xmlhttpLocations.send();
 
   // Prices xml request
-  var xmlhttpPrices = newXMLRequest(initializePrices);
+  var xmlhttpPrices = newXMLRequest(initializePrices, 'prices');
   xmlhttpPrices.open("POST","/prices",true);
   xmlhttpPrices.send();
 
   // Postings xml request
-  var xmlhttpPostings = new newXMLRequest(initializePostings);
+  var xmlhttpPostings = new newXMLRequest(null, 'postings');
   xmlhttpPostings.open("POST","/postings",true);
   xmlhttpPostings.send();
 }

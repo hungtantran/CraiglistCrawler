@@ -7,10 +7,15 @@ html
     script(type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" charset="utf-8")
     script(type='text/javascript', src='/javascripts/common.js')
     script(type='text/javascript')
+      | var map = null;
+      | var markerClusterer = null;
+      | var markerArray = [];
+
+      | var cache = [];
+
       | var mapBound = null;
       | var stateFilter = null;
-      | var map = null;
-      | window.onload = loadData(map);
+      | window.onload = loadData();
 
   body
     div(id='header')
