@@ -4,6 +4,7 @@ import re
 import quantities as pq
 import sys
 import unicodedata
+import urllib2
 
 from bs4 import BeautifulSoup
 from HTMLParser import HTMLParser
@@ -48,6 +49,29 @@ def get_quantity_mapping():
     quantityMapping[key] = value
 
   return quantityMapping
+
+def extract_inferred_location(id):
+  cursor = db.cursor()
+  cursor.execute("SELECT * FROM posting_location INNER JOIN location_link ON + \
+    ((posting_location.city=location_link.city) AND \
+      (posting_location.state=location_link.state)) \
+        where posting_location.location_fk=" + id)
+  rows = cursor.fetchall()
+  if len(rows) > 1:
+    print("ERROR: more than one key for extract_inferred_location")
+  for row in rows:
+    state = row[0]
+    city = row[1]
+    country = row[8]
+
+    url = "http://maps.google.com/maps/api/geocode/json?address="
+    url = (url + city + "+" + state + "+" + country).replace('+', ' ')
+    print (url)
+
+    response = urllib2.urlopen(url)
+    json = response.read()
+    print json
+
 
 def extract_locations(text):
   latitudePattern = re.compile("data-latitude=\"(-?\d+?[0-9]*\.?[0-9]+)\"")
@@ -166,6 +190,8 @@ def index(rowId, htmlFile):
   extracted_quantities = extract_quantities(text)
 
   extracted_locations = extract_locations(htmlFile)
+  if (extracted_locations[0] == None):
+    extracted_locations = extract_inferred_location(rowId)
 
   # print "metric quantities:", extracted_quantities[0]
   # print "english quantities:", extracted_quantities[1]
