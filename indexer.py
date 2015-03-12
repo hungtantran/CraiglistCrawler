@@ -71,7 +71,7 @@ def extract_inferred_location(id):
     print (url)
 
     time.sleep(.2)
-    response = urllib2.urlopen(url).read()
+    response = urllib2.urlopen(url)
     data = json.load(response)
     location = data['results'][0]['geometry']['location']
     print [location['lat'], location['lng']]
