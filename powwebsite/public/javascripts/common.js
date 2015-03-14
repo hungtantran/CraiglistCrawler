@@ -7,24 +7,21 @@ function updateDisplay() {
 
 function initializePrices(prices) {
   $('#price_bin_dist_by_state').empty();
-  console.log(prices);
-  newPrices = [];
-  mapBound = map.getBounds();
-  for (var i=0; i<prices.length; ++i) {
-    // console.log(prices[i]['latitude']);
-    // console.log(prices[i]['longitude']);
-    // console.log(map);
-    // console.log(mapBound);
-    if (!('latitude' in prices[i])) continue
 
-    // var priceLocation = new google.maps.LatLng(0, 0)
-    var priceLocation = new google.maps.LatLng(prices[i]['latitude'], prices[i]['longitude'])
+  newPrices = [];
+
+  for (var i = 0; i < prices.length; ++i) {
+    if (!('latitude' in prices[i])) {
+      continue
+    }
+
+    var priceLocation = new google.maps.LatLng(prices[i]['latitude'], prices[i]['longitude']);
+
     if (mapBound.contains(priceLocation)) {
       newPrices.push(prices[i]);
     }
   }
 
-  console.log(newPrices);
   return newPriceBin('price_bin_dist_by_state', newPrices);
 }
 
@@ -182,7 +179,6 @@ function newPriceBin(divId, prices) {
 // Callback function to handle change in map
 function handleMapChange() {
   mapBound = map.getBounds();
-  // console.log('map change');
 
   updateDisplay();
 }
@@ -203,12 +199,7 @@ function drawMarker(map, markers) {
   for (var i = 0; i < markers.length; ++i)
   {
     if (stateFilter != null && markers[i]['state'] != stateFilter) {
-      // console.log(stateFilter + ' ' + markers[i]['state']);
       continue;
-    }
-    else 
-    {
-      // console.log(stateFilter + ' ' + markers[i]['state']);
     }
 
     if (markers[i]['latitude'] != null &&
@@ -230,7 +221,6 @@ function drawMarker(map, markers) {
 function initializeMap(markers, redrawMap) {
   // Initialize maps
   if (map == null || (redrawMap != null && redrawMap == true)) {
-    // console.log('new map');
     map = newMap(39.6948, -104.7881, 5, 'map-canvas');
 
     google.maps.event.addListener(map, 'idle', handleMapChange);
@@ -238,11 +228,9 @@ function initializeMap(markers, redrawMap) {
 
   // Initialize markers
   if (markers != null) {
-    // console.log('draw markers');
     drawMarker(map, markers);
   }
 
-  // console.log('initialize map')
   mapBound = map.getBounds();
 
   return map;
@@ -266,10 +254,8 @@ function initializePostings(postings) {
     return;
   }
 
-  // console.log('initializePostings');
   var table = document.getElementById('latest_prices_content');
-
-  for(var i = table.rows.length - 1; i > 0; i--)
+  for(var i = table.rows.length - 1; i > 0; --i)
   {
       table.deleteRow(i);
   }
@@ -282,6 +268,18 @@ function initializePostings(postings) {
 
     if (!postings[i]['city']) {
       continue;
+    }
+
+    var postingLocation = new google.maps.LatLng(
+      postings[i]['latitude'],
+      postings[i]['longitude']);
+
+    if (!mapBound.contains(postingLocation)) {
+      continue;
+    }
+    else
+    {
+      console.log('posting ' + postings[i]);
     }
 
     var row = table.insertRow(table.length);
