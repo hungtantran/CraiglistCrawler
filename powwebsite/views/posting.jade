@@ -2,13 +2,33 @@ doctype html
 html
   head
     title= title
+    link(rel='stylesheet', type='text/css', href='/stylesheets/posting.css')
+    script(type='text/javascript' src="http://d3js.org/d3.v3.min.js")
     script(type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" charset="utf-8")
+    script(type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" charset="utf-8")
+    script(type='text/javascript', src='/javascripts/common.js')
+    script(type='text/javascript')
+      | var map = null;
+      | var markerClusterer = null;
+      | var markerArray = [];
+
+      | var cache = [];
+
+      | var mapBound = null;
+      | var stateFilter = null;
+      | window.onload = loadData();
 
   body
     div(id='header')
       | Header
 
     div(id='content')
+      div(id='map-canvas')
+      div(id='price_bin_dist_by_state')
+      
+
+
+    div(id='posting')
       content!= content['html']
 
     div(id='footer')

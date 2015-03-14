@@ -11,10 +11,6 @@ function initializePrices(prices) {
   newPrices = [];
   mapBound = map.getBounds();
   for (var i=0; i<prices.length; ++i) {
-    // console.log(prices[i]['latitude']);
-    // console.log(prices[i]['longitude']);
-    // console.log(map);
-    // console.log(mapBound);
     if (!('latitude' in prices[i])) continue
 
     // var priceLocation = new google.maps.LatLng(0, 0)
