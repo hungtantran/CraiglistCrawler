@@ -28,7 +28,7 @@ app.use('/', index);
 app.use('/locations', locations);
 app.use('/prices', prices)
 app.use('/postings', postings)
-app.use('/posting', posting)
+app.use('/posting', posting);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
