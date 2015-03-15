@@ -3,20 +3,26 @@ function updateDisplay() {
   initializeMap(cache['locations']);
   initializePrices(cache['prices']);
   initializePostings(cache['postings']);
+  initializePostingBodyContent(content['html']);
+}
+
+function initializePostingBodyContent(content) {
+  console.log('here');
+  var elements = $(content['html']);
+  var postingBody = $('#postingbody', elements);
+
+  $('#postingBodyContent').empty();
+  $('#postingBodyContent').append(postingBody);
 }
 
 function initializePrices(prices) {
   $('#price_bin_dist_by_state').empty();
 
   newPrices = [];
+  for (var i=0; i<prices.length; ++i) {
+    if (!('latitude' in prices[i])) continue
 
-  for (var i = 0; i < prices.length; ++i) {
-    if (!('latitude' in prices[i])) {
-      continue
-    }
-
-    var priceLocation = new google.maps.LatLng(prices[i]['latitude'], prices[i]['longitude']);
-
+    var priceLocation = new google.maps.LatLng(prices[i]['latitude'], prices[i]['longitude'])
     if (mapBound.contains(priceLocation)) {
       newPrices.push(prices[i]);
     }
@@ -277,10 +283,6 @@ function initializePostings(postings) {
     if (!mapBound.contains(postingLocation)) {
       continue;
     }
-    else
-    {
-      console.log('posting ' + postings[i]);
-    }
 
     var row = table.insertRow(table.length);
     
@@ -358,6 +360,15 @@ function loadData() {
   var xmlhttpPostings = new newXMLRequest(null, 'postings');
   xmlhttpPostings.open("POST","/postings",true);
   xmlhttpPostings.send();
+
+  var params = document.URL.split("/");
+  var id = params[params.length-1];
+  if (!isNaN(parseInt(id))) {
+    // if it is a number
+    var xmlhttpPostingBody = new newXMLRequest(initializePostingBodyContent, 'posting');
+    xmlhttpPostingBody.open("POST","/posting/postingbody/" + id, true);
+    xmlhttpPostingBody.send();
+  }
 }
 
 window.google = window.google || {};

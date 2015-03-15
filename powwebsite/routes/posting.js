@@ -1,8 +1,19 @@
 var express         = require('express');
-var router          = express.Router();
-
+var router          = express.Router()
+;
 var globals         = require('./globals');
 var rawHTMLProvider   = globals.rawHTMLProvider;
+
+router.post('/postingbody/:id', function(req, res) {
+    var params = req.params.id.split("-");
+    var id = params[params.length-1];
+    console.log('posting-id = '+id);
+
+    rawHTMLProvider.getContent(id, function(error, doc) {
+        console.log('html = '+doc);
+        res.json(doc);
+    })
+});
 
 // Get the main page with a list of topics
 router.get('/:id', function(req, res) {
