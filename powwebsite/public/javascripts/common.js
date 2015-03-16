@@ -283,12 +283,12 @@ function initializePostings(postings) {
     if (!mapBound.contains(postingLocation)) {
       continue;
     }
-
+    
     var row = table.insertRow(table.length);
     
     // Location cell
     var location = row.insertCell(0);
-    location.innerHTML = postings[i]['city'];
+    location.innerHTML = '<a href="/posting/' + postings[i]['id'] + '">' + postings[i]['city'] + '</a>';
     location.setAttribute('id', 'locations')
 
     // Quantity cell
@@ -297,7 +297,7 @@ function initializePostings(postings) {
       continue;
     }
 
-    quantity.innerHTML = postings[i]['quantity'] + ' ' + postings[i]['unit'];
+    quantity.innerHTML = '<a href="/posting/' + postings[i]['id'] + '">' + postings[i]['quantity'] + ' ' + postings[i]['unit'] + '</a>';
     quantity.setAttribute('id', 'quantities')
 
     // Price cell

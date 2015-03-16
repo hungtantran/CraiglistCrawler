@@ -32,7 +32,7 @@ html
       | ga('send', 'pageview');
 
   body
-    div(id='header')
+    div(id='header' class='col-xs-4 col-sm-4 col-md-3')
       | <nav class="navbar navbar-inverse navbar-fixed-top">
       | <div class="container">
       | <div class="navbar-header">
@@ -55,41 +55,40 @@ html
       | </div>
       | </nav>
 
-    div(id='content')
-      div(id='left_pane')
-        div(id='map-canvas')
+    div(id='left_pane' class='col-xs-4 col-sm-4 col-md-3')
+      div(id='map-canvas')
 
-        div(id='price_bin')
-          div(id='price_bin_dist_by_state')
+      div(id='price_bin')
+        div(id='price_bin_dist_by_state')
 
-          div(id='price_per_unit')
-            | Price (per gram) (bin)
+        div(id='price_per_unit')
+          | Price (per gram) (bin)
 
-      div(id='right_pane')
-        div(id='right_pane_header')
-          | Latest Prices
-        div(id='right_pane_content')
-          table(id='latest_prices_content')
-            tr
-              td(id='locations')
-                | Locations
-              td(id='quantities')
-                | Quantities
-              td(id='prices')
-                | Prices
-            each posting in postings
-              if (posting['city'])
-                tr
-                  td(id='locations')
-                    = posting['city']
-                  td(id='quantities')
-                    = posting['quantity'] + ' ' + posting['unit']
-                  td(id='prices')
-                    != '<a href="/posting/'
-                    = posting['id']
-                    != '">$'
-                    = posting['price']
-                    != '</a>'
+    div(id='right_pane' class='col-xs-4 col-sm-4 col-md-3')
+      div(id='right_pane_header')
+        | Latest Prices
+      div(id='right_pane_content')
+        table(id='latest_prices_content')
+          tr
+            td(id='locations')
+              | Locations
+            td(id='quantities')
+              | Quantities
+            td(id='prices')
+              | Prices
+          each posting in postings
+            if (posting['city'])
+              tr
+                td(id='locations')
+                  = posting['city']
+                td(id='quantities')
+                  = posting['quantity'] + ' ' + posting['unit']
+                td(id='prices')
+                  != '<a href="/posting/'
+                  = posting['id']
+                  != '">$'
+                  = posting['price']
+                  != '</a>'
 
-    div(id='footer')
+    div(id='footer' class='col-xs-4 col-sm-4 col-md-3')
       | Footer
