@@ -55,14 +55,18 @@ html
       | </div>
       | </nav>
 
+    div(class='clearfix visible-xs-block')
+    
     div(id='left_pane' class='col-xs-4 col-sm-4 col-md-3')
       div(id='map-canvas')
 
-      div(id='price_bin')
+      div(id='price_bin' class='hidden-xs')
         div(id='price_bin_dist_by_state')
 
         div(id='price_per_unit')
           | Price (per gram) (bin)
+
+    div(class='clearfix visible-xs-block')
 
     div(id='right_pane' class='col-xs-4 col-sm-4 col-md-3')
       div(id='right_pane_header')
@@ -89,6 +93,8 @@ html
                   != '">$'
                   = posting['price']
                   != '</a>'
+
+    div(class='clearfix visible-xs-block')
 
     div(id='footer' class='col-xs-4 col-sm-4 col-md-3')
       | Footer
