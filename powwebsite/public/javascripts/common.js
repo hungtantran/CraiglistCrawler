@@ -260,8 +260,8 @@ function initializePostings(postings) {
     return;
   }
 
-  var table = document.getElementById('latest_prices_content');
-  for(var i = table.rows.length - 1; i > 0; --i)
+  var table = document.getElementById('table_body');
+  for(var i = table.rows.length - 1; i >= 0; --i)
   {
       table.deleteRow(i);
   }
@@ -281,33 +281,36 @@ function initializePostings(postings) {
       postings[i]['longitude']);
 
     if (!mapBound.contains(postingLocation)) {
-      continue;
+     continue;
     }
-    
+
     var row = table.insertRow(table.length);
     
+    var index = 0;
+
+    // Date Posted cell
+    var datePosted = row.insertCell(index++);
+
     // Location cell
-    var location = row.insertCell(0);
+    var location = row.insertCell(index++);
     location.innerHTML = '<a href="/posting/' + postings[i]['id'] + '">' + postings[i]['city'] + '</a>';
-    location.setAttribute('id', 'locations')
 
     // Quantity cell
-    var quantity = row.insertCell(1);
+    var quantity = row.insertCell(index++);
     if (!postings[i]['quantity'] || !postings[i]['unit']) {
-      continue;
+      postings[i]['quantity'] = 'Please click to check!'
+      postings[i]['unit'] = '';
     }
 
     quantity.innerHTML = '<a href="/posting/' + postings[i]['id'] + '">' + postings[i]['quantity'] + ' ' + postings[i]['unit'] + '</a>';
-    quantity.setAttribute('id', 'quantities')
 
     // Price cell
-    var price = row.insertCell(2);
+    var price = row.insertCell(index++);
     if (!postings[i]['price']) {
       continue;
     }
 
     price.innerHTML = '<a href="/posting/' + postings[i]['id'] + '">$' + postings[i]['price'] + '</a>';
-    price.setAttribute('id', 'prices')
   }
 }
 
