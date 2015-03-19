@@ -6,31 +6,23 @@ html, body {
 
 #header {
     float: left;
-    height: 5%;
+    height: 10%;
     width: 100%;
     overflow: hidden;
 }
 
 #content {
-    float: left;
     width: 100%;
     height: 50%;
-    overflow: hidden;
 }
 
 #map-canvas {
-    float: left;
     height: 100%;
-    width: 50%;
     padding: 0;
-    overflow: hidden;
 }
 
 #price_bin_dist_by_state {
-    float: left;
     height: 100%;
-    width: 50%;
-    max-height: inherit;
     overflow-y: scroll;
 }
 
