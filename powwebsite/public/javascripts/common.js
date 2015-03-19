@@ -25,6 +25,7 @@ function initializePrices(prices) {
 
     var priceLocation = new google.maps.LatLng(prices[i]['latitude'], prices[i]['longitude'])
     if (mapBound.contains(priceLocation)) {
+      console.log('here2')
       newPrices.push(prices[i]);
     }
   }
