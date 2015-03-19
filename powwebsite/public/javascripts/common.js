@@ -17,6 +17,7 @@ function initializePostingBodyContent(content) {
 
 function initializePrices(prices) {
   $('#price_bin_dist_by_state').empty();
+  $('#svgAxis').remove();
 
   newPrices = [];
   for (var i=0; i<prices.length; ++i) {
@@ -68,11 +69,10 @@ function newPriceBin(divId, prices) {
     arr.push(data[k]);
   }
 
-  console.log(arr);
-  console.log(data);
+  console.log();
 
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
+    width = $('#' + divId).width()- margin.left - margin.right,
     height = 250*arr.length;//250 - margin.top - margin.bottom;
   
   var y0 = d3.scale.ordinal()
@@ -111,8 +111,15 @@ function newPriceBin(divId, prices) {
   tooltip.append('div')
     .attr('class', 'count');
 
+  var svgAxis = d3.select('#' + 'price_bin').insert("svg", ":first-child")
+      .attr("width", "100%")
+      .attr("height", 18)
+      .attr("id", "svgAxis")
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
   var svg = d3.select('#' + divId).append("svg")
-      .attr("width", width + margin.left + margin.right)
+      .attr("width", "100%")
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -121,9 +128,12 @@ function newPriceBin(divId, prices) {
   y1.domain(binNames).rangeRoundBands([0, y0.rangeBand()]);
   x.domain([0, d3.max(arr, function(d) { return d3.max(d['bins'], function(d) { return d.value; }); })]);
 
-  svg.append("g")
+  
+
+  svgAxis.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(100,0)")
+    .style("position", "fixed")
     .call(xAxis);
 
   svg.append("g")
@@ -162,7 +172,6 @@ function newPriceBin(divId, prices) {
       }
     })
     .attr("y", function(d) {
-      console.log(this.getBoundingClientRect()['height']/2);
       return y1(d.name) + 4 + y1.rangeBand()/2;
     });
     

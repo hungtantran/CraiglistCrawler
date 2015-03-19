@@ -129,6 +129,7 @@ body {
 
 .x.axis path {
     display: none;
+    position: fixed;
 }
 
 .chart rect {
