@@ -6,10 +6,10 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet', media='screen', href='/stylesheets/bootstrap.css')
 
-    script(type='text/javascript' src="http://d3js.org/d3.v3.min.js")
-    script(type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" charset="utf-8")
+    script(type='text/javascript' src='http://d3js.org/d3.v3.min.js')
+    script(type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js' charset='utf-8')
     script(type='text/javascript', src='/javascripts/common.js')
-    <script src="/javascripts/bootstrap.js"></script>
+    script(src='/javascripts/bootstrap.js')
 
     script(type='text/javascript')
       | var map = null;
@@ -33,33 +33,32 @@ html
 
   body
     div(id='header')
-      | <nav class="navbar navbar-inverse navbar-fixed-top">
-      | <div class="container">
-      | <div class="navbar-header">
-      | <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-      | <span class="sr-only">Toggle navigation</span>
-      | <span class="icon-bar"></span>
-      | <span class="icon-bar"></span>
-      | <span class="icon-bar"></span>
-      | </button>
-      | <a class="navbar-brand" href="/">LeafyExchange</a>
-      | </div>
-      | <div id="navbar" class="navbar-collapse collapse">
-      | <form class="navbar-form">
-      | <div class="form-group">
-      | <input type="text" placeholder="Location (Ex: 420 Pontius Ave N, Seattle, WA, 98103)" class="form-control">
-      | </div>
-      | <button type="submit" class="btn btn-success">Search</button>
-      | </form>
-      | </div><!--/.navbar-collapse -->
-      | </div>
-      | </nav>
+      nav(class='navbar navbar-inverse navbar-fixed-top')
+        div(class='container')
+          div(class='navbar-header')
+            button(type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar')
+              span(class='sr-only')
+                | Toggle navigation
+              span(class='icon-bar')
+              span(class='icon-bar')
+              span(class='icon-bar')
 
-    div(id='content')
-      div(id='map-canvas')
-      div(id='price_bin_dist_by_state')
+            a(class='navbar-brand' href='/')
+              | LeafyExchange
 
-    div(id='postingBodyContent')
+          div(id='navbar' class='navbar-collapse collapse')
+            form(class='navbar-form')
+              div(class='form-group')
+                | <input type="text" placeholder="Location (Ex: 420 Pontius Ave N, Seattle, WA, 98103)" class="form-control">
+              button(type='submit' class='btn btn-success')
+                | Search
 
-    div(id='footer')
-      | Footer
+    div(class='row' id ='content')
+      div(id='map-canvas' class='col-xs-12 col-sm-12 col-md-6 col-lg-6 hidden-xs')
+      div(id='price_bin_dist_by_state' class='col-xs-12 col-sm-12 col-md-6 col-lg-6 hidden-xs')
+
+    div(id='postingBodyContent' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
+
+    div(class='row')
+      div(id='footer' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
+        | Footer
