@@ -330,7 +330,7 @@ function initializePostings(postings) {
     // Quantity cell
     var quantity = row.insertCell(index++);
     if (!postings[i]['quantity'] || !postings[i]['unit']) {
-      postings[i]['quantity'] = 'Please click to check!'
+      postings[i]['quantity'] = 'Click to check!'
       postings[i]['unit'] = '';
     }
 

@@ -7,6 +7,7 @@ var globals = require('./globals');
 router.get('/', function(req, res) {
   res.render('index', {
     title: 'Weed Price Index',
+    stylesheet: '/stylesheets/index.css',
     markers: globals.locations,
     postings: globals.postings
   });
