@@ -32,51 +32,6 @@ function initializePrices(prices) {
 }
 
 function newPriceBin(divId, prices) {
-  var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
-    height = 2000;//250 - margin.top - margin.bottom;
-  
-  var y0 = d3.scale.ordinal()
-    .rangeRoundBands([0, height], .1);
-
-  var y1 = d3.scale.ordinal();
-
-  var x = d3.scale.linear()
-      .range([0, width]);
-
-  var color = d3.scale.ordinal()
-      .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00", "#ff8c00", "#ff8c00"]);
-
-  var xAxis = d3.svg.axis()
-      .scale(x)
-      .orient("top")
-      .tickFormat(d3.format('.2s'));
-
-  var yAxis = d3.svg.axis()
-      .scale(y0)
-      .orient("left");
-
-  var yAxisBins = d3.svg.axis()
-      .scale(y1)
-      .orient("left");
-
-  var tooltip = d3.select('#price_bin')
-    .append('div')
-    .attr('class', 'tooltip');
-
-  tooltip.append('div')
-    .attr('class', 'state');
-  tooltip.append('div')
-    .attr('class', 'label');
-  tooltip.append('div')
-    .attr('class', 'count');
-
-  var svg = d3.select('#' + divId).append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
   var binNames = ['0-5', '5-10', '10-15', '15-20', '20-25', '25-30', '30-35', '35-40','40-45','45+'];
   data = {}
   for (var i=0; i<prices.length; ++i)
@@ -113,6 +68,55 @@ function newPriceBin(divId, prices) {
     arr.push(data[k]);
   }
 
+  console.log(arr);
+  console.log(data);
+
+  var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 250*arr.length;//250 - margin.top - margin.bottom;
+  
+  var y0 = d3.scale.ordinal()
+    .rangeRoundBands([0, height], .1);
+
+  var y1 = d3.scale.ordinal();
+
+  var x = d3.scale.linear()
+      .range([0, width]);
+
+  var color = d3.scale.ordinal()
+      .range(["#A2c295","#88b57a","#6DA964","#4C9D51","#3B9748","#319412","#29803A","#217B37","#25803A","#1D7634","#187131","#136C2F","#0E672C","#09622A"]);
+
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("top")
+      .tickSize(0);
+
+  var yAxis = d3.svg.axis()
+      .scale(y0)
+      .orient("left");
+
+  var yAxisBins = d3.svg.axis()
+      .scale(y1)
+      .orient("left")
+      .tickSize(0);
+
+  var tooltip = d3.select('#price_bin')
+    .append('div')
+    .attr('class', 'tooltip');
+
+  tooltip.append('div')
+    .attr('class', 'state');
+  tooltip.append('div')
+    .attr('class', 'label');
+  tooltip.append('div')
+    .attr('class', 'count');
+
+  var svg = d3.select('#' + divId).append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
   y0.domain(Object.keys(data));
   y1.domain(binNames).rangeRoundBands([0, y0.rangeBand()]);
   x.domain([0, d3.max(arr, function(d) { return d3.max(d['bins'], function(d) { return d.value; }); })]);
@@ -139,6 +143,31 @@ function newPriceBin(divId, prices) {
     .call(yAxisBins);
 
   state.selectAll("rect")
+    .data(function(d) {
+      return d['bins']; })
+  .enter().append("text")
+    .text(function(d) { 
+      if (d.value == null) {
+        return 0;
+      } else {
+        if (d.value == 0) return "";
+        return d.value;
+      }
+    })
+    .attr("x", function(d) {
+      if (d.value == null) {
+        return 0;
+      } else {
+        return x(d.value) + 4;
+      }
+    })
+    .attr("y", function(d) {
+      console.log(this.getBoundingClientRect()['height']/2);
+      return y1(d.name) + 4 + y1.rangeBand()/2;
+    });
+    
+
+  state.selectAll("rect")
       .data(function(d) {
         return d['bins']; })
     .enter().append("rect")
@@ -151,9 +180,9 @@ function newPriceBin(divId, prices) {
       })
       .attr("x", 0)
       .attr("y", function(d) {
-        return y1(d.name);
+        return y1(d.name)+2;
       })
-      .attr("height", y1.rangeBand())
+      .attr("height", y1.rangeBand()-4)
       .on('mouseover', function(d) {
         var xPosition = parseInt(d3.select(this).attr("x") );
         var yPosition = parseInt(d3.select(this).attr("y") );
@@ -177,9 +206,11 @@ function newPriceBin(divId, prices) {
         if (stateFilter == null || d.state == stateFilter) {
           return color(d.name);
         } else {
-          return "#F5F5F5"
+          return "#F5F5F5";
         }
         });
+
+
 }
 
 // Callback function to handle change in map
