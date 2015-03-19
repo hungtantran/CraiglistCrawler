@@ -54,11 +54,31 @@ html
                 | Search
 
     div(class='row' id ='content')
-      div(id='map-canvas' class='col-xs-12 col-sm-12 col-md-6 col-lg-6 hidden-xs')
-      div(id='price_bin_dist_by_state' class='col-xs-12 col-sm-12 col-md-6 col-lg-6 hidden-xs')
+      div(id='hidden' class='col-md-2 col-lg-2 hidden-xs hidden-sm')
+
+      div(id='map-canvas' class='col-xs-12 col-sm-12 col-md-4 col-lg-4 hidden-xs')
+      div(id='price_bin_dist_by_state' class='col-xs-12 col-sm-12 col-md-4 col-lg-4 hidden-xs')
+
+      div(id='hidden' class='col-md-2 col-lg-2 hidden-xs hidden-sm')
 
     div(id='postingBodyContent' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
 
+
+    <!-- FOOTER -->
     div(class='row')
+      hr(class='featurette-divider col-xs-12 col-sm-12 col-md-12 col-lg-12')
+
       div(id='footer' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
-        | Footer
+        p(class='pull-right')
+          a(href='#')
+            | Back to top
+        p
+          | &copy; 2015 LeafyExchange, Inc. &middot; 
+          a(href='/privacy')
+            | Privacy
+          | &middot;
+          a(href='/terms')
+            | Terms
+          | &middot;
+          a(href='/contactus')
+            | Contact Us
