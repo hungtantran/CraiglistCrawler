@@ -7,10 +7,8 @@ var rawHTMLProvider   = globals.rawHTMLProvider;
 router.post('/postingbody/:id', function(req, res) {
     var params = req.params.id.split("-");
     var id = params[params.length-1];
-    console.log('posting-id = '+id);
 
     rawHTMLProvider.getContent(id, function(error, doc) {
-        console.log('html = '+doc);
         res.json(doc);
     })
 });
@@ -19,12 +17,11 @@ router.post('/postingbody/:id', function(req, res) {
 router.get('/:id', function(req, res) {
     var params = req.params.id.split("-");
     var id = params[params.length-1];
-    console.log('posting-id = '+id);
 
     rawHTMLProvider.getContent(id, function(error, doc) {
-        console.log('html = '+doc);
         res.render('posting', {
             title: 'Weed Posting Page',
+            stylesheet: '/stylesheets/posting.css',
             content: doc
         });
         return;

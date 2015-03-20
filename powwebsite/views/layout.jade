@@ -1,8 +1,63 @@
-doctype html
 html
   head
     title= title
-    script(src='/javascripts/common.js')
-    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyA59fRrwKrIwATNyiob1CeXnhowhtcVtn8')
-    
+    link(rel='stylesheet', type='text/css', href=stylesheet)
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', media='screen', href='/stylesheets/bootstrap.css')
+
+    script(type='text/javascript' src='http://d3js.org/d3.v3.min.js')
+    script(type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js' charset='utf-8')
+    script(type='text/javascript', src='/javascripts/common.js')
+    script(src='/javascripts/bootstrap.js')
+
+    script
+      | (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      | (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      | m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      | })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      | ga('create', 'UA-60747888-1', 'auto');
+      | ga('send', 'pageview');
+
+  body
+    div(id='header')
+      nav(class='navbar navbar-inverse navbar-fixed-top')
+        div(class='container')
+          div(class='navbar-header')
+            button(type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar')
+              span(class='sr-only')
+                | Toggle navigation
+              span(class='icon-bar')
+              span(class='icon-bar')
+              span(class='icon-bar')
+
+            a(class='navbar-brand' href='/')
+              | LeafyExchange
+
+          div(id='navbar' class='navbar-collapse collapse')
+            form(class='navbar-form')
+              div(class='form-group')
+                | <input type="text" placeholder="Location (Ex: 420 Pontius Ave N, Seattle, WA, 98103)" class="form-control">
+              button(type='submit' class='btn btn-success')
+                | Search
+
     block content
+
+    <!-- FOOTER -->
+    div(class='row')
+      hr(class='featurette-divider col-xs-12 col-sm-12 col-md-12 col-lg-12')
+
+      div(id='footer' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
+        p(class='pull-right')
+          a(href='#')
+            | Back to top
+        p
+          | &copy; 2015 LeafyExchange, Inc. &middot; 
+          a(href='/privacy')
+            | Privacy
+          | &middot;
+          a(href='/terms')
+            | Terms
+          | &middot;
+          a(href='/contactus')
+            | Contact Us
