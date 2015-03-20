@@ -11,7 +11,8 @@ function initializePostingBodyPrices(prices) {
 }
 
 function initializePostingBodyContent(content) {
-  var elements = $(content['html']);
+  if (!content) return;
+  var elements = $(content['html']).highlightRegex('[\d+/\d+oz|\d+/\d+ ounce|\d+oz|\d ounces|eighth|eighths|quarter|quarter oz|quart|quarters|half|half oz|ounce|oz|1/8th|1/8TH|8ths|8THS|HALF|FULL|an o|a qp|a hp|an hp|a unit|a pound|\d+/\d+ | \d+[0-9]*\.?[0-9]* grams | \d+[0-9]*\.?[0-9]*grams | gram | GRAMS | \d+[0-9]*\.?[0-9]*gram | \d+[0-9]*\.?[0-9]*GRAMS | \d+[0-9]*\.?[0-9]*g | \d+[0-9]*\.?[0-9]*G]|\d+/\d+|\d+?[0-9]*\.?[0-9]+ dollar|\d+?[0-9]*\.?[0-9]+ donation|\\$\d+?[0-9]*\.?[0-9]+|\\$+?[0-9]*\.?[0-9]+|[0-9]*\.?[0-9]+');
   var postingBody = $('#postingbody', elements);
 
   $('#postingBodyContent').empty();
@@ -19,17 +20,17 @@ function initializePostingBodyContent(content) {
 }
 
 function initializePrices(prices) {
-  console.log(prices);
+  // console.log(prices);
   $('#price_bin_dist_by_state').empty();
   $('#svgAxis').remove();
 
   var params = document.URL.split("/");
   var id = params[params.length-1];
-  console.log(id);
+  // console.log(id);
   var postingPrices = [];
   var isPostingPage = false;
   if (!isNaN(parseInt(id))) isPostingPage = true;
-  console.log(isPostingPage);
+  // console.log(isPostingPage);
 
   newPrices = [];
   for (var i=0; i<prices.length; ++i) {
@@ -37,12 +38,12 @@ function initializePrices(prices) {
     if (!('latitude' in prices[i])) continue
 
     var priceLocation = new google.maps.LatLng(prices[i]['latitude'], prices[i]['longitude'])
-    if (mapBound.contains(priceLocation)) {
+    if (mapBound && mapBound.contains(priceLocation)) {
       newPrices.push(prices[i]);
     }
   }
 
-  console.log(postingPrices);
+  // console.log(postingPrices);
   newPostingPrices('postingPrices', postingPrices);
   newPriceBin('price_bin_dist_by_state', newPrices);
 }
@@ -319,7 +320,7 @@ function initializePostings(postings) {
     return;
   }
 
-  console.log(postings);
+  // console.log(postings);
 
   // check if posting page
   var params = document.URL.split("/");
