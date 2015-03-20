@@ -33,7 +33,7 @@ PricesProvider = function() {
 };
 
 // Get all prices
-PricesProvider.prototype.getPrices = function(callback) {
+PricesProvider.prototype.getAllPrices = function(callback) {
   var query =
     'SELECT \
     `prices`.`price_id` AS `price_id`, \
@@ -61,6 +61,27 @@ PricesProvider.prototype.getPrices = function(callback) {
     }
   });
 };
+
+PricesProvider.prototype.getPrices = function(postingId, callback) {
+  var query =
+    'SELECT \
+    `prices`.`price_id` AS `price_id`, \
+    `prices`.`price_fk` AS `price_fk`, \
+    `prices`.`price` AS `price`, \
+    `prices`.`quantity` AS `quantity`, \
+    `prices`.`unit` AS `unit`, \
+    `prices`.`human_generated` AS `human_generated`, \
+    `posting_location`.`state` AS `state`, \
+    `posting_location`.`city` AS `city`, \
+    `posting_location`.`latitude` AS `latitude`, \
+    `posting_location`.`longitude` AS `longitude`, \
+    `posting_location`.`location_fk` AS `location_fk` \
+  FROM \
+    `prices` \
+  INNER JOIN `posting_location` ON ( \
+    `prices`.`price_fk` = `posting_location`.`location_fk`) \
+  WHERE `prices`.`price_fk` = ' + postingId;
+}
 
 // Get all posting
 PricesProvider.prototype.getPostings = function(callback) {

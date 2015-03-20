@@ -17,7 +17,7 @@ postingLocationProvider.getLocations(function(error, docs) {
 })
 
 var prices = null;
-pricesProvider.getPrices(function(error, docs) {
+pricesProvider.getAllPrices(function(error, docs) {
     if (error != null) {
         console.error('error to get prices: ' + error.stack);
         process.exit(1);

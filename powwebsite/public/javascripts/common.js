@@ -6,8 +6,11 @@ function updateDisplay() {
   initializePostingBodyContent(content['html']);
 }
 
+function initializePostingBodyPrices(prices) {
+  console.log(prices);
+}
+
 function initializePostingBodyContent(content) {
-  console.log('here');
   var elements = $(content['html']);
   var postingBody = $('#postingbody', elements);
 
@@ -16,21 +19,36 @@ function initializePostingBodyContent(content) {
 }
 
 function initializePrices(prices) {
+  console.log(prices);
   $('#price_bin_dist_by_state').empty();
   $('#svgAxis').remove();
 
+  var params = document.URL.split("/");
+  var id = params[params.length-1];
+  console.log(id);
+  var postingPrices = [];
+  var isPostingPage = false;
+  if (!isNaN(parseInt(id))) isPostingPage = true;
+  console.log(isPostingPage);
+
   newPrices = [];
   for (var i=0; i<prices.length; ++i) {
+    if (isPostingPage && prices[i]['price_fk']==id) postingPrices.push(prices[i]);
     if (!('latitude' in prices[i])) continue
 
     var priceLocation = new google.maps.LatLng(prices[i]['latitude'], prices[i]['longitude'])
     if (mapBound.contains(priceLocation)) {
-      console.log('here2')
       newPrices.push(prices[i]);
     }
   }
 
-  return newPriceBin('price_bin_dist_by_state', newPrices);
+  console.log(postingPrices);
+  newPostingPrices('postingPrices', postingPrices);
+  newPriceBin('price_bin_dist_by_state', newPrices);
+}
+
+function newPostingPrices(divId, postingPrices) {
+
 }
 
 function newPriceBin(divId, prices) {
@@ -301,6 +319,16 @@ function initializePostings(postings) {
     return;
   }
 
+  console.log(postings);
+
+  // check if posting page
+  var params = document.URL.split("/");
+  var id = params[params.length-1];
+  console.log(id);
+  var postingPrices = [];
+  var isPostingPage = false;
+  if (!isNaN(parseInt(id))) isPostingPage = true;
+
   var table = document.getElementById('table_body');
   for(var i = table.rows.length - 1; i >= 0; --i)
   {
@@ -309,19 +337,21 @@ function initializePostings(postings) {
 
   for (var i = 0; i < postings.length; ++i)
   {
-    if (stateFilter != null && postings[i]['state'] != stateFilter) {
+    if (stateFilter != null && postings[i]['state'] != stateFilter && !isPostingPage) {
       continue;
     }
 
-    if (!postings[i]['city']) {
+    if (!postings[i]['city'] && !isPostingPage) {
       continue;
     }
+
+    if (isPostingPage && postings[i]['id'] != id) continue;
 
     var postingLocation = new google.maps.LatLng(
       postings[i]['latitude'],
       postings[i]['longitude']);
 
-    if (!mapBound.contains(postingLocation)) {
+    if (!mapBound.contains(postingLocation) && !isPostingPage) {
      continue;
     }
 
