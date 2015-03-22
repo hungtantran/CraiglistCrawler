@@ -85,14 +85,6 @@ PricesProvider.prototype.getPrices = function(postingId, callback) {
 
 // Get all posting
 PricesProvider.prototype.getPostings = function(callback) {
-  var day = new Date();
-  day.setDate(day.getDate() - 60);
-  var date = day.getDate();
-  var month = day.getMonth() + 1; //January is 0!
-  var year = day.getFullYear();
-  var dateString = '' + year + '-' + month + '-' + date;
-  console.log(dateString);
-
   var query =
     'SELECT * \
 FROM \
@@ -142,12 +134,8 @@ FROM \
   ) AS D \
   WHERE datePosted IS NOT NULL \
   ORDER BY \
-  datePosted DESC \
-  LIMIT 0, 500';
-
-  // AND datePosted >= "' + dateString + '"\
-
-  console.log(query);
+  datePosted DESC';
+  
   this.connection.query(query, function(err, rows) {
     if (err) {
       callback (err);

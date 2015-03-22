@@ -10,7 +10,6 @@ var postings = require('./routes/postings')
 var privacy = require('./routes/privacy')
 var terms = require('./routes/terms')
 var contactus = require('./routes/contactus')
-
 var posting = require('./routes/posting');
 
 var app = express();
@@ -31,7 +30,6 @@ app.use('/postings', postings)
 app.use('/privacy', privacy)
 app.use('/terms', terms)
 app.use('/contactus', contactus)
-
 app.use('/posting', posting);
 
 // catch 404 and forward to error handler

@@ -326,7 +326,6 @@ function initializePostings(postings) {
 
   for (var i = 0; i < postings.length; ++i)
   {
-    console.log(postings[i])
     if (stateFilter != null && postings[i]['state'] != stateFilter && !isPostingPage) {
       continue;
     }
@@ -412,19 +411,15 @@ function newXMLRequest(func, cacheEntry) {
 }
 
 function loadData() {
-  // // Locations xml request
-  // var xmlhttpLocations = newXMLRequest(updateDisplay, 'locations');
-  // xmlhttpLocations.open("POST","/locations",true);
-  // xmlhttpLocations.send();
-
-  // // Prices xml request
-  // var xmlhttpPrices = newXMLRequest(initializePrices, 'prices');
-  // xmlhttpPrices.open("POST","/prices",true);
-  // xmlhttpPrices.send();
-
   // Postings xml request
+  var params = location.pathname.split('/');
+  var postUrl = "/postings/";
+  if (params.length > 2 && params[1] == 'state') {
+    postUrl += params[2];
+  }
+
   var xmlhttpPostings = new newXMLRequest(updateDisplay, 'postings');
-  xmlhttpPostings.open("POST","/postings",true);
+  xmlhttpPostings.open("POST", postUrl, true);
   xmlhttpPostings.send();
 
   var params = document.URL.split("/");

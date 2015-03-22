@@ -13,4 +13,23 @@ router.get('/', function(req, res) {
   });
 });
 
+// Get some state
+router.get('/state/:state', function(req, res){
+    var state = req.params.state
+
+    stateInfo = [];
+    for (var i = 0; i < globals.postings.length; ++i) {
+        if (globals.postings[i]['state'].toUpperCase() === state.toUpperCase()) {
+            stateInfo.push(globals.postings[i]);
+        }
+    }
+
+    res.render('index', {
+    title: 'Weed Price Index in ' + state,
+    stylesheet: '/stylesheets/index.css',
+    markers: stateInfo,
+    postings: stateInfo
+  });
+});
+
 module.exports = router;
