@@ -16,8 +16,21 @@ router.post('/', function(req, res){
 });
 
 // Get some state json
-router.post('/:state', function(req, res){
-    var state = req.params.state
+router.post('/:param', function(req, res){
+    var param = req.params.param;
+
+    var state = null;
+    if (!isNaN(parseInt(param))) {
+        for (var i = 0; i < globals.postings.length; ++i) {
+            if (globals.postings[i]['id'] == param) {
+                console.log(globals.postings[i]['id']);
+                state = globals.postings[i]['state'];
+                break;
+            }
+        }
+    } else {
+        state = param;
+    }
 
     stateInfo = [];
     for (var i = 0; i < globals.postings.length; ++i) {

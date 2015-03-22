@@ -418,6 +418,10 @@ function loadData() {
     postUrl += params[2];
   }
 
+  if (params.length > 2 && params[1] == 'posting') {
+    postUrl += params[2];
+  }
+
   var xmlhttpPostings = new newXMLRequest(updateDisplay, 'postings');
   xmlhttpPostings.open("POST", postUrl, true);
   xmlhttpPostings.send();
