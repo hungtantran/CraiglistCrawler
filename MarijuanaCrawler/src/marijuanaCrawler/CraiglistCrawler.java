@@ -65,11 +65,13 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 		
 		final List<LocationLink> locationLinks = this.locationLinkDAO.get();
 		for (final LocationLink locationLink : locationLinks) {
+		    final Integer id = locationLink.getId();
 			final String link = locationLink.getLink();
 			final String country = locationLink.getCity();
 			final String state = locationLink.getState();
 			final String city = locationLink.getCity();
-			final Location location = new Location(country, state, city);
+			
+			final Location location = new Location(id, country, state, city);
 
 			this.linkToLocationMap.put(link, location);
 			this.locationLinkLists.add(locationLink);
@@ -93,11 +95,11 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 		return true;
 	}
 
-	private boolean processOneEntryLink(String entryLink, Location loc)
-			throws SQLException {
-		final String htmlContent = NetworkingFunctions
-				.downloadHtmlContentToString(entryLink,
-						this.numRetriesDownloadLink);
+	private boolean processOneEntryLink(String entryLink, Location loc) throws SQLException {
+		final String htmlContent = NetworkingFunctions.downloadHtmlContentToString(
+		        entryLink,
+		        this.numRetriesDownloadLink);
+		
 		if (htmlContent == null) {
 			Globals.crawlerLogManager.writeLog("Fail to download link " + entryLink);
 			return false;
@@ -116,20 +118,20 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 		try {
 			id = this.linkCrawledDAO.create(linkCrawled);
 		} catch (final SQLException e) {
-			Globals.crawlerLogManager.writeLog("Insert content of link "
-					+ entryLink + " into RawHTML table fails");
+			Globals.crawlerLogManager.writeLog("Insert content of link " + entryLink + " into RawHTML table fails");
 			throw e;
 		}
 
 		if (id < 0) {
-			Globals.crawlerLogManager.writeLog("Fail to insert link "
-					+ entryLink + " into table link_crawled_table");
+			Globals.crawlerLogManager.writeLog("Fail to insert link " + entryLink + " into table link_crawled_table");
 			return false;
 		}
 
 		final Short positivePage = null;
 		final Short predict1 = Classifier.classify(htmlContent);
 		final Short predict2 = null;
+		String currentDate = Helper.getCurrentDate();
+		String currentTime = Helper.getCurrentTime();
 
 		final RawHTML rawHTML = new RawHTML();
 		rawHTML.setId(id);
@@ -139,6 +141,8 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 		rawHTML.setPredict1(predict1);
 		rawHTML.setPredict2(predict2);
 		rawHTML.setLocation(loc);
+		rawHTML.setDateCrawled(currentDate);
+		rawHTML.setTimeCrawled(currentTime);
 
 		try {
 			int rawHTMLId = this.rawHTMLDAO.create(rawHTML);
@@ -148,6 +152,10 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 		    location.setState(rawHTML.getState());
 		    location.setCity(rawHTML.getCity());
 		    location.setLocation_fk(rawHTMLId);
+		    location.setLocation_link_fk(loc.id);
+		    location.setDatePosted(currentDate);
+		    location.setTimePosted(currentTime);
+		    
 		    if (!this.postingLocationDAO.create(location)) {
 		        Globals.crawlerLogManager.writeLog("Fails to insert location for " + entryLink + " into posting_location table");
                 return false;
@@ -197,10 +205,8 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 				// this.urlsQueue.add(entryLink);
 				this.urlsCrawled.add(nextEntryLink);
 
-				// Classify the link and add relevant information into the
-				// database
-				final boolean processLinkSuccess = this.processOneEntryLink(
-						nextEntryLink, curLocation);
+				// Classify the link and add relevant information into the database
+				final boolean processLinkSuccess = this.processOneEntryLink(nextEntryLink, curLocation);
 				if (!processLinkSuccess) {
 					continue;
 				}

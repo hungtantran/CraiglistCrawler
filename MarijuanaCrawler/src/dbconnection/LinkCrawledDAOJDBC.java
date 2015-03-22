@@ -110,8 +110,7 @@ public class LinkCrawledDAOJDBC implements LinkCrawledDAO {
 		}
 
 		// If the time crawled is not specified, use the current time
-		if (linkCrawled.getTimeCrawled() == null
-				|| linkCrawled.getDateCrawled() == null) {
+		if (linkCrawled.getTimeCrawled() == null || linkCrawled.getDateCrawled() == null) {
 			linkCrawled.setTimeCrawled(Helper.getCurrentTime());
 			linkCrawled.setDateCrawled(Helper.getCurrentDate());
 		}

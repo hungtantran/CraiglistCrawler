@@ -11,7 +11,9 @@ import commonlib.Globals;
 
 public class LocationLinkDAOJDBC implements LocationLinkDAO {
 	private final String SQL_SELECT_ALL = "SELECT * FROM location_link";
-	private final String SQL_INSERT = "INSERT INTO location_link (link, country, state, city, num_positive_pages_found) values (?, ?, ?, ?)";
+	private final String SQL_INSERT = "INSERT INTO location_link"
+	        + " (link, country, state, city, num_positive_pages_found, latitude, longitude, nelatitude, nelongitude, swlatitude, swlongitude)"
+	        + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	private final DAOFactory daoFactory;
 
@@ -50,6 +52,36 @@ public class LocationLinkDAOJDBC implements LocationLinkDAO {
 		locationLink.setNumPositivePagesFound(resultSet.getInt("num_positive_pages_found"));
         if (resultSet.wasNull()) {
             locationLink.setNumPositivePagesFound(null);
+        }
+        
+        locationLink.setLatitude(resultSet.getString("latitude"));
+        if (resultSet.wasNull()) {
+            locationLink.setLatitude(null);
+        }
+        
+        locationLink.setLongitude(resultSet.getString("longitude"));
+        if (resultSet.wasNull()) {
+            locationLink.setLongitude(null);
+        }
+        
+        locationLink.setNelatitude(resultSet.getString("nelatitude"));
+        if (resultSet.wasNull()) {
+            locationLink.setNelatitude(null);
+        }
+        
+        locationLink.setNelongitude(resultSet.getString("nelongitude"));
+        if (resultSet.wasNull()) {
+            locationLink.setNelongitude(null);
+        }
+        
+        locationLink.setSwlatitude(resultSet.getString("swlatitude"));
+        if (resultSet.wasNull()) {
+            locationLink.setSwlatitude(null);
+        }
+        
+        locationLink.setSwlongitude(resultSet.getString("swlongitude"));
+        if (resultSet.wasNull()) {
+            locationLink.setSwlongitude(null);
         }
 
 		return locationLink;
@@ -98,12 +130,20 @@ public class LocationLinkDAOJDBC implements LocationLinkDAO {
 		try {
 			connection = this.daoFactory.getConnection();
 
-			final Object[] values = { locationLink.getLink(),
-					locationLink.getCountry(), locationLink.getState(),
-					locationLink.getCity() };
+			final Object[] values = {
+			        locationLink.getLink(),
+					locationLink.getCountry(),
+					locationLink.getState(),
+					locationLink.getCity(),
+					locationLink.getNumPositivePagesFound(),
+					locationLink.getLatitude(),
+					locationLink.getLongitude(),
+					locationLink.getNelatitude(),
+					locationLink.getNelongitude(),
+					locationLink.getSwlatitude(),
+					locationLink.getSwlongitude()};
 
-			preparedStatement = DAOUtil.prepareStatement(connection,
-					this.SQL_INSERT, true, values);
+			preparedStatement = DAOUtil.prepareStatement(connection, this.SQL_INSERT, true, values);
 
 			Globals.crawlerLogManager.writeLog(preparedStatement.toString());
 
@@ -119,8 +159,7 @@ public class LocationLinkDAOJDBC implements LocationLinkDAO {
 
 			return generatedKey;
 		} catch (final SQLException e) {
-			Globals.crawlerLogManager
-					.writeLog("Insert into table location_link fails");
+			Globals.crawlerLogManager.writeLog("Insert into table location_link fails");
 			Globals.crawlerLogManager.writeLog(e.getMessage());
 
 			return -1;

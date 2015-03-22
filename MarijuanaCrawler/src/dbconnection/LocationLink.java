@@ -16,6 +16,12 @@ public class LocationLink {
 	String state;
 	String city;
 	Integer numPositivePagesFound;
+	String latitude;
+	String longitude;
+	String nelatitude;
+	String nelongitude;
+	String swlatitude;
+	String swlongitude;
 
 	// Getters/setters
 	// ----------------------------------------------------------------------------
@@ -66,6 +72,54 @@ public class LocationLink {
 
     public void setNumPositivePagesFound(Integer numPositivePagesFound) {
         this.numPositivePagesFound = numPositivePagesFound;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getNelatitude() {
+        return nelatitude;
+    }
+
+    public void setNelatitude(String nelatitude) {
+        this.nelatitude = nelatitude;
+    }
+
+    public String getNelongitude() {
+        return nelongitude;
+    }
+
+    public void setNelongitude(String nelongitude) {
+        this.nelongitude = nelongitude;
+    }
+
+    public String getSwlatitude() {
+        return swlatitude;
+    }
+
+    public void setSwlatitude(String swlatitude) {
+        this.swlatitude = swlatitude;
+    }
+
+    public String getSwlongitude() {
+        return swlongitude;
+    }
+
+    public void setSwlongitude(String swlongitude) {
+        this.swlongitude = swlongitude;
     }
 
 	// Object overrides

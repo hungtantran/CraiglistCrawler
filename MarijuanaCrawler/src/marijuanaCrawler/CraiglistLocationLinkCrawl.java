@@ -31,11 +31,11 @@ public class CraiglistLocationLinkCrawl {
 	}
 
 	public boolean getLink() {
-		Document doc = NetworkingFunctions.downloadHtmlContentToDoc(this.startLink,
-				this.numRetryDownloadPage);
+		Document doc = NetworkingFunctions.downloadHtmlContentToDoc(this.startLink, this.numRetryDownloadPage);
 
-		if (doc == null)
+		if (doc == null) {
 			return false;
+		}
 
 		Elements countryElems = doc.select("div[class=colmask]");
 
@@ -51,8 +51,7 @@ public class CraiglistLocationLinkCrawl {
 		Elements stateNameElems = usCountryElem.select("h4");
 		Elements stateCitiesElems = usCountryElem.select("ul");
 
-		Globals.crawlerLogManager.writeLog("Found " + stateNameElems.size() + " state names and "
-				+ stateCitiesElems.size() + " state elems");
+		Globals.crawlerLogManager.writeLog("Found " + stateNameElems.size() + " state names and " + stateCitiesElems.size() + " state elems");
 
 		if (stateNameElems.size() != stateCitiesElems.size())
 			return false;
@@ -95,14 +94,15 @@ public class CraiglistLocationLinkCrawl {
 		CraiglistLocationLinkCrawl crawler = new CraiglistLocationLinkCrawl();
 
 		// Fail to get the craiglist location links
-		if (!crawler.getLink())
+		if (!crawler.getLink()) {
 			return;
+		}
 
-		Map<String, Location> linkToLocationMap = crawler
-				.getLinkToLocationMap();
+		Map<String, Location> linkToLocationMap = crawler.getLinkToLocationMap();
 
-		if (linkToLocationMap == null)
+		if (linkToLocationMap == null) {
 			return;
+		}
 		
 		LocationLinkDAO locationLinkDAO = new LocationLinkDAOJDBC(DAOFactory.getInstance(
 				Globals.username, Globals.password, Globals.server + Globals.database));

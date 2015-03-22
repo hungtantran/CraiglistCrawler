@@ -19,21 +19,20 @@ import dbconnection.RawHTMLDAO;
 import dbconnection.RawHTMLDAOJDBC;
 
 public class IdentifyLocationScript {
-	public static void identifyLocationRawHTML() throws ClassNotFoundException,
-			SQLException {
+	public static void identifyLocationRawHTML() throws Exception {
 		LocationLinkDAO locationLinkDAO = new LocationLinkDAOJDBC(
-				DAOFactory.getInstance(Globals.username, Globals.password,
-						Globals.server + Globals.database));
+		        DAOFactory.getInstance(Globals.username, Globals.password, Globals.server + Globals.database));
 
 		Map<String, Location> linkToLocationMap = new HashMap<String, Location>();
 
 		List<LocationLink> locationLinks = locationLinkDAO.get();
 		for (LocationLink locationLink : locationLinks) {
+		    Integer id = locationLink.getId();
 			String link = locationLink.getLink();
 			String country = locationLink.getCity();
 			String state = locationLink.getState();
 			String city = locationLink.getCity();
-			Location location = new Location(country, state, city);
+			Location location = new Location(id, country, state, city);
 
 			linkToLocationMap.put(link, location);
 		}
@@ -43,8 +42,7 @@ public class IdentifyLocationScript {
 		int htmlCount = lowerBound;
 
 		RawHTMLDAO rawHTMLDAO = new RawHTMLDAOJDBC(DAOFactory.getInstance(
-				Globals.username, Globals.password, Globals.server
-						+ Globals.database));
+				Globals.username, Globals.password, Globals.server + Globals.database));
 
 		// Get 2000 articles at a time, until exhaust all the articles
 		while (true) {
@@ -95,8 +93,7 @@ public class IdentifyLocationScript {
 		}
 	}
 
-	public static void identifyLocationLinkCrawl()
-			throws ClassNotFoundException, SQLException {
+	public static void identifyLocationLinkCrawl() throws Exception {
 		LocationLinkDAO locationLinkDAO = new LocationLinkDAOJDBC(
 				DAOFactory.getInstance(Globals.username, Globals.password,
 						Globals.server + Globals.database));
@@ -105,19 +102,18 @@ public class IdentifyLocationScript {
 
 		List<LocationLink> locationLinks = locationLinkDAO.get();
 		for (LocationLink locationLink : locationLinks) {
+		    Integer id = locationLink.getId();
 			String link = locationLink.getLink();
 			String country = locationLink.getCity();
 			String state = locationLink.getState();
 			String city = locationLink.getCity();
-			Location location = new Location(country, state,
-					city);
+			Location location = new Location(id, country, state, city);
 
 			linkToLocationMap.put(link, location);
 		}
 
 		LinkCrawledDAO linkCrawledDAO = new LinkCrawledDAOJDBC(
-				DAOFactory.getInstance(Globals.username, Globals.password,
-						Globals.server + Globals.database));
+				DAOFactory.getInstance(Globals.username, Globals.password, Globals.server + Globals.database));
 
 		List<LinkCrawled> linksCrawled = linkCrawledDAO
 				.get(Globals.Domain.CRAIGLIST.value);

@@ -26,6 +26,8 @@ public class RawHTML implements Serializable {
 	private String alt_prices;
 	private String latitude;
 	private String longtitude;
+	private String dateCrawled;
+	private String timeCrawled;
 
 	// Getters/setters
 	// ----------------------------------------------------------------------------
@@ -139,6 +141,22 @@ public class RawHTML implements Serializable {
 	public void setLongtitude(String longtitude) {
 		this.longtitude = longtitude;
 	}
+	
+    public String getDateCrawled() {
+        return dateCrawled;
+    }
+
+    public void setDateCrawled(String dateCrawled) {
+        this.dateCrawled = dateCrawled;
+    }
+
+    public String getTimeCrawled() {
+        return timeCrawled;
+    }
+
+    public void setTimeCrawled(String timeCrawled) {
+        this.timeCrawled = timeCrawled;
+    }
 
 	// Object overrides
 	// ---------------------------------------------------------------------------

@@ -12,7 +12,9 @@ import commonlib.Globals;
 public class PostingLocationDAOJDBC implements PostingLocationDAO {
     private final String SQL_SELECT_ALL = "SELECT * FROM posting_location";
     private final String SQL_SELECT_BY_ID = "SELECT * FROM posting_location WHERE location_fk = ?";
-    private final String SQL_INSERT = "INSERT INTO posting_location (state, city, latitude, longitude, location_fk) values (?, ?, ?, ?, ?)";
+    private final String SQL_INSERT = "INSERT INTO posting_location"
+            + "(state, city, latitude, longitude, location_fk, location_link_fk, datePosted, timePosted)"
+            + " values (?, ?, ?, ?, ?, ?, ?, ?)";
 
     private final DAOFactory daoFactory;
 
@@ -46,6 +48,21 @@ public class PostingLocationDAOJDBC implements PostingLocationDAO {
         location.setLocation_fk(resultSet.getInt("location_fk"));
         if (resultSet.wasNull()) {
             location.setLocation_fk(null);
+        }
+        
+        location.setLocation_link_fk(resultSet.getInt("location_link_fk"));
+        if (resultSet.wasNull()) {
+            location.setLocation_link_fk(null);
+        }
+        
+        location.setDatePosted(resultSet.getString("datePosted"));
+        if (resultSet.wasNull()) {
+            location.setDatePosted(null);
+        }
+        
+        location.setTimePosted(resultSet.getString("timePosted"));
+        if (resultSet.wasNull()) {
+            location.setTimePosted(null);
         }
         
         return location;
@@ -128,9 +145,15 @@ public class PostingLocationDAOJDBC implements PostingLocationDAO {
         try {
             connection = this.daoFactory.getConnection();
 
-            final Object[] values = { location.getState(),
-                    location.getCity(), location.getLatitude(),
-                    location.getLongitude(), location.getLocation_fk() };
+            final Object[] values = {
+                    location.getState(),
+                    location.getCity(),
+                    location.getLatitude(),
+                    location.getLongitude(),
+                    location.getLocation_fk(),
+                    location.getLocation_link_fk(),
+                    location.getDatePosted(),
+                    location.getTimePosted()};
 
             preparedStatement = DAOUtil.prepareStatement(connection,
                     this.SQL_INSERT, false, values);

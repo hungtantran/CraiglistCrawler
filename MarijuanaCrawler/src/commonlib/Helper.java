@@ -95,9 +95,7 @@ public class Helper {
 	// lowerBound and upperBound number of seconds
 	public static void waitSec(int lowerBound, int upperBound) {
 		try {
-			int waitTime = lowerBound
-					* 1000
-					+ (int) (Math.random() * ((upperBound * 1000 - lowerBound * 1000) + 1));
+			int waitTime = lowerBound * 1000 + (int) (Math.random() * ((upperBound * 1000 - lowerBound * 1000) + 1));
 			Globals.crawlerLogManager.writeLog("Wait for " + waitTime);
 			Thread.currentThread();
 			Thread.sleep(waitTime);

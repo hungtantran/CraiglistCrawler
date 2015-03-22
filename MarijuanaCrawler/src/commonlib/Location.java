@@ -1,6 +1,7 @@
 package commonlib;
 
 public class Location {
+    public Integer id = null;
 	public String country = null;
 	public String state = null;
 	public String city = null;
@@ -8,7 +9,12 @@ public class Location {
 	public Location() {
 	}
 
-	public Location(String country, String state, String city) {
+	public Location(Integer id, String country, String state, String city) throws Exception {
+	    if (id == null || country == null || state == null || city == null) {
+	        throw new Exception("Invalid arguments");
+	    }
+	       
+	    this.id = id;
 		this.country = country;
 		this.state = state;
 		this.city = city;
@@ -16,7 +22,14 @@ public class Location {
 
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-
+		
+		str.append("Id: ");
+        if (this.id != null) {
+            str.append(this.id + " ");
+        } else {
+            str.append("(null) ");
+        }
+		
 		str.append("Country: ");
 		if (this.country != null) {
 			str.append(this.country + " ");

@@ -15,6 +15,9 @@ public class PostingLocation {
     String latitude = null;
     String longitude = null;
     Integer location_fk = null;
+    Integer location_link_fk = null;
+    String datePosted = null;
+    String timePosted = null;
     
     // Getters/setters
     // ----------------------------------------------------------------------------
@@ -57,6 +60,30 @@ public class PostingLocation {
     
     public void setLocation_fk(Integer location_fk) {
         this.location_fk = location_fk;
+    }
+
+    public Integer getLocation_link_fk() {
+        return location_link_fk;
+    }
+
+    public void setLocation_link_fk(Integer location_link_fk) {
+        this.location_link_fk = location_link_fk;
+    }
+
+    public String getDatePosted() {
+        return datePosted;
+    }
+
+    public void setDatePosted(String datePosted) {
+        this.datePosted = datePosted;
+    }
+
+    public String getTimePosted() {
+        return timePosted;
+    }
+
+    public void setTimePosted(String timePosted) {
+        this.timePosted = timePosted;
     }
     
     // Object overrides
