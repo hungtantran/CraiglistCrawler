@@ -143,22 +143,29 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 		rawHTML.setLocation(loc);
 		rawHTML.setDateCrawled(currentDate);
 		rawHTML.setTimeCrawled(currentTime);
-
+		
 		try {
 			int rawHTMLId = this.rawHTMLDAO.create(rawHTML);
 			
 		    Globals.crawlerLogManager.writeLog("Insert content of link " + entryLink + " into RawHTML table succeeds with id = " + rawHTMLId);
-		    PostingLocation location = new PostingLocation();
-		    location.setState(rawHTML.getState());
-		    location.setCity(rawHTML.getCity());
-		    location.setLocation_fk(rawHTMLId);
-		    location.setLocation_link_fk(loc.id);
-		    location.setDatePosted(currentDate);
-		    location.setTimePosted(currentTime);
 		    
-		    if (!this.postingLocationDAO.create(location)) {
-		        Globals.crawlerLogManager.writeLog("Fails to insert location for " + entryLink + " into posting_location table");
-                return false;
+		    // Only insert into posting_location for page that qualify as weed page
+		    if ((predict1 != null && predict1 == 1) ||
+                (predict2 != null && predict2 == 1) ||
+                (positivePage != null && positivePage == 1))
+		    {
+    		    PostingLocation location = new PostingLocation();
+    		    location.setState(rawHTML.getState());
+    		    location.setCity(rawHTML.getCity());
+    		    location.setLocation_fk(rawHTMLId);
+    		    location.setLocation_link_fk(loc.id);
+    		    location.setDatePosted(currentDate);
+    		    location.setTimePosted(currentTime);
+    		    
+    		    if (!this.postingLocationDAO.create(location)) {
+    		        Globals.crawlerLogManager.writeLog("Fails to insert location for " + entryLink + " into posting_location table");
+                    return false;
+    		    }
 		    }
 		} catch (final SQLException e) {
 			Globals.crawlerLogManager.writeLog("Insert content of link " + entryLink + " into RawHTML table fails");

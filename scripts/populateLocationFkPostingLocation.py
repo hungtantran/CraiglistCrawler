@@ -1,15 +1,15 @@
 import time
 import MySQLdb
 
-# db = MySQLdb.connect(host="localhost",
-#                      user="root",
-#                      passwd="",
-#                      db="weedpricelink")
+db = MySQLdb.connect(host="localhost",
+                     user="root",
+                     passwd="",
+                     db="weedpricelink")
 
-db = MySQLdb.connect(host="powdb.clfpwrv3fbfn.us-west-2.rds.amazonaws.com",
-                     port=4200,user="cedro",
-                     passwd="password",
-                     db="powdb")
+# db = MySQLdb.connect(host="powdb.clfpwrv3fbfn.us-west-2.rds.amazonaws.com",
+#                      port=4200,user="cedro",
+#                      passwd="password",
+#                      db="powdb")
 
 def main():
     cursor = db.cursor()
