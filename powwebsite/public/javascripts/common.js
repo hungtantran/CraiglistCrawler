@@ -1,13 +1,9 @@
 // Function that reupdate the display with the newest filter
 function updateDisplay() {
-  initializeMap(cache['locations']);
-  initializePrices(cache['prices']);
+  initializeMap(cache['postings']);
+  initializePrices(cache['postings']);
   initializePostings(cache['postings']);
   initializePostingBodyContent(content['html']);
-}
-
-function initializePostingBodyPrices(prices) {
-  console.log(prices);
 }
 
 function initializePostingBodyContent(content) {
@@ -20,30 +16,34 @@ function initializePostingBodyContent(content) {
 }
 
 function initializePrices(prices) {
-  // console.log(prices);
   $('#price_bin_dist_by_state').empty();
   $('#svgAxis').remove();
 
   var params = document.URL.split("/");
   var id = params[params.length-1];
-  // console.log(id);
   var postingPrices = [];
   var isPostingPage = false;
   if (!isNaN(parseInt(id))) isPostingPage = true;
-  // console.log(isPostingPage);
 
   newPrices = [];
   for (var i=0; i<prices.length; ++i) {
     if (isPostingPage && prices[i]['price_fk']==id) postingPrices.push(prices[i]);
-    if (!('latitude' in prices[i])) continue
 
-    var priceLocation = new google.maps.LatLng(prices[i]['latitude'], prices[i]['longitude'])
+    lat = prices[i]['lat1'];
+    lng = prices[i]['lng1'];
+
+    // If the post doesn't have exact location, use the one of the city
+    if (lat == null || lng == null) {
+      lat = prices[i]['lat2'];
+      lng = prices[i]['lng2'];
+    }
+
+    var priceLocation = new google.maps.LatLng(lat, lng)
     if (mapBound && mapBound.contains(priceLocation)) {
       newPrices.push(prices[i]);
     }
   }
 
-  // console.log(postingPrices);
   newPostingPrices('postingPrices', postingPrices);
   newPriceBin('price_bin_dist_by_state', newPrices);
 }
@@ -88,8 +88,6 @@ function newPriceBin(divId, prices) {
 
     arr.push(data[k]);
   }
-
-  console.log();
 
   var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = $('#' + divId).width()- margin.left - margin.right,
@@ -268,11 +266,18 @@ function drawMarker(map, markers) {
       continue;
     }
 
-    if (markers[i]['latitude'] != null &&
-      markers[i]['longitude'] != null) {
+    lat = markers[i]['lat1'];
+    lng = markers[i]['lng1'];
 
+    // If the post doesn't have exact location, use the one of the city
+    if (lat == null || lng == null) {
+      lat = markers[i]['lat2'];
+      lng = markers[i]['lng2'];
+    }
+
+    if (lat != null && lng != null) {
       var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(markers[i]['latitude'], markers[i]['longitude']),
+        position: new google.maps.LatLng(lat, lng),
         map: map
       });
 
@@ -320,12 +325,9 @@ function initializePostings(postings) {
     return;
   }
 
-  // console.log(postings);
-
   // check if posting page
   var params = document.URL.split("/");
   var id = params[params.length-1];
-  console.log(id);
   var postingPrices = [];
   var isPostingPage = false;
   if (!isNaN(parseInt(id))) isPostingPage = true;
@@ -348,9 +350,16 @@ function initializePostings(postings) {
 
     if (isPostingPage && postings[i]['id'] != id) continue;
 
-    var postingLocation = new google.maps.LatLng(
-      postings[i]['latitude'],
-      postings[i]['longitude']);
+    lat = postings[i]['lat1'];
+    lng = postings[i]['lng1'];
+
+    // If the post doesn't have exact location, use the one of the city
+    if (lat == null || lng == null) {
+      lat = postings[i]['lat2'];
+      lng = postings[i]['lng2'];
+    }
+
+    var postingLocation = new google.maps.LatLng(lat, lng);
 
     if (!mapBound.contains(postingLocation) && !isPostingPage) {
      continue;
@@ -421,18 +430,18 @@ function newXMLRequest(func, cacheEntry) {
 }
 
 function loadData() {
-  // Locations xml request
-  var xmlhttpLocations = newXMLRequest(initializeMap, 'locations');
-  xmlhttpLocations.open("POST","/locations",true);
-  xmlhttpLocations.send();
+  // // Locations xml request
+  // var xmlhttpLocations = newXMLRequest(updateDisplay, 'locations');
+  // xmlhttpLocations.open("POST","/locations",true);
+  // xmlhttpLocations.send();
 
-  // Prices xml request
-  var xmlhttpPrices = newXMLRequest(initializePrices, 'prices');
-  xmlhttpPrices.open("POST","/prices",true);
-  xmlhttpPrices.send();
+  // // Prices xml request
+  // var xmlhttpPrices = newXMLRequest(initializePrices, 'prices');
+  // xmlhttpPrices.open("POST","/prices",true);
+  // xmlhttpPrices.send();
 
   // Postings xml request
-  var xmlhttpPostings = new newXMLRequest(null, 'postings');
+  var xmlhttpPostings = new newXMLRequest(updateDisplay, 'postings');
   xmlhttpPostings.open("POST","/postings",true);
   xmlhttpPostings.send();
 
