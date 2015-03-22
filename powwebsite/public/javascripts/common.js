@@ -26,17 +26,13 @@ function initializePrices(prices) {
   if (!isNaN(parseInt(id))) isPostingPage = true;
 
   newPrices = [];
-  for (var i=0; i<prices.length; ++i) {
-    if (isPostingPage && prices[i]['price_fk']==id) postingPrices.push(prices[i]);
-
-    lat = prices[i]['lat1'];
-    lng = prices[i]['lng1'];
-
-    // If the post doesn't have exact location, use the one of the city
-    if (lat == null || lng == null) {
-      lat = prices[i]['lat2'];
-      lng = prices[i]['lng2'];
+  for (var i = 0; i < prices.length; ++i) {
+    if (isPostingPage && prices[i]['price_fk'] == id) {
+      postingPrices.push(prices[i]);
     }
+
+    lat = prices[i]['lat'];
+    lng = prices[i]['lng'];
 
     var priceLocation = new google.maps.LatLng(lat, lng)
     if (mapBound && mapBound.contains(priceLocation)) {
@@ -146,8 +142,6 @@ function newPriceBin(divId, prices) {
   y1.domain(binNames).rangeRoundBands([0, y0.rangeBand()]);
   x.domain([0, d3.max(arr, function(d) { return d3.max(d['bins'], function(d) { return d.value; }); })]);
 
-  
-
   svgAxis.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(100,0)")
@@ -236,8 +230,6 @@ function newPriceBin(divId, prices) {
           return "#F5F5F5";
         }
         });
-
-
 }
 
 // Callback function to handle change in map
@@ -266,14 +258,8 @@ function drawMarker(map, markers) {
       continue;
     }
 
-    lat = markers[i]['lat1'];
-    lng = markers[i]['lng1'];
-
-    // If the post doesn't have exact location, use the one of the city
-    if (lat == null || lng == null) {
-      lat = markers[i]['lat2'];
-      lng = markers[i]['lng2'];
-    }
+    lat = markers[i]['lat'];
+    lng = markers[i]['lng'];
 
     if (lat != null && lng != null) {
       var marker = new google.maps.Marker({
@@ -340,6 +326,7 @@ function initializePostings(postings) {
 
   for (var i = 0; i < postings.length; ++i)
   {
+    console.log(postings[i])
     if (stateFilter != null && postings[i]['state'] != stateFilter && !isPostingPage) {
       continue;
     }
@@ -350,14 +337,8 @@ function initializePostings(postings) {
 
     if (isPostingPage && postings[i]['id'] != id) continue;
 
-    lat = postings[i]['lat1'];
-    lng = postings[i]['lng1'];
-
-    // If the post doesn't have exact location, use the one of the city
-    if (lat == null || lng == null) {
-      lat = postings[i]['lat2'];
-      lng = postings[i]['lng2'];
-    }
+    lat = postings[i]['lat'];
+    lng = postings[i]['lng'];
 
     var postingLocation = new google.maps.LatLng(lat, lng);
 

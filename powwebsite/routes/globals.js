@@ -12,7 +12,29 @@ pricesProvider.getPostings(function(error, docs) {
         process.exit(1);
     }
 
-    postings = docs;
+    postings = [];
+
+    for (var i = 0; i < docs.length; ++i)
+    {
+        postings[i] = {};
+
+        postings[i]['id'] = docs[i]['id'];
+        postings[i]['price'] = docs[i]['price'];
+        postings[i]['quantity'] = docs[i]['quantity'];
+        postings[i]['unit'] = docs[i]['unit'];
+        postings[i]['state'] = docs[i]['state'];
+        postings[i]['city'] = docs[i]['city'];
+        postings[i]['datePosted'] = docs[i]['datePosted'];
+
+        postings[i]['lat'] = docs[i]['lat1'];
+        postings[i]['lng'] = docs[i]['lng1'];
+
+        if (postings[i]['lat'] == null || postings[i]['lng'] == null) {
+            postings[i]['lat'] = docs[i]['lat2'];
+            postings[i]['lng'] = docs[i]['lng2'];
+        }
+    }
+
     exports.postings = postings;
 })
 
