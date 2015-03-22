@@ -29,8 +29,8 @@ def main():
         cursor.execute(selectQuery);
         locations = cursor.fetchall()
 
-        if len(locations) > 1:
-            print("ERROR: more than one key for locations")
+        if len(locations) != 1:
+            print("ERROR: more or less than 1 key for locations")
             continue
 
         updateQuery = "UPDATE posting_location SET location_link_fk = %d WHERE location_fk = %d" % (locations[0][0], id)
