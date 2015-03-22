@@ -18,6 +18,7 @@ public class PostingLocation {
     Integer location_link_fk = null;
     String datePosted = null;
     String timePosted = null;
+    String posting_body = null;
     
     // Getters/setters
     // ----------------------------------------------------------------------------
@@ -84,6 +85,14 @@ public class PostingLocation {
 
     public void setTimePosted(String timePosted) {
         this.timePosted = timePosted;
+    }
+
+    public String getPosting_body() {
+        return posting_body;
+    }
+
+    public void setPosting_body(String posting_body) {
+        this.posting_body = posting_body;
     }
     
     // Object overrides

@@ -13,8 +13,8 @@ public class PostingLocationDAOJDBC implements PostingLocationDAO {
     private final String SQL_SELECT_ALL = "SELECT * FROM posting_location";
     private final String SQL_SELECT_BY_ID = "SELECT * FROM posting_location WHERE location_fk = ?";
     private final String SQL_INSERT = "INSERT INTO posting_location"
-            + "(state, city, latitude, longitude, location_fk, location_link_fk, datePosted, timePosted)"
-            + " values (?, ?, ?, ?, ?, ?, ?, ?)";
+            + "(state, city, latitude, longitude, location_fk, location_link_fk, datePosted, timePosted, posting_body)"
+            + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private final DAOFactory daoFactory;
 
@@ -63,6 +63,11 @@ public class PostingLocationDAOJDBC implements PostingLocationDAO {
         location.setTimePosted(resultSet.getString("timePosted"));
         if (resultSet.wasNull()) {
             location.setTimePosted(null);
+        }
+        
+        location.setPosting_body(resultSet.getString("posting_body"));
+        if (resultSet.wasNull()) {
+            location.setPosting_body(null);
         }
         
         return location;
@@ -153,7 +158,8 @@ public class PostingLocationDAOJDBC implements PostingLocationDAO {
                     location.getLocation_fk(),
                     location.getLocation_link_fk(),
                     location.getDatePosted(),
-                    location.getTimePosted()};
+                    location.getTimePosted(),
+                    location.getPosting_body()};
 
             preparedStatement = DAOUtil.prepareStatement(connection,
                     this.SQL_INSERT, false, values);

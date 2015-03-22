@@ -19,6 +19,7 @@ router.get('/:id', function(req, res) {
     var id = params[params.length-1];
 
     rawHTMLProvider.getContent(id, function(error, doc) {
+        
         res.render('posting', {
             title: 'Weed Posting Page',
             stylesheet: '/stylesheets/posting.css',

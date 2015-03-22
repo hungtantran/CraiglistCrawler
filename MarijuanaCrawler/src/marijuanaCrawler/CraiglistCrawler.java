@@ -9,6 +9,9 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
 import commonlib.Globals;
 import commonlib.Globals.Domain;
 import commonlib.Helper;
@@ -96,14 +99,22 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 	}
 
 	private boolean processOneEntryLink(String entryLink, Location loc) throws SQLException {
-		final String htmlContent = NetworkingFunctions.downloadHtmlContentToString(
+		final Document htmlDoc = NetworkingFunctions.downloadHtmlContentToDoc(
 		        entryLink,
 		        this.numRetriesDownloadLink);
 		
-		if (htmlContent == null) {
+		if (htmlDoc == null) {
 			Globals.crawlerLogManager.writeLog("Fail to download link " + entryLink);
 			return false;
 		}
+		
+		Elements postingBodies = htmlDoc.select("section[id=postingBody]");
+		if (postingBodies.size() != 1) {
+		    Globals.crawlerLogManager.writeLog("Can't parse posting body for link " + entryLink);
+            return false;
+		}
+		
+		final String htmlContent = htmlDoc.outerHtml();
 
 		final LinkCrawled linkCrawled = new LinkCrawled();
 		linkCrawled.setLink(entryLink);
@@ -161,6 +172,7 @@ public class CraiglistCrawler implements IWebsiteCrawler {
     		    location.setLocation_link_fk(loc.id);
     		    location.setDatePosted(currentDate);
     		    location.setTimePosted(currentTime);
+    		    location.setPosting_body(postingBodies.get(0).html());
     		    
     		    if (!this.postingLocationDAO.create(location)) {
     		        Globals.crawlerLogManager.writeLog("Fails to insert location for " + entryLink + " into posting_location table");
