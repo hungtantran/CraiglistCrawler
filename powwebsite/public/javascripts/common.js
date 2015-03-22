@@ -3,12 +3,13 @@ function updateDisplay() {
   initializeMap(cache['postings']);
   initializePrices(cache['postings']);
   initializePostings(cache['postings']);
-  initializePostingBodyContent(content['html']);
+  initializePostingBodyContent();
 }
 
-function initializePostingBodyContent(content) {
-  if (!content) return;
-  var elements = $(content['html']).highlightRegex('[\d+/\d+oz|\d+/\d+ ounce|\d+oz|\d ounces|eighth|eighths|quarter|quarter oz|quart|quarters|half|half oz|ounce|oz|1/8th|1/8TH|8ths|8THS|HALF|FULL|an o|a qp|a hp|an hp|a unit|a pound|\d+/\d+ | \d+[0-9]*\.?[0-9]* grams | \d+[0-9]*\.?[0-9]*grams | gram | GRAMS | \d+[0-9]*\.?[0-9]*gram | \d+[0-9]*\.?[0-9]*GRAMS | \d+[0-9]*\.?[0-9]*g | \d+[0-9]*\.?[0-9]*G]|\d+/\d+|\d+?[0-9]*\.?[0-9]+ dollar|\d+?[0-9]*\.?[0-9]+ donation|\\$\d+?[0-9]*\.?[0-9]+|\\$+?[0-9]*\.?[0-9]+|[0-9]*\.?[0-9]+');
+function initializePostingBodyContent() {
+  var content = $("postingbody")[0];;
+
+  var elements = content.highlightRegex('[\d+/\d+oz|\d+/\d+ ounce|\d+oz|\d ounces|eighth|eighths|quarter|quarter oz|quart|quarters|half|half oz|ounce|oz|1/8th|1/8TH|8ths|8THS|HALF|FULL|an o|a qp|a hp|an hp|a unit|a pound|\d+/\d+ | \d+[0-9]*\.?[0-9]* grams | \d+[0-9]*\.?[0-9]*grams | gram | GRAMS | \d+[0-9]*\.?[0-9]*gram | \d+[0-9]*\.?[0-9]*GRAMS | \d+[0-9]*\.?[0-9]*g | \d+[0-9]*\.?[0-9]*G]|\d+/\d+|\d+?[0-9]*\.?[0-9]+ dollar|\d+?[0-9]*\.?[0-9]+ donation|\\$\d+?[0-9]*\.?[0-9]+|\\$+?[0-9]*\.?[0-9]+|[0-9]*\.?[0-9]+');
   var postingBody = $('#postingbody', elements);
 
   $('#postingBodyContent').empty();
@@ -425,15 +426,6 @@ function loadData() {
   var xmlhttpPostings = new newXMLRequest(updateDisplay, 'postings');
   xmlhttpPostings.open("POST", postUrl, true);
   xmlhttpPostings.send();
-
-  var params = document.URL.split("/");
-  var id = params[params.length-1];
-  if (!isNaN(parseInt(id))) {
-    // if it is a number
-    var xmlhttpPostingBody = new newXMLRequest(initializePostingBodyContent, 'posting');
-    xmlhttpPostingBody.open("POST","/posting/postingbody/" + id, true);
-    xmlhttpPostingBody.send();
-  }
 }
 
 window.google = window.google || {};
