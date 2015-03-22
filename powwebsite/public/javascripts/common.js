@@ -371,6 +371,7 @@ function initializePostings(postings) {
 
     // Date Posted cell
     var datePosted = row.insertCell(index++);
+    datePosted.innerHTML = '<a href="/posting/' + postings[i]['id'] + '">' + postings[i]['datePosted'] + '</a>';
 
     // Location cell
     var location = row.insertCell(index++);

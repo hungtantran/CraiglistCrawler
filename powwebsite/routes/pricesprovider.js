@@ -86,44 +86,54 @@ PricesProvider.prototype.getPrices = function(postingId, callback) {
 // Get all posting
 PricesProvider.prototype.getPostings = function(callback) {
   var query =
-    '(SELECT \
-    location_fk AS id, \
-    price, \
-    quantity, \
-    unit, \
-    A.state, \
-    A.city, \
-    A.latitude AS lat1, \
-    A.longitude AS lng1, \
-    C.latitude AS lat2, \
-    C.longitude AS lng2 \
-  FROM \
-    posting_location AS A, \
-    prices AS B, \
-    location_link AS C \
-  WHERE \
-    price_fk = location_fk \
-  AND location_link_fk = C.id \
-) \
-UNION \
+    'SELECT * \
+FROM \
   ( \
-    SELECT \
-      location_fk AS id, \
-      NULL AS price, \
-      NULL AS quantity, \
-      NULL AS unit, \
-      A.state, \
-      A.city, \
-      A.latitude AS lat1, \
-      A.longitude AS lng1, \
-      C.latitude AS lat2, \
-      C.longitude AS lng2 \
-    FROM \
-      posting_location AS A, \
-      location_link AS C \
-    WHERE \
-      location_link_fk = C.id \
-    AND location_fk NOT IN (SELECT price_fk FROM prices))';
+    ( \
+      SELECT \
+        location_fk AS id, \
+        price, \
+        quantity, \
+        unit, \
+        A.state, \
+        A.city, \
+        A.latitude AS lat1, \
+        A.longitude AS lng1, \
+        C.latitude AS lat2, \
+        C.longitude AS lng2, \
+        datePosted \
+      FROM \
+        posting_location AS A, \
+        prices AS B, \
+        location_link AS C \
+      WHERE \
+        price_fk = location_fk \
+      AND location_link_fk = C.id \
+    ) \
+    UNION \
+      ( \
+        SELECT \
+          location_fk AS id, \
+          NULL AS price, \
+          NULL AS quantity, \
+          NULL AS unit, \
+          A.state, \
+          A.city, \
+          A.latitude AS lat1, \
+          A.longitude AS lng1, \
+          C.latitude AS lat2, \
+          C.longitude AS lng2, \
+          datePosted \
+        FROM \
+          posting_location AS A, \
+          location_link AS C \
+        WHERE \
+          location_link_fk = C.id \
+        AND location_fk NOT IN (SELECT price_fk FROM prices) \
+      ) \
+  ) AS D \
+ORDER BY \
+  datePosted DESC';
 
   this.connection.query(query, function(err, rows) {
     if (err) {
