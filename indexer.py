@@ -52,34 +52,6 @@ def get_quantity_mapping():
 
   return quantityMapping
 
-def extract_inferred_location(id):
-  cursor = db.cursor()
-  cursor.execute("SELECT * FROM posting_location INNER JOIN location_link ON + \
-    ((posting_location.city=location_link.city) AND \
-      (posting_location.state=location_link.state)) \
-        where posting_location.location_fk=" + str(id))
-  rows = cursor.fetchall()
-  if len(rows) > 1:
-    print("ERROR: more than one key for extract_inferred_location")
-  for row in rows:
-    state = row[0]
-    city = row[1]
-    country = row[8]
-
-    url = "http://maps.google.com/maps/api/geocode/json?address="
-    url = (url + city + "+" + state + "+" + country).replace(' ', '+')
-    print (url)
-
-    time.sleep(.2)
-    response = urllib2.urlopen(url)
-    data = json.load(response)
-    location = data['results'][0]['geometry']['location']
-    print [location['lat'], location['lng']]
-    return [location['lat'], location['lng']]
-
-  return [None, None]
-
-
 def extract_locations(text):
   latitudePattern = re.compile("data-latitude=\"(-?\d+?[0-9]*\.?[0-9]+)\"")
   longitudePattern = re.compile("data-longitude=\"(-?\d+?[0-9]*\.?[0-9]+)\"")
@@ -167,12 +139,14 @@ def write_to_db(rowId, metricQuantities, englishQuantities, prices, locations):
   cursor = db.cursor()
   cursor.execute(query)
 
-  query = "INSERT INTO posting_location (location_fk, latitude, longitude) VALUES(%d, \"%s\", \"%s\") ON DUPLICATE KEY UPDATE latitude=\"%s\", longitude=\"%s\"" %(rowId, str(locations[0]), str(locations[1]), str(locations[0]), str(locations[1]));
-  # print query
-  cursor = db.cursor()
-  cursor.execute(query)
+  if (locations[0] != None)
+    query = "INSERT INTO posting_location (location_fk, latitude, longitude) VALUES(%d, \"%s\", \"%s\") ON DUPLICATE KEY UPDATE latitude=\"%s\", longitude=\"%s\"" %(rowId, str(locations[0]), str(locations[1]), str(locations[0]), str(locations[1]));
 
-  db.commit()
+    # print query
+    cursor = db.cursor()
+    cursor.execute(query)
+
+    db.commit()
 
 def index(rowId, htmlFile):
   html_doc = htmlFile
@@ -197,8 +171,6 @@ def index(rowId, htmlFile):
   extracted_quantities = extract_quantities(text)
 
   extracted_locations = extract_locations(htmlFile)
-  if (extracted_locations[0] == None):
-    extracted_locations = extract_inferred_location(rowId)
 
   # print "metric quantities:", extracted_quantities[0]
   # print "english quantities:", extracted_quantities[1]
