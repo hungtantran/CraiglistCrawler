@@ -23,7 +23,8 @@ router.get('/:id', function(req, res) {
         res.render('posting', {
             title: 'Weed Posting Page',
             stylesheet: '/stylesheets/posting.css',
-            content: doc['posting_body']
+            content: doc['posting_body'],
+            states: globals.states
         });
         return;
     })

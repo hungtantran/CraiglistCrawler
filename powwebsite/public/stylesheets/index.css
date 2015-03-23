@@ -19,6 +19,10 @@ body {
     */url(../images/bg.png) repeat-x top;
 }
 
+#header-bar {
+    width: 50%;
+}
+
 #header {
     float: left;
     height: 10%;

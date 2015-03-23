@@ -37,11 +37,44 @@ html
               | LeafyExchange
 
           div(id='navbar' class='navbar-collapse collapse')
-            form(class='navbar-form')
-              div(class='form-group')
-                | <input type="text" placeholder="Location (Ex: 420 Pontius Ave N, Seattle, WA, 98103)" class="form-control">
-              button(type='submit' class='btn btn-success')
-                | Search
+            ul(class='nav navbar-nav' id='header-bar')
+              li(class='dropdown')
+                  a(href='#' data-toggle='dropdown' class='dropdown-toggle')
+                    if (typeof(stateChosen) !== 'undefined')
+                      = stateChosen
+                    else
+                      | Choose State
+                    b(class='caret')
+
+                  ul(class='dropdown-menu')
+                    div(class='row' style='width:500px')
+                      if (typeof(states) !== 'undefined')
+                        - index = 0
+                        each state in states
+                          if (typeof(state) === 'undefined' || state != stateChosen)
+                            if (index % 10 == 0)
+                              if (index > 0)
+                                | </ul>
+                              | <ul class='list-unstyled col-md-4'>
+                            - ++index
+                            li(class='list-unstyled')
+                              | <a href='/state/
+                              = state
+                              | '>
+                              = state
+                              | </a>
+
+                      li(class='divider')
+                      li
+                        a(href='/')
+                          | All States
+                      | </ul>
+              li
+                form(class='navbar-form')
+                  div(class='form-group')
+                    | <input type="text" placeholder="Location (Ex: 420 Pontius Ave N, Seattle, WA, 98103)" class="form-control">
+                  button(type='submit' class='btn btn-success')
+                    | Search
 
     block content
 

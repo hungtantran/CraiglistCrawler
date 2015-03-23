@@ -9,7 +9,8 @@ router.get('/', function(req, res) {
     title: 'Weed Price Index',
     stylesheet: '/stylesheets/index.css',
     markers: globals.locations,
-    postings: globals.postings
+    postings: globals.postings,
+    states: globals.states
   });
 });
 
@@ -28,7 +29,9 @@ router.get('/state/:state', function(req, res){
     title: 'Weed Price Index in ' + state,
     stylesheet: '/stylesheets/index.css',
     markers: stateInfo,
-    postings: stateInfo
+    postings: stateInfo,
+    states: globals.states,
+    stateChosen: state
   });
 });
 
