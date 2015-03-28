@@ -11,18 +11,19 @@ block content
       div(class='clearfix visible-xs-block')
 
       div(id='right_pane' class='col-xs-12 col-sm-12 col-md-5 col-lg-3')
+        table(id='latest_prices_content' class='table table-striped table-condensed table-responsive')
+          thead
+            tr
+              th
+                | Date Posted
+              th
+                | Locations
+              th
+               | Quantities
+              th
+                | Prices
         div(id='right_pane_content')
           table(id='latest_prices_content' class='table table-striped table-condensed table-responsive')
-            thead
-              tr
-                th
-                  | Date Posted
-                th
-                  | Locations
-                th
-                 | Quantities
-                th
-                  | Prices
             tbody(id='table_body')
               each posting in postings
                 if (posting['city'])
