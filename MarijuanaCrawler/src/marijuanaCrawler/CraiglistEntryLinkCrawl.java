@@ -1,5 +1,6 @@
 package marijuanaCrawler;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class CraiglistEntryLinkCrawl implements IEntryLinkCrawler {
 	}
 
 	@Override
-	public String getNextEntryLink() {
+	public String getNextEntryLink() throws IOException {
 		this.curLinkListIndex++;
 
 		if (this.curLinkListIndex < this.entryLinkList.size()) {
@@ -64,8 +65,7 @@ public class CraiglistEntryLinkCrawl implements IEntryLinkCrawler {
 
 		List<String> curPageLink = null;
 		try {
-			curPageLink = this.parseEntryLinksOnePage(this.searchTerm,
-					this.curPage);
+			curPageLink = this.parseEntryLinksOnePage(this.searchTerm, this.curPage);
 		} catch (final MalformedURLException e) {
 			e.printStackTrace();
 			return null;
@@ -108,7 +108,7 @@ public class CraiglistEntryLinkCrawl implements IEntryLinkCrawler {
 
 	// Return the number of links found
 	private List<String> parseEntryLinksOnePage(String searchTerm, int pageNum)
-			throws MalformedURLException {
+			throws IOException {
 		final List<String> linksFound = new ArrayList<String>();
 
 		if (searchTerm == null) {
@@ -132,8 +132,7 @@ public class CraiglistEntryLinkCrawl implements IEntryLinkCrawler {
 		}
 
 		Globals.crawlerLogManager.writeLog("Search page: " + pageLink);
-		final Document doc = NetworkingFunctions.downloadHtmlContentToDoc(
-				pageLink, this.numRetryDownloadPage);
+		final Document doc = NetworkingFunctions.downloadHtmlContentToDoc(pageLink, this.numRetryDownloadPage);
 
 		// If fail to download the page, return found no links
 		if (doc == null) {
@@ -209,6 +208,9 @@ public class CraiglistEntryLinkCrawl implements IEntryLinkCrawler {
 		} catch (final MalformedURLException e) {
 			e.printStackTrace();
 			System.out.println("Fail to create craiglist entry link crawl");
+		} catch (final IOException e) {
+		    e.printStackTrace();
+            System.out.println("Fail to create craiglist entry link crawl");
 		}
 	}
 }

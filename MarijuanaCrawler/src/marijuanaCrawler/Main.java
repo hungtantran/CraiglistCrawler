@@ -13,8 +13,9 @@ public class Main {
 				Globals.crawlerLogManager.writeLog("Fail to crawl");
 			}
 		} catch (Exception e) {
-			Globals.crawlerLogManager.writeLog("Fail to create CraiglistCrawler object");
+			Globals.crawlerLogManager.writeLog("Fail to create CraiglistCrawler object and crawl " + e.getMessage());
 			e.printStackTrace();
+			return;
 		}
 	}
 }

@@ -7,26 +7,76 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Random;
 
 import org.jsoup.Jsoup;
 import org.jsoup.Connection.Response;
 import org.jsoup.nodes.Document;
 
 public class NetworkingFunctions {
+    public static final String[] userAgents = {
+        "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6",
+        "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)",
+        "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)",
+        "Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0 )",
+        "Mozilla/4.0 (compatible; MSIE 5.5; Windows 98; Win 9x 4.90)",
+        "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.1) Gecko/2008070208 Firefox/3.0.1",
+        "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14",
+        "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.29 Safari/525.13",
+        "Mozilla/4.8 [en] (Windows NT 6.0; U)",
+        "Mozilla/4.8 [en] (Windows NT 5.1; U)",
+        "Opera/9.25 (Windows NT 6.0; U; en)",
+        "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; en) Opera 8.0",
+        "Opera/7.51 (Windows NT 5.1; U) [en]",
+        "Opera/7.50 (Windows XP; U)",
+        "Avant Browser/1.2.789rel1 (http://www.avantbrowser.com)",
+        "Mozilla/5.0 (Windows; U; Win98; en-US; rv:1.4) Gecko Netscape/7.1 (ax)",
+        "Mozilla/5.0 (Windows; U; Windows XP) Gecko MultiZilla/1.6.1.0a",
+        "Opera/7.50 (Windows ME; U) [en]",
+        "Mozilla/3.01Gold (Win95; I)",
+        "Mozilla/2.02E (Win95; U)",
+        "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/125.2 (KHTML, like Gecko) Safari/125.8",
+        "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/125.2 (KHTML, like Gecko) Safari/85.8",
+        "Mozilla/4.0 (compatible; MSIE 5.15; Mac_PowerPC)",
+        "Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.7a) Gecko/20050614 Firefox/0.9.0+",
+        "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-US) AppleWebKit/125.4 (KHTML, like Gecko, Safari) OmniWeb/v563.15",
+        "Mozilla/5.0 (X11; U; Linux; i686; en-US; rv:1.6) Gecko Debian/1.6-7",
+        "Mozilla/5.0 (X11; U; Linux; i686; en-US; rv:1.6) Gecko Epiphany/1.2.5",
+        "Mozilla/5.0 (X11; U; Linux i586; en-US; rv:1.7.3) Gecko/20050924 Epiphany/1.4.4 (Ubuntu)",
+        "Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.10 (like Gecko) (Kubuntu)",
+        "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.19) Gecko/20081216 Ubuntu/8.04 (hardy) Firefox/2.0.0.19",
+        "Mozilla/5.0 (X11; U; Linux; i686; en-US; rv:1.6) Gecko Galeon/1.3.14",
+        "Mozilla/5.0 (compatible; Konqueror/3.3; Linux 2.6.8-gentoo-r3; X11;",
+        "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.6) Gecko/20050614 Firefox/0.8",
+        "Opera/9.52 (X11; Linux i686; U; en)",
+        "Mozilla/5.0 (X11; U; FreeBSD; i386; en-US; rv:1.7) Gecko",
+        "Mozilla/4.77 [en] (X11; I; IRIX;64 6.5 IP30)",
+        "Mozilla/4.8 [en] (X11; U; SunOS; 5.7 sun4u)",
+        "Mozilla/3.0 (compatible; NetPositive/2.1.1; BeOS)"
+    };
+    
 	// Download the html content into a private Document variable "doc"
-	public static Document downloadHtmlContentToDoc(String url, int numRetries) {
+	public static Document downloadHtmlContentToDoc(String url, int numRetries) throws IOException {
+	    Random rand = new Random(); 
+	    int ranIndex = rand.nextInt(NetworkingFunctions.userAgents.length); 
+	    
 		for (int i = 0; i < numRetries; i++) {
 			try {
 				Response response = Jsoup
-						.connect(url)
-						.userAgent(
-								"Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
-						.timeout(10000).followRedirects(true).execute();
+					.connect(url)
+					.userAgent(NetworkingFunctions.userAgents[ranIndex])
+					.timeout(10000).followRedirects(true).execute();
+				
+				Globals.crawlerLogManager.writeLog("Download successfully link " + url + " after " + numRetries + " retries with user agent " + NetworkingFunctions.userAgents[ranIndex]);
+				
 				return response.parse();
 			} catch (IOException e) {
 				// Only print out fail on the last fail
-				if (i == numRetries - 1) 
+				if (i == numRetries - 1) {
+				    Globals.crawlerLogManager.writeLog("Fail to download link " + url + " after " + numRetries + " retries with user agent " + NetworkingFunctions.userAgents[ranIndex]);
 					Globals.crawlerLogManager.writeLog(e.getMessage());
+					throw e;
+				}
 			}
 		}
 

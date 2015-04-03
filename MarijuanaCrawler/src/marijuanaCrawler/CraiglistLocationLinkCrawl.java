@@ -1,5 +1,6 @@
 package marijuanaCrawler;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class CraiglistLocationLinkCrawl {
 		return this.linkToLocationMap;
 	}
 
-	public boolean getLink() {
+	public boolean getLink() throws IOException {
 		Document doc = NetworkingFunctions.downloadHtmlContentToDoc(this.startLink, this.numRetryDownloadPage);
 
 		if (doc == null) {
@@ -94,9 +95,14 @@ public class CraiglistLocationLinkCrawl {
 		CraiglistLocationLinkCrawl crawler = new CraiglistLocationLinkCrawl();
 
 		// Fail to get the craiglist location links
-		if (!crawler.getLink()) {
-			return;
-		}
+		try {
+            if (!crawler.getLink()) {
+            	return;
+            }
+        } catch (IOException e) {
+            Globals.crawlerLogManager.writeLog("Throw Exception " + e.getMessage());
+            return;
+        }
 
 		Map<String, Location> linkToLocationMap = crawler.getLinkToLocationMap();
 

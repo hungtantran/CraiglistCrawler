@@ -1,5 +1,6 @@
 package newsCrawler;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class BingNewsEntryLinkCrawl {
 	public BingNewsEntryLinkCrawl() {
 	}
 
-	public Map<String, String> getLink(int pageNum) {
+	public Map<String, String> getLink(int pageNum) throws IOException {
 		if (pageNum < 1)
 			return null;
 
@@ -31,8 +32,7 @@ public class BingNewsEntryLinkCrawl {
 			String startLink = "http://www.bing.com/news/search?q=" + searchTerm + "&qft=sortbydate%3d\"1\"&first=" + firstEntryOrder + "&FORM=YFNR";
 			System.out.println("Start link = "+startLink);
 			
-			Document doc = NetworkingFunctions.downloadHtmlContentToDoc(
-					startLink, this.numRetryDownloadPage);
+			Document doc = NetworkingFunctions.downloadHtmlContentToDoc(startLink, this.numRetryDownloadPage);
 
 			if (doc == null)
 				return null;
@@ -62,14 +62,20 @@ public class BingNewsEntryLinkCrawl {
 	}
 
 	public static void main(String[] args) {
-		BingNewsEntryLinkCrawl crawler = new BingNewsEntryLinkCrawl();
-
-		Map<String, String> linkToTitleMap = crawler.getLink(2);
-		
-		if (linkToTitleMap != null) {
-			for (Map.Entry<String, String> entry : linkToTitleMap.entrySet()) {
-				System.out.println(entry.getValue()+" : "+entry.getValue());
-			}
-		}
+	    try {
+    		BingNewsEntryLinkCrawl crawler = new BingNewsEntryLinkCrawl();
+    
+    		Map<String, String> linkToTitleMap = crawler.getLink(2);
+    		
+    		if (linkToTitleMap != null) {
+    			for (Map.Entry<String, String> entry : linkToTitleMap.entrySet()) {
+    				System.out.println(entry.getValue()+" : "+entry.getValue());
+    			}
+    		}
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        Globals.crawlerLogManager.writeLog("Throw Exception " + e.getMessage());
+            return;
+	    }
 	}
 }

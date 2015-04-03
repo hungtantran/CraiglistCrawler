@@ -1,5 +1,6 @@
 package marijuanaCrawler;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -80,8 +81,7 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 			this.locationLinkLists.add(locationLink);
 		}
 
-		final List<LinkCrawled> linksCrawled = this.linkCrawledDAO
-		        .get(Domain.CRAIGLIST.value);
+		final List<LinkCrawled> linksCrawled = this.linkCrawledDAO.get(Domain.CRAIGLIST.value);
 
 		this.urlsCrawled = new HashSet<String>();
 		for (final LinkCrawled linkCrawled : linksCrawled) {
@@ -98,10 +98,8 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 		return true;
 	}
 
-	private boolean processOneEntryLink(String entryLink, Location loc) throws SQLException {
-		final Document htmlDoc = NetworkingFunctions.downloadHtmlContentToDoc(
-		        entryLink,
-		        this.numRetriesDownloadLink);
+	private boolean processOneEntryLink(String entryLink, Location loc) throws SQLException, IOException {
+		final Document htmlDoc = NetworkingFunctions.downloadHtmlContentToDoc(entryLink, this.numRetriesDownloadLink);
 		
 		if (htmlDoc == null) {
 			Globals.crawlerLogManager.writeLog("Fail to download link " + entryLink);
@@ -190,8 +188,7 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 	private boolean processOneLocationLink(String locationUrl) throws Exception {
 		final Location curLocation = this.linkToLocationMap.get(locationUrl);
 		if (curLocation == null) {
-			throw new Exception("Unexpected error: location link "
-					+ locationUrl + " is not poresent in the map");
+			throw new Exception("Unexpected error: location link " + locationUrl + " is not poresent in the map");
 		}
 
 		final IEntryLinkCrawler crawler = new CraiglistEntryLinkCrawl(
@@ -202,8 +199,7 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 			crawler.setQueryTerm(term);
 
 			if (!crawler.startUp()) {
-				Globals.crawlerLogManager
-						.writeLog("Fail to start up from link " + locationUrl);
+				Globals.crawlerLogManager.writeLog("Fail to start up from link " + locationUrl);
 				continue;
 			}
 
@@ -272,12 +268,10 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 
 			final String locationUrl = this.urlsQueue.remove().getLink();
 
-			final boolean processLocLinkSuccess = this
-					.processOneLocationLink(locationUrl);
+			final boolean processLocLinkSuccess = this.processOneLocationLink(locationUrl);
 
 			if (!processLocLinkSuccess) {
-				Globals.crawlerLogManager.writeLog("Process location link "
-						+ locationUrl + " fails");
+				Globals.crawlerLogManager.writeLog("Process location link " + locationUrl + " fails");
 				continue;
 			}
 		}
