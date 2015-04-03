@@ -220,7 +220,7 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 
 			final Object[] values = {
 		        rawHTML.getId(), rawHTML.getUrl(),
-				HTMLCompressor.compressHtmlContent(rawHTML.getHtml()), rawHTML.getPositive(),
+				rawHTML.getHtml(), rawHTML.getPositive(),
 				rawHTML.getPredict1(), rawHTML.getPredict2(),
 				rawHTML.getCountry(), rawHTML.getState(), rawHTML.getCity(),
 				rawHTML.getDateCrawled(), rawHTML.getTimeCrawled()};
