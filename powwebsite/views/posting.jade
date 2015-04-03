@@ -2,19 +2,18 @@ extends layout
 
 block content
     div(class='row' id ='content')
-      div(id='hidden' class='col-md-2 col-lg-2 hidden-xs hidden-sm')
+      div(id='left-margin'             class='hidden-xs hidden-sm col-md-2 col-lg-2')
+      div(id='map-canvas'              class='col-xs-12 col-sm-6  col-md-4 col-lg-4 ')
+      div(id='price_bin_dist_by_state' class='hidden-xs col-sm-6  col-md-4 col-lg-4 ')
+      div(id='right-margin'            class='hidden-xs hidden-sm col-md-2 col-lg-2')
 
-      div(id='map-canvas' class='col-xs-12 col-sm-12 col-md-4 col-lg-4 hidden-xs')
-      div(id='price_bin_dist_by_state' class='col-xs-12 col-sm-12 col-md-4 col-lg-4 hidden-xs')
+      div(class='clearfix')
 
-      div(id='hidden' class='col-md-2 col-lg-2 hidden-xs hidden-sm')
-
-    div(class='row' id ='posting')
-      div(id='hidden' class='col-md-2 col-lg-2 hidden-xs hidden-sm')
-
-      div(id='postingBodyContent' class='col-xs-12 col-sm-12 col-md-4 col-lg-4 hidden-xs')
+      div(id='left-margin'             class='hidden-xs hidden-sm col-md-2 col-lg-2')
+      div(id='postingBodyContent'      class='col-xs-12 col-sm-6  col-md-4 col-lg-4')
         != content
-      div(id='right_pane' class='col-xs-12 col-sm-12 col-md-4 col-lg-4')
+
+      div(id='right_pane'              class='col-xs-12 col-sm-6  col-md-4 col-lg-4')
         div(id='right_pane_content')
           table(id='latest_prices_content' class='table table-striped table-condensed table-responsive')
             thead
@@ -28,8 +27,7 @@ block content
                 th
                   | Prices
             tbody(id='table_body')
-
-      div(id='hidden' class='col-md-2 col-lg-2 hidden-xs hidden-sm')
+      div(id='right-margin'            class='hidden-xs hidden-sm col-md-2 col-lg-2')
 
     script(type='text/javascript')
       | var map = null;
