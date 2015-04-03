@@ -34,6 +34,13 @@ import dbconnection.RawHTMLDAO;
 import dbconnection.RawHTMLDAOJDBC;
 
 public class CraiglistCrawler implements IWebsiteCrawler {
+//    private static final int maxTimeCrawlInSec = 10;  // 10 sec
+//    private static final int maxTimeCrawlInSec = 60;  // 1 min
+//    private static final int maxTimeCrawlInSec = 3600;  // 1 hours
+      private static final int maxTimeCrawlInSec = 7200;  // 1 hours
+//    private static final int maxTimeCrawlInSec = 14400; // 4 hours
+//    private static final int maxTimeCrawlInSec = 43200; // 12 hours
+            
 	private Map<String, Location> linkToLocationMap = null;
 	private Set<LocationLink> locationLinkLists = null;
 	private Set<String> urlsCrawled = null;
@@ -44,6 +51,8 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 	private LinkCrawledDAO linkCrawledDAO = null;
 	private LocationLinkDAO locationLinkDAO = null;
 	private PostingLocationDAO postingLocationDAO = null;
+	
+	private long startTimeInSec = 0;
 
 	private final String[] searchTerms = { "420 weed", "marijuana" };
 
@@ -227,6 +236,12 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 				}
 
 				Helper.waitSec(Globals.DEFAULTLOWERBOUNDWAITTIMESEC, Globals.DEFAULTUPPERBOUNDWAITTIMESEC);
+				
+				// Reach maximum timeslot, stop
+				long currentTimeInSec = System.currentTimeMillis()/1000;
+				if (currentTimeInSec - this.startTimeInSec > CraiglistCrawler.maxTimeCrawlInSec) {
+				    break;
+				}
 			}
 		}
 
@@ -247,7 +262,9 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 			Globals.crawlerLogManager.writeLog("There is no location links to start from");
 			return false;
 		}
-
+		
+        this.startTimeInSec = System.currentTimeMillis()/1000;
+		
 		while (true) {
 			// If the queue is empty, restock the links again
 			if (this.urlsQueue == null || this.urlsQueue.isEmpty()) {
@@ -269,11 +286,21 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 			final String locationUrl = this.urlsQueue.remove().getLink();
 
 			final boolean processLocLinkSuccess = this.processOneLocationLink(locationUrl);
-
+			
+			// Reach maximum timeslot, stop
+            long currentTimeInSec = System.currentTimeMillis()/1000;
+            if (currentTimeInSec - this.startTimeInSec > CraiglistCrawler.maxTimeCrawlInSec) {
+                Globals.crawlerLogManager.writeLog(
+                        "Crawler reaches maximum time allowable. Start time = " + this.startTimeInSec + ". End time = " + currentTimeInSec);
+                break;
+            }
+			
 			if (!processLocLinkSuccess) {
 				Globals.crawlerLogManager.writeLog("Process location link " + locationUrl + " fails");
 				continue;
 			}
 		}
+		
+        return true;
 	}
 }
