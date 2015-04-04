@@ -8,7 +8,10 @@ router.get('/', function(req, res) {
   res.render('terms', {
     title: 'Terms - Weed Price Index',
     stylesheet: '/stylesheets/index.css',
-    states: globals.states
+    states: globals.states,
+    description: 'description',
+    keywords: 'keywords',
+    icon: 'icon'
   });
 });
 

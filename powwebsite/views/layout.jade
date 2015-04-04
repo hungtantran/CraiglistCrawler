@@ -1,6 +1,13 @@
 html
   head
     title= title
+    meta(name='description' content=description)
+    meta(name='keywords' content=keywords)
+    meta(name='robots' content='index, follow')
+    link(rel='icon' href=icon type='image/x-icon')
+    meta(property='og:title' content=title)
+    meta(property='og:description' content=description)
+
     link(rel='stylesheet', type='text/css', href=stylesheet)
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet', media='screen', href='/stylesheets/bootstrap.css')
@@ -72,7 +79,7 @@ html
               li
                 form(class='navbar-form')
                   div(class='form-group')
-                    | <input type="text" placeholder="Location (Ex: 420 Pontius Ave N, Seattle, WA, 98103)" class="form-control">
+                    | <input type='text' placeholder='Location (Ex: 420 Pontius Ave N, Seattle, WA, 98103)' class='form-control'>
                   button(type='submit' class='btn btn-success')
                     | Search
 

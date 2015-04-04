@@ -22,7 +22,10 @@ router.get('/', function(req, res) {
     stylesheet: '/stylesheets/index.css',
     markers: globals.locations,
     postings: globals.postings,
-    states: globals.states
+    states: globals.states,
+    description: 'description',
+    keywords: 'keywords',
+    icon: 'icon'
   });
 });
 
@@ -71,7 +74,10 @@ router.get('/state/:state', function(req, res){
         markers: stateInfo,
         postings: stateInfo,
         states: globals.states,
-        stateChosen: state
+        stateChosen: state,
+        description: 'description',
+        keywords: 'keywords',
+        icon: 'icon'
   });
 });
 

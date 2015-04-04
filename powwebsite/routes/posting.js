@@ -5,7 +5,7 @@ var globals         = require('./globals');
 var rawHTMLProvider   = globals.rawHTMLProvider;
 
 router.post('/postingbody/:id', function(req, res) {
-    var params = req.params.id.split("-");
+    var params = req.params.id.split('-');
     var id = params[params.length-1];
 
     rawHTMLProvider.getContent(id, function(error, doc) {
@@ -15,7 +15,7 @@ router.post('/postingbody/:id', function(req, res) {
 
 // Get the main page with a list of topics
 router.get('/:id', function(req, res) {
-    var params = req.params.id.split("-");
+    var params = req.params.id.split('-');
     var id = params[params.length-1];
 
     rawHTMLProvider.getContent(id, function(error, doc) {
@@ -24,7 +24,10 @@ router.get('/:id', function(req, res) {
             title: 'Weed Posting Page',
             stylesheet: '/stylesheets/posting.css',
             content: doc['posting_body'],
-            states: globals.states
+            states: globals.states,
+            description: 'description',
+            keywords: 'keywords',
+            icon: 'icon'
         });
         return;
     })
