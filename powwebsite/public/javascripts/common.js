@@ -377,7 +377,7 @@ function initializePostings(postings) {
       continue;
     }
 
-    price.innerHTML = '<a href="' + url + '">' + postings[i]['price'] + '</a>';
+    price.innerHTML = '<a href="' + url + '">$' + postings[i]['price'] + '</a>';
   }
 }
 

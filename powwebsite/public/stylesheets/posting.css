@@ -8,6 +8,11 @@ b {
     font-size: 13px;
 }
 
+h1,h2,h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
 #header {
     float: left;
     height: 10%;
