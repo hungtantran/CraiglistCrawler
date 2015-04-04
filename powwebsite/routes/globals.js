@@ -5,6 +5,10 @@ var pricesProvider = new PricesProvider();
 var RawHTMLProvider = require('./rawhtmlprovider').RawHTMLProvider;
 var rawHTMLProvider = new RawHTMLProvider();
 
+function ReplaceAll (find, replace, str) {
+  return str.replace(new RegExp(find, 'g'), replace);
+}
+
 var postings = null;
 pricesProvider.getPostings(function(error, docs) {
     if (error != null) {
@@ -25,6 +29,9 @@ pricesProvider.getPostings(function(error, docs) {
         postings[i]['state'] = docs[i]['state'];
         postings[i]['city'] = docs[i]['city'];
         postings[i]['datePosted'] = docs[i]['datePosted'];
+        postings[i]['title'] = docs[i]['title'];
+        postings[i]['url'] = ReplaceAll(' ', '-', postings[i]['title']);
+        postings[i]['url'] += "-" + postings[i]['id'];
 
         postings[i]['lat'] = docs[i]['lat1'];
         postings[i]['lng'] = docs[i]['lng1'];

@@ -58,7 +58,8 @@ FROM \
         A.longitude AS lng1, \
         C.latitude AS lat2, \
         C.longitude AS lng2, \
-        datePosted \
+        datePosted, \
+        title \
       FROM \
         posting_location AS A, \
         prices AS B, \
@@ -80,7 +81,8 @@ FROM \
           A.longitude AS lng1, \
           C.latitude AS lat2, \
           C.longitude AS lng2, \
-          datePosted \
+          datePosted, \
+          title \
         FROM \
           posting_location AS A, \
           location_link AS C \

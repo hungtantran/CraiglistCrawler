@@ -38,7 +38,7 @@ block content
                         = posting['quantity'] + ' ' + posting['unit']
                     td
                       != '<a href="/posting/'
-                      = posting['id']
+                      = posting['url']
                       != '"">'
                       if (posting['price'] == null)
                         | Click to check!

@@ -4,6 +4,10 @@ html, body {
     padding: 0;
 }
 
+b {
+    font-size: 13px;
+}
+
 #header {
     float: left;
     height: 10%;

@@ -315,6 +315,9 @@ function initializePostings(postings) {
   // check if posting page
   var params = document.URL.split("/");
   var id = params[params.length-1];
+  var paramsId = id.split("-");
+  id = paramsId[paramsId.length-1];
+
   var postingPrices = [];
   var isPostingPage = false;
   if (!isNaN(parseInt(id))) isPostingPage = true;
@@ -335,7 +338,7 @@ function initializePostings(postings) {
       continue;
     }
 
-    if (isPostingPage && postings[i]['id'] != id) continue;
+    if (isPostingPage && (isNaN(id) || postings[i]['id'] != id)) continue;
 
     lat = postings[i]['lat'];
     lng = postings[i]['lng'];
@@ -352,11 +355,12 @@ function initializePostings(postings) {
 
     // Date Posted cell
     var datePosted = row.insertCell(index++);
-    datePosted.innerHTML = '<a href="/posting/' + postings[i]['id'] + '">' + postings[i]['datePosted'] + '</a>';
+    var url = '/posting/' + postings[i]['url'];
+    datePosted.innerHTML = '<a href="' + url + '">' + postings[i]['datePosted'] + '</a>';
 
     // Location cell
     var location = row.insertCell(index++);
-    location.innerHTML = '<a href="/posting/' + postings[i]['id'] + '">' + postings[i]['city'] + '</a>';
+    location.innerHTML = '<a href="' + url + '">' + postings[i]['city'] + '</a>';
 
     // Quantity cell
     var quantity = row.insertCell(index++);
@@ -365,7 +369,7 @@ function initializePostings(postings) {
       postings[i]['unit'] = '';
     }
 
-    quantity.innerHTML = '<a href="/posting/' + postings[i]['id'] + '">' + postings[i]['quantity'] + ' ' + postings[i]['unit'] + '</a>';
+    quantity.innerHTML = '<a href="' + url + '">' + postings[i]['quantity'] + ' ' + postings[i]['unit'] + '</a>';
 
     // Price cell
     var price = row.insertCell(index++);
@@ -373,7 +377,7 @@ function initializePostings(postings) {
       continue;
     }
 
-    price.innerHTML = '<a href="/posting/' + postings[i]['id'] + '">$' + postings[i]['price'] + '</a>';
+    price.innerHTML = '<a href="' + url + '">' + postings[i]['price'] + '</a>';
   }
 }
 
