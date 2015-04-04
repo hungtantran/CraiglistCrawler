@@ -49,8 +49,7 @@ public class ClassifyRawHTML {
                     final String htmlContent = rawHTML.getHtml();
 
                     if (Globals.DEBUG) {
-                        System.out.println("(" + htmlCount + ") Check HTML id "
-                                + id + ": " + link);
+                        System.out.println("(" + htmlCount + ") Check HTML id " + id + ": " + link);
                     }
 
                     // Classify the page

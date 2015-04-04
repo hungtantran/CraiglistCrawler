@@ -13,8 +13,8 @@ public class PostingLocationDAOJDBC implements PostingLocationDAO {
     private final String SQL_SELECT_ALL = "SELECT * FROM posting_location";
     private final String SQL_SELECT_BY_ID = "SELECT * FROM posting_location WHERE location_fk = ?";
     private final String SQL_INSERT = "INSERT INTO posting_location"
-            + "(state, city, latitude, longitude, location_fk, location_link_fk, datePosted, timePosted, posting_body)"
-            + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            + "(state, city, latitude, longitude, location_fk, location_link_fk, datePosted, timePosted, posting_body, title)"
+            + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private final DAOFactory daoFactory;
 
@@ -68,6 +68,11 @@ public class PostingLocationDAOJDBC implements PostingLocationDAO {
         location.setPosting_body(resultSet.getString("posting_body"));
         if (resultSet.wasNull()) {
             location.setPosting_body(null);
+        }
+        
+        location.setTitle(resultSet.getString("title"));
+        if (resultSet.wasNull()) {
+            location.setTitle(null);
         }
         
         return location;
@@ -159,10 +164,10 @@ public class PostingLocationDAOJDBC implements PostingLocationDAO {
                     location.getLocation_link_fk(),
                     location.getDatePosted(),
                     location.getTimePosted(),
-                    location.getPosting_body()};
+                    location.getPosting_body(),
+                    location.getTitle()};
 
-            preparedStatement = DAOUtil.prepareStatement(connection,
-                    this.SQL_INSERT, false, values);
+            preparedStatement = DAOUtil.prepareStatement(connection, this.SQL_INSERT, false, values);
 
             Globals.crawlerLogManager.writeLog(preparedStatement.toString());
 

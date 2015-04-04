@@ -37,8 +37,8 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 //    private static final int maxTimeCrawlInSec = 10;  // 10 sec
 //    private static final int maxTimeCrawlInSec = 60;  // 1 min
 //    private static final int maxTimeCrawlInSec = 3600;  // 1 hours
-      private static final int maxTimeCrawlInSec = 7200;  // 1 hours
-//    private static final int maxTimeCrawlInSec = 14400; // 4 hours
+//    private static final int maxTimeCrawlInSec = 7200;  // 2 hours
+      private static final int maxTimeCrawlInSec = 14400; // 4 hours
 //    private static final int maxTimeCrawlInSec = 43200; // 12 hours
             
 	private Map<String, Location> linkToLocationMap = null;
@@ -121,6 +121,13 @@ public class CraiglistCrawler implements IWebsiteCrawler {
             return false;
 		}
 		
+		Elements postingTitles = htmlDoc.select("h2[class=postingtitle]");
+		if (postingTitles.size() != 1) {
+            Globals.crawlerLogManager.writeLog("Can't parse posting title for link " + entryLink);
+            return false;
+        }
+		String postingTitle = Helper.cleanNonCharacterDigit(postingTitles.get(0).text());
+		
 		final String htmlContent = htmlDoc.outerHtml();
 
 		final LinkCrawled linkCrawled = new LinkCrawled();
@@ -180,6 +187,7 @@ public class CraiglistCrawler implements IWebsiteCrawler {
     		    location.setDatePosted(currentDate);
     		    location.setTimePosted(currentTime);
     		    location.setPosting_body(postingBodies.get(0).html());
+    		    location.setTitle(postingTitle);
     		    
     		    if (!this.postingLocationDAO.create(location)) {
     		        Globals.crawlerLogManager.writeLog("Fails to insert location for " + entryLink + " into posting_location table");

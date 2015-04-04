@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Helper {
 	public static String[] splitString(String string, String delimiter) {
@@ -271,4 +273,20 @@ public class Helper {
 		
 		return numWordsOccur;
 	}
+
+    public static String cleanNonCharacterDigit(String rawString) {
+        String cleanUpString = "";
+
+        String regex = "([a-zA-Z0-9$ ])+";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(rawString);
+        
+        while (m.find()) {
+            cleanUpString += m.group(0);
+        }
+        
+        cleanUpString = cleanUpString.trim();
+        
+        return cleanUpString;
+    }
 }

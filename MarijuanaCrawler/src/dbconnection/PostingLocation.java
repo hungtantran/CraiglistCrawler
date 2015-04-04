@@ -19,6 +19,7 @@ public class PostingLocation {
     String datePosted = null;
     String timePosted = null;
     String posting_body = null;
+    String title = null;
     
     // Getters/setters
     // ----------------------------------------------------------------------------
@@ -93,6 +94,14 @@ public class PostingLocation {
 
     public void setPosting_body(String posting_body) {
         this.posting_body = posting_body;
+    }
+    
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
     
     // Object overrides

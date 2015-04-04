@@ -42,7 +42,7 @@ public class IdentifyLocationScript {
 		int htmlCount = lowerBound;
 
 		RawHTMLDAO rawHTMLDAO = new RawHTMLDAOJDBC(DAOFactory.getInstance(
-				Globals.username, Globals.password, Globals.server + Globals.database));
+			Globals.username, Globals.password, Globals.server + Globals.database));
 
 		// Get 2000 articles at a time, until exhaust all the articles
 		while (true) {
@@ -66,10 +66,7 @@ public class IdentifyLocationScript {
 
 						if (link.contains(linkMap)) {
 							if (Globals.DEBUG)
-								System.out
-										.println("(" + htmlCount
-												+ ") Check HTML id " + id
-												+ ": " + link);
+								System.out.println("(" + htmlCount + ") Check HTML id " + id + ": " + link);
 
 							rawHTML.setCountry(location.country);
 							rawHTML.setState(location.state);
@@ -94,9 +91,8 @@ public class IdentifyLocationScript {
 	}
 
 	public static void identifyLocationLinkCrawl() throws Exception {
-		LocationLinkDAO locationLinkDAO = new LocationLinkDAOJDBC(
-				DAOFactory.getInstance(Globals.username, Globals.password,
-						Globals.server + Globals.database));
+		LocationLinkDAO locationLinkDAO = new LocationLinkDAOJDBC(DAOFactory.getInstance(
+		        Globals.username, Globals.password, Globals.server + Globals.database));
 
 		Map<String, Location> linkToLocationMap = new HashMap<String, Location>();
 
