@@ -139,7 +139,7 @@ def write_to_db(rowId, metricQuantities, englishQuantities, prices, locations):
   cursor = db.cursor()
   cursor.execute(query)
 
-  if (locations[0] != None)
+  if (locations[0] != None):
     query = "INSERT INTO posting_location (location_fk, latitude, longitude) VALUES(%d, \"%s\", \"%s\") ON DUPLICATE KEY UPDATE latitude=\"%s\", longitude=\"%s\"" %(rowId, str(locations[0]), str(locations[1]), str(locations[0]), str(locations[1]));
 
     # print query
@@ -150,21 +150,26 @@ def write_to_db(rowId, metricQuantities, englishQuantities, prices, locations):
 
 def index(rowId, htmlFile):
   html_doc = htmlFile
-  soup = BeautifulSoup(html_doc)
-  
-  title = soup.title.string
-  title = str(unicodedata.normalize('NFKD', title).encode('ascii', 'ignore'))
-  h2 = soup.h2.text
-  h2 = str(unicodedata.normalize('NFKD', h2).encode('ascii', 'ignore'))
-  posting = soup.find(id="postingbody")
-  postingStr = ""
-  try:
-    postingStr = str(posting)
-  except (RuntimeError):
-    print "posting " + str(rowId) + " was too large"
-    return
+  #try:
+  #  soup = BeautifulSoup(html_doc)
+  #
+  #  title = soup.title.string
+  #  title = str(unicodedata.normalize('NFKD', title).encode('ascii', 'ignore'))
+  #  h2 = soup.h2.text
+  #  h2 = str(unicodedata.normalize('NFKD', h2).encode('ascii', 'ignore'))
+  #  posting = soup.find(id="postingbody")
+  #  postingStr = ""
+  #except:
+  #  print "posting " + str(rowId) + " has invalid HTML"
+  #  return
+  #try:
+  #  postingStr = str(posting)
+  #except (RuntimeError):
+  #  print "posting " + str(rowId) + " was too large"
+  #  return
 
-  text = strip_tags(title + h2 + postingStr)
+  #text = strip_tags(title + h2 + postingStr)
+  text = htmlFile
   prices = extract_prices(text)
   prices = [price for price in prices if price!=420 and price!=215 and price!=502] # and price>9
   
@@ -185,10 +190,10 @@ def index(rowId, htmlFile):
 
 def index_from_db():
   cursor = db.cursor()
-  cursor.execute("SELECT * FROM rawhtml where predict1=1 and alt_quantities IS NULL and alt_prices IS NULL")
+  cursor.execute("SELECT location_fk,posting_body FROM posting_location")
   for row in cursor.fetchall():
     rowId = row[0]
-    htmltext = row[2]
+    htmltext = row[1]
     index(rowId, htmltext)
 
 
