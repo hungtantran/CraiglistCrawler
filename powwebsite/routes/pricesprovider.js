@@ -42,6 +42,10 @@ PricesProvider.prototype.getAllPrices = function(callback) {
 PricesProvider.prototype.getPostings = function(callback) {
   var connection = connectionProvider.getConnection();
 
+  var d = new Date();
+  d.setDate(d.getDate() - 2);
+  var dateString = d.getFullYear() + '-' + (d.getMonth() + 1)  + '-' + d.getDate();
+
   var query =
     'SELECT * \
 FROM \
@@ -91,7 +95,7 @@ FROM \
         AND location_fk NOT IN (SELECT price_fk FROM prices) \
       ) \
   ) AS D \
-  WHERE datePosted IS NOT NULL \
+  WHERE datePosted IS NOT NULL AND datePosted >= "' + dateString + '" \
   ORDER BY \
   datePosted DESC';
   
