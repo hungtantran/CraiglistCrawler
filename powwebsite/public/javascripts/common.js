@@ -3,7 +3,7 @@ function updateDisplay() {
   initializeMap(cache['postings']);
   initializePrices(cache['postings']);
   initializePostings(cache['postings']);
-  initializePostingBodyContent();
+  // initializePostingBodyContent();
 }
 
 function initializePostingBodyContent() {
