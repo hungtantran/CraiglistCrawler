@@ -43,7 +43,7 @@ PricesProvider.prototype.getPostings = function(callback) {
   var connection = connectionProvider.getConnection();
 
   var d = new Date();
-  d.setDate(d.getDate() - 2);
+  d.setDate(d.getDate() - 7);
   var dateString = d.getFullYear() + '-' + (d.getMonth() + 1)  + '-' + d.getDate();
 
   var query =
