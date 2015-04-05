@@ -19,7 +19,12 @@ router.get('/:id', function(req, res) {
     var id = params[params.length-1];
 
     rawHTMLProvider.getContent(id, function(error, doc) {
-        
+        if (error) {
+            res.statusCode = 302;
+            res.setHeader('Location', '/');
+            res.end();
+        }
+
         res.render('posting', {
             title: 'Weed Posting Page',
             stylesheet: '/stylesheets/posting.css',
