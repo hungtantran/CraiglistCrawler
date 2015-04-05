@@ -9,8 +9,9 @@ function ReplaceAll (find, replace, str) {
   return str.replace(new RegExp(find, 'g'), replace);
 }
 
-var postings = null;
-pricesProvider.getPostings(function(error, docs) {
+var postings = [];
+
+function UpdateCache(error, docs) {
     if (error != null) {
         console.error('error to get postings: ' + error.stack);
         process.exit(1);
@@ -42,8 +43,21 @@ pricesProvider.getPostings(function(error, docs) {
         }
     }
 
+    console.log("Cache has " + postings.length + " entries")
+}
+
+pricesProvider.getPostings(function(error, docs) {
+    UpdateCache(error, docs);
     exports.postings = postings;
 })
+
+// Periodically refresh cache every 5 minutes
+setInterval(function() {
+    pricesProvider.getPostings(function(error, docs) {
+        UpdateCache(error, docs);
+        exports.postings = postings;
+    })
+}, 300000);
 
 var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 exports.states = states;
