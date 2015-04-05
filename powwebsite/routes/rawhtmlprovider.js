@@ -19,7 +19,7 @@ RawHTMLProvider.prototype.getContent = function(contentId, callback) {
       if (rows.length >= 0) {
         content = rows[0];
       }
-
+      
       callback(null, content);
     }
   });

@@ -25,7 +25,7 @@ router.get('/', function(req, res) {
     states: globals.states,
     description: 'description',
     keywords: 'keywords',
-    icon: 'icon'
+    icon: '/public/images/icon.gif'
   });
 });
 
@@ -77,7 +77,7 @@ router.get('/state/:state', function(req, res){
         stateChosen: state,
         description: 'description',
         keywords: 'keywords',
-        icon: 'icon'
+        icon: '/public/images/icon.gif'
   });
 });
 

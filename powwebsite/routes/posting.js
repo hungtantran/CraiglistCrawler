@@ -8,6 +8,11 @@ router.post('/postingbody/:id', function(req, res) {
     var params = req.params.id.split('-');
     var id = params[params.length-1];
 
+    if (isNan(id)) {
+        res.json("");
+        return;
+    }
+
     rawHTMLProvider.getContent(id, function(error, doc) {
         res.json(doc);
     })
@@ -18,11 +23,19 @@ router.get('/:id', function(req, res) {
     var params = req.params.id.split('-');
     var id = params[params.length-1];
 
+    if (isNaN(id)) {
+        res.statusCode = 302;
+        res.setHeader('Location', '/');
+        res.end();
+        return;
+    }
+
     rawHTMLProvider.getContent(id, function(error, doc) {
-        if (error) {
+        if (error || doc === undefined || !('posting_body' in doc)) {
             res.statusCode = 302;
             res.setHeader('Location', '/');
             res.end();
+            return;
         }
 
         res.render('posting', {
@@ -32,7 +45,7 @@ router.get('/:id', function(req, res) {
             states: globals.states,
             description: 'description',
             keywords: 'keywords',
-            icon: 'icon'
+            icon: '/public/images/icon.gif'
         });
         return;
     })

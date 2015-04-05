@@ -11,7 +11,7 @@ router.get('/', function(req, res) {
     states: globals.states,
     description: 'description',
     keywords: 'keywords',
-    icon: 'icon'
+    icon: '/public/images/icon.gif'
   });
 });
 
