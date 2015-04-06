@@ -1,0 +1,86 @@
+extends layout-simple
+
+block content
+  div(class='row' id ='content')
+        div(class='hidden-xs hidden-sm col-md-2 col-lg-2')
+                // | Or fill out the form below:
+            // form(id='form1' name='form1' method='post' action='' style='margin-top:8px;')
+            //     table(width='100%' cellspacing='10' cellpadding='0' id='form_content')
+            //         tr
+            //             td(class='text_form' id='ffullname_text' style="td-width:50%")
+            //                 | Name:      
+            //         tr
+            //             td
+            //                 label
+            //                     input(name='textfield' type='text' class='input_form' id='ffullname')
+            //         tr
+            //             td(class='text_form' id='femail_text')
+            //                 br
+            //                 | Email:       
+            //         tr
+            //             td
+            //                 label
+            //                     input(name='textfield2' type='text' class='input_form' id='femail' style:"width:100%")
+            //         tr
+            //             td(class='text_form' id='faddress_text')
+            //                 br
+            //                 | Address:  
+            //         tr
+            //             td
+            //                 label
+            //                     input(name='textfield3' type='text' class='input_form' id='faddress')
+            //         tr
+            //             td(class='text_form' id='ftitle_text')
+            //                 br
+            //                 | Title:  
+            //         tr
+            //             td
+            //                 label
+            //                     input(name='textfield4' type='text' class='input_form' id='ftitle')
+            //         tr
+            //             td(class='text_form' id='fdescription_text')
+            //                 br
+            //                 | Detail:
+            //         tr
+            //             td
+            //                 label
+            //                     textarea(name='textarea' id='fdescription' rows='5' class='area_form')
+            //         tr
+            //             td
+            //                 br
+            //                 label
+            //                     input(type='button' name='button' id='button' value='Send' class='sub_form_contact' style='float:right; margin-right:1px;' onclick='submit_func()')
+            // p
+            //     | &nbsp;
+
+
+        div(class='col-xs-12 col-sm-12 col-md-5 col-lg-5')
+            p(class='text_yellow_uppercase' style='font-weight:bold; font-size:15px;')
+                | About LeafyExchange
+            p(class='text_yellow_uppercase')
+                | &nbsp;
+            p
+                | My roommate (H) has always had a fascination with finance and machine learning; I, (R), have always had a fascination with distributed systems. For our capstone project, H wanted to build a system that could predict stock prices, but the market and literature were rife with existing work. We could have spent our entire academic careers just learning what has already been done. Instead, I proposed that we instead investigate a financial market that has not yet been legalized--the marijuana market. In the same way that dairies and meats can be sold in futures exchanges, my roommate and I wanted to identify the exchange prices for weed. The illegal nature of the pot market made it interesting--nobody has yet tried to identify weed prices at a large scale, and we'd need some non-trivial computing infrastructure to tease out the weed dealers, and some fancy natural language processing (NLP) to figure out the prices and quantities being sold. Our professors, while intrigued, were concerned about the legality of our project. Free of academic shackles, we've started to find answers to our questions...but the journey has just begun!
+            p
+                | &nbsp;
+            p
+                | All of the data shown on LeafyExchange has been scraped from the wild wild west of the internet, and parsed by our rudimentary NLP techniques. It's extremely suceptible to errors, but we think we're pushing the boundaries of what computing can do. We appreciate your feedback, and if you have ideas on how we can improve our techniques, please reach out to us at leafyexchange@gmail.com.
+            p
+                | &nbsp;
+            p
+                | Since this is a for-fun (for science!?) project, there are a couple of goals (rapidly shifting) that we have:
+            p
+                | &nbsp;
+            ul
+                <li> Find all of the weed! Soon, hospitals and clinics across the country will need to find medicinal-grade products for their patients, how much should they pay? For a large healthcare operation, a steady, high-quality supply of medical marijuana is a must. For an insurance company, predictable and consistent prices are essential to keeping down costs. Anything we can do to lend clarity to this shadow economy is a plus in our book.
+                <li> Push the boundaries of NLP. Our parsers are extremely weak--Naive Bayes, simple regexes and statistics--we've used rudimentary techniques to get us to where we are. We'd love to be doing more entity extraction, syntax-tree construction, mass-scale supervised learning, but we're not there yet. Neither of us are AI PhD's, but I'm sure someone out there is, and a helping hand is always appreciated! :)
+                <li> Scale. Between my roomie and me, we've worked on the two largest search engines in the world (Google and Bing), and have studied operating systems, databases, and parallel computing. To find all of the weed dealers, to parse through all of their slang and double entendres will take an army of machines and some cool algorithms. Help us push our infrastructure to the max (without DDoS'ing us please)!
+                <li> Delight users! While this is a very technical project for my roommate and me, we'd also like it to be an experience in design (we're clearly not UX/design types :P ). Your fresh eyes can give us many useful opinions, share them!
+            p
+                | We hope you enjoy our site, H&R.
+                br
+                | <a href=mailto:leafyexchange@gmail.com> Email us at leafyexchange@gmail.com </a>
+            p
+                | &nbsp;
+                
+        div(class='hidden-xs hidden-sm col-md-2 col-lg-2')
