@@ -122,7 +122,8 @@ FROM \
       WHERE \
         location_fk = B.id AND \
         location_link_fk = C.id AND \
-        datePosted IS NOT NULL AND alt_quantities IS NOT NULL \
+        datePosted IS NOT NULL AND alt_quantities IS NOT NULL AND \
+        datePosted >= "' + dateString + '" \
     ) AS D \
   ORDER BY \
   datePosted DESC';
@@ -149,7 +150,8 @@ FROM \
         location_link AS C \
       WHERE \
         location_fk = B.id AND alt_quantities IS NULL AND \
-        location_link_fk = C.id AND datePosted IS NOT NULL \
+        location_link_fk = C.id AND datePosted IS NOT NULL AND \
+        datePosted >= "' + dateString + '" \
     ) AS D \
   ORDER BY \
   datePosted DESC';

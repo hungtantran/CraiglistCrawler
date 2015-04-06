@@ -384,7 +384,6 @@ function initializePostings(postings) {
     // Code for query with grouping
     // Quantity cell
     var quantity = row.insertCell(index++);
-    console.log(postings[i]);
     var quantityString = "";
     if (!postings[i]['quantity']) {
       postings[i]['quantity'] = 'Check!'

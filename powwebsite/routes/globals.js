@@ -14,7 +14,7 @@ function sortNumber(a,b) {
 }
 
 function isIntValue(value){ 
-    if((parseFloat(value) == parseInt(value)) && !isNaN(value)){
+    if ((parseFloat(value) == parseInt(value)) && !isNaN(value)){
       return true;
     } else { 
       return false;
@@ -86,7 +86,8 @@ function ParseQuantities(quantities) {
     if (quantitiesType.length < 2) {
         return quantitiesArray;
     }
-    var gramArray = ParseArrayString(quantitiesType[1], ' ', 1.1, 200, true);
+
+    var gramArray = ParseArrayString(quantitiesType[1], ' ', 1.1, 200, false);
     quantitiesArray.push(gramArray);
 
     // One empty, one for gram, one for oz
