@@ -4,60 +4,8 @@ var PricesProvider = require('./pricesprovider').PricesProvider;
 var pricesProvider = new PricesProvider();
 var RawHTMLProvider = require('./rawhtmlprovider').RawHTMLProvider;
 var rawHTMLProvider = new RawHTMLProvider();
-
-function ReplaceAll (find, replace, str) {
-  return str.replace(new RegExp(find, 'g'), replace);
-}
-
-function sortNumber(a,b) {
-    return a - b;
-}
-
-function isIntValue(value){ 
-    if ((parseFloat(value) == parseInt(value)) && !isNaN(value)){
-      return true;
-    } else { 
-      return false;
-    } 
-}
-
-function ParseArrayString(str, split, lowerBound, upperBound, isInt) {
-    if (!str) {
-        return str;
-    }
-
-    var array = [];
-    if (str[0] == '[') {
-        str = str.substring(1);
-    }
-    if (str[str.length - 1] == ']') {
-        str = str.substring(0, str.length - 1);
-    }
-    array = str.split(split);
-
-    var sortedArray = [];
-    for (var i = 0; i < array.length; ++i) {
-        var parsedValue = parseFloat(array[i]);
-        if (!isNaN(parsedValue)) {
-            if (!isInt || isIntValue(parsedValue)) {
-                sortedArray.push(parsedValue);
-            }
-        }
-    }
-    sortedArray.sort(sortNumber);
-
-    var uniqueSortedArray = [];
-    for (var i = 0; i < sortedArray.length; ++i) {
-        if (!isNaN(sortedArray[i]) && sortedArray[i] >= lowerBound && sortedArray[i] <= upperBound && (i == 0 || sortedArray[i] != sortedArray[i-1])) {
-            var divisibleBy125 = Math.round(sortedArray[i] * 1000) % 25;
-            if (divisibleBy125 == 0) {
-                uniqueSortedArray.push(sortedArray[i]);
-            }
-        }
-    }
-
-    return uniqueSortedArray;
-}
+var CommonHelper = require('./commonHelper').CommonHelper;
+var commonHelper = new CommonHelper();
 
 // For ex: [10.0, 4.0, 40.0, 7.0, 60.0, 14.0, 100.0, 1.0, 28.0, 200.0, 4.0, 112.0, 650.0, 253.0, 414.0, 4380.0]
 function ParsePrices(prices) {
@@ -65,7 +13,7 @@ function ParsePrices(prices) {
         return prices;
     }
 
-    var priceArray = ParseArrayString(prices, ',', 3, 1000, true);
+    var priceArray = commonHelper.ParseArrayString(prices, ',', 3, 1000, true);
 
     return priceArray;
 }
@@ -87,14 +35,14 @@ function ParseQuantities(quantities) {
         return quantitiesArray;
     }
 
-    var gramArray = ParseArrayString(quantitiesType[1], ' ', 1.1, 200, false);
+    var gramArray = commonHelper.ParseArrayString(quantitiesType[1], ' ', 1.1, 200, true);
     quantitiesArray.push(gramArray);
 
     // One empty, one for gram, one for oz
     if (quantitiesType.length < 3) {
         return quantitiesArray;
     }
-    var ounceArray = ParseArrayString(quantitiesType[2], ' ', 0.1, 200, false);
+    var ounceArray = commonHelper.ParseArrayString(quantitiesType[2], ' ', 0.1, 200, false);
     quantitiesArray.push(ounceArray);
 
     return quantitiesArray;
@@ -161,7 +109,7 @@ function UpdateCache(error, docs) {
         postings[i]['city'] = docs[i]['city'];
         postings[i]['datePosted'] = docs[i]['datePosted'];
         postings[i]['title'] = docs[i]['title'];
-        postings[i]['url'] = ReplaceAll(' ', '-', postings[i]['title']);
+        postings[i]['url'] = commonHelper.ReplaceAll(' ', '-', postings[i]['title']);
         postings[i]['url'] += "-" + postings[i]['id'];
 
         postings[i]['lat'] = docs[i]['lat1'];
