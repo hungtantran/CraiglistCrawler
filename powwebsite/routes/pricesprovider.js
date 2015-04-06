@@ -46,7 +46,7 @@ PricesProvider.prototype.getPostings = function(callback) {
   d.setDate(d.getDate() - 7);
   var dateString = d.getFullYear() + '-' + (d.getMonth() + 1)  + '-' + d.getDate();
 
-  var query =
+  var queryWithoutPriceGrouping =
     'SELECT * \
 FROM \
   ( \
@@ -98,16 +98,81 @@ FROM \
   WHERE datePosted IS NOT NULL AND datePosted >= "' + dateString + '" \
   ORDER BY \
   datePosted DESC';
+
+  var queryWithPriceGroupingNotNullQuantity =
+    'SELECT *  \
+FROM \
+    ( \
+      SELECT \
+        location_fk AS id, \
+        A.state, \
+        A.city, \
+        B.alt_prices AS price, \
+        B.alt_quantities AS quantity, \
+        A.latitude AS lat1, \
+        A.longitude AS lng1, \
+        C.latitude AS lat2, \
+        C.longitude AS lng2, \
+        datePosted, \
+        title \
+      FROM \
+        posting_location AS A, \
+        rawhtml AS B, \
+        location_link AS C \
+      WHERE \
+        location_fk = B.id AND \
+        location_link_fk = C.id AND \
+        datePosted IS NOT NULL AND alt_quantities IS NOT NULL AND \
+        datePosted >= "' + dateString + '" \
+    ) AS D \
+  ORDER BY \
+  datePosted DESC';
+
+  var queryWithPriceGroupingNullQuantity =
+    'SELECT *  \
+FROM \
+    ( \
+      SELECT \
+        location_fk AS id, \
+        A.state, \
+        A.city, \
+        B.alt_prices AS price, \
+        B.alt_quantities AS quantity, \
+        A.latitude AS lat1, \
+        A.longitude AS lng1, \
+        C.latitude AS lat2, \
+        C.longitude AS lng2, \
+        datePosted, \
+        title \
+      FROM \
+        posting_location AS A, \
+        rawhtml AS B, \
+        location_link AS C \
+      WHERE \
+        location_fk = B.id AND alt_quantities IS NULL AND \
+        location_link_fk = C.id AND datePosted IS NOT NULL AND \
+        datePosted >= "' + dateString + '" \
+    ) AS D \
+  ORDER BY \
+  datePosted DESC';
   
-  connection.query(query, function(err, rows) {
-    if (err) {
-      callback (err);
+  connection.query(queryWithPriceGroupingNotNullQuantity, function(err1, rows1) {
+    if (err1) {
+      callback (err1);
+      connection.end();
     } else {
-      callback(null, rows);
+      connection.query(queryWithPriceGroupingNullQuantity, function(err2, rows2) {
+        if (err2) {
+          callback (err2);
+          connection.end();
+        } else {
+          var rows = rows1.concat(rows2);
+          callback(null, rows);
+          connection.end();
+        }
+      });
     }
   });
-
-  connection.end();
 };
 
 exports.PricesProvider = PricesProvider;

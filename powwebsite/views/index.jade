@@ -33,7 +33,7 @@ block content
                       = posting['city']
                     td
                       if (posting['quantity'] == null || posting['unit'] == null)
-                        | Click to check!
+                        | Check Quantity!
                       else
                         = posting['quantity'] + ' ' + posting['unit']
                     td
@@ -41,7 +41,7 @@ block content
                       = posting['url']
                       != '"">'
                       if (posting['price'] == null)
-                        | Click to check!
+                        | Check Price!
                       else
                         | $
                         = posting['price']
