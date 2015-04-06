@@ -138,6 +138,7 @@ def write_to_db(rowId, metricQuantities, englishQuantities, prices, locations):
   # print query
   cursor = db.cursor()
   cursor.execute(query)
+  db.commit()
 
   if (locations[0] != None):
     query = "INSERT INTO posting_location (location_fk, latitude, longitude) VALUES(%d, \"%s\", \"%s\") ON DUPLICATE KEY UPDATE latitude=\"%s\", longitude=\"%s\"" %(rowId, str(locations[0]), str(locations[1]), str(locations[0]), str(locations[1]));
@@ -150,26 +151,26 @@ def write_to_db(rowId, metricQuantities, englishQuantities, prices, locations):
 
 def index(rowId, htmlFile):
   html_doc = htmlFile
-  #try:
-  #  soup = BeautifulSoup(html_doc)
-  #
-  #  title = soup.title.string
-  #  title = str(unicodedata.normalize('NFKD', title).encode('ascii', 'ignore'))
-  #  h2 = soup.h2.text
-  #  h2 = str(unicodedata.normalize('NFKD', h2).encode('ascii', 'ignore'))
-  #  posting = soup.find(id="postingbody")
-  #  postingStr = ""
-  #except:
-  #  print "posting " + str(rowId) + " has invalid HTML"
-  #  return
-  #try:
-  #  postingStr = str(posting)
-  #except (RuntimeError):
-  #  print "posting " + str(rowId) + " was too large"
-  #  return
+  try:
+   soup = BeautifulSoup(html_doc)
+  
+   title = soup.title.string
+   title = str(unicodedata.normalize('NFKD', title).encode('ascii', 'ignore'))
+   h2 = soup.h2.text
+   h2 = str(unicodedata.normalize('NFKD', h2).encode('ascii', 'ignore'))
+   posting = soup.find(id="postingbody")
+   postingStr = ""
+  except:
+   print "posting " + str(rowId) + " has invalid HTML"
+   return
+  try:
+   postingStr = str(posting)
+  except (RuntimeError):
+   print "posting " + str(rowId) + " was too large"
+   return
 
-  #text = strip_tags(title + h2 + postingStr)
-  text = htmlFile
+  text = strip_tags(title + h2 + postingStr)
+  # text = htmlFile
   prices = extract_prices(text)
   prices = [price for price in prices if price!=420 and price!=215 and price!=502] # and price>9
   
@@ -182,7 +183,7 @@ def index(rowId, htmlFile):
   # print "location:", extracted_locations
   # print "prices:", prices, '\n'
   
-  if len(extracted_quantities[0])==0 and len(extracted_quantities[1])==0 or len(prices)==0:
+  if (len(extracted_quantities[0])==0 and len(extracted_quantities[1])==0) or len(prices)==0:
     print "could not find prices or quantities for rowid:" + str(rowId)
     return
 
@@ -190,10 +191,11 @@ def index(rowId, htmlFile):
 
 def index_from_db():
   cursor = db.cursor()
-  cursor.execute("SELECT location_fk,posting_body FROM posting_location")
+  cursor.execute("SELECT id,html FROM rawhtml WHERE (alt_prices IS NULL OR alt_quantities IS NULL) AND dateCrawled >= DATE_ADD(NOW(), INTERVAL -1 DAY)  ")
+  print "here"
   for row in cursor.fetchall():
     rowId = row[0]
-    htmltext = row[1]
+    htmltext = row[1].replace("scr\"+\"ipt", "script")
     index(rowId, htmltext)
 
 
