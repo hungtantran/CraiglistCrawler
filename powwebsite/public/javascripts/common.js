@@ -362,22 +362,62 @@ function initializePostings(postings) {
     var location = row.insertCell(index++);
     location.innerHTML = '<a href="' + url + '">' + postings[i]['city'] + '</a>';
 
+    // // Code for query without grouping
+    // // Quantity cell
+    // var quantity = row.insertCell(index++);
+    // if (!postings[i]['quantity'] || !postings[i]['unit']) {
+    //   postings[i]['quantity'] = 'Check!'
+    //   postings[i]['unit'] = '';
+    // }
+
+    // quantity.innerHTML = '<a href="' + url + '">' + postings[i]['quantity'] + ' ' + postings[i]['unit'] + '</a>';
+
+    // // Price cell
+    // var price = row.insertCell(index++);
+
+    // if (!postings[i]['price']) {
+    //   continue;
+    // }
+
+    // price.innerHTML = '<a href="' + url + '">$' + postings[i]['price'] + '</a>';
+
+    // Code for query with grouping
     // Quantity cell
     var quantity = row.insertCell(index++);
-    if (!postings[i]['quantity'] || !postings[i]['unit']) {
-      postings[i]['quantity'] = 'Click to check!'
-      postings[i]['unit'] = '';
+    var quantityString = "";
+    if (!postings[i]['quantity']) {
+      postings[i]['quantity'] = 'Check!'
+    } else {
+      var gramArray = postings[i]['quantity'][0];
+      if (gramArray) {
+        for (var j = 0; j < gramArray.length; ++j) {
+          quantityString += gramArray[j] + "g, "
+        }
+      }
+
+      var ounceArray = postings[i]['quantity'][1];
+      if (ounceArray) {
+        for (var j = 0; j < ounceArray.length; ++j) {
+          quantityString += ounceArray[j] + "oz, "
+        }
+      }
     }
 
-    quantity.innerHTML = '<a href="' + url + '">' + postings[i]['quantity'] + ' ' + postings[i]['unit'] + '</a>';
+    quantity.innerHTML = '<a href="' + url + '">' + quantityString + '</a>';
 
     // Price cell
     var price = row.insertCell(index++);
+
+    var priceString = "";
     if (!postings[i]['price']) {
-      continue;
+      priceString = 'Check!'
+    } else {
+      for (var j = 0; j < postings[i]['price'].length; ++j) {
+        priceString += "$" + postings[i]['price'][j] + ", "
+      }
     }
 
-    price.innerHTML = '<a href="' + url + '">$' + postings[i]['price'] + '</a>';
+    price.innerHTML = '<a href="' + url + '">' + priceString + '</a>';
   }
 }
 
