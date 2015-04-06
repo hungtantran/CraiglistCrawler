@@ -8,7 +8,7 @@ RawHTMLProvider = function() {
 RawHTMLProvider.prototype.getContent = function(contentId, callback) {
   var connection = connectionProvider.getConnection();
 
-  var query = 'SELECT * FROM posting_location WHERE location_fk = ' + contentId;
+  var query = 'SELECT * FROM posting_location LEFT JOIN (select rawhtml.id, rawhtml.url from rawhtml) AS query ON location_fk=query.id WHERE location_fk = ' + contentId;
 
   connection.query(query, function(err, rows) {
     if (err) {

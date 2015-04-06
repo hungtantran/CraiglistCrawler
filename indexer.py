@@ -151,9 +151,9 @@ def write_to_db(rowId, metricQuantities, englishQuantities, prices, locations):
 
 def index(rowId, htmlFile):
   html_doc = htmlFile
+
   try:
    soup = BeautifulSoup(html_doc)
-  
    title = soup.title.string
    title = str(unicodedata.normalize('NFKD', title).encode('ascii', 'ignore'))
    h2 = soup.h2.text
