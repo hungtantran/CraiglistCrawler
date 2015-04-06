@@ -2,18 +2,17 @@ extends layout
 
 block content
     div(class='row' id ='content')
-      div(id='left-margin'             class='hidden-xs hidden-sm col-md-2 col-lg-2')
-      div(id='map-canvas'              class='col-xs-12 col-sm-6  col-md-4 col-lg-4 ')
-      div(id='price_bin_dist_by_state' class='hidden-xs col-sm-6  col-md-4 col-lg-4 ')
-      div(id='right-margin'            class='hidden-xs hidden-sm col-md-2 col-lg-2')
+      div(id='map-content' class='col-xs-12 col-sm-6  col-md-6 col-lg-6 ')
+        div(id='map-canvas')
+        a(href=url style="font-size:25px") Go to original posting
+      div(id='price_bin_dist_by_state' class='hidden-xs col-sm-6  col-md-6 col-lg-6 ')
 
       div(class='clearfix')
 
-      div(id='left-margin'             class='hidden-xs hidden-sm col-md-2 col-lg-2')
-      div(id='postingBodyContent'      class='col-xs-12 col-sm-6  col-md-4 col-lg-4')
+      div(id='postingBodyContent'      class='col-xs-12 col-sm-6  col-md-6 col-lg-6')
         != content
 
-      div(id='right_pane'              class='col-xs-12 col-sm-6  col-md-4 col-lg-4')
+      div(id='right_pane'              class='col-xs-12 col-sm-6  col-md-6 col-lg-6')
         div(id='right_pane_content')
           table(id='latest_prices_content' class='table table-striped table-condensed table-responsive')
             thead
@@ -27,10 +26,8 @@ block content
                 th
                   | Prices
             tbody(id='table_body')
-      div(id='right-margin'            class='hidden-xs hidden-sm col-md-2 col-lg-2')
-      != url
-      div(id='posting-frame' class='hidden-xs hidden-sm col-md-2 col-lg-2')
-        iframe(width="425", height="350", frameborder="0", scrolling="no", marginheight="0", marginwidth="0", src=url)
+
+      
 
     script(type='text/javascript')
       | var map = null;

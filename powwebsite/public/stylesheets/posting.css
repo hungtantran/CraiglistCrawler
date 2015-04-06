@@ -26,13 +26,21 @@ h1,h2,h3 {
 }
 
 #map-canvas {
-    height: 100%;
+    height: 90%;
     padding: 0;
 }
 
 #price_bin_dist_by_state {
     height: 100%;
     overflow-y: scroll;
+}
+
+#postingBodyContent {
+    font-size: 16px;
+    border: 2px solid #a1a1a1;
+    padding: 20px; 
+    background: #dddddd;
+    border-radius: 25px;
 }
 
 .axis path,
