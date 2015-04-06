@@ -226,7 +226,7 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 				// Add new links into the queue table
 				final String nextEntryLink = crawler.getNextEntryLink();
 				if (nextEntryLink == null) {
-					Helper.waitSec(2, 5);
+					Helper.waitSec(Globals.DEFAULTLOWERBOUNDWAITTIMESEC, Globals.DEFAULTUPPERBOUNDWAITTIMESEC);
 					break;
 				}
 
