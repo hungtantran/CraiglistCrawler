@@ -28,6 +28,9 @@ block content
                   | Prices
             tbody(id='table_body')
       div(id='right-margin'            class='hidden-xs hidden-sm col-md-2 col-lg-2')
+      != url
+      div(id='posting-frame' class='hidden-xs hidden-sm col-md-2 col-lg-2')
+        iframe(width="425", height="350", frameborder="0", scrolling="no", marginheight="0", marginwidth="0", src=url)
 
     script(type='text/javascript')
       | var map = null;

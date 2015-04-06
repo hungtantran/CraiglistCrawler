@@ -42,6 +42,7 @@ router.get('/:id', function(req, res) {
             title: 'Weed Posting Page',
             stylesheet: '/stylesheets/posting.css',
             content: doc['posting_body'],
+            url: doc['url'],
             states: globals.states,
             description: 'description',
             keywords: 'keywords',

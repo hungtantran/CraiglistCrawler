@@ -168,8 +168,8 @@ def index(rowId, htmlFile):
   #  print "posting " + str(rowId) + " was too large"
   #  return
 
-  #text = strip_tags(title + h2 + postingStr)
-  text = htmlFile
+  text = strip_tags(title + h2 + postingStr)
+  # text = htmlFile
   prices = extract_prices(text)
   prices = [price for price in prices if price!=420 and price!=215 and price!=502] # and price>9
   
