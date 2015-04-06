@@ -143,5 +143,6 @@ exports.states = states;
 exports.pricesProvider = pricesProvider;
 exports.postingLocationProvider = postingLocationProvider;
 exports.rawHTMLProvider = rawHTMLProvider;
+exports.commonHelper = commonHelper;
 
 

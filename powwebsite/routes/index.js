@@ -23,6 +23,8 @@ router.get('/', function(req, res) {
     markers: globals.locations,
     postings: globals.postings,
     states: globals.states,
+    pricesString: globals.commonHelper.constructPriceStringArray(globals.postings),
+    quantitiesString: globals.commonHelper.constructQuantityStringArray(globals.postings),
     description: 'description',
     keywords: 'keywords',
     icon: '/public/images/icon.gif'
@@ -75,6 +77,8 @@ router.get('/state/:state', function(req, res){
         postings: stateInfo,
         states: globals.states,
         stateChosen: state,
+        pricesString: globals.commonHelper.constructPriceStringArray(stateInfo),
+        quantitiesString: globals.commonHelper.constructQuantityStringArray(stateInfo),
         description: 'description',
         keywords: 'keywords',
         icon: '/public/images/icon.gif'

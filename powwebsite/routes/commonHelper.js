@@ -17,6 +17,70 @@ CommonHelper.prototype.IsIntValue = function(value) {
     return false;
 }
 
+CommonHelper.prototype.constructPriceString = function(prices) {
+    if (!prices) {
+        return prices;
+    }
+
+    var priceString = "";
+    for (var i = 0; i < prices.length; ++i) {
+        priceString += "$" + prices[i] + ", "
+    }
+
+    return priceString;
+}
+
+CommonHelper.prototype.constructPriceStringArray = function(pricesArray) {
+    if (!pricesArray) {
+        return pricesArray;
+    }
+
+    var priceStringArray = [];
+    for (var i = 0; i < pricesArray.length; ++i) {
+        var priceString = this.constructPriceString(pricesArray[i]['price']);
+        priceStringArray.push(priceString);
+    }
+
+    return priceStringArray;
+}
+
+CommonHelper.prototype.constructQuantityString = function(quantities) {
+    if (!quantities) {
+        return quantities;
+    }
+
+    var quantityString = "";
+    var gramArray = quantities[0];
+    if (gramArray) {
+        for (var i = 0; i < gramArray.length; ++i) {
+            quantityString += gramArray[i] + "g, "
+        }
+    }
+
+    var ounceArray = quantities[1];
+    if (ounceArray) {
+        for (var i = 0; i < ounceArray.length; ++i) {
+            quantityString += ounceArray[i] + "oz, "
+        }
+    }
+
+    return quantityString;
+}
+
+CommonHelper.prototype.constructQuantityStringArray = function(quantityArray) {
+    if (!quantityArray) {
+        return quantityArray;
+    }
+
+    var quantityStringArray = [];
+    for (var i = 0; i < quantityArray.length; ++i) {
+        var quantityString = this.constructQuantityString(quantityArray[i]['quantity']);
+        quantityStringArray.push(quantityString);
+    }
+
+    return quantityStringArray;
+}
+
 CommonHelper.prototype.ParseArrayString = function(str, split, lowerBound, upperBound, isInt) {
     if (!str) {
         return str;

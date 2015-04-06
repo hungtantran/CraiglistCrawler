@@ -25,17 +25,21 @@ block content
         div(id='right_pane_content')
           table(id='latest_prices_content' class='table table-striped table-condensed table-responsive')
             tbody(id='table_body')
-              each posting in postings
+              - for (var i = 0; i < postings.length; ++i) {
+                - posting = postings[i]
+                - priceString = pricesString[i]
+                - quantityString = quantitiesString[i]
                 if (posting['city'])
                   tr
                     td
+                      = posting['datePosted']
                     td
                       = posting['city']
                     td
-                      if (posting['quantity'] == null || posting['unit'] == null)
+                      if (posting['quantity'] == null)
                         | Check Quantity!
                       else
-                        = posting['quantity'] + ' ' + posting['unit']
+                        = quantityString
                     td
                       != '<a href="/posting/'
                       = posting['url']
@@ -43,9 +47,9 @@ block content
                       if (posting['price'] == null)
                         | Check Price!
                       else
-                        | $
-                        = posting['price']
+                        = priceString
                       != '</a>'
+              - }
 
 
 
