@@ -49,6 +49,7 @@ function ParseQuantities(quantities) {
 }
 
 var postings = [];
+var prices = [];
 
 // function UpdateCache(error, docs) {
 //     if (error != null) {
@@ -90,7 +91,7 @@ var postings = [];
 //     exports.postings = postings;
 // })
 
-function UpdateCache(error, docs) {
+function UpdatePostingCache(error, docs) {
     if (error != null) {
         console.error('error to get postings: ' + error.stack);
         process.exit(1);
@@ -121,19 +122,31 @@ function UpdateCache(error, docs) {
         }
     }
 
-    console.log("Cache has " + postings.length + " entries")
+    console.log("Postings cache has " + postings.length + " entries")
 }
 
 pricesProvider.getPostings(function(error, docs) {
-    UpdateCache(error, docs);
+    UpdatePostingCache(error, docs);
     exports.postings = postings;
+})
+
+pricesProvider.getAllPrices(function(error, docs) {
+    prices = docs;
+    console.log("Prices cache has " + prices.length + " entries");
+    exports.prices = prices;
 })
 
 // Periodically refresh cache every 5 minutes
 setInterval(function() {
     pricesProvider.getPostings(function(error, docs) {
-        UpdateCache(error, docs);
+        UpdatePostingCache(error, docs);
         exports.postings = postings;
+    })
+
+    pricesProvider.getAllPrices(function(error, docs) {
+        prices = docs;
+        console.log("Prices cache has " + prices.length + " entries")
+        exports.prices = prices;
     })
 }, 300000);
 

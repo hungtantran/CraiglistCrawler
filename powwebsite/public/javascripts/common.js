@@ -1,8 +1,16 @@
 // Function that reupdate the display with the newest filter
-function updateDisplay() {
-  initializeMap(cache['postings']);
-  initializePrices(cache['postings']);
-  initializePostings(cache['postings']);
+function updateDisplay(displayInfo, initializePosting) {
+  if (displayInfo == undefined) {
+    displayInfo = cache;
+  }
+
+  console.log('initializePosting' + initializePosting)
+  if (initializePosting == undefined || initializePosting) {
+    initializePostings(displayInfo['postings']);
+  }
+
+  initializeMap(displayInfo['postings']);
+  initializePrices(displayInfo['prices']);
   // initializePostingBodyContent();
 }
 
@@ -356,11 +364,11 @@ function initializePostings(postings) {
     // Date Posted cell
     var datePosted = row.insertCell(index++);
     var url = '/posting/' + postings[i]['url'];
-    datePosted.innerHTML = '<a href="' + url + '">' + postings[i]['datePosted'] + '</a>';
+    datePosted.innerHTML = '<b>' +postings[i]['datePosted'] + '</b>';
 
     // Location cell
     var location = row.insertCell(index++);
-    location.innerHTML = '<a href="' + url + '">' + postings[i]['city'] + '</a>';
+    location.innerHTML = '<b>' + postings[i]['city'] + '</b>';
 
     // // Code for query without grouping
     // // Quantity cell
@@ -413,6 +421,10 @@ function initializePostings(postings) {
       priceString = 'Check Price!'
     } else {
       for (var j = 0; j < postings[i]['price'].length; ++j) {
+        if (j > 8) {
+          priceString += "..."
+          break;
+        }
         priceString += "$" + postings[i]['price'][j] + ", "
       }
     }
@@ -421,7 +433,7 @@ function initializePostings(postings) {
   }
 }
 
-function newXMLRequest(func, cacheEntry) {
+function newXMLRequest(func, cacheEntry, extraParams) {
   var xmlhttp;
 
   // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -447,7 +459,7 @@ function newXMLRequest(func, cacheEntry) {
 
       // Invoke callback function
       if (func != null) {
-        func(docs);
+        func(docs, extraParams);
       }
     }
   }
@@ -467,7 +479,7 @@ function loadData() {
     postUrl += params[2];
   }
 
-  var xmlhttpPostings = new newXMLRequest(updateDisplay, 'postings');
+  var xmlhttpPostings = new newXMLRequest(updateDisplay, 'postings', false);
   xmlhttpPostings.open("POST", postUrl, true);
   xmlhttpPostings.send();
 }

@@ -1,12 +1,19 @@
 var MySQLConnectionProvider  = require("./mysqlConnectionProvider.js").MySQLConnectionProvider;
 var connectionProvider = new MySQLConnectionProvider();
 
+var maxPostTimeValidInDays = 7;
+var maxPricesTimeValidInDays = 31;
+
 PricesProvider = function() {
 };
 
 // Get all prices
 PricesProvider.prototype.getAllPrices = function(callback) {
   var connection = connectionProvider.getConnection();
+
+  var d = new Date();
+  d.setDate(d.getDate() - maxPricesTimeValidInDays);
+  var dateString = d.getFullYear() + '-' + (d.getMonth() + 1)  + '-' + d.getDate();
 
   var query =
     'SELECT \
@@ -24,8 +31,8 @@ PricesProvider.prototype.getAllPrices = function(callback) {
   FROM \
     `prices` \
   INNER JOIN `posting_location` ON ( \
-    `prices`.`price_fk` = `posting_location`.`location_fk` \
-  )';
+    `prices`.`price_fk` = `posting_location`.`location_fk`) \
+  WHERE datePosted IS NOT NULL AND datePosted >= "' + dateString + '"';
 
   connection.query(query, function(err, rows) {
     if (err) {
@@ -43,7 +50,7 @@ PricesProvider.prototype.getPostings = function(callback) {
   var connection = connectionProvider.getConnection();
 
   var d = new Date();
-  d.setDate(d.getDate() - 7);
+  d.setDate(d.getDate() - maxPostTimeValidInDays);
   var dateString = d.getFullYear() + '-' + (d.getMonth() + 1)  + '-' + d.getDate();
 
   var queryWithoutPriceGrouping =
