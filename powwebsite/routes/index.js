@@ -25,8 +25,8 @@ router.get('/', function(req, res) {
     states: globals.states,
     pricesString: globals.commonHelper.constructPriceStringArray(globals.postings),
     quantitiesString: globals.commonHelper.constructQuantityStringArray(globals.postings),
-    description: 'description',
-    keywords: 'keywords',
+    description: 'Looking for the price of weed? LeafyExchange can help you find the prices of pot in your area!',
+    keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
     icon: '/public/images/icon.gif'
   });
 });

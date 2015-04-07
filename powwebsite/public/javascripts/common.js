@@ -301,17 +301,16 @@ function initializeMap(markers, redrawMap) {
   // Initialize maps
   if (map == null || (redrawMap != null && redrawMap == true)) {
     if (typeof lat_ !== 'undefined' && typeof long_ !== 'undefined' && lat_ != null && long_ != null) {
-      map = newMap(parseFloat(lat_), parseFloat(long_), 5, 'map-canvas');
+      map = newMap(parseFloat(lat_), parseFloat(long_), 7, 'map-canvas', false);
     } else if (typeof state_ !== 'undefined' && typeof city_ !== 'undefined' && state_ != null && city_ != null) {
       geocoder = new google.maps.Geocoder();
-      geocoder.geocode( { 'address': city_ + "," + state_}, function(results, status) {
+      geocoder.geocode( { 'address': city_ + ", " + state_}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           map = newMap(results[0].geometry.location.lat(), results[0].geometry.location.lng(), 5, 'map-canvas');
         } else {
-          console.log(status);
-          console.log(city_ + "," + state_);
           map = newMap(42.2030543,-98.602256, 4, 'map-canvas');
         }
+        google.maps.event.addListener(map, 'idle', handleMapChange);
       });
     } else {
       map = newMap(42.2030543,-98.602256, 4, 'map-canvas');
@@ -321,20 +320,19 @@ function initializeMap(markers, redrawMap) {
   }
 
   // Initialize markers
-  if (markers != null) {
-    drawMarker(map, markers);
-  }
-
-  mapBound = map.getBounds();
-
+  if (map != null && markers != null) drawMarker(map, markers);
+  if (map != null) mapBound = map.getBounds();
   return map;
 }
 
 // Function to create a new map
-function newMap(latitude, longtitude, zoom, divId) {
+function newMap(latitude, longtitude, zoom, divId, draggable) {
+  var draggable_ = typeof draggable ==='undefined' ? true : draggable;
+
   var mapOptions = {
     center: { lat: latitude, lng: longtitude},
-    zoom: zoom
+    zoom: zoom,
+    draggable: draggable_
   };
 
   map = new google.maps.Map(document.getElementById(divId),

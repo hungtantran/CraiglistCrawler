@@ -48,8 +48,8 @@ router.get('/:id', function(req, res) {
             latitude: doc['latitude'],
             longitude: doc['longitude'],
             states: globals.states,
-            description: 'description',
-            keywords: 'keywords',
+            description: 'Looking for the price of weed? LeafyExchange can help you find the prices of pot in your area!',
+            keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
             icon: '/public/images/icon.gif'
         });
         return;
