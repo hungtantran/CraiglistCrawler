@@ -287,7 +287,22 @@ function drawMarker(map, markers) {
 function initializeMap(markers, redrawMap) {
   // Initialize maps
   if (map == null || (redrawMap != null && redrawMap == true)) {
-    map = newMap(39.6948, -104.7881, 5, 'map-canvas');
+    if (typeof lat_ !== 'undefined' && typeof long_ !== 'undefined' && lat_ != null && long_ != null) {
+      map = newMap(parseFloat(lat_), parseFloat(long_), 5, 'map-canvas');
+    } else if (typeof state_ !== 'undefined' && typeof city_ !== 'undefined' && state_ != null && city_ != null) {
+      geocoder = new google.maps.Geocoder();
+      geocoder.geocode( { 'address': city_ + "," + state_}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          map = newMap(results[0].geometry.location.lat(), results[0].geometry.location.lng(), 5, 'map-canvas');
+        } else {
+          console.log(status);
+          console.log(city_ + "," + state_);
+          map = newMap(42.2030543,-98.602256, 4, 'map-canvas');
+        }
+      });
+    } else {
+      map = newMap(42.2030543,-98.602256, 4, 'map-canvas');
+    }
 
     google.maps.event.addListener(map, 'idle', handleMapChange);
   }
