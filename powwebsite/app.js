@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
+var prices = require('./routes/prices')
 var postings = require('./routes/postings')
 var privacy = require('./routes/privacy')
 var terms = require('./routes/terms')
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/postings', postings)
+app.use('/prices', prices)
 app.use('/privacy', privacy)
 app.use('/terms', terms)
 app.use('/aboutus', aboutus)
