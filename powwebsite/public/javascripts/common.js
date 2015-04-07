@@ -1,16 +1,29 @@
 // Function that reupdate the display with the newest filter
-function updateDisplay(displayInfo, initializePosting) {
+function updateDisplay(displayInfo, initializeParams) {
   if (displayInfo == undefined) {
     displayInfo = cache;
   }
 
-  console.log('initializePosting' + initializePosting)
-  if (initializePosting == undefined || initializePosting) {
+  var isInitializePosting = true;
+  var isInitializeMap = true;
+  var isInitializePrice = true;
+  if (initializeParams !== undefined) {
+    isInitializePosting = initializeParams[0];
+    isInitializeMap = initializeParams[1];
+    isInitializePrice = initializeParams[2];
+  }
+
+  if (isInitializePosting == undefined ||  isInitializePosting) {
     initializePostings(displayInfo['postings']);
   }
 
-  initializeMap(displayInfo['postings']);
-  initializePrices(displayInfo['prices']);
+  if (isInitializeMap == undefined || isInitializeMap) {
+    initializeMap(displayInfo['postings']);
+  }
+
+  if (isInitializePrice == undefined || isInitializePrice) {
+    initializePrices(displayInfo['prices']);
+  }
   // initializePostingBodyContent();
 }
 
@@ -471,16 +484,29 @@ function loadData() {
   // Postings xml request
   var params = location.pathname.split('/');
   var postUrl = "/postings/";
+  var priceUrl = "/prices/";
   if (params.length > 2 && params[1] == 'state') {
     postUrl += params[2];
+    priceUrl += params[2];
   }
 
   if (params.length > 2 && params[1] == 'posting') {
     postUrl += params[2];
+    priceUrl += params[2];
   }
 
-  var xmlhttpPostings = new newXMLRequest(updateDisplay, 'postings', false);
+  var xmlhttpPostings = new newXMLRequest(
+    updateDisplay,
+    'postings',
+    [false, true, false]);
   xmlhttpPostings.open("POST", postUrl, true);
+  xmlhttpPostings.send();
+
+  var xmlhttpPostings = new newXMLRequest(
+    updateDisplay,
+    'prices',
+    [false, false, true]);
+  xmlhttpPostings.open("POST", priceUrl, true);
   xmlhttpPostings.send();
 }
 
