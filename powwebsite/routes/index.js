@@ -25,7 +25,7 @@ router.get('/', function(req, res) {
     states: globals.states,
     pricesString: globals.commonHelper.constructPriceStringArray(globals.postings),
     quantitiesString: globals.commonHelper.constructQuantityStringArray(globals.postings),
-    description: 'Looking for the price of weed? LeafyExchange can help you find the prices of pot in your area!',
+    description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot in your area!',
     keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
     icon: '/public/images/icon.gif'
   });
@@ -79,7 +79,7 @@ router.get('/state/:state', function(req, res){
         stateChosen: state,
         pricesString: globals.commonHelper.constructPriceStringArray(stateInfo),
         quantitiesString: globals.commonHelper.constructQuantityStringArray(stateInfo),
-        description: 'Looking for the price of weed? LeafyExchange can help you find the prices of pot in your area!',
+        description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot in ' + state,
         keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
         icon: '/public/images/icon.gif'
   });

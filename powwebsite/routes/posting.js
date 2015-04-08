@@ -38,8 +38,14 @@ router.get('/:id', function(req, res) {
             return;
         }
 
+        var title = doc['title'];
+        if (title === undefined || title === null || title.length === 0) {
+            title = 'Weed Posting Page';
+        }
+        title += " - LeafyExchange";
+
         res.render('posting', {
-            title: 'Weed Posting Page',
+            title: title,
             stylesheet: '/stylesheets/posting.css',
             content: doc['posting_body'],
             url: doc['url'],
@@ -48,8 +54,8 @@ router.get('/:id', function(req, res) {
             latitude: doc['latitude'],
             longitude: doc['longitude'],
             states: globals.states,
-            description: 'Looking for the price of weed? LeafyExchange can help you find the prices of pot in your area!',
-            keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
+            description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot in ' + doc['city'] + ', ' + doc['state'],
+            keywords: 'price of weed, price of marijuana, price of pot, 420, green, weed, pot, marijuana, legalize, medical, medicinal, herb, herbal',
             icon: '/public/images/icon.gif'
         });
         return;
