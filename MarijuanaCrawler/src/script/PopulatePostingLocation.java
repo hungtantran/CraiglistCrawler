@@ -63,6 +63,7 @@ public class PopulatePostingLocation {
                 if (city == null || state == null || html == null || dateCrawled == null || timeCrawled == null) {
                 	continue;
                 }
+                city = city.replace("'", "\\'");
                 
                 Document doc = Jsoup.parse(html);
                 
@@ -73,6 +74,7 @@ public class PopulatePostingLocation {
                     continue;
                 }
                 String postingTitle = Helper.cleanNonCharacterDigit(postingTitles.get(0).text());
+                postingTitle = postingTitle.replace("'", "");
                 System.out.println("Found title '" + postingTitle + "' for id " + id);
                 
                 // Extract posting body

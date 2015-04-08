@@ -1,7 +1,7 @@
 var MySQLConnectionProvider  = require("./mysqlConnectionProvider.js").MySQLConnectionProvider;
 var connectionProvider = new MySQLConnectionProvider();
 
-var maxPostTimeValidInDays = 7;
+var maxPostTimeValidInDays = 5;
 var maxPricesTimeValidInDays = 31;
 
 PricesProvider = function() {
@@ -158,22 +158,44 @@ FROM \
     ) AS D \
   ORDER BY \
   datePosted DESC';
+
+  var queryWithPriceGrouping = 
+  'SELECT *  \
+FROM \
+    ( \
+      SELECT \
+        location_fk AS id, \
+        A.state, \
+        A.city, \
+        B.alt_prices AS price, \
+        B.alt_quantities AS quantity, \
+        A.latitude AS lat1, \
+        A.longitude AS lng1, \
+        C.latitude AS lat2, \
+        C.longitude AS lng2, \
+        datePosted, \
+        title \
+      FROM \
+        posting_location AS A, \
+        rawhtml AS B, \
+        location_link AS C \
+      WHERE \
+        location_fk = B.id AND \
+        location_link_fk = C.id AND \
+        datePosted IS NOT NULL AND \
+        datePosted >= "' + dateString + '" \
+    ) AS D \
+  ORDER BY \
+  datePosted DESC, quantity DESC';
+  console.log(queryWithPriceGrouping);
   
-  connection.query(queryWithPriceGroupingNotNullQuantity, function(err1, rows1) {
-    if (err1) {
-      callback (err1);
+  connection.query(queryWithPriceGrouping, function(err, rows) {
+    if (err) {
+      callback (err);
       connection.end();
     } else {
-      connection.query(queryWithPriceGroupingNullQuantity, function(err2, rows2) {
-        if (err2) {
-          callback (err2);
-          connection.end();
-        } else {
-          var rows = rows1.concat(rows2);
-          callback(null, rows);
-          connection.end();
-        }
-      });
+      callback(null, rows);
+      connection.end();
     }
   });
 };
