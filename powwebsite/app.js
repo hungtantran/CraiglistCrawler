@@ -4,18 +4,20 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var connect = require('connect');
 
 var index = require('./routes/index');
-var prices = require('./routes/prices')
-var postings = require('./routes/postings')
-var privacy = require('./routes/privacy')
-var terms = require('./routes/terms')
-var aboutus = require('./routes/aboutus')
+var prices = require('./routes/prices');
+var postings = require('./routes/postings');
+var privacy = require('./routes/privacy');
+var terms = require('./routes/terms');
+var aboutus = require('./routes/aboutus');
 var posting = require('./routes/posting');
 
 var app = express();
-app.use(connect.compress());
+
+// gzip/deflate outgoing responses
+var compression = require('compression');
+app.use(compression());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
