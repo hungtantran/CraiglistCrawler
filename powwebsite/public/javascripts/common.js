@@ -1,6 +1,6 @@
 // Function that reupdate the display with the newest filter
 function updateDisplay(displayInfo, initializeParams) {
-  if (displayInfo == undefined) {
+  if (displayInfo === undefined) {
     displayInfo = cache;
   }
 
@@ -13,18 +13,17 @@ function updateDisplay(displayInfo, initializeParams) {
     isInitializePrice = initializeParams[2];
   }
 
-  if (isInitializePosting == undefined ||  isInitializePosting) {
+  if (isInitializePosting === undefined ||  isInitializePosting) {
     initializePostings(displayInfo['postings']);
   }
 
-  if (isInitializeMap == undefined || isInitializeMap) {
+  if (isInitializeMap === undefined || isInitializeMap) {
     initializeMap(displayInfo['postings']);
   }
 
-  if (isInitializePrice == undefined || isInitializePrice) {
+  if (isInitializePrice === undefined || isInitializePrice) {
     initializePrices(displayInfo['prices']);
   }
-  // initializePostingBodyContent();
 }
 
 function initializePostingBodyContent() {
@@ -57,7 +56,7 @@ function initializePrices(prices) {
     lng = prices[i]['lng'];
 
     var priceLocation = new google.maps.LatLng(lat, lng)
-    if (mapBound && mapBound.contains(priceLocation)) {
+    if (mapBound === null || mapBound === undefined || mapBound.contains(priceLocation)) {
       newPrices.push(prices[i]);
     }
   }
@@ -289,6 +288,8 @@ function drawMarker(map, markers) {
         map: map
       });
 
+      google.maps.event.addListener(marker, 'click', handleMapChange);
+
       markerArray.push(marker);
     }
   }
@@ -310,17 +311,19 @@ function initializeMap(markers, redrawMap) {
         } else {
           map = newMap(42.2030543,-98.602256, 4, 'map-canvas');
         }
-        google.maps.event.addListener(map, 'idle', handleMapChange);
+        google.maps.event.addListener(map, 'zoom_changed', handleMapChange);
       });
     } else {
       map = newMap(42.2030543,-98.602256, 4, 'map-canvas');
     }
 
-    google.maps.event.addListener(map, 'idle', handleMapChange);
+    google.maps.event.addListener(map, 'zoom_changed', handleMapChange);
   }
 
   // Initialize markers
-  if (map != null && markers != null) drawMarker(map, markers);
+  if (map != null && markers != null) {
+    drawMarker(map, markers);
+  }
   if (map != null) mapBound = map.getBounds();
   return map;
 }
@@ -485,7 +488,7 @@ function newXMLRequest(func, cacheEntry, extraParams) {
 
       // Invoke callback function
       if (func != null) {
-        func(docs, extraParams);
+        func(cache, extraParams);
       }
     }
   }
