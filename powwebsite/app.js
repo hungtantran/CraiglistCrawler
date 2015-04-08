@@ -4,6 +4,7 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var connect = require('connect');
 
 var index = require('./routes/index');
 var prices = require('./routes/prices')
@@ -14,6 +15,7 @@ var aboutus = require('./routes/aboutus')
 var posting = require('./routes/posting');
 
 var app = express();
+app.use(connect.compress());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

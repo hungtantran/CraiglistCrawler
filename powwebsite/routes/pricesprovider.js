@@ -187,7 +187,6 @@ FROM \
     ) AS D \
   ORDER BY \
   datePosted DESC, quantity DESC';
-  console.log(queryWithPriceGrouping);
   
   connection.query(queryWithPriceGrouping, function(err, rows) {
     if (err) {
