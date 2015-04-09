@@ -18,7 +18,7 @@ router.get('/', function(req, res) {
   }
 
   res.render('index', {
-    title: 'LeafyExchange: Best Marijuana Prices and Information',
+    title: 'LeafyExchange: The Best Marijuana Prices and Information',
     stylesheet: '/stylesheets/index.css',
     markers: globals.locations,
     postings: globals.postings,
@@ -71,7 +71,7 @@ router.get('/state/:state', function(req, res){
     console.log();
 
     res.render('index', {
-        title: 'LeafyExchange: Best Marijuana Prices and Information in ' + state,
+        title: 'LeafyExchange: The Best Marijuana Prices and Information in ' + state,
         stylesheet: '/stylesheets/index.css',
         markers: stateInfo,
         postings: stateInfo,
