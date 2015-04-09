@@ -6,7 +6,7 @@ var globals         = require('./globals');
 /* GET about us page. */
 router.get('/', function(req, res) {
   res.render('aboutus', {
-    title: 'About Us - Weed Price Index',
+    title: 'About Us - LeafyExchange - Best Marijuana Prices and Information',
     stylesheet: '/stylesheets/index.css',
     states: globals.states,
     description: 'Looking for the price of weed? LeafyExchange can help you find the prices of pot in your area!',

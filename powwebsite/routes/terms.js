@@ -6,7 +6,7 @@ var globals         = require('./globals');
 /* GET terms page. */
 router.get('/', function(req, res) {
   res.render('terms', {
-    title: 'Terms - Weed Price Index',
+    title: 'Terms - LeafyExchange - Best Marijuana Prices and Information',
     stylesheet: '/stylesheets/index.css',
     states: globals.states,
     description: 'Looking for the price of weed? LeafyExchange can help you find the prices of pot in your area!',

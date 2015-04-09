@@ -6,7 +6,7 @@ var globals         = require('./globals');
 /* GET privacy page. */
 router.get('/', function(req, res) {
   res.render('privacy', {
-    title: 'Privacy - Weed Price Index',
+    title: 'Privacy - LeafyExchange - Best Marijuana Prices and Information',
     stylesheet: '/stylesheets/index.css',
     states: globals.states,
     description: 'Looking for the price of weed? LeafyExchange can help you find the prices of pot in your area!',
