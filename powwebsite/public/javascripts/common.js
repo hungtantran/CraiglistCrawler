@@ -394,10 +394,12 @@ function initializePostings(postings) {
     var datePosted = row.insertCell(index++);
     var url = '/posting/' + postings[i]['url'];
     datePosted.innerHTML = '<b>' +postings[i]['datePosted'] + '</b>';
+    datePosted.setAttribute('width','16%');
 
     // Location cell
     var location = row.insertCell(index++);
     location.innerHTML = '<b>' + postings[i]['city'] + '</b>';
+    location.setAttribute('width','14%');
 
     // // Code for query without grouping
     // // Quantity cell
@@ -441,6 +443,7 @@ function initializePostings(postings) {
     }
 
     quantity.innerHTML = '<a href="' + url + '">' + quantityString + '</a>';
+    quantity.setAttribute('width','35%');
 
     // Price cell
     var price = row.insertCell(index++);
@@ -450,7 +453,7 @@ function initializePostings(postings) {
       priceString = 'Check Price!'
     } else {
       for (var j = 0; j < postings[i]['price'].length; ++j) {
-        if (j > 8) {
+        if (j > 6) {
           priceString += "..."
           break;
         }
@@ -459,6 +462,7 @@ function initializePostings(postings) {
     }
 
     price.innerHTML = '<a href="' + url + '">' + priceString + '</a>';
+    price.setAttribute('width','35%');
   }
 }
 
