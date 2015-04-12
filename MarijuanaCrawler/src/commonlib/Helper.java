@@ -62,7 +62,22 @@ public class Helper {
 
 		return wordsSet;
 	}
-
+	
+	// Add 0 to string represent time like "9" to "09" if there is only
+	// one 1 digit
+	public static String AddZeros(String originalString, int numDigits)
+	{
+		if (originalString == null) {
+			return null;
+		}
+		
+		while (originalString.length() < numDigits) {
+			originalString = "0" + originalString;
+		}
+		
+		return originalString;
+	}
+	
 	// Return the current date, e.g: 2014-05-23
 	@SuppressWarnings("deprecation")
 	public static String getCurrentDate() {
@@ -71,9 +86,16 @@ public class Helper {
 		StringBuilder dateString = new StringBuilder();
 		dateString.append(1900 + currentDate.getYear());
 		dateString.append("-");
-		dateString.append(currentDate.getMonth() + 1);
+		
+		String monthString = "" + currentDate.getMonth() + 1;
+		monthString = Helper.AddZeros(monthString, 2);
+
+		dateString.append(monthString);
 		dateString.append("-");
-		dateString.append(currentDate.getDate());
+		
+		String dayString = "" + currentDate.getDate();
+		dayString = Helper.AddZeros(dayString, 2);
+		dateString.append(dayString);
 
 		return dateString.toString();
 	}
@@ -84,11 +106,20 @@ public class Helper {
 		Date currentDate = new Date();
 
 		StringBuilder timeString = new StringBuilder();
-		timeString.append(currentDate.getHours());
+		
+		String hourString = "" + currentDate.getHours();
+		hourString = Helper.AddZeros(hourString, 2);
+		timeString.append(hourString);
 		timeString.append(":");
-		timeString.append(currentDate.getMinutes());
+		
+		String minuteString = "" + currentDate.getMinutes();
+		minuteString = Helper.AddZeros(minuteString, 2);
+		timeString.append(minuteString);
 		timeString.append(":");
-		timeString.append(currentDate.getSeconds());
+		
+		String secondString = "" + currentDate.getSeconds();
+		secondString = Helper.AddZeros(secondString, 2);
+		timeString.append(secondString);
 
 		return timeString.toString();
 	}

@@ -1,5 +1,7 @@
 var MySQLConnectionProvider  = require("./mysqlConnectionProvider.js").MySQLConnectionProvider;
 var connectionProvider = new MySQLConnectionProvider();
+var CommonHelper = require('./commonHelper').CommonHelper;
+var commonHelper = new CommonHelper();
 
 var maxPostTimeValidInDays = 5;
 var maxPricesTimeValidInDays = 31;
@@ -13,7 +15,7 @@ PricesProvider.prototype.getAllPrices = function(callback) {
 
   var d = new Date();
   d.setDate(d.getDate() - maxPricesTimeValidInDays);
-  var dateString = d.getFullYear() + '-' + (d.getMonth() + 1)  + '-' + d.getDate();
+  var dateString = commonHelper.FormatDate(d);
 
   var query =
     'SELECT \
@@ -47,7 +49,8 @@ PricesProvider.prototype.getPostings = function(callback) {
 
   var d = new Date();
   d.setDate(d.getDate() - maxPostTimeValidInDays);
-  var dateString = d.getFullYear() + '-' + (d.getMonth() + 1)  + '-' + d.getDate();
+  var dateString = commonHelper.FormatDate(d);
+  console.log(dateString);
 
   var queryWithoutPriceGrouping =
     'SELECT * \
@@ -187,7 +190,7 @@ FROM \
     ) AS D \
   ORDER BY \
   datePosted DESC, quantity DESC';
-  
+  console.log(queryWithPriceGrouping);
   connection.query(queryWithPriceGrouping, function(err, rows) {
     if (err) {
       callback (err);

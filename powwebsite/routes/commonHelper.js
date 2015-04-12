@@ -1,6 +1,29 @@
 CommonHelper = function() {
 };
 
+CommonHelper.prototype.FormatNumber = function(number, numDigits) {
+  while (number.length < numDigits) {
+    number = "0" + number;
+  }
+
+  return number;
+}
+
+CommonHelper.prototype.FormatDate = function(date) {
+  var year = "" + date.getFullYear();
+  year = this.FormatNumber(year, 4);
+
+  var month = "" + (date.getMonth() + 1);
+  month = this.FormatNumber(month, 2);
+
+  var date = "" + date.getDate();
+  date = this.FormatNumber(date, 2);  
+
+  var dateString = year + '-' + month  + '-' + date;
+
+  return dateString;
+}
+
 CommonHelper.prototype.ReplaceAll = function(find, replace, str) {
     return str.replace(new RegExp(find, 'g'), replace);
 }
