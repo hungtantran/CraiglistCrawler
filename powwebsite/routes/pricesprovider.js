@@ -3,7 +3,7 @@ var connectionProvider = new MySQLConnectionProvider();
 var CommonHelper = require('./commonHelper').CommonHelper;
 var commonHelper = new CommonHelper();
 
-var maxPostTimeValidInDays = 5;
+var maxPostTimeValidInDays = 7;
 var maxPricesTimeValidInDays = 31;
 
 PricesProvider = function() {
@@ -177,7 +177,8 @@ FROM \
         C.latitude AS lat2, \
         C.longitude AS lng2, \
         datePosted, \
-        title \
+        title, \
+        duplicatePostId \
       FROM \
         posting_location AS A, \
         rawhtml AS B, \
@@ -190,7 +191,7 @@ FROM \
     ) AS D \
   ORDER BY \
   datePosted DESC, quantity DESC';
-  console.log(queryWithPriceGrouping);
+
   connection.query(queryWithPriceGrouping, function(err, rows) {
     if (err) {
       callback (err);

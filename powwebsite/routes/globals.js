@@ -61,25 +61,25 @@ var prices = [];
 
 //     for (var i = 0; i < docs.length; ++i)
 //     {
-//         postings[i] = {};
+//         postings[index] = {};
 
-//         postings[i]['id'] = docs[i]['id'];
-//         postings[i]['price'] = docs[i]['price'];
-//         postings[i]['quantity'] = docs[i]['quantity'];
-//         postings[i]['unit'] = docs[i]['unit'];
-//         postings[i]['state'] = docs[i]['state'];
-//         postings[i]['city'] = docs[i]['city'];
-//         postings[i]['datePosted'] = docs[i]['datePosted'];
-//         postings[i]['title'] = docs[i]['title'];
-//         postings[i]['url'] = ReplaceAll(' ', '-', postings[i]['title']);
-//         postings[i]['url'] += "-" + postings[i]['id'];
+//         postings[index]['id'] = docs[i]['id'];
+//         postings[index]['price'] = docs[i]['price'];
+//         postings[index]['quantity'] = docs[i]['quantity'];
+//         postings[index]['unit'] = docs[i]['unit'];
+//         postings[index]['state'] = docs[i]['state'];
+//         postings[index]['city'] = docs[i]['city'];
+//         postings[index]['datePosted'] = docs[i]['datePosted'];
+//         postings[index]['title'] = docs[i]['title'];
+//         postings[index]['url'] = ReplaceAll(' ', '-', postings[index]['title']);
+//         postings[index]['url'] += "-" + postings[index]['id'];
 
-//         postings[i]['lat'] = docs[i]['lat1'];
-//         postings[i]['lng'] = docs[i]['lng1'];
+//         postings[index]['lat'] = docs[i]['lat1'];
+//         postings[index]['lng'] = docs[i]['lng1'];
 
-//         if (postings[i]['lat'] == null || postings[i]['lng'] == null) {
-//             postings[i]['lat'] = docs[i]['lat2'];
-//             postings[i]['lng'] = docs[i]['lng2'];
+//         if (postings[index]['lat'] == null || postings[index]['lng'] == null) {
+//             postings[index]['lat'] = docs[i]['lat2'];
+//             postings[index]['lng'] = docs[i]['lng2'];
 //         }
 //     }
 
@@ -98,28 +98,48 @@ function UpdatePostingCache(error, docs) {
     }
 
     postings = [];
+    var idSets = new Array();
 
+    var index = 0;
     for (var i = 0; i < docs.length; ++i)
     {
-        postings[i] = {};
-
-        postings[i]['id'] = docs[i]['id'];
-        postings[i]['price'] = ParsePrices(docs[i]['price']);
-        postings[i]['quantity'] = ParseQuantities(docs[i]['quantity']);
-        postings[i]['state'] = docs[i]['state'];
-        postings[i]['city'] = docs[i]['city'];
-        postings[i]['datePosted'] = docs[i]['datePosted'];
-        postings[i]['title'] = docs[i]['title'];
-        postings[i]['url'] = commonHelper.ReplaceAll(' ', '-', postings[i]['title']);
-        postings[i]['url'] += "-" + postings[i]['id'];
-
-        postings[i]['lat'] = docs[i]['lat1'];
-        postings[i]['lng'] = docs[i]['lng1'];
-
-        if (postings[i]['lat'] == null || postings[i]['lng'] == null) {
-            postings[i]['lat'] = docs[i]['lat2'];
-            postings[i]['lng'] = docs[i]['lng2'];
+        var duplicatedId = docs[i]['duplicatePostId'];
+        if (duplicatedId !== null) {
+            if (idSets.indexOf(duplicatedId) != -1) {
+                // console.log("Post " + docs[i]['id'] + " is filtered out because duplication with " + duplicatedId);
+                continue;
+            } else {
+                // console.log("New duplicated id is added " + duplicatedId + " from post " + docs[i]['id']);
+                idSets.push(duplicatedId);
+            }
+        } else {
+            if (idSets.indexOf(docs[i]['id']) != -1) {
+                // console.log("Post " + docs[i]['id'] + " is filtered out");
+                continue;
+            }
         }
+
+        postings[index] = {};
+
+        postings[index]['id'] = docs[i]['id'];
+        postings[index]['price'] = ParsePrices(docs[i]['price']);
+        postings[index]['quantity'] = ParseQuantities(docs[i]['quantity']);
+        postings[index]['state'] = docs[i]['state'];
+        postings[index]['city'] = docs[i]['city'];
+        postings[index]['datePosted'] = docs[i]['datePosted'];
+        postings[index]['title'] = docs[i]['title'];
+        postings[index]['url'] = commonHelper.ReplaceAll(' ', '-', postings[index]['title']);
+        postings[index]['url'] += "-" + postings[index]['id'];
+
+        postings[index]['lat'] = docs[i]['lat1'];
+        postings[index]['lng'] = docs[i]['lng1'];
+
+        if (postings[index]['lat'] == null || postings[index]['lng'] == null) {
+            postings[index]['lat'] = docs[i]['lat2'];
+            postings[index]['lng'] = docs[i]['lng2'];
+        }
+
+        ++index;
     }
 
     console.log("Postings cache has " + postings.length + " entries")
