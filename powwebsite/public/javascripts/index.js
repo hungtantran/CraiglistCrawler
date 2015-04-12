@@ -48,7 +48,7 @@ function initializePrices(prices) {
 
   newPrices = [];
   for (var i = 0; i < prices.length; ++i) {
-    if (isPostingPage && prices[i]['price_fk'] == id) {
+    if (isPostingPage && prices[i]['price_fk'] === id) {
       postingPrices.push(prices[i]);
     }
 
@@ -61,12 +61,7 @@ function initializePrices(prices) {
     }
   }
 
-  newPostingPrices('postingPrices', postingPrices);
   newPriceBin('price_bin_dist_by_state', newPrices);
-}
-
-function newPostingPrices(divId, postingPrices) {
-
 }
 
 function newPriceBin(divId, prices) {
@@ -190,15 +185,15 @@ function newPriceBin(divId, prices) {
       return d['bins']; })
   .enter().append("text")
     .text(function(d) { 
-      if (d.value == null) {
+      if (d.value === null) {
         return 0;
       } else {
-        if (d.value == 0) return "";
+        if (d.value === 0) return "";
         return d.value;
       }
     })
     .attr("x", function(d) {
-      if (d.value == null) {
+      if (d.value === null) {
         return 0;
       } else {
         return x(d.value) + 4;
@@ -214,7 +209,7 @@ function newPriceBin(divId, prices) {
         return d['bins']; })
     .enter().append("rect")
       .attr("width", function(d) { 
-        if (d.value == null) {
+        if (d.value === null) {
           return 0;
         } else {
           return x(d.value);
@@ -240,12 +235,12 @@ function newPriceBin(divId, prices) {
         tooltip.style('display', 'none');
         })
       .on('click', function(d) {
-        if (stateFilter == d.state) stateFilter = null;
+        if (stateFilter === d.state) stateFilter = null;
         else stateFilter = d.state;
         updateDisplay();
         })
       .style("fill", function(d) {
-        if (stateFilter == null || d.state == stateFilter) {
+        if (stateFilter === null || d.state === stateFilter) {
           return color(d.name);
         } else {
           return "#F5F5F5";
@@ -300,13 +295,13 @@ function drawMarker(map, markers) {
 // Reinitialize the map, call to redraw the map
 function initializeMap(markers, redrawMap) {
   // Initialize maps
-  if (map == null || (redrawMap != null && redrawMap == true)) {
+  if (map === null || (redrawMap != null && redrawMap === true)) {
     if (typeof lat_ !== 'undefined' && typeof long_ !== 'undefined' && lat_ != null && long_ != null) {
       map = newMap(parseFloat(lat_), parseFloat(long_), 7, 'map-canvas', false);
     } else if (typeof state_ !== 'undefined' && typeof city_ !== 'undefined' && state_ != null && city_ != null) {
       geocoder = new google.maps.Geocoder();
       geocoder.geocode( { 'address': city_ + ", " + state_}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
+        if (status === google.maps.GeocoderStatus.OK) {
           map = newMap(results[0].geometry.location.lat(), results[0].geometry.location.lng(), 5, 'map-canvas');
         } else {
           map = newMap(42.2030543,-98.602256, 4, 'map-canvas');
@@ -345,19 +340,9 @@ function newMap(latitude, longtitude, zoom, divId, draggable) {
 }
 
 function initializePostings(postings) {
-  if (postings == null) {
+  if (postings === null || postings === undefined) {
     return;
   }
-
-  // check if posting page
-  var params = document.URL.split("/");
-  var id = params[params.length-1];
-  var paramsId = id.split("-");
-  id = paramsId[paramsId.length-1];
-
-  var postingPrices = [];
-  var isPostingPage = false;
-  if (!isNaN(parseInt(id))) isPostingPage = true;
 
   var table = document.getElementById('table_body');
   for(var i = table.rows.length - 1; i >= 0; --i)
@@ -367,22 +352,20 @@ function initializePostings(postings) {
 
   for (var i = 0; i < postings.length; ++i)
   {
-    if (stateFilter != null && postings[i]['state'] != stateFilter && !isPostingPage) {
+    if (stateFilter != null && postings[i]['state'] != stateFilter) {
       continue;
     }
 
-    if (!postings[i]['city'] && !isPostingPage) {
+    if (!postings[i]['city']) {
       continue;
     }
-
-    if (isPostingPage && (isNaN(id) || postings[i]['id'] != id)) continue;
 
     lat = postings[i]['lat'];
     lng = postings[i]['lng'];
 
     var postingLocation = new google.maps.LatLng(lat, lng);
 
-    if (!mapBound.contains(postingLocation) && !isPostingPage) {
+    if (!mapBound.contains(postingLocation)) {
      continue;
     }
 
@@ -505,12 +488,7 @@ function loadData() {
   var params = location.pathname.split('/');
   var postUrl = "/postings/";
   var priceUrl = "/prices/";
-  if (params.length > 2 && params[1] == 'state') {
-    postUrl += params[2];
-    priceUrl += params[2];
-  }
-
-  if (params.length > 2 && params[1] == 'posting') {
+  if (params.length > 2 && params[1] === 'state') {
     postUrl += params[2];
     priceUrl += params[2];
   }

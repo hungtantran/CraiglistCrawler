@@ -10,6 +10,32 @@ PricesProvider = function() {
 };
 
 // Get all prices
+PricesProvider.prototype.getAllPostingsState = function(callback) {
+  var connection = connectionProvider.getConnection();
+
+  var d = new Date();
+  d.setDate(d.getDate() - maxPricesTimeValidInDays);
+  var dateString = commonHelper.FormatDate(d);
+
+  var query =
+    'SELECT \
+    `posting_location`.`state` AS `state`, \
+    `posting_location`.`location_fk` AS `id` \
+  FROM `posting_location` \
+  WHERE datePosted IS NOT NULL';
+
+  connection.query(query, function(err, rows) {
+    if (err) {
+      callback (err);
+    } else {
+      callback(null, rows);
+    }
+  });
+
+  connection.end();
+};
+
+// Get all prices
 PricesProvider.prototype.getAllPrices = function(callback) {
   var connection = connectionProvider.getConnection();
 

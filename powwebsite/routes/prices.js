@@ -15,9 +15,9 @@ router.post('/:param', function(req, res){
 
     var state = null;
     if (!isNaN(parseInt(id))) {
-        for (var i = 0; i < globals.prices.length; ++i) {
-            if (globals.prices[i]['id'] == id) {
-                state = globals.prices[i]['state'];
+        for (var i = 0; i < globals.postingStates.length; ++i) {
+            if (globals.postingStates[i]['id'] == id) {
+                state = globals.postingStates[i]['state'];
                 break;
             }
         }

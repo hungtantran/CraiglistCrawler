@@ -50,46 +50,7 @@ function ParseQuantities(quantities) {
 
 var postings = [];
 var prices = [];
-
-// function UpdateCache(error, docs) {
-//     if (error != null) {
-//         console.error('error to get postings: ' + error.stack);
-//         process.exit(1);
-//     }
-
-//     postings = [];
-
-//     for (var i = 0; i < docs.length; ++i)
-//     {
-//         postings[index] = {};
-
-//         postings[index]['id'] = docs[i]['id'];
-//         postings[index]['price'] = docs[i]['price'];
-//         postings[index]['quantity'] = docs[i]['quantity'];
-//         postings[index]['unit'] = docs[i]['unit'];
-//         postings[index]['state'] = docs[i]['state'];
-//         postings[index]['city'] = docs[i]['city'];
-//         postings[index]['datePosted'] = docs[i]['datePosted'];
-//         postings[index]['title'] = docs[i]['title'];
-//         postings[index]['url'] = ReplaceAll(' ', '-', postings[index]['title']);
-//         postings[index]['url'] += "-" + postings[index]['id'];
-
-//         postings[index]['lat'] = docs[i]['lat1'];
-//         postings[index]['lng'] = docs[i]['lng1'];
-
-//         if (postings[index]['lat'] == null || postings[index]['lng'] == null) {
-//             postings[index]['lat'] = docs[i]['lat2'];
-//             postings[index]['lng'] = docs[i]['lng2'];
-//         }
-//     }
-
-//     console.log("Cache has " + postings.length + " entries")
-// }
-
-// pricesProvider.getPostings(function(error, docs) {
-//     UpdateCache(error, docs);
-//     exports.postings = postings;
-// })
+var postingStates = [];
 
 function UpdatePostingCache(error, docs) {
     if (error != null) {
@@ -141,33 +102,33 @@ function UpdatePostingCache(error, docs) {
 
         ++index;
     }
-
-    console.log("Postings cache has " + postings.length + " entries")
 }
 
-pricesProvider.getPostings(function(error, docs) {
-    UpdatePostingCache(error, docs);
-    exports.postings = postings;
-})
-
-pricesProvider.getAllPrices(function(error, docs) {
-    prices = docs;
-    console.log("Prices cache has " + prices.length + " entries");
-    exports.prices = prices;
-})
-
-// Periodically refresh cache every 5 minutes
-setInterval(function() {
+function RefreshCache() {
     pricesProvider.getPostings(function(error, docs) {
         UpdatePostingCache(error, docs);
+        console.log("Postings cache has " + postings.length + " entries")
         exports.postings = postings;
     })
 
     pricesProvider.getAllPrices(function(error, docs) {
         prices = docs;
-        console.log("Prices cache has " + prices.length + " entries")
+        console.log("Prices cache has " + prices.length + " entries");
         exports.prices = prices;
     })
+
+    pricesProvider.getAllPostingsState(function(error, docs) {
+        postingStates = docs;
+        console.log("PostingStates cache has " + postingStates.length + " entries");
+        exports.postingStates = postingStates;
+    })
+}
+
+RefreshCache();
+
+// Periodically refresh cache every 5 minutes
+setInterval(function() {
+    RefreshCache();
 }, 300000);
 
 var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];

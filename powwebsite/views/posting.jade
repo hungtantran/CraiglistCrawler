@@ -29,16 +29,12 @@ block content
                   | Prices
             tbody(id='table_body')
 
-      
-
     script(type='text/javascript')
       | var map = null;
-      | var markerClusterer = null;
       | var markerArray = [];
 
       | var cache = [];
 
-      | var mapBound = null;
       | var stateFilter = null;
       | var lat_ = !{JSON.stringify(latitude)};
       | var long_ = !{JSON.stringify(longitude)};
