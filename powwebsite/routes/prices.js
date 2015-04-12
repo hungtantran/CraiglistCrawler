@@ -13,26 +13,37 @@ router.post('/:param', function(req, res){
     var params = req.params.param.split("-");
     var id = params[params.length-1];
 
-    var state = null;
+    var info = [];
+
+    // Posting page
     if (!isNaN(parseInt(id))) {
-        for (var i = 0; i < globals.postingStates.length; ++i) {
-            if (globals.postingStates[i]['id'] == id) {
-                state = globals.postingStates[i]['state'];
+        var city = null;
+
+        for (var i = 0; i < globals.postingLocations.length; ++i) {
+            if (globals.postingLocations[i]['id'] == id) {
+                city = globals.postingLocations[i]['city'];
                 break;
             }
         }
-    } else {
-        state = req.params.param;
-    }
 
-    stateInfo = [];
-    for (var i = 0; i < globals.prices.length; ++i) {
-        if (globals.prices[i]['state'].toUpperCase() === state.toUpperCase()) {
-            stateInfo.push(globals.prices[i]);
+        for (var i = 0; i < globals.prices.length; ++i) {
+            if (globals.prices[i]['city'].toUpperCase() === city.toUpperCase()) {
+                info.push(globals.prices[i]);
+            }
+        }
+    }
+    // State page
+    else {
+        var state = req.params.param;
+
+        for (var i = 0; i < globals.prices.length; ++i) {
+            if (globals.prices[i]['state'].toUpperCase() === state.toUpperCase()) {
+                info.push(globals.prices[i]);
+            }
         }
     }
 
-    res.json(stateInfo);
+    res.json(info);
 });
 
 module.exports = router;

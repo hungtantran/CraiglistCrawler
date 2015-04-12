@@ -50,7 +50,7 @@ function ParseQuantities(quantities) {
 
 var postings = [];
 var prices = [];
-var postingStates = [];
+var postingLocations = [];
 
 function UpdatePostingCache(error, docs) {
     if (error != null) {
@@ -117,10 +117,10 @@ function RefreshCache() {
         exports.prices = prices;
     })
 
-    pricesProvider.getAllPostingsState(function(error, docs) {
-        postingStates = docs;
-        console.log("PostingStates cache has " + postingStates.length + " entries");
-        exports.postingStates = postingStates;
+    pricesProvider.getAllPostingLocations(function(error, docs) {
+        postingLocations = docs;
+        console.log("PostingLocations cache has " + postingLocations.length + " entries");
+        exports.postingLocations = postingLocations;
     })
 }
 

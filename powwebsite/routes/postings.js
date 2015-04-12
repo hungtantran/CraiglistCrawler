@@ -8,31 +8,42 @@ router.post('/', function(req, res){
     res.json(globals.postings);
 });
 
-// Get some state json
+// Get some location json
 router.post('/:param', function(req, res){
     var params = req.params.param.split("-");
     var id = params[params.length-1];
     
-    var state = null;
+    var info = [];
+
+    // Posting page
     if (!isNaN(parseInt(id))) {
-        for (var i = 0; i < globals.postingStates.length; ++i) {
-            if (globals.postingStates[i]['id'] == id) {
-                state = globals.postingStates[i]['state'];
+        var city = null;
+
+        for (var i = 0; i < globals.postingLocations.length; ++i) {
+            if (globals.postingLocations[i]['id'] == id) {
+                city = globals.postingLocations[i]['city'];
                 break;
             }
         }
-    } else {
-        state = req.params.param;
-    }
 
-    stateInfo = [];
-    for (var i = 0; i < globals.postings.length; ++i) {
-        if (globals.postings[i]['state'].toUpperCase() === state.toUpperCase()) {
-            stateInfo.push(globals.postings[i]);
+        for (var i = 0; i < globals.postings.length; ++i) {
+            if (globals.postings[i]['city'].toUpperCase() === city.toUpperCase()) {
+                info.push(globals.postings[i]);
+            }
+        }
+    }
+    // State page
+    else {
+        var state = req.params.param;
+
+        for (var i = 0; i < globals.postings.length; ++i) {
+            if (globals.postings[i]['state'].toUpperCase() === state.toUpperCase()) {
+                info.push(globals.postings[i]);
+            }
         }
     }
 
-    res.json(stateInfo);
+    res.json(info);
 });
 
 module.exports = router;

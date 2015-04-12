@@ -10,7 +10,7 @@ PricesProvider = function() {
 };
 
 // Get all prices
-PricesProvider.prototype.getAllPostingsState = function(callback) {
+PricesProvider.prototype.getAllPostingLocations = function(callback) {
   var connection = connectionProvider.getConnection();
 
   var d = new Date();
@@ -20,6 +20,7 @@ PricesProvider.prototype.getAllPostingsState = function(callback) {
   var query =
     'SELECT \
     `posting_location`.`state` AS `state`, \
+    `posting_location`.`city` AS `city`, \
     `posting_location`.`location_fk` AS `id` \
   FROM `posting_location` \
   WHERE datePosted IS NOT NULL';
@@ -50,6 +51,7 @@ PricesProvider.prototype.getAllPrices = function(callback) {
     `prices`.`quantity` AS `quantity`, \
     `prices`.`unit` AS `unit`, \
     `posting_location`.`state` AS `state`, \
+    `posting_location`.`city` AS `city`, \
     `posting_location`.`latitude` AS `lat`, \
     `posting_location`.`longitude` AS `lng` \
   FROM \

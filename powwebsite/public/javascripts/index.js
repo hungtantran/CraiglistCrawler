@@ -26,16 +26,6 @@ function updateDisplay(displayInfo, initializeParams) {
   }
 }
 
-function initializePostingBodyContent() {
-  var content = $("#postingBodyContent").html();
-  
-  var elements = $(content).highlightRegex('[\d+/\d+oz|\d+/\d+ ounce|\d+oz|\d ounces|eighth|eighths|quarter|quarter oz|quart|quarters|half|half oz|ounce|oz|1/8th|1/8TH|8ths|8THS|HALF|FULL|an o|a qp|a hp|an hp|a unit|a pound|\d+/\d+ | \d+[0-9]*\.?[0-9]* grams | \d+[0-9]*\.?[0-9]*grams | gram | GRAMS | \d+[0-9]*\.?[0-9]*gram | \d+[0-9]*\.?[0-9]*GRAMS | \d+[0-9]*\.?[0-9]*g | \d+[0-9]*\.?[0-9]*G]|\d+/\d+|\d+?[0-9]*\.?[0-9]+ dollar|\d+?[0-9]*\.?[0-9]+ donation|\\$\d+?[0-9]*\.?[0-9]+|\\$+?[0-9]*\.?[0-9]+|[0-9]*\.?[0-9]+');
-  var postingBody = $('#postingbody', elements);
-
-  $('#postingBodyContent').empty();
-  $('#postingBodyContent').append(postingBody);
-}
-
 function initializePrices(prices) {
   $('#price_bin_dist_by_state').empty();
   $('#svgAxis').remove();
