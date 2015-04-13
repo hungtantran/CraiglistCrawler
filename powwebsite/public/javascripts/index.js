@@ -371,7 +371,7 @@ function initializePostings(postings) {
 
     // Title cell
     var title = row.insertCell(index++);
-    title.innerHTML = '<b>' + postings[i]['title'] + '</b>';
+    title.innerHTML = '<strong>' + postings[i]['title'] + '</strong>';
     title.setAttribute('class','col-xs-8 col-sm-8 col-md-6 col-lg-6 text-center');
 
     // Code for query with grouping
