@@ -16,14 +16,16 @@ block content
         table(id='latest_prices_content' class='table table-striped table-condensed table-responsive')
           thead
             tr
-              th(style='width: 35%')
+              th(class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center")
                 | Date/Locations
-              th(style='width: 30%')
-                | Quantities Sold
-              th(style='width: 35%')
-                | Extracted Prices
+              th(class="col-xs-8 col-sm-8 col-md-6 col-lg-6 text-center")
+                | Post title
+              th(class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center")
+                | Quantities
+              th(class="hidden-xs hidden-sm col-md-2 col-lg-2 text-center")
+                | Prices
         div(id='right_pane_content')
-          table(id='latest_prices_content' class='table table-striped table-condensed table-responsive')
+          table(id='latest_prices_content' class='table table-striped table-condensed table-responsive' style='table-layout: fixed')
             tbody(id='table_body')
               - for (var i = 0; i < postings.length; ++i) {
                 - posting = postings[i]
@@ -31,16 +33,21 @@ block content
                 - quantityString = quantitiesString[i]
                 if (posting['city'])
                   tr
-                    td(style='width: 16%')
-                      = posting['datePosted']
-                    td(style='width: 14%')
-                      = posting['city']
-                    td(style='width: 35%')
+                    td(class="col-xs-2 col-sm-2 col-md-2 col-lg-2")
+                      = posting['datePosted'] + " - " + posting['city']
+                    td(class="col-xs-8 col-sm-8 col-md-6 col-lg-6 text-center")
+                      b
+                        = posting['title']
+                    td(class="col-xs-2 col-sm-2 col-md-2 col-lg-2")
+                      != '<a href="/posting/'
+                      = posting['url']
+                      != '"">'
                       if (posting['quantity'] == null)
                         | Check Quantity!
                       else
                         = quantityString
-                    td(style='width: 35%')
+                      != '</a>'
+                    td(class="hidden-xs hidden-sm col-md-2 col-lg-2")
                       != '<a href="/posting/'
                       = posting['url']
                       != '"">'

@@ -89,6 +89,7 @@ function UpdatePostingCache(error, docs) {
         postings[index]['city'] = docs[i]['city'];
         postings[index]['datePosted'] = docs[i]['datePosted'];
         postings[index]['title'] = docs[i]['title'];
+
         postings[index]['url'] = commonHelper.ReplaceAll(' ', '-', postings[index]['title']);
         postings[index]['url'] += "-" + postings[index]['id'];
 

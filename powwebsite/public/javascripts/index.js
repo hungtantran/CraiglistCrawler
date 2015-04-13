@@ -363,35 +363,16 @@ function initializePostings(postings) {
     
     var index = 0;
 
-    // Date Posted cell
-    var datePosted = row.insertCell(index++);
+    // Date/Location Posted cell
+    var dateLocationPosted = row.insertCell(index++);
     var url = '/posting/' + postings[i]['url'];
-    datePosted.innerHTML = '<b>' +postings[i]['datePosted'] + '</b>';
-    datePosted.setAttribute('width','16%');
+    dateLocationPosted.innerHTML = postings[i]['datePosted'] + " - " + postings[i]['city'];
+    dateLocationPosted.setAttribute('class','col-xs-2 col-sm-2 col-md-2 col-lg-2');
 
-    // Location cell
-    var location = row.insertCell(index++);
-    location.innerHTML = '<b>' + postings[i]['city'] + '</b>';
-    location.setAttribute('width','14%');
-
-    // // Code for query without grouping
-    // // Quantity cell
-    // var quantity = row.insertCell(index++);
-    // if (!postings[i]['quantity'] || !postings[i]['unit']) {
-    //   postings[i]['quantity'] = 'Check!'
-    //   postings[i]['unit'] = '';
-    // }
-
-    // quantity.innerHTML = '<a href="' + url + '">' + postings[i]['quantity'] + ' ' + postings[i]['unit'] + '</a>';
-
-    // // Price cell
-    // var price = row.insertCell(index++);
-
-    // if (!postings[i]['price']) {
-    //   continue;
-    // }
-
-    // price.innerHTML = '<a href="' + url + '">$' + postings[i]['price'] + '</a>';
+    // Title cell
+    var title = row.insertCell(index++);
+    title.innerHTML = '<b>' + postings[i]['title'] + '</b>';
+    title.setAttribute('class','col-xs-8 col-sm-8 col-md-6 col-lg-6 text-center');
 
     // Code for query with grouping
     // Quantity cell
@@ -416,7 +397,7 @@ function initializePostings(postings) {
     }
 
     quantity.innerHTML = '<a href="' + url + '">' + quantityString + '</a>';
-    quantity.setAttribute('width','35%');
+    quantity.setAttribute('class','col-xs-2 col-sm-2 col-md-2 col-lg-2');
 
     // Price cell
     var price = row.insertCell(index++);
@@ -435,7 +416,7 @@ function initializePostings(postings) {
     }
 
     price.innerHTML = '<a href="' + url + '">' + priceString + '</a>';
-    price.setAttribute('width','35%');
+    price.setAttribute('class','hidden-xs hidden-sm col-md-2 col-lg-2');
   }
 }
 
