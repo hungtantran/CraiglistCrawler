@@ -38,6 +38,17 @@ router.get('/:id', function(req, res) {
             return;
         }
 
+
+        // Related posts from the same city
+        var info = [];
+        var city = doc['city'];
+        for (var i = 0; i < globals.postings.length; ++i) {
+            if (globals.postings[i]['city'].toUpperCase() === city.toUpperCase()) {
+                info.push(globals.postings[i]);
+            }
+        }
+
+        // Title of the page
         var title = doc['title'];
         if (title === undefined || title === null || title.length === 0) {
             title = 'Weed Posting Page';
@@ -50,7 +61,10 @@ router.get('/:id', function(req, res) {
             content: doc['posting_body'],
             url: doc['url'],
             state: doc['state'],
-            city: doc['city'],
+            city: city,
+            relatedPosts: info,
+            pricesString: globals.commonHelper.constructPriceStringArray(info),
+            quantitiesString: globals.commonHelper.constructQuantityStringArray(info),
             latitude: doc['latitude'],
             longitude: doc['longitude'],
             states: globals.states,

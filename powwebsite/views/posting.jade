@@ -14,20 +14,56 @@ block content
           = title
         != content
 
-      div(id='right_pane'              class='col-xs-12 col-sm-6  col-md-6 col-lg-6')
+      div(id='right_pane'              class='col-xs-12 col-sm-6 col-md-6 col-lg-6')
+        div(class='col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center')
+          h3(style='underlined')
+            | Relate post from !{city}
         div(id='right_pane_content')
           table(id='latest_prices_content' class='table table-striped table-condensed table-responsive')
             thead
               tr
-                th(style='width: 18%')
-                  | Date
-                th(style='width: 18%')
-                  | Locations
-                th(style='width: 30%')
-                 | Quantities
-                th(style='width: 34%')
+                th(class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center")
+                  | Date/Locations
+                th(class="col-xs-8 col-sm-8 col-md-6 col-lg-6 text-center")
+                  | Post title
+                th(class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center")
+                  | Quantities
+                th(class="hidden-xs hidden-sm col-md-2 col-lg-2 text-center")
                   | Prices
             tbody(id='table_body')
+              - for (var i = 0; i < relatedPosts.length; ++i) {
+                - if (i > 10) {
+                -   break
+                - }
+                - posting = relatedPosts[i]
+                - priceString = pricesString[i]
+                - quantityString = quantitiesString[i]
+                if (posting['city'])
+                  tr
+                    td(class="col-xs-2 col-sm-2 col-md-2 col-lg-2")
+                      = posting['datePosted'] + " - " + posting['city']
+                    td(class="col-xs-8 col-sm-8 col-md-6 col-lg-6 text-center")
+                      strong
+                        = posting['title']
+                    td(class="col-xs-2 col-sm-2 col-md-2 col-lg-2")
+                      != '<a href="/posting/'
+                      = posting['url']
+                      != '">'
+                      if (posting['quantity'] == null)
+                        | Check Quantity!
+                      else
+                        = quantityString
+                      != '</a>'
+                    td(class="hidden-xs hidden-sm col-md-2 col-lg-2")
+                      != '<a href="/posting/'
+                      = posting['url']
+                      != '">'
+                      if (posting['price'] == null)
+                        | Check Price!
+                      else
+                        = priceString
+                      != '</a>'
+              - }
 
     script(type='text/javascript')
       | var map = null;
