@@ -22,9 +22,11 @@ public class HelperTest {
     
     public void TestGetTime() {
     	String currentDate = Helper.getCurrentDate();
+    	System.out.println(currentDate);
     	assertEquals(currentDate.length(), 10);
     	
     	String currentTime = Helper.getCurrentTime();
+    	System.out.println(currentTime);
     	assertEquals(currentTime.length(), 8);
     }
 }

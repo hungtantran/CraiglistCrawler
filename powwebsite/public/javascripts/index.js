@@ -240,9 +240,16 @@ function newPriceBin(divId, prices) {
 
 // Callback function to handle change in map
 function handleMapChange() {
-  mapBound = map.getBounds();
+  if(typeof timeoutID == "number") {
+    window.clearTimeout(timeoutID);
+    delete timeoutID;
+  }
 
-  updateDisplay();
+  timeoutID = window.setTimeout(function() {
+    console.log("there");
+    mapBound = map.getBounds();
+    updateDisplay();
+  }, 1000);
 }
 
 // Function that draw marker on map
@@ -286,31 +293,18 @@ function drawMarker(map, markers) {
 function initializeMap(markers, redrawMap) {
   // Initialize maps
   if (map === null || (redrawMap != null && redrawMap === true)) {
-    if (typeof lat_ !== 'undefined' && typeof long_ !== 'undefined' && lat_ != null && long_ != null) {
-      map = newMap(parseFloat(lat_), parseFloat(long_), 7, 'map-canvas', false);
-    } else if (typeof state_ !== 'undefined' && typeof city_ !== 'undefined' && state_ != null && city_ != null) {
-      geocoder = new google.maps.Geocoder();
-      geocoder.geocode( { 'address': city_ + ", " + state_}, function(results, status) {
-        if (status === google.maps.GeocoderStatus.OK) {
-          map = newMap(results[0].geometry.location.lat(), results[0].geometry.location.lng(), 5, 'map-canvas');
-        } else {
-          map = newMap(42.2030543,-98.602256, 4, 'map-canvas');
-        }
-        google.maps.event.addListener(map, 'zoom_changed', handleMapChange);
-      });
-    } else {
-      map = newMap(42.2030543,-98.602256, 4, 'map-canvas');
-    }
-
+    map = newMap(42.2030543,-98.602256, 4, 'map-canvas');
     google.maps.event.addListener(map, 'zoom_changed', handleMapChange);
   }
 
   // Initialize markers
-  if (map != null && markers != null) {
+  if (map !== null && markers !== null) {
     drawMarker(map, markers);
   }
-  if (map != null) mapBound = map.getBounds();
-  return map;
+
+  if (map !== null) {
+    mapBound = map.getBounds();
+  }
 }
 
 // Function to create a new map
@@ -355,8 +349,8 @@ function initializePostings(postings) {
 
     var postingLocation = new google.maps.LatLng(lat, lng);
 
-    if (!mapBound.contains(postingLocation)) {
-     continue;
+    if (mapBound !== undefined && !mapBound.contains(postingLocation)) {
+      continue;
     }
 
     var row = table.insertRow(table.length);

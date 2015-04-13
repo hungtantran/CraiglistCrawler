@@ -21,7 +21,7 @@ body {
 
 #header {
     float: left;
-    height: 10%;
+    height: 5%;
     width: 100%;
     overflow: hidden;
 }
@@ -50,7 +50,7 @@ body {
 }
 
 #right_pane_content {
-    max-height: 100%;
+    max-height: 90%;
     overflow-y: scroll;
 }
 
@@ -170,12 +170,6 @@ body {
 
 #price_per_unit {
     float: left;
-    overflow: hidden;
-}
-
-#footer {
-    float: left;
-    width: 100%;
     overflow: hidden;
 }
 

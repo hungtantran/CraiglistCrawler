@@ -87,9 +87,8 @@ public class Helper {
 		dateString.append(1900 + currentDate.getYear());
 		dateString.append("-");
 		
-		String monthString = "" + currentDate.getMonth() + 1;
+		String monthString = "" + (currentDate.getMonth() + 1);
 		monthString = Helper.AddZeros(monthString, 2);
-
 		dateString.append(monthString);
 		dateString.append("-");
 		
