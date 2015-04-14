@@ -257,7 +257,6 @@ function handleMapChange() {
   }
 
   timeoutID = window.setTimeout(function() {
-    console.log("there");
     mapBound = map.getBounds();
     updateDisplay();
   }, 1000);
@@ -309,11 +308,17 @@ function initializeMap(markers, redrawMap) {
   }
 
   // Initialize markers
-  if (map !== null && markers !== null) {
-    drawMarker(map, markers);
-  }
-
   if (map !== null) {
+    if (markers !== null) {
+      drawMarker(map, markers);
+    }
+
+    if (curLatLng != null) {
+      map.setCenter(curLatLng);
+      map.setZoom(10);
+      curLatLng = null;
+    }
+
     mapBound = map.getBounds();
   }
 }
@@ -460,11 +465,12 @@ function newXMLRequest(func, cacheEntry, extraParams) {
 }
 
 function loadData() {
-  geocoder = new google.maps.Geocoder();
+  // geocoder = new google.maps.Geocoder();
 
   navigator.geolocation.getCurrentPosition(function(pos){
-      console.log(pos);
-      codeLatLng(pos.coords.latitude, pos.coords.longitude);
+    curLatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+    handleMapChange();
+    // codeLatLng(pos.coords.latitude, pos.coords.longitude);
   });
 
   // Postings xml request
