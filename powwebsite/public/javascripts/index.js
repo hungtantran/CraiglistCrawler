@@ -313,7 +313,7 @@ function initializeMap(markers, redrawMap) {
       drawMarker(map, markers);
     }
 
-    if (curLatLng != null) {
+    if (state === null && curLatLng != null) {
       map.setCenter(curLatLng);
       map.setZoom(10);
       curLatLng = null;
@@ -480,6 +480,7 @@ function loadData() {
   if (params.length > 2 && params[1] === 'state') {
     postUrl += params[2];
     priceUrl += params[2];
+    state = params[2]
   }
 
   var xmlhttpPostings = new newXMLRequest(
