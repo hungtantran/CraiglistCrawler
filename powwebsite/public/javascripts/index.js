@@ -1,3 +1,14 @@
+function codeLatLng(lat, lng) {
+  var latlng = new google.maps.LatLng(lat, lng);
+  geocoder.geocode({'latLng': latlng}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      console.log(results);
+    } else {
+      console.log("Geocoder failed due to: " + status);
+    }
+  });
+}
+
 // Function that reupdate the display with the newest filter
 function updateDisplay(displayInfo, initializeParams) {
   if (displayInfo === undefined) {
@@ -449,6 +460,13 @@ function newXMLRequest(func, cacheEntry, extraParams) {
 }
 
 function loadData() {
+  geocoder = new google.maps.Geocoder();
+
+  navigator.geolocation.getCurrentPosition(function(pos){
+      console.log(pos);
+      codeLatLng(pos.coords.latitude, pos.coords.longitude);
+  });
+
   // Postings xml request
   var params = location.pathname.split('/');
   var postUrl = "/postings/";

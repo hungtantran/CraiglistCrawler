@@ -1,12 +1,12 @@
 package script;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import commonlib.Globals;
 import commonlib.Location;
+
 import dbconnection.DAOFactory;
 import dbconnection.LinkCrawled;
 import dbconnection.LinkCrawledDAO;

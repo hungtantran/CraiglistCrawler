@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import commonlib.Globals;
-import commonlib.HTMLCompressor;
 
 public class RawHTMLDAOJDBC implements RawHTMLDAO {
 	private final String SQL_SELECT_BY_ID = "SELECT * FROM rawhtml WHERE id = ?";
