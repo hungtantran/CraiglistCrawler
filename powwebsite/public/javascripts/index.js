@@ -350,6 +350,7 @@ function initializePostings(postings) {
       table.deleteRow(i);
   }
 
+  var totalSalePosts = 0;
   for (var i = 0; i < postings.length; ++i)
   {
     if (stateFilter != null && postings[i]['state'] != stateFilter) {
@@ -427,6 +428,15 @@ function initializePostings(postings) {
 
     price.innerHTML = '<a href="' + url + '">' + priceString + '</a>';
     price.setAttribute('class','hidden-xs hidden-sm col-md-2 col-lg-2');
+
+    ++totalSalePosts;
+  }
+
+  if (totalSalePosts === 0) {
+    var row = table.insertRow(table.length);
+    var noPostLink = row.insertCell(0);
+    noPostLink.innerHTML = '<a href=\'/state/all\'>No marijuana sales here now. Checkout other sales around the US</a>';
+    noPostLink.setAttribute('class','col-xs-12 col-sm-12 col-md-12 col-lg-12');
   }
 }
 
