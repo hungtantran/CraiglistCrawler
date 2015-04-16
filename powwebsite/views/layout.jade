@@ -29,7 +29,7 @@ html
 
   body
     div(class='modal fade state-modal-lg' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true')
-      div(class='modal-dialog modal-lg' style='margin-right: 25px;')
+      div(class='modal-dialog modal-lg')
         div(class='modal-content col-xs-12 col-sm-12 col-md-12 col-lg-12')
           div(class='model-body')
             h4(class='modal-title text-center' id='myModalLabel')
@@ -55,7 +55,7 @@ html
                     | </a>
 
     #exampleModal.modal.fade.signup-modal-lg(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
-      .modal-dialog(style='margin-right: 25px;')
+      .modal-dialog
           .modal-content
             .modal-header
               button.close(type='button', data-dismiss='modal', aria-label='Close')
@@ -104,7 +104,7 @@ html
                     | Search
 
     nav(class='navbar navbar-default' role='navigation')
-      ul(class='nav navbar-nav text-center' style='white-space: nowrap')
+      ul(class='nav navbar-nav text-center' style='white-space: nowrap; overflow-x:hidden')
         li(style='display: inline-block')
           a(href='#' data-toggle='modal' data-target='.state-modal-lg')
             if (typeof(stateChosen) !== 'undefined')

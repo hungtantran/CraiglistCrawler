@@ -25,14 +25,14 @@ html
       | ga('send', 'pageview');
 
   body
-    div(class='modal fade bs-example-modal-lg' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true')
+    div(class='modal fade state-modal-lg' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true')
       div(class='modal-dialog modal-lg')
         div(class='modal-content col-xs-12 col-sm-12 col-md-12 col-lg-12')
           div(class='model-body')
             h4(class='modal-title text-center' id='myModalLabel')
               | Please choose states
               ul
-                li
+                li(class='list-unstyled')
                   a(href='/state/all')
                     | All States
             if (typeof(states) !== 'undefined')
@@ -50,6 +50,32 @@ html
                     | '>
                     = state
                     | </a>
+
+    #exampleModal.modal.fade.signup-modal-lg(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+      .modal-dialog
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') &times;
+              |         
+              h4#exampleModalLabel.modal-title New message
+            |       
+            .modal-body
+              form
+                .form-group
+                  label.control-label(for='recipient-name') Recipient:
+                  |             
+                  input#recipient-name.form-control(type='text')
+                |           
+                .form-group
+                  label.control-label(for='message-text') Message:
+                  |             
+                  textarea#message-text.form-control
+            |       
+            .modal-footer
+              button.btn.btn-default(type='button', data-dismiss='modal') Close
+              |         
+              button.btn.btn-primary(type='button') Send message
 
     div(id='header' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
       nav(class='navbar navbar-inverse navbar-fixed-top')
@@ -75,14 +101,19 @@ html
                     | Search
 
     nav(class='navbar navbar-default' role='navigation')
-      div(class='text-center')
-        ul(class='nav navbar-nav')
-          li
-            a(href='#' data-toggle='modal' data-target='.bs-example-modal-lg')
-              if (typeof(stateChosen) !== 'undefined')
-                = stateChosen
-              else
-                | Choose State
+      ul(class='nav navbar-nav text-center' style='white-space: nowrap; overflow-x:hidden')
+        li(style='display: inline-block')
+          a(href='#' data-toggle='modal' data-target='.state-modal-lg')
+            if (typeof(stateChosen) !== 'undefined')
+              = stateChosen
+            else
+              | CHOOSE STATE
+        li(style='display: inline-block')
+          a(href='#' data-toggle='modal' data-target='.signup-modal-lg')
+            | SIGN UP
+        li(style='display: inline-block')
+          a(href='/search/')
+            | ALL SALES
 
     div(id='title' class='col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center')
       h1(style='font-size:2em; font-weight:bold; color:#369844')
