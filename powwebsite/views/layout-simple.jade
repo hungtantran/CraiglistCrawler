@@ -42,7 +42,7 @@ html
                   if (index % 10 == 0)
                     if (index > 0)
                       | </ul>
-                    | <ul class='list-unstyled col-xs-6 col-sm-6 col-md-4 col-lg-4'>
+                    | <ul class='list-unstyled col-xs-6 col-sm-6 col-md-4 col-lg-4 text-center'>
                   - ++index
                   li(class='list-unstyled')
                     | <a href='/state/
@@ -51,31 +51,30 @@ html
                     = state
                     | </a>
 
-    #exampleModal.modal.fade.signup-modal-lg(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+    .modal.fade.signup-modal-lg(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
       .modal-dialog
           .modal-content
             .modal-header
               button.close(type='button', data-dismiss='modal', aria-label='Close')
                 span(aria-hidden='true') &times;
-              |         
-              h4#exampleModalLabel.modal-title Sign Up To Post on LeafyExchange
-            |       
+              h4.modal-title Sign Up To Post on LeafyExchange!
             .modal-body
               form
                 .form-group
-                  label.control-label(for='recipient-name') Recipient:
-                  |             
-                  input#recipient-name.form-control(type='text')
-                |           
+                  label.control-label(for='email') Email:
+                  input.form-control(type='text')
                 .form-group
-                  label.control-label(for='message-text') Message:
-                  |             
-                  textarea#message-text.form-control
-            |       
+                  label.control-label(for='username') Username:
+                  input.form-control(type='text')
+                .form-group
+                  label.control-label(for='message-text') Password:
+                  input.form-control(type='password')
+                .form-group
+                  label.control-label(for='message-text') Re-typed Password:
+                  input.form-control(type='password')
             .modal-footer
               button.btn.btn-default(type='button', data-dismiss='modal') Close
-              |         
-              button.btn.btn-primary(type='button') Send message
+              button.btn.btn-primary(type='button') Sign Up
 
     div(id='header' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
       nav(class='navbar navbar-inverse navbar-fixed-top')
@@ -100,20 +99,21 @@ html
                   button(type='submit' class='btn btn-success')
                     | Search
 
-    nav(class='navbar navbar-default' role='navigation' style='overflow-x:hidden')
-      ul(class='nav navbar-nav text-center' style='white-space: nowrap')
-        li(style='display: inline-block')
-          a(href='#' data-toggle='modal' data-target='.state-modal-lg')
-            if (typeof(stateChosen) !== 'undefined')
-              = stateChosen
-            else
-              | CHOOSE STATE
-        li(style='display: inline-block')
-          a(href='#' data-toggle='modal' data-target='.signup-modal-lg')
-            | SIGN UP
-        li(style='display: inline-block')
-          a(href='/search/')
-            | ALL SALES
+    nav(class='navbar navbar-default text-center col-xs-12 col-sm-12 col-md-12 col-lg-12' role='navigation' style='overflow-x:hidden')
+      .container
+        ul(class='nav navbar-nav text-center' style='white-space: nowrap; font-size:medium; font-weight:bold')
+          li(style='display: inline-block')
+            a(href='#' data-toggle='modal' data-target='.state-modal-lg')
+              if (typeof(stateChosen) !== 'undefined')
+                = stateChosen.toUpperCase()
+              else
+                | CHOOSE STATE
+          li(style='display: inline-block')
+            a(href='#' data-toggle='modal' data-target='.signup-modal-lg')
+              | SIGN UP
+          li(style='display: inline-block')
+            a(href='/search/')
+              | ALL SALES
 
     div(id='title' class='col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center')
       h1(style='font-size:2em; font-weight:bold; color:#369844')
