@@ -58,7 +58,7 @@ html
               button.close(type='button', data-dismiss='modal', aria-label='Close')
                 span(aria-hidden='true') &times;
               |         
-              h4#exampleModalLabel.modal-title New message
+              h4#exampleModalLabel.modal-title Sign Up To Post on LeafyExchange
             |       
             .modal-body
               form
@@ -100,8 +100,8 @@ html
                   button(type='submit' class='btn btn-success')
                     | Search
 
-    nav(class='navbar navbar-default' role='navigation')
-      ul(class='nav navbar-nav text-center' style='white-space: nowrap; overflow-x:hidden')
+    nav(class='navbar navbar-default' role='navigation' style='overflow-x:hidden')
+      ul(class='nav navbar-nav text-center' style='white-space: nowrap')
         li(style='display: inline-block')
           a(href='#' data-toggle='modal' data-target='.state-modal-lg')
             if (typeof(stateChosen) !== 'undefined')
