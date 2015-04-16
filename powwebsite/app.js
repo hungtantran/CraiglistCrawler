@@ -12,6 +12,7 @@ var privacy = require('./routes/privacy');
 var terms = require('./routes/terms');
 var aboutus = require('./routes/aboutus');
 var posting = require('./routes/posting');
+var search = require('./routes/search');
 
 var app = express();
 
@@ -31,11 +32,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/postings', postings)
-app.use('/prices', prices)
-app.use('/privacy', privacy)
-app.use('/terms', terms)
-app.use('/aboutus', aboutus)
+app.use('/search', search);
+app.use('/postings', postings);
+app.use('/prices', prices);
+app.use('/privacy', privacy);
+app.use('/terms', terms);
+app.use('/aboutus', aboutus);
 app.use('/posting', posting);
 
 // catch 404 and forward to error handler
@@ -58,18 +60,18 @@ app.get('/*', function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    // app.use(function(err, req, res, next) {
-    //     res.status(err.status || 500);
-    //     res.render('error', {
-    //         message: err.message,
-    //         error: err
-    //     });
-    // });
     app.use(function(err, req, res, next) {
-        res.statusCode = 302;
-        res.setHeader('Location', '/');
-        res.end();
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
     });
+    // app.use(function(err, req, res, next) {
+    //     res.statusCode = 302;
+    //     res.setHeader('Location', '/');
+    //     res.end();
+    // });
 }
 
 // production error handler
