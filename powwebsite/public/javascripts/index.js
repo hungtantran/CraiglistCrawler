@@ -351,7 +351,22 @@ function initializePostings(postings) {
   }
 
   var totalSalePosts = 0;
-  for (var i = 0; i < postings.length; ++i)
+
+  // Chrome, safara and ie has different order or json array
+  var startIndex = 0;
+  var endIndex = postings.length;
+  var step = 1;
+  if (postings.length > 1) {
+    console.log(postings[postings.length-1]);
+    console.log(postings[0]);
+    if (postings[postings.length-1]['datePosted'] < postings[0]['datePosted']) {
+      startIndex = postings.length - 1;
+      endIndex = -1;
+      step = -1;
+    }
+  }
+
+  for (var i = startIndex; i !== endIndex; i += step)
   {
     if (stateFilter != null && postings[i]['state'] != stateFilter) {
       continue;
