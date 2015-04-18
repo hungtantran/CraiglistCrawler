@@ -8,9 +8,6 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var prices = require('./routes/prices');
 var postings = require('./routes/postings');
-var privacy = require('./routes/privacy');
-var terms = require('./routes/terms');
-var aboutus = require('./routes/aboutus');
 var posting = require('./routes/posting');
 var search = require('./routes/search');
 
@@ -35,9 +32,6 @@ app.use('/', index);
 app.use('/search', search);
 app.use('/postings', postings);
 app.use('/prices', prices);
-app.use('/privacy', privacy);
-app.use('/terms', terms);
-app.use('/aboutus', aboutus);
 app.use('/posting', posting);
 
 // catch 404 and forward to error handler

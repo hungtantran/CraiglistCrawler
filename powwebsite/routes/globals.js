@@ -26,15 +26,12 @@ function UpdatePostingCache(error, docs) {
         var duplicatedId = docs[i]['duplicatePostId'];
         if (duplicatedId !== null) {
             if (idSets.indexOf(duplicatedId) != -1) {
-                // console.log("Post " + docs[i]['id'] + " is filtered out because duplication with " + duplicatedId);
                 continue;
             } else {
-                // console.log("New duplicated id is added " + duplicatedId + " from post " + docs[i]['id']);
                 idSets.push(duplicatedId);
             }
         } else {
             if (idSets.indexOf(docs[i]['id']) != -1) {
-                // console.log("Post " + docs[i]['id'] + " is filtered out");
                 continue;
             }
         }

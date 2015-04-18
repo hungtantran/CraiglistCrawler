@@ -87,9 +87,7 @@ CommonHelper.prototype.constructPriceString = function(prices) {
     }
 
     var priceString = "";
-    console.log("length = " + prices.length);
     for (var i = 0; i < prices.length; ++i) {
-        console.log(prices[i]);
         priceString += "$" + prices[i] + ", "
     }
 
@@ -104,11 +102,6 @@ CommonHelper.prototype.constructPriceStringArray = function(pricesArray) {
     var priceStringArray = [];
     for (var i = 0; i < pricesArray.length; ++i) {
         var priceString = this.constructPriceString(pricesArray[i]['price']);
-        if (pricesArray[i]['price'] !== null) {
-            console.log(pricesArray[i]['price']);
-            console.log(priceString);
-            console.log('here\n\n')
-        }
         priceStringArray.push(priceString);
     }
 

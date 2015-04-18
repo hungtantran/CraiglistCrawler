@@ -86,4 +86,40 @@ router.get('/state/:state', function(req, res){
   });
 });
 
+/* GET privacy page. */
+router.get('/privacy', function(req, res) {
+  res.render('privacy', {
+    title: 'Privacy - LeafyExchange',
+    stylesheet: '/stylesheets/index.css',
+    states: globals.states,
+    description: 'Looking for the price of weed? LeafyExchange can help you find the prices of pot in your area!',
+    keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
+    icon: '/images/leafyexchange.jpg'
+  });
+});
+
+/* GET about us page. */
+router.get('/aboutus', function(req, res) {
+  res.render('aboutus', {
+    title: 'About Us - LeafyExchange',
+    stylesheet: '/stylesheets/index.css',
+    states: globals.states,
+    description: 'Looking for the price of weed? LeafyExchange can help you find the prices of pot in your area!',
+    keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
+    icon: '/images/leafyexchange.jpg'
+  });
+});
+
+/* GET terms and conditions page. */
+router.get('/terms', function(req, res) {
+  res.render('terms', {
+    title: 'Terms and Conditions - LeafyExchange',
+    stylesheet: '/stylesheets/index.css',
+    states: globals.states,
+    description: 'Looking for the price of weed? LeafyExchange can help you find the prices of pot in your area!',
+    keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
+    icon: '/images/leafyexchange.jpg'
+  });
+});
+
 module.exports = router;

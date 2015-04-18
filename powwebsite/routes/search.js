@@ -35,7 +35,7 @@ router.get('/', function(req, res) {
 });
 
 // Get page with search pararm
-router.get('/:id', function(req, res) {
+router.get('/:params', function(req, res) {
 });
 
 module.exports = router;
