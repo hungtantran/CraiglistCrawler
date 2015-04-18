@@ -32,6 +32,47 @@ CommonHelper.prototype.SortNumber = function(a,b) {
     return a - b;
 }
 
+// For ex: [10.0, 4.0, 40.0, 7.0, 60.0, 14.0, 100.0, 1.0, 28.0, 200.0, 4.0, 112.0, 650.0, 253.0, 414.0, 4380.0]
+CommonHelper.prototype.ParsePrices = function(prices) {
+    if (!prices) {
+        return prices;
+    }
+
+    var priceArray = this.ParseArrayString(prices, ',', 3, 1000, true);
+
+    return priceArray;
+}
+
+// For ex: [ 0.125  0.25   0.5  ] g[ 0.125  0.25   0.5  ] oz
+CommonHelper.prototype.ParseQuantities = function(quantities) {
+    if (!quantities) {
+        return quantities;
+    }
+
+    var quantitiesType = quantities.split('[');
+
+    var quantitiesArray = [];
+    quantitiesArray['gram'] = null;
+    quantitiesArray['ounce'] = null;
+
+    // One empty, one for gram, one for oz
+    if (quantitiesType.length < 2) {
+        return quantitiesArray;
+    }
+
+    var gramArray = this.ParseArrayString(quantitiesType[1], ' ', 1.1, 200, true);
+    quantitiesArray.push(gramArray);
+
+    // One empty, one for gram, one for oz
+    if (quantitiesType.length < 3) {
+        return quantitiesArray;
+    }
+    var ounceArray = this.ParseArrayString(quantitiesType[2], ' ', 0.1, 200, false);
+    quantitiesArray.push(ounceArray);
+
+    return quantitiesArray;
+}
+
 CommonHelper.prototype.IsIntValue = function(value) {
     if ((parseFloat(value) == parseInt(value)) && !isNaN(value)){
       return true;
@@ -46,7 +87,9 @@ CommonHelper.prototype.constructPriceString = function(prices) {
     }
 
     var priceString = "";
+    console.log("length = " + prices.length);
     for (var i = 0; i < prices.length; ++i) {
+        console.log(prices[i]);
         priceString += "$" + prices[i] + ", "
     }
 
@@ -61,6 +104,11 @@ CommonHelper.prototype.constructPriceStringArray = function(pricesArray) {
     var priceStringArray = [];
     for (var i = 0; i < pricesArray.length; ++i) {
         var priceString = this.constructPriceString(pricesArray[i]['price']);
+        if (pricesArray[i]['price'] !== null) {
+            console.log(pricesArray[i]['price']);
+            console.log(priceString);
+            console.log('here\n\n')
+        }
         priceStringArray.push(priceString);
     }
 
