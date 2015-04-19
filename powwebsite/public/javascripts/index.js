@@ -496,7 +496,6 @@ function newXMLRequest(func, cacheEntry, extraParams) {
 
 function loadData() {
   // geocoder = new google.maps.Geocoder();
-
   navigator.geolocation.getCurrentPosition(function(pos){
     curLatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
     handleMapChange();

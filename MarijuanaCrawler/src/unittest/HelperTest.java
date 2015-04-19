@@ -14,6 +14,7 @@ public class HelperTest {
         TestGetTime();
         TestCleanTag();
         TestCleanPostingBody();
+        TestCleanPostingBody2();
     }
     
     public void TestCleanNonCharacterDigit() {
@@ -134,31 +135,43 @@ public class HelperTest {
     	String cleanedString = Helper.cleanPostingBody(rawString);
     	
     	String expectedCleanedString = "One Of The Best OG's In Town!!!" +
-    			"<br />" +
-    			"<br /> Text OR email ONLY DO NOT CALL!" +
-    			"<br />" +
-    			"<br />" +
-    			"<br /> BY RESPONDING TO THIS AD YOU AGREE THAT: 1) i am a Arizona resident age 18 or older. 2) I have a written recommendation for the use of medical cannabis from my doctor. 3) I am not a law enforcement officer of any kind, or operating under an assumed name or in cooperation with any criminal investigation; nor am I seeking out evidence which may serve as the basis for any charge of violating federal, state, or local laws. 4) I will not use the information provided for any non-medicinal purposes. 5) Anyone who uses the provided information for any purposes what so ever, will be assuming their own liability, and are responsible for their own actions. 6) This medicine will be consumed only by me and/or other Prop 203 patients. *** This notice is intended for Arizona medical cannabis patients in accordance with Prop 203. This information is not intended for any other purpose illegal or otherwise. This is a legal advertisement for Medicinal marijuana in compliance with Arizona Prop 203 have extra high quality flower.. for MMJ CARDHOLDERS only. ." +
-    			"<br />" +
-    			"<br /> Text OR email ONLY DO NOT CALL!" +
-    			"<br />" +
-    			"<br /> Text OR email ONLY DO NOT CALL!" +
-    			"<br />" +
-    			"<br /> Text OR email ONLY DO NOT CALL!" +
-    			"<br />" +
-    			"<br />" +
-    			"<br /> best time after 3pm" +
-    			"<br />" +
-    			"<br /> suggested donations" +
-    			"<br />" +
-    			"<br /> 20 gs" +
-    			"<br />" +
-    			"<br /> 55 8th" +
-    			"<br />" +
-    			"<br /> 100 qtr" +
-    			"<br />" +
-    			"<br /> Text OR email ONLY DO NOT CALL!" +
-    			"<br />";
+    			"<br>" +
+    			"<br>Text OR email ONLY DO NOT CALL!" +
+    			"<br>" +
+    			"<br>" +
+    			"BY RESPONDING TO THIS AD YOU AGREE THAT: 1) i am a Arizona resident age 18 or older. 2) I have a written recommendation for the use of medical cannabis from my doctor. 3) I am not a law enforcement officer of any kind, or operating under an assumed name or in cooperation with any criminal investigation; nor am I seeking out evidence which may serve as the basis for any charge of violating federal, state, or local laws. 4) I will not use the information provided for any non-medicinal purposes. 5) Anyone who uses the provided information for any purposes what so ever, will be assuming their own liability, and are responsible for their own actions. 6) This medicine will be consumed only by me and/or other Prop 203 patients. *** This notice is intended for Arizona medical cannabis patients in accordance with Prop 203. This information is not intended for any other purpose illegal or otherwise. This is a legal advertisement for Medicinal marijuana in compliance with Arizona Prop 203 have extra high quality flower.. for MMJ CARDHOLDERS only. ." +
+    			"<br>" +
+    			"<br>Text OR email ONLY DO NOT CALL!" +
+    			"<br>" +
+    			"<br>Text OR email ONLY DO NOT CALL!" +
+    			"<br>" +
+    			"<br>Text OR email ONLY DO NOT CALL!" +
+    			"<br>" +
+    			"<br>" +
+    			"best time after 3pm" +
+    			"<br>" +
+    			"<br>suggested donations" +
+    			"<br>" +
+    			"<br>20 gs" +
+    			"<br>" +
+    			"<br>55 8th" +
+    			"<br>" +
+    			"<br>100 qtr" +
+    			"<br>" +
+    			"<br>Text OR email ONLY DO NOT CALL!" +
+    			"<br>";
+    	
+    	System.out.println(expectedCleanedString);
+    	System.out.println(cleanedString);
+    	assertEquals(expectedCleanedString, cleanedString);
+    }
+    
+    public void TestCleanPostingBody2() {
+    	String rawString = "Hey,<br><br>What's up? i live in Southern California. I have access to hundreds local dispensaries.<br><br>The selection is amazing! Over 420 strains of marijuana! Great Prices/Amazing Quality!! Next Day Shipping from Cali<br><br>Text me for a cannabis menu: 8i8 397 7I64<br><br><br><br><br><br><br><br><br>Bud - Hash - Wax - Buddah - OG - Kush - Edibles - weed - Vapor - Vape Pen - Vaporizer - shatter - Dab - bho - hash oil - joint - blunt - cheeba chews - bhang chocolate";
+    	
+    	String cleanedString = Helper.cleanPostingBody(rawString);
+    	
+    	String expectedCleanedString = "Hey,<br><br>What's up? i live in Southern California. I have access to hundreds local dispensaries.<br><br>The selection is amazing! Over 420 strains of marijuana! Great Prices/Amazing Quality!! Next Day Shipping from Cali<br><br>Text me for a cannabis menu: 8i8 397 7I64<br><br>Bud - Hash - Wax - Buddah - OG - Kush - Edibles - weed - Vapor - Vape Pen - Vaporizer - shatter - Dab - bho - hash oil - joint - blunt - cheeba chews - bhang chocolate";
     	
     	System.out.println(expectedCleanedString);
     	System.out.println(cleanedString);

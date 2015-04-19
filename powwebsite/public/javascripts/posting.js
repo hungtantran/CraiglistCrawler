@@ -240,11 +240,6 @@ function newPriceBin(divId, prices) {
         });
 }
 
-// Callback function to handle change in map
-function handleMapChange() {
-  updateDisplay();
-}
-
 // Function that draw marker on map
 function drawMarker(map, markers) {
   // Clear all existing markers first
@@ -269,8 +264,6 @@ function drawMarker(map, markers) {
         map: map
       });
 
-      google.maps.event.addListener(marker, 'click', handleMapChange);
-
       markerArray.push(marker);
     }
   }
@@ -289,13 +282,10 @@ function initializeMap(markers, redrawMap) {
         } else {
           map = newMap(42.2030543,-98.602256, 4, 'map-canvas');
         }
-        google.maps.event.addListener(map, 'idle', handleMapChange);
       });
     } else {
       map = newMap(42.2030543,-98.602256, 4, 'map-canvas');
     }
-
-    google.maps.event.addListener(map, 'idle', handleMapChange);
   }
 
   // Initialize markers

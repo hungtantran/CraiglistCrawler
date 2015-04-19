@@ -187,7 +187,9 @@ public class CraiglistCrawler implements IWebsiteCrawler {
     		    location.setLocation_link_fk(loc.id);
     		    location.setDatePosted(currentDate);
     		    location.setTimePosted(currentTime);
-    		    location.setPosting_body(postingBodies.get(0).html());
+    		    
+    		    String postingBody = Helper.cleanPostingBody(postingBodies.get(0).html());
+    		    location.setPosting_body(postingBody);
     		    location.setTitle(postingTitle);
     		    
     		    if (!this.postingLocationDAO.create(location)) {

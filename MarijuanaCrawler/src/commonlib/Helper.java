@@ -358,6 +358,9 @@ public class Helper {
 		}
 		
 		String cleanUpPostingBody = "";
+		postingBody = postingBody.replaceAll("<br>", "\n<br>\n");
+		postingBody = postingBody.replaceAll("<br />", "\n<br>\n");
+		postingBody = postingBody.replaceAll("<br/>", "\n<br>\n");
 		String[] postingLines = postingBody.split("\n");
 		
 		int numConcurBreak = 0;
@@ -370,7 +373,7 @@ public class Helper {
 				continue;
 			}
 			
-			if (lineTrim.equals("<br />")) {
+			if (lineTrim.equals("<br />") || lineTrim.equals("<br>") || lineTrim.equals("<br/>")) {
 				++numConcurBreak;
 			} else {
 				numConcurBreak = 0;
