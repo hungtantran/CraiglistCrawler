@@ -388,4 +388,19 @@ public class Helper {
 		
 		return cleanUpPostingBody;
 	}
+	
+	// From www.xxx.com/aaabbb?yy=zz&rr=tt to www.xxx.com/aaabbb
+	public static String stripParamUrl(String fullUrl) {
+		if (fullUrl == null) {
+			return fullUrl;
+		}
+		
+		String stripUrl = fullUrl.trim();
+		int index = stripUrl.indexOf('?');
+		if (index == -1) {
+			return stripUrl;
+		}
+		
+		return stripUrl.substring(0, index);
+	}
 }

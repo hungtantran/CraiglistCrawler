@@ -11,7 +11,6 @@ import java.util.Queue;
 import java.util.Set;
 
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 
 import commonlib.Globals;
 import commonlib.Globals.Domain;
@@ -117,19 +116,6 @@ public class YelpCrawler implements IWebsiteCrawler {
 			return false;
 		}
 		
-		Elements postingBodies = htmlDoc.select("section[id=postingBody]");
-		if (postingBodies.size() != 1) {
-		    Globals.crawlerLogManager.writeLog("Can't parse posting body for link " + entryLink);
-            return false;
-		}
-		
-		Elements postingTitles = htmlDoc.select("h2[class=postingtitle]");
-		if (postingTitles.size() != 1) {
-            Globals.crawlerLogManager.writeLog("Can't parse posting title for link " + entryLink);
-            return false;
-        }
-		String postingTitle = Helper.cleanNonCharacterDigit(postingTitles.get(0).text());
-		
 		final String htmlContent = HTMLCompressor.compressHtmlContent(htmlDoc.outerHtml());
 
 		final LinkCrawled linkCrawled = new LinkCrawled();
@@ -178,18 +164,16 @@ public class YelpCrawler implements IWebsiteCrawler {
 		    LocalBusiness business = new LocalBusiness();
 		    business.setState(loc.state);
 		    business.setCity(loc.city);
-		    business.setAddress(address);
-		    business.setPhone_number(phone_number);
-		    business.setRating(rating);
+		    business.setAddress(null);
+		    business.setPhone_number(null);
+		    business.setRating(null);
 		    business.setRawhtml_fk(rawHTMLId);
 		    business.setLocation_link_fk(loc.id);
 		    business.setDatePosted(currentDate);
 		    business.setTimePosted(currentTime);
 		    business.setDuplicatePostId(null);
-		    
-		    String postingBody = Helper.cleanPostingBody(postingBodies.get(0).html());
-		    business.setPosting_body(postingBody);
-		    business.setTitle(postingTitle);
+		    business.setPosting_body(null);
+		    business.setTitle(null);
 		    
 		    if (!this.localBusinessDAO.create(business)) {
 		        Globals.crawlerLogManager.writeLog("Fails to insert location for " + entryLink + " into local_business table");
