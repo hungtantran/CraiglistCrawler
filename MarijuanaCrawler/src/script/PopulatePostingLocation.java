@@ -49,7 +49,7 @@ public class PopulatePostingLocation {
         }
         
         for (Integer id : ids) {
-            sqlQuery = "SELECT html, state, city, dateCrawled, timeCrawled FROM rawhtml WHERE id = " + id;
+            sqlQuery = "SELECT html, state, city, dateCrawled, timeCrawled FROM rawhtml, link_crawled_table WHERE rawhtml.id = " + id + " AND link_crawled_table.id = " + id;
             preparedStatement = DAOUtil.prepareStatement(connection, sqlQuery, false);
             resultSet = preparedStatement.executeQuery();
             

@@ -183,5 +183,4 @@ public class PostingLocationDAOJDBC implements PostingLocationDAO {
             DAOUtil.close(connection, preparedStatement, resultSet);
         }
     }
-   
 }

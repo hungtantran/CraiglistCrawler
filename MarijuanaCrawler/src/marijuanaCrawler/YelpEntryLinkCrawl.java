@@ -2,7 +2,13 @@ package marijuanaCrawler;
 
 import java.io.IOException;
 
+import commonlib.Location;
+
 public class YelpEntryLinkCrawl implements IEntryLinkCrawler {
+	public YelpEntryLinkCrawl(Location location) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public boolean startUp() {
 		// TODO Auto-generated method stub
