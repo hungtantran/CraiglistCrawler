@@ -45,7 +45,8 @@ FROM \
       WHERE \
         location_fk = B.id AND \
         location_link_fk = C.id AND \
-        datePosted IS NOT NULL \
+        datePosted IS NOT NULL AND \
+        duplicatePostId IS NULL \
     ) AS D \
   ORDER BY \
   datePosted DESC, quantity DESC \
