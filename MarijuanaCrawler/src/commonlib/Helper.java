@@ -319,4 +319,70 @@ public class Helper {
         
         return cleanUpString;
     }
+    
+    public static String cleanTags(String tag, String str) {
+    	if (str == null || tag == null) {
+    		return str;
+    	}
+    	
+    	String cleanStr = str;
+    	
+    	String beginTag = "<" + tag;
+    	String endTag = tag + ">";
+    	while (true) {
+    		int index = cleanStr.indexOf(beginTag);
+    		if (index == -1) {
+    			break;
+    		}
+    		
+    		String preTagPart = cleanStr.substring(0, index);
+
+    		String postTagPart = cleanStr.substring(index);
+    		index = postTagPart.indexOf(endTag);
+    		if (index == -1) {
+    			postTagPart = "";
+    		} else {
+    			postTagPart = postTagPart.substring(index + endTag.length());
+    		}
+    		
+    		cleanStr = preTagPart + postTagPart;
+    	}
+    	
+    	return cleanStr;
+    }
+    
+    // Clean multiple break concurrently and clean link tag
+	public static String cleanPostingBody(String postingBody) {
+		if (postingBody == null) {
+			return null;
+		}
+		
+		String cleanUpPostingBody = "";
+		String[] postingLines = postingBody.split("\n");
+		
+		int numConcurBreak = 0;
+
+		for (int i = 0; i < postingLines.length; ++i) {
+			String lineTrim = Helper.cleanTags("a", postingLines[i]);
+			lineTrim = lineTrim.trim();
+			
+			if (lineTrim.isEmpty()) {
+				continue;
+			}
+			
+			if (lineTrim.equals("<br />")) {
+				++numConcurBreak;
+			} else {
+				numConcurBreak = 0;
+			}
+			
+			if (numConcurBreak > 2) {
+				continue;
+			}
+			
+			cleanUpPostingBody += lineTrim;
+		}
+		
+		return cleanUpPostingBody;
+	}
 }
