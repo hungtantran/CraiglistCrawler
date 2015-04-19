@@ -14,82 +14,8 @@ import dbconnection.LinkCrawledDAOJDBC;
 import dbconnection.LocationLink;
 import dbconnection.LocationLinkDAO;
 import dbconnection.LocationLinkDAOJDBC;
-import dbconnection.RawHTML;
-import dbconnection.RawHTMLDAO;
-import dbconnection.RawHTMLDAOJDBC;
 
 public class IdentifyLocationScript {
-	public static void identifyLocationRawHTML() throws Exception {
-		LocationLinkDAO locationLinkDAO = new LocationLinkDAOJDBC(
-		        DAOFactory.getInstance(Globals.username, Globals.password, Globals.server + Globals.database));
-
-		Map<String, Location> linkToLocationMap = new HashMap<String, Location>();
-
-		List<LocationLink> locationLinks = locationLinkDAO.get();
-		for (LocationLink locationLink : locationLinks) {
-		    Integer id = locationLink.getId();
-			String link = locationLink.getLink();
-			String country = locationLink.getCity();
-			String state = locationLink.getState();
-			String city = locationLink.getCity();
-			Location location = new Location(id, country, state, city);
-
-			linkToLocationMap.put(link, location);
-		}
-
-		int lowerBound = 0;
-		int maxNumResult = 200;
-		int htmlCount = lowerBound;
-
-		RawHTMLDAO rawHTMLDAO = new RawHTMLDAOJDBC(DAOFactory.getInstance(
-			Globals.username, Globals.password, Globals.server + Globals.database));
-
-		// Get 2000 articles at a time, until exhaust all the articles
-		while (true) {
-			try {
-				List<RawHTML> htmls = rawHTMLDAO.get(lowerBound, maxNumResult);
-				if (htmls == null)
-					break;
-
-				int count = 0;
-				// Iterate through the result set to populate the information
-				for (RawHTML rawHTML : htmls) {
-					count++;
-					htmlCount++;
-
-					int id = rawHTML.getId();
-					String link = rawHTML.getUrl();
-
-					for (Map.Entry<String, Location> entry : linkToLocationMap.entrySet()) {
-						String linkMap = entry.getKey();
-						Location location = entry.getValue();
-
-						if (link.contains(linkMap)) {
-							if (Globals.DEBUG)
-								System.out.println("(" + htmlCount + ") Check HTML id " + id + ": " + link);
-
-							rawHTML.setCountry(location.country);
-							rawHTML.setState(location.state);
-							rawHTML.setCity(location.city);
-
-							rawHTMLDAO.update(rawHTML);
-
-							break;
-						}
-					}
-				}
-
-				if (count == 0)
-					break;
-			} catch (Exception e) {
-				e.printStackTrace();
-				break;
-			}
-
-			lowerBound += maxNumResult;
-		}
-	}
-
 	public static void identifyLocationLinkCrawl() throws Exception {
 		LocationLinkDAO locationLinkDAO = new LocationLinkDAOJDBC(DAOFactory.getInstance(
 		        Globals.username, Globals.password, Globals.server + Globals.database));
@@ -145,8 +71,6 @@ public class IdentifyLocationScript {
 	public static void main(String[] args) {
 		try {
 			IdentifyLocationScript.identifyLocationLinkCrawl();
-
-			IdentifyLocationScript.identifyLocationRawHTML();
 		} catch (Exception e) {
 			return;
 		}

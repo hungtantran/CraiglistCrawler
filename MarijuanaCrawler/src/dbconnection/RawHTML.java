@@ -2,8 +2,6 @@ package dbconnection;
 
 import java.io.Serializable;
 
-import commonlib.Location;
-
 public class RawHTML implements Serializable {
 	// Constants
 	// ----------------------------------------------------------------------------------
@@ -19,13 +17,8 @@ public class RawHTML implements Serializable {
 	private Short positive;
 	private Short predict1;
 	private Short predict2;
-	private String country;
-	private String state;
-	private String city;
 	private String alt_quantities;
 	private String alt_prices;
-	private String latitude;
-	private String longtitude;
 	private String dateCrawled;
 	private String timeCrawled;
 
@@ -80,30 +73,6 @@ public class RawHTML implements Serializable {
 		this.predict2 = predict2;
 	}
 
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
 	public String getAlt_quantities() {
 		return alt_quantities;
 	}
@@ -118,28 +87,6 @@ public class RawHTML implements Serializable {
 
 	public void setAlt_prices(String alt_prices) {
 		this.alt_prices = alt_prices;
-	}
-	
-	public void setLocation(Location loc) {
-		this.country = loc.country;
-		this.state = loc.state;
-		this.city = loc.city;
-	}
-
-	public String getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
-
-	public String getLongtitude() {
-		return longtitude;
-	}
-
-	public void setLongtitude(String longtitude) {
-		this.longtitude = longtitude;
 	}
 	
     public String getDateCrawled() {

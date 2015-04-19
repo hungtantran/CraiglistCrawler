@@ -62,8 +62,7 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 			throw new Exception("Read config file fails");
 		}
 
-		final DAOFactory daoFactory = DAOFactory.getInstance(Globals.username,
-				Globals.password, Globals.server + Globals.database);
+		final DAOFactory daoFactory = DAOFactory.getInstance(Globals.username, Globals.password, Globals.server + Globals.database);
 
 		this.rawHTMLDAO = new RawHTMLDAOJDBC(daoFactory);
 
@@ -166,7 +165,6 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 		rawHTML.setPositive(positivePage);
 		rawHTML.setPredict1(predict1);
 		rawHTML.setPredict2(predict2);
-		rawHTML.setLocation(loc);
 		rawHTML.setDateCrawled(currentDate);
 		rawHTML.setTimeCrawled(currentTime);
 		
@@ -181,8 +179,8 @@ public class CraiglistCrawler implements IWebsiteCrawler {
                 (positivePage != null && positivePage == 1))
 		    {
     		    PostingLocation location = new PostingLocation();
-    		    location.setState(rawHTML.getState());
-    		    location.setCity(rawHTML.getCity());
+    		    location.setState(loc.state);
+    		    location.setCity(loc.city);
     		    location.setLocation_fk(rawHTMLId);
     		    location.setLocation_link_fk(loc.id);
     		    location.setDatePosted(currentDate);

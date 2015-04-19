@@ -14,10 +14,10 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 	private final String SQL_SELECT_ALL = "SELECT * FROM rawhtml";
 	private final String SQL_SELECT_WITH_LIMIT = "SELECT * FROM rawhtml LIMIT ?, ?";
 	private final String SQL_INSERT = "INSERT INTO rawhtml"
-	        + "(id, url, html, positive, predict1, predict2, country, state, city, dateCrawled, timeCrawled)"
-	        + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	        + "(id, url, html, positive, predict1, predict2, dateCrawled, timeCrawled)"
+	        + " values (?, ?, ?, ?, ?, ?, ?, ?)";
 	private final String SQL_UPDATE = "UPDATE rawhtml SET"
-	        + "url = ?, html = ?, positive = ?, predict1 = ?, predict2 = ?, country = ?, state = ?, city = ?"
+	        + "url = ?, html = ?, positive = ?, predict1 = ?, predict2 = ?"
 	        + " WHERE id = ?";
 
 	private final DAOFactory daoFactory;
@@ -60,21 +60,6 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 			rawHTML.setPredict2(null);
 		}
 
-		rawHTML.setCountry(resultSet.getString("country"));
-		if (resultSet.wasNull()) {
-			rawHTML.setCountry(null);
-		}
-
-		rawHTML.setState(resultSet.getString("state"));
-		if (resultSet.wasNull()) {
-			rawHTML.setState(null);
-		}
-
-		rawHTML.setCity(resultSet.getString("city"));
-		if (resultSet.wasNull()) {
-			rawHTML.setCity(null);
-		}
-
 		rawHTML.setAlt_quantities(resultSet.getString("alt_quantities"));
 		if (resultSet.wasNull()) {
 			rawHTML.setAlt_quantities(null);
@@ -84,16 +69,6 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 		if (resultSet.wasNull()) {
 			rawHTML.setAlt_prices(null);
 		}
-		
-		rawHTML.setLatitude(resultSet.getString("latitude"));
-        if (resultSet.wasNull()) {
-            rawHTML.setLatitude(null);
-        }
-        
-        rawHTML.setLongtitude(resultSet.getString("longitude"));
-        if (resultSet.wasNull()) {
-            rawHTML.setLongtitude(null);
-        }
         
         rawHTML.setDateCrawled(resultSet.getString("dateCrawled"));
         if (resultSet.wasNull()) {
@@ -221,7 +196,6 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 		        rawHTML.getId(), rawHTML.getUrl(),
 				rawHTML.getHtml(), rawHTML.getPositive(),
 				rawHTML.getPredict1(), rawHTML.getPredict2(),
-				rawHTML.getCountry(), rawHTML.getState(), rawHTML.getCity(),
 				rawHTML.getDateCrawled(), rawHTML.getTimeCrawled()};
 
 			preparedStatement = DAOUtil.prepareStatement(connection,
@@ -256,8 +230,7 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 
 			final Object[] values = { rawHTML.getUrl(), rawHTML.getHtml(),
 					rawHTML.getPositive(), rawHTML.getPredict1(),
-					rawHTML.getPredict2(), rawHTML.getCountry(),
-					rawHTML.getState(), rawHTML.getCity(), rawHTML.getId(),
+					rawHTML.getPredict2(), rawHTML.getId(),
 					rawHTML.getDateCrawled(), rawHTML.getTimeCrawled()};
 
 			preparedStatement = DAOUtil.prepareStatement(connection,

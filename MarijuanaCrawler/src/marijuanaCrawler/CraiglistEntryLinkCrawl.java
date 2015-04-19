@@ -83,8 +83,7 @@ public class CraiglistEntryLinkCrawl implements IEntryLinkCrawler {
 		}
 
 		if (this.curLinkListIndex >= this.entryLinkList.size()) {
-			Globals.crawlerLogManager.writeLog("Index " + this.curLinkListIndex
-					+ " is unexpected");
+			Globals.crawlerLogManager.writeLog("Index " + this.curLinkListIndex + " is unexpected");
 			return null;
 		}
 
