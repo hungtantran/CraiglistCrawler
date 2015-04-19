@@ -61,6 +61,7 @@ if (app.get('env') === 'development') {
             error: err
         });
     });
+    
     // app.use(function(err, req, res, next) {
     //     res.statusCode = 302;
     //     res.setHeader('Location', '/');
@@ -71,14 +72,15 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-    // res.status(err.status || 500);
-    // res.render('error', {
-    //     message: err.message,
-    //     error: {}
-    // });
-    res.statusCode = 302;
-    res.setHeader('Location', '/');
-    res.end();
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
+
+    // res.statusCode = 302;
+    // res.setHeader('Location', '/');
+    // res.end();
 });
 
 app.listen(3000);

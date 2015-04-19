@@ -71,7 +71,12 @@ router.get('/:id', function(req, res) {
             description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot in ' + doc['city'] + ', ' + doc['state'],
             keywords: 'price of weed, price of marijuana, price of pot, 420, green, weed, pot, marijuana, legalize, medical, medicinal, herb, herbal',
             icon: '/images/leafyexchange.jpg',
-            javascriptSrc: '/javascripts/posting.js'
+            javascriptSrcs:
+                ['http://maps.googleapis.com/maps/api/js',
+                 'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js',
+                 'http://d3js.org/d3.v3.min.js',
+                 'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel_packed.js',
+                 '/javascripts/index.js']
         });
         return;
     })
