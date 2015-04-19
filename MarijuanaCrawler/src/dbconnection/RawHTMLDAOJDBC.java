@@ -16,7 +16,7 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 	private final String SQL_INSERT = "INSERT INTO rawhtml"
 	        + "(id, url, html, positive, predict1, predict2, dateCrawled, timeCrawled)"
 	        + " values (?, ?, ?, ?, ?, ?, ?, ?)";
-	private final String SQL_UPDATE = "UPDATE rawhtml SET"
+	private final String SQL_UPDATE = "UPDATE rawhtml SET "
 	        + "url = ?, html = ?, positive = ?, predict1 = ?, predict2 = ?"
 	        + " WHERE id = ?";
 
@@ -227,11 +227,10 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 
 		try {
 			connection = this.daoFactory.getConnection();
-
+			
 			final Object[] values = { rawHTML.getUrl(), rawHTML.getHtml(),
 					rawHTML.getPositive(), rawHTML.getPredict1(),
-					rawHTML.getPredict2(), rawHTML.getId(),
-					rawHTML.getDateCrawled(), rawHTML.getTimeCrawled()};
+					rawHTML.getPredict2(), rawHTML.getId()};
 
 			preparedStatement = DAOUtil.prepareStatement(connection,
 					this.SQL_UPDATE, false, values);

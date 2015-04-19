@@ -134,14 +134,14 @@ def extract_quantities(text):
 
 
 def write_to_db(rowId, metricQuantities, englishQuantities, prices, locations):
-  query = "UPDATE rawhtml SET alt_quantities=\"%s\", alt_prices=\"%s\", latitude=\"%s\", longitude=\"%s\" WHERE id=%s;" % (str(metricQuantities)+str(englishQuantities), str(prices), str(locations[0]), str(locations[1]), str(rowId))
+  query = "UPDATE rawhtml SET alt_quantities=\"%s\", alt_prices=\"%s\" WHERE id=%s;" % (str(metricQuantities)+str(englishQuantities), str(prices), str(rowId))
   # print query
   cursor = db.cursor()
   cursor.execute(query)
   db.commit()
 
   if (locations[0] != None):
-    query = "INSERT INTO posting_location (location_fk, latitude, longitude) VALUES(%d, \"%s\", \"%s\") ON DUPLICATE KEY UPDATE latitude=\"%s\", longitude=\"%s\"" %(rowId, str(locations[0]), str(locations[1]), str(locations[0]), str(locations[1]));
+    query = "UPDATE posting_location SET latitude=\"%s\", longitude=\"%s\" WHERE location_fk=%s" % (str(locations[0]), str(locations[1]), rowId);
 
     # print query
     cursor = db.cursor()

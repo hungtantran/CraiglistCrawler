@@ -15,6 +15,7 @@ import org.jsoup.select.Elements;
 
 import commonlib.Globals;
 import commonlib.Globals.Domain;
+import commonlib.HTMLCompressor;
 import commonlib.Helper;
 import commonlib.Location;
 import commonlib.LocationLinkComparator;
@@ -128,7 +129,7 @@ public class CraiglistCrawler implements IWebsiteCrawler {
         }
 		String postingTitle = Helper.cleanNonCharacterDigit(postingTitles.get(0).text());
 		
-		final String htmlContent = htmlDoc.outerHtml();
+		final String htmlContent = HTMLCompressor.compressHtmlContent(htmlDoc.outerHtml());
 
 		final LinkCrawled linkCrawled = new LinkCrawled();
 		linkCrawled.setLink(entryLink);
