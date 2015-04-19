@@ -96,9 +96,9 @@ html
           div(id='navbar' class='navbar-collapse collapse')
             ul(class='nav navbar-nav' id='header-bar')
               li
-                form(class='navbar-form')
+                form(class='navbar-form' action='/search/')
                   div(class='form-group')
-                    | <input type='text' placeholder='Location (Ex: 420 Pontius Ave N, Seattle, WA, 98103)' class='form-control'>
+                    | <input type='text' name='term' placeholder='Location (Ex: 420 Pontius Ave N, Seattle, WA, 98103)' class='form-control'>
                   button(type='submit' class='btn btn-success')
                     | Search
 
