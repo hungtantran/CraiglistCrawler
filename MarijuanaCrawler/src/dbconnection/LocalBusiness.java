@@ -18,12 +18,14 @@ public class LocalBusiness {
     String latitude = null;
     String longitude = null;
     Integer rawhtml_fk = null;
-    Integer location_link_fk = null;
     String datePosted = null;
     String timePosted = null;
     String posting_body = null;
     String title = null;
     Integer duplicatePostId = null;
+    Integer locationFk1 = null;
+    Integer locationFk2 = null;
+    Integer locationFk3 = null;
     
     // Getters/setters
     // ----------------------------------------------------------------------------
@@ -58,14 +60,6 @@ public class LocalBusiness {
     
     public void setLongitude(String longitude) {
         this.longitude = longitude;
-    }
-
-    public Integer getLocation_link_fk() {
-        return location_link_fk;
-    }
-
-    public void setLocation_link_fk(Integer location_link_fk) {
-        this.location_link_fk = location_link_fk;
     }
 
     public String getDatePosted() {
@@ -138,6 +132,30 @@ public class LocalBusiness {
 
 	public void setDuplicatePostId(Integer duplicatePostId) {
 		this.duplicatePostId = duplicatePostId;
+	}
+
+	public Integer getLocationFk1() {
+		return locationFk1;
+	}
+
+	public void setLocationFk1(Integer locationFk1) {
+		this.locationFk1 = locationFk1;
+	}
+
+	public Integer getLocationFk2() {
+		return locationFk2;
+	}
+
+	public void setLocationFk2(Integer locationFk2) {
+		this.locationFk2 = locationFk2;
+	}
+
+	public Integer getLocationFk3() {
+		return locationFk3;
+	}
+
+	public void setLocationFk3(Integer locationFk3) {
+		this.locationFk3 = locationFk3;
 	}
     
     // Object overrides

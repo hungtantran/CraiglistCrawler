@@ -128,7 +128,7 @@ public class LocationDB {
 	@Override
 	public String toString() {
 		// TODO implement this
-		return this.country + "," + this.state + "," + this.city;
+		return this.country + ", " + this.state + ", " + this.city;
 	}
 
 	// Custom methods

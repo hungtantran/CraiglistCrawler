@@ -81,7 +81,7 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 		for (final LocationLink locationLink : locationLinks) {
 		    final Integer id = locationLink.getId();
 			final String link = locationLink.getLink();
-			final String country = locationLink.getCity();
+			final String country = locationLink.getCountry();
 			final String state = locationLink.getState();
 			final String city = locationLink.getCity();
 			

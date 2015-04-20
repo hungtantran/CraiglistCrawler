@@ -22,6 +22,9 @@ public class LocationLink {
 	String nelongitude;
 	String swlatitude;
 	String swlongitude;
+    Integer locationFk1 = null;
+    Integer locationFk2 = null;
+    Integer locationFk3 = null;
 
 	// Getters/setters
 	// ----------------------------------------------------------------------------
@@ -121,6 +124,30 @@ public class LocationLink {
     public void setSwlongitude(String swlongitude) {
         this.swlongitude = swlongitude;
     }
+
+	public Integer getLocationFk1() {
+		return locationFk1;
+	}
+
+	public void setLocationFk1(Integer locationFk1) {
+		this.locationFk1 = locationFk1;
+	}
+
+	public Integer getLocationFk2() {
+		return locationFk2;
+	}
+
+	public void setLocationFk2(Integer locationFk2) {
+		this.locationFk2 = locationFk2;
+	}
+
+	public Integer getLocationFk3() {
+		return locationFk3;
+	}
+
+	public void setLocationFk3(Integer locationFk3) {
+		this.locationFk3 = locationFk3;
+	}
 
 	// Object overrides
 	// ---------------------------------------------------------------------------

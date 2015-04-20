@@ -2,11 +2,9 @@ package marijuanaCrawler;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 
@@ -16,10 +14,7 @@ import commonlib.Globals;
 import commonlib.Globals.Domain;
 import commonlib.HTMLCompressor;
 import commonlib.Helper;
-import commonlib.Location;
-import commonlib.LocationLinkComparator;
 import commonlib.NetworkingFunctions;
-
 import dbconnection.DAOFactory;
 import dbconnection.LinkCrawled;
 import dbconnection.LinkCrawledDAO;
@@ -27,6 +22,9 @@ import dbconnection.LinkCrawledDAOJDBC;
 import dbconnection.LocalBusiness;
 import dbconnection.LocalBusinessDAO;
 import dbconnection.LocalBusinessDAOJDBC;
+import dbconnection.LocationDB;
+import dbconnection.LocationDBDAO;
+import dbconnection.LocationDBDAOJDBC;
 import dbconnection.LocationLink;
 import dbconnection.LocationLinkDAO;
 import dbconnection.LocationLinkDAOJDBC;
@@ -43,15 +41,13 @@ public class YelpCrawler implements IWebsiteCrawler {
 //  private static final int maxTimeCrawlInSec = 21600; // 6 hours
 //  private static final int maxTimeCrawlInSec = 43200; // 12 hours
 
-	private Map<String, Location> linkToLocationMap = null;
-	private Set<LocationLink> locationLinkLists = null;
+	private Set<LocationDB> locationSet = null;
 	private Set<String> urlsCrawled = null;
-	private Queue<LocationLink> urlsQueue = null;
+	private Queue<LocationDB> urlsQueue = null;
 	private final int numRetriesDownloadLink = 2;
 	
 	private RawHTMLDAO rawHTMLDAO = null;
 	private LinkCrawledDAO linkCrawledDAO = null;
-	private LocationLinkDAO locationLinkDAO = null;
 	private LocalBusinessDAO localBusinessDAO = null;
 	
 	private long startTimeInSec = 0;
@@ -69,29 +65,42 @@ public class YelpCrawler implements IWebsiteCrawler {
 
 		this.linkCrawledDAO = new LinkCrawledDAOJDBC(daoFactory);
 
-		this.locationLinkDAO = new LocationLinkDAOJDBC(daoFactory);
+		LocationLinkDAO locationLinkDAO = new LocationLinkDAOJDBC(daoFactory);
+		
+		LocationDBDAO locationDBDAO = new LocationDBDAOJDBC(daoFactory);
 		
 		this.localBusinessDAO = new LocalBusinessDAOJDBC(daoFactory);
 
-		// Get start urls (location links for now)
-		this.linkToLocationMap = new HashMap<String, Location>();
-		this.locationLinkLists = new HashSet<LocationLink>();
-		
-		final List<LocationLink> locationLinks = this.locationLinkDAO.get();
+		// Get id of locations should be crawled yelp for
+		final List<LocationLink> locationLinks = locationLinkDAO.get();
+		Set<Integer> locationDBIdSet = new HashSet<Integer>();
 		for (final LocationLink locationLink : locationLinks) {
-		    final Integer id = locationLink.getId();
-			final String link = locationLink.getLink();
-			final String country = locationLink.getCity();
-			final String state = locationLink.getState();
-			final String city = locationLink.getCity();
 			
-			final Location location = new Location(id, country, state, city);
-
-			this.linkToLocationMap.put(link, location);
-			this.locationLinkLists.add(locationLink);
+			if (locationLink.getLocationFk1() != null) {
+				locationDBIdSet.add(locationLink.getLocationFk1());
+			}
+			
+			if (locationLink.getLocationFk2() != null) {
+				locationDBIdSet.add(locationLink.getLocationFk2());
+			}
+			
+			if (locationLink.getLocationFk3() != null) {
+				locationDBIdSet.add(locationLink.getLocationFk3());
+			}
+		}
+		
+		this.locationSet = new HashSet<LocationDB>();
+		final List<LocationDB> locationDBs = locationDBDAO.get();
+		for (final Integer locationId : locationDBIdSet) {
+			for (LocationDB locationDB : locationDBs) {
+				if (locationDB.getId().equals(locationId)) {
+					this.locationSet.add(locationDB);
+					break;
+				}
+			}
 		}
 
-		final List<LinkCrawled> linksCrawled = this.linkCrawledDAO.get(Domain.CRAIGLIST.value);
+		final List<LinkCrawled> linksCrawled = this.linkCrawledDAO.get(Domain.YELP.value);
 
 		this.urlsCrawled = new HashSet<String>();
 		for (final LinkCrawled linkCrawled : linksCrawled) {
@@ -108,7 +117,7 @@ public class YelpCrawler implements IWebsiteCrawler {
 		return true;
 	}
 
-	private boolean processOneEntryLink(String entryLink, Location loc) throws SQLException, IOException {
+	private boolean processOneEntryLink(String entryLink, LocationDB location) throws SQLException, IOException {
 		final Document htmlDoc = NetworkingFunctions.downloadHtmlContentToDoc(entryLink, this.numRetriesDownloadLink);
 		
 		if (htmlDoc == null) {
@@ -124,7 +133,9 @@ public class YelpCrawler implements IWebsiteCrawler {
 		linkCrawled.setPriority(1);
 		linkCrawled.setTimeCrawled(null);
 		linkCrawled.setDateCrawled(null);
-		linkCrawled.setLocation(loc);
+		linkCrawled.setCountry(location.getCountry());
+		linkCrawled.setState(location.getState());
+		linkCrawled.setCity(location.getCity());
 
 		int id = -1;
 
@@ -162,18 +173,20 @@ public class YelpCrawler implements IWebsiteCrawler {
 		    Globals.crawlerLogManager.writeLog("Insert content of link " + entryLink + " into RawHTML table succeeds with id = " + rawHTMLId);
 		    
 		    LocalBusiness business = new LocalBusiness();
-		    business.setState(loc.state);
-		    business.setCity(loc.city);
+		    business.setState(location.getState());
+		    business.setCity(location.getCity());
 		    business.setAddress(null);
 		    business.setPhone_number(null);
 		    business.setRating(null);
 		    business.setRawhtml_fk(rawHTMLId);
-		    business.setLocation_link_fk(loc.id);
 		    business.setDatePosted(currentDate);
 		    business.setTimePosted(currentTime);
 		    business.setDuplicatePostId(null);
 		    business.setPosting_body(null);
 		    business.setTitle(null);
+		    business.setLocationFk1(location.getId());
+		    business.setLocationFk2(null);
+		    business.setLocationFk3(null);
 		    
 		    if (!this.localBusinessDAO.create(business)) {
 		        Globals.crawlerLogManager.writeLog("Fails to insert location for " + entryLink + " into local_business table");
@@ -187,7 +200,7 @@ public class YelpCrawler implements IWebsiteCrawler {
 		return true;
 	}
 
-	private boolean processOneLocationLink(Location location) throws Exception {
+	private boolean processOneLocationLink(LocationDB location) throws Exception {
 		if (location == null) {
 			Globals.crawlerLogManager.writeLog("Unexpected: null location");
 			return false;
@@ -246,43 +259,21 @@ public class YelpCrawler implements IWebsiteCrawler {
 			throw new Exception("Unexpected error: url crawl set is null");
 		}
 
-		if (this.linkToLocationMap == null) {
-			throw new Exception("Unexpected error: location link map is null");
-		}
-
-		if (this.linkToLocationMap.size() == 0) {
-			Globals.crawlerLogManager.writeLog("There is no location links to start from");
-			return false;
+		if (this.locationSet == null) {
+			throw new Exception("Unexpected error: location set is null");
 		}
 		
         this.startTimeInSec = System.currentTimeMillis()/1000;
 		
-		while (true) {
-			// If the queue is empty, restock the links again
-			if (this.urlsQueue == null || this.urlsQueue.isEmpty()) {
-				// If this is the first crawl time, initilize the queue.
-				// Otherwise, wait for 10 to 15 minutes before the next crawl.
-				if (this.urlsQueue == null) {
-					this.urlsQueue = new PriorityQueue<LocationLink>(100, new LocationLinkComparator());
-				} else {
-					Globals.crawlerLogManager.writeLog("Finish crawling once, wait before recrawl again");
-					Helper.waitSec(30 * 60, 60 * 60);
-					Globals.crawlerLogManager.writeLog("Finish waiting, restart crawling again");
-				}
-
-				for (final LocationLink locationLink : this.locationLinkLists) {
-					this.urlsQueue.add(locationLink);
-				}
-			}
-
-			final String locationUrl = this.urlsQueue.remove().getLink();
-			final Location curLocation = this.linkToLocationMap.get(locationUrl);
-			
-			if (curLocation == null) {
-				throw new Exception("Unexpected error: location link " + locationUrl + " is not present in the map");
-			}
-
-			final boolean processLocLinkSuccess = this.processOneLocationLink(curLocation);
+        this.urlsQueue = new LinkedList<LocationDB>();
+        for (final LocationDB locationDB : this.locationSet) {
+			this.urlsQueue.add(locationDB);
+		}
+        
+		while (!this.urlsQueue.isEmpty()) {
+			final LocationDB locationDB = this.urlsQueue.remove();
+			System.out.println("Process location " + locationDB.toString());
+			final boolean processLocLinkSuccess = this.processOneLocationLink(locationDB);
 			
 			// Reach maximum timeslot, stop
             long currentTimeInSec = System.currentTimeMillis()/1000;
@@ -293,7 +284,7 @@ public class YelpCrawler implements IWebsiteCrawler {
             }
 			
 			if (!processLocLinkSuccess) {
-				Globals.crawlerLogManager.writeLog("Process location " + curLocation.toString() + " fails");
+				Globals.crawlerLogManager.writeLog("Process location " + locationDB.toString() + " fails");
 				continue;
 			}
 		}

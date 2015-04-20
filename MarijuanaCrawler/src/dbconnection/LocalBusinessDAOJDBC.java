@@ -13,8 +13,8 @@ public class LocalBusinessDAOJDBC implements LocalBusinessDAO {
     private final String SQL_SELECT_ALL = "SELECT * FROM local_business";
     private final String SQL_SELECT_BY_ID = "SELECT * FROM local_business WHERE rawhtml_fk = ?";
     private final String SQL_INSERT = "INSERT INTO local_business"
-            + "(state, city, address, phone_number, rating, latitude, longitude, rawhtml_fk, location_link_fk, datePosted, timePosted, posting_body, title, duplicatePostId)"
-            + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            + "(state, city, address, phone_number, rating, latitude, longitude, rawhtml_fk, datePosted, timePosted, posting_body, title, duplicatePostId, locationFk1, locationFk2, locationFk3)"
+            + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private final DAOFactory daoFactory;
 
@@ -65,11 +65,6 @@ public class LocalBusinessDAOJDBC implements LocalBusinessDAO {
             business.setRawhtml_fk(null);
         }
         
-        business.setLocation_link_fk(resultSet.getInt("location_link_fk"));
-        if (resultSet.wasNull()) {
-            business.setLocation_link_fk(null);
-        }
-        
         business.setDatePosted(resultSet.getString("datePosted"));
         if (resultSet.wasNull()) {
             business.setDatePosted(null);
@@ -93,6 +88,21 @@ public class LocalBusinessDAOJDBC implements LocalBusinessDAO {
         business.setDuplicatePostId(resultSet.getInt("duplicatePostId"));
         if (resultSet.wasNull()) {
             business.setDuplicatePostId(null);
+        }
+        
+        business.setLocationFk1(resultSet.getInt("locationFk1"));
+        if (resultSet.wasNull()) {
+            business.setLocationFk1(null);
+        }
+        
+        business.setLocationFk2(resultSet.getInt("locationFk2"));
+        if (resultSet.wasNull()) {
+            business.setLocationFk2(null);
+        }
+        
+        business.setLocationFk3(resultSet.getInt("locationFk3"));
+        if (resultSet.wasNull()) {
+            business.setLocationFk3(null);
         }
         
         return business;
@@ -184,12 +194,14 @@ public class LocalBusinessDAOJDBC implements LocalBusinessDAO {
             		business.getLatitude(),
             		business.getLongitude(),
             		business.getRawhtml_fk(),
-            		business.getLocation_link_fk(),
             		business.getDatePosted(),
             		business.getTimePosted(),
                     business.getPosting_body(),
                     business.getTitle(),
-                    business.getDuplicatePostId()};
+                    business.getDuplicatePostId(),
+                    business.getLocationFk1(),
+                    business.getLocationFk2(),
+                    business.getLocationFk3()};
 
             preparedStatement = DAOUtil.prepareStatement(connection, this.SQL_INSERT, false, values);
 

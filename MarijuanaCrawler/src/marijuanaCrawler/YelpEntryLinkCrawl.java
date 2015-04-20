@@ -11,8 +11,9 @@ import org.jsoup.select.Elements;
 
 import commonlib.Globals;
 import commonlib.Helper;
-import commonlib.Location;
 import commonlib.NetworkingFunctions;
+
+import dbconnection.LocationDB;
 
 public class YelpEntryLinkCrawl implements IEntryLinkCrawler {
 	// A complete search link is like this http://www.yelp.com/search?find_loc=los%20angeles%2C+california&ns=1&find_desc=marijuana&start=100
@@ -23,12 +24,12 @@ public class YelpEntryLinkCrawl implements IEntryLinkCrawler {
 
 	private final int numRetryDownloadPage = 2;
 
-	private Location location = null;
+	private LocationDB location = null;
 	private List<String> entryLinkList = null;
 	private int curLinkListIndex = -1;
 	private int curPage = 0;
 
-	public YelpEntryLinkCrawl(Location location) throws Exception {
+	public YelpEntryLinkCrawl(LocationDB location) throws Exception {
 		if (location == null) {
 			throw new Exception("Invalid location");
 		}
@@ -95,7 +96,7 @@ public class YelpEntryLinkCrawl implements IEntryLinkCrawler {
 		}
 		
 		// A complete search link is like this http://www.yelp.com/search?find_loc=los%20angeles%2C+california&ns=1&find_desc=marijuana&start=100
-		final String locationQueryString = this.location.city.replaceAll(" ", "%20") + "%2C+" + this.location.state;
+		final String locationQueryString = this.location.getCity().replaceAll(" ", "%20") + "%2C+" + this.location.getState();
 		final String termQueryString = this.searchTerm.replaceAll(" ", "%20");
 		final String pageLink = String.format(YelpEntryLinkCrawl.domain + YelpEntryLinkCrawl.searchPageSurfix, locationQueryString, termQueryString, (this.curPage-1)*10);
 
@@ -188,7 +189,10 @@ public class YelpEntryLinkCrawl implements IEntryLinkCrawler {
 		YelpEntryLinkCrawl crawler = null;
 
 		try {
-			Location loc = new Location(176, "US", "California", "los angeles");
+			LocationDB loc = new LocationDB();
+			loc.setCountry("US");
+			loc.setState("California");
+			loc.setCity("los angeles");
 
 			crawler = new YelpEntryLinkCrawl(loc);
 			crawler.startUp();

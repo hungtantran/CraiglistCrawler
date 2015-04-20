@@ -12,8 +12,8 @@ import commonlib.Globals;
 public class LocationLinkDAOJDBC implements LocationLinkDAO {
 	private final String SQL_SELECT_ALL = "SELECT * FROM location_link";
 	private final String SQL_INSERT = "INSERT INTO location_link"
-	        + " (link, country, state, city, num_positive_pages_found, latitude, longitude, nelatitude, nelongitude, swlatitude, swlongitude)"
-	        + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	        + " (link, country, state, city, num_positive_pages_found, latitude, longitude, nelatitude, nelongitude, swlatitude, swlongitude, locationFk1, locationFk2, locationFk3)"
+	        + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	private final DAOFactory daoFactory;
 
@@ -83,6 +83,21 @@ public class LocationLinkDAOJDBC implements LocationLinkDAO {
         if (resultSet.wasNull()) {
             locationLink.setSwlongitude(null);
         }
+        
+        locationLink.setLocationFk1(resultSet.getInt("locationFk1"));
+        if (resultSet.wasNull()) {
+        	locationLink.setLocationFk1(null);
+        }
+        
+        locationLink.setLocationFk2(resultSet.getInt("locationFk2"));
+        if (resultSet.wasNull()) {
+        	locationLink.setLocationFk2(null);
+        }
+        
+        locationLink.setLocationFk3(resultSet.getInt("locationFk3"));
+        if (resultSet.wasNull()) {
+        	locationLink.setLocationFk3(null);
+        }
 
 		return locationLink;
 	}
@@ -141,7 +156,10 @@ public class LocationLinkDAOJDBC implements LocationLinkDAO {
 					locationLink.getNelatitude(),
 					locationLink.getNelongitude(),
 					locationLink.getSwlatitude(),
-					locationLink.getSwlongitude()};
+					locationLink.getSwlongitude(),
+					locationLink.getLocationFk1(),
+					locationLink.getLocationFk2(),
+					locationLink.getLocationFk3()};
 
 			preparedStatement = DAOUtil.prepareStatement(connection, this.SQL_INSERT, true, values);
 
