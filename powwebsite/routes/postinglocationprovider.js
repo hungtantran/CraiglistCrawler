@@ -29,8 +29,8 @@ FROM \
         location_fk AS id, \
         A.state, \
         A.city, \
-        B.alt_prices AS price, \
-        B.alt_quantities AS quantity, \
+        A.alt_prices AS price, \
+        A.alt_quantities AS quantity, \
         A.latitude AS lat1, \
         A.longitude AS lng1, \
         C.latitude AS lat2, \
@@ -40,10 +40,8 @@ FROM \
         duplicatePostId \
       FROM \
         posting_location AS A, \
-        rawhtml AS B, \
         location_link AS C \
       WHERE \
-        location_fk = B.id AND \
         location_link_fk = C.id AND \
         datePosted IS NOT NULL AND \
         duplicatePostId IS NULL \
@@ -57,6 +55,29 @@ FROM \
       callback (err);
     } else {
       callback(null, rows);
+    }
+  });
+
+  connection.end();
+};
+
+// Get raw content with given id only for page identified by human or machine that it's weed page
+PostingLocationProvider.prototype.getContent = function(contentId, callback) {
+  var connection = connectionProvider.getConnection();
+
+  var query = 'SELECT * FROM posting_location WHERE location_fk = ' + contentId;
+
+  connection.query(query, function(err, rows) {
+    if (err) {
+      callback (err);
+    } else {
+      var content = null;
+
+      if (rows.length >= 0) {
+        content = rows[0];
+      }
+      
+      callback(null, content);
     }
   });
 

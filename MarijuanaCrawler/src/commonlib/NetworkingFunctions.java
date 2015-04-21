@@ -67,13 +67,13 @@ public class NetworkingFunctions {
 					.userAgent(NetworkingFunctions.userAgents[ranIndex])
 					.timeout(10000).followRedirects(true).execute();
 				
-				Globals.crawlerLogManager.writeLog("Download successfully link " + url + " after " + numRetries + " retries with user agent " + NetworkingFunctions.userAgents[ranIndex]);
+				Globals.crawlerLogManager.writeLog("Download successfully link " + url + " after " + i + " retries with user agent " + NetworkingFunctions.userAgents[ranIndex]);
 				
 				return response.parse();
 			} catch (IOException e) {
 				// Only print out fail on the last fail
 				if (i == numRetries - 1) {
-				    Globals.crawlerLogManager.writeLog("Fail to download link " + url + " after " + numRetries + " retries with user agent " + NetworkingFunctions.userAgents[ranIndex]);
+				    Globals.crawlerLogManager.writeLog("Fail to download link " + url + " after " + i + " retries with user agent " + NetworkingFunctions.userAgents[ranIndex]);
 					Globals.crawlerLogManager.writeLog(e.getMessage());
 					throw e;
 				}

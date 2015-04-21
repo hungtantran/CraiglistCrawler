@@ -134,14 +134,8 @@ def extract_quantities(text):
 
 
 def write_to_db(rowId, metricQuantities, englishQuantities, prices, locations):
-  query = "UPDATE rawhtml SET alt_quantities=\"%s\", alt_prices=\"%s\" WHERE id=%s;" % (str(metricQuantities)+str(englishQuantities), str(prices), str(rowId))
-  # print query
-  cursor = db.cursor()
-  cursor.execute(query)
-  db.commit()
-
   if (locations[0] != None):
-    query = "UPDATE posting_location SET latitude=\"%s\", longitude=\"%s\" WHERE location_fk=%s" % (str(locations[0]), str(locations[1]), rowId);
+    query = "UPDATE posting_location SET latitude=\"%s\", longitude=\"%s\", alt_quantities=\"%s\", alt_prices=\"%s\" WHERE location_fk=%s" % (str(locations[0]), str(locations[1]), (str(metricQuantities)+str(englishQuantities), str(prices), rowId);
 
     # print query
     cursor = db.cursor()
@@ -191,7 +185,7 @@ def index(rowId, htmlFile):
 
 def index_from_db():
   cursor = db.cursor()
-  cursor.execute("SELECT id,html FROM rawhtml WHERE (alt_prices IS NULL OR alt_quantities IS NULL) AND dateCrawled >= DATE_ADD(NOW(), INTERVAL -1 DAY)  ")
+  cursor.execute("SELECT id, html FROM rawhtml WHERE (alt_prices IS NULL OR alt_quantities IS NULL) AND dateCrawled >= DATE_ADD(NOW(), INTERVAL -2 DAY)  ")
   print "here"
   for row in cursor.fetchall():
     rowId = row[0]

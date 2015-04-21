@@ -2,7 +2,7 @@ var express         = require('express');
 var router          = express.Router()
 ;
 var globals         = require('./globals');
-var rawHTMLProvider   = globals.rawHTMLProvider;
+var postingLocationProvider   = globals.postingLocationProvider;
 
 router.post('/postingbody/:id', function(req, res) {
     var params = req.params.id.split('-');
@@ -13,7 +13,7 @@ router.post('/postingbody/:id', function(req, res) {
         return;
     }
 
-    rawHTMLProvider.getContent(id, function(error, doc) {
+    postingLocationProvider.getContent(id, function(error, doc) {
         res.json(doc);
     })
 });
@@ -30,7 +30,7 @@ router.get('/:id', function(req, res) {
         return;
     }
 
-    rawHTMLProvider.getContent(id, function(error, doc) {
+    postingLocationProvider.getContent(id, function(error, doc) {
         if (error || doc === undefined || !('posting_body' in doc)) {
             res.statusCode = 302;
             res.setHeader('Location', '/');
