@@ -12,13 +12,10 @@ public class RawHTML implements Serializable {
 	// ---------------------------------------------------------------------------------
 
 	private Integer id;
-	private String url;
 	private String html;
 	private Short positive;
 	private Short predict1;
 	private Short predict2;
-	private String alt_quantities;
-	private String alt_prices;
 	private String dateCrawled;
 	private String timeCrawled;
 
@@ -31,14 +28,6 @@ public class RawHTML implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
 	}
 
 	public String getHtml() {
@@ -71,22 +60,6 @@ public class RawHTML implements Serializable {
 
 	public void setPredict2(Short predict2) {
 		this.predict2 = predict2;
-	}
-
-	public String getAlt_quantities() {
-		return alt_quantities;
-	}
-
-	public void setAlt_quantities(String alt_quantities) {
-		this.alt_quantities = alt_quantities;
-	}
-
-	public String getAlt_prices() {
-		return alt_prices;
-	}
-
-	public void setAlt_prices(String alt_prices) {
-		this.alt_prices = alt_prices;
 	}
 	
     public String getDateCrawled() {
@@ -134,6 +107,6 @@ public class RawHTML implements Serializable {
 	
 	// Custom methods
 	public boolean isValid() {
-		return this.id != null && this.url != null && this.html != null;
+		return this.id != null && this.html != null;
 	}
 }

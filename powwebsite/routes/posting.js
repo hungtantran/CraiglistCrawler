@@ -55,6 +55,8 @@ router.get('/:id', function(req, res) {
         }
         title += " - LeafyExchange";
 
+        console.log(doc['url']);
+
         res.render('posting', {
             title: title,
             stylesheet: '/stylesheets/posting.css',

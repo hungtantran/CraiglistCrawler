@@ -185,7 +185,7 @@ def index(rowId, htmlFile):
 
 def index_from_db():
   cursor = db.cursor()
-  cursor.execute("SELECT id, html FROM rawhtml WHERE (alt_prices IS NULL OR alt_quantities IS NULL) AND dateCrawled >= DATE_ADD(NOW(), INTERVAL -2 DAY)  ")
+  cursor.execute("SELECT id, html FROM rawhtml A, posting_location B WHERE (B.alt_prices IS NULL OR B.alt_quantities IS NULL) AND dateCrawled >= DATE_ADD(NOW(), INTERVAL -2 DAY) AND A.id = B.location_fk")
   print "here"
   for row in cursor.fetchall():
     rowId = row[0]

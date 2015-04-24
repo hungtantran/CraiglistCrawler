@@ -14,10 +14,10 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 	private final String SQL_SELECT_ALL = "SELECT * FROM rawhtml";
 	private final String SQL_SELECT_WITH_LIMIT = "SELECT * FROM rawhtml LIMIT ?, ?";
 	private final String SQL_INSERT = "INSERT INTO rawhtml"
-	        + "(id, url, html, positive, predict1, predict2, dateCrawled, timeCrawled)"
-	        + " values (?, ?, ?, ?, ?, ?, ?, ?)";
+	        + "(id, html, positive, predict1, predict2, dateCrawled, timeCrawled)"
+	        + " values (?, ?, ?, ?, ?, ?, ?)";
 	private final String SQL_UPDATE = "UPDATE rawhtml SET "
-	        + "url = ?, html = ?, positive = ?, predict1 = ?, predict2 = ?"
+	        + "html = ?, positive = ?, predict1 = ?, predict2 = ?"
 	        + " WHERE id = ?";
 
 	private final DAOFactory daoFactory;
@@ -33,11 +33,6 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 		rawHTML.setId(resultSet.getInt("id"));
 		if (resultSet.wasNull()) {
 			rawHTML.setId(null);
-		}
-
-		rawHTML.setUrl(resultSet.getString("url"));
-		if (resultSet.wasNull()) {
-			rawHTML.setUrl(null);
 		}
 
 		rawHTML.setHtml(resultSet.getString("html"));
@@ -58,16 +53,6 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 		rawHTML.setPredict2(resultSet.getShort("predict2"));
 		if (resultSet.wasNull()) {
 			rawHTML.setPredict2(null);
-		}
-
-		rawHTML.setAlt_quantities(resultSet.getString("alt_quantities"));
-		if (resultSet.wasNull()) {
-			rawHTML.setAlt_quantities(null);
-		}
-
-		rawHTML.setAlt_prices(resultSet.getString("alt_prices"));
-		if (resultSet.wasNull()) {
-			rawHTML.setAlt_prices(null);
 		}
         
         rawHTML.setDateCrawled(resultSet.getString("dateCrawled"));
@@ -193,7 +178,7 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 			connection = this.daoFactory.getConnection();
 
 			final Object[] values = {
-		        rawHTML.getId(), rawHTML.getUrl(),
+		        rawHTML.getId(),
 				rawHTML.getHtml(), rawHTML.getPositive(),
 				rawHTML.getPredict1(), rawHTML.getPredict2(),
 				rawHTML.getDateCrawled(), rawHTML.getTimeCrawled()};
@@ -203,7 +188,7 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 
 			if (Globals.DEBUG) {
 				Globals.crawlerLogManager.writeLog("INSERT INTO RawHTML "
-					+ rawHTML.getUrl() + ", Content Length = "
+					+ rawHTML.getId() + ", Content Length = "
 					+ rawHTML.getHtml().length());
 			}
 
@@ -228,7 +213,7 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 		try {
 			connection = this.daoFactory.getConnection();
 			
-			final Object[] values = { rawHTML.getUrl(), rawHTML.getHtml(),
+			final Object[] values = { rawHTML.getHtml(),
 					rawHTML.getPositive(), rawHTML.getPredict1(),
 					rawHTML.getPredict2(), rawHTML.getId()};
 
@@ -237,7 +222,7 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 
 			if (Globals.DEBUG) {
 				Globals.crawlerLogManager.writeLog("Update RawHTML ("
-					+ rawHTML.getUrl() + ", Content Length = "
+					+ rawHTML.getId() + ", Content Length = "
 					+ rawHTML.getHtml().length());
 			}
 

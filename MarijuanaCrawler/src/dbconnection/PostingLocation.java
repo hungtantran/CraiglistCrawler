@@ -20,6 +20,9 @@ public class PostingLocation {
     String timePosted = null;
     String posting_body = null;
     String title = null;
+    String alt_prices = null;
+    String alt_quantities = null;
+    String url = null;
     
     // Getters/setters
     // ----------------------------------------------------------------------------
@@ -103,6 +106,30 @@ public class PostingLocation {
     public void setTitle(String title) {
         this.title = title;
     }
+
+	public String getAlt_quantities() {
+		return alt_quantities;
+	}
+
+	public void setAlt_quantities(String alt_quantities) {
+		this.alt_quantities = alt_quantities;
+	}
+
+	public String getAlt_prices() {
+		return alt_prices;
+	}
+
+	public void setAlt_prices(String alt_prices) {
+		this.alt_prices = alt_prices;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
     
     // Object overrides
     // ---------------------------------------------------------------------------

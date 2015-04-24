@@ -13,8 +13,8 @@ public class LocalBusinessDAOJDBC implements LocalBusinessDAO {
     private final String SQL_SELECT_ALL = "SELECT * FROM local_business";
     private final String SQL_SELECT_BY_ID = "SELECT * FROM local_business WHERE rawhtml_fk = ?";
     private final String SQL_INSERT = "INSERT INTO local_business"
-            + "(state, city, address, phone_number, rating, latitude, longitude, rawhtml_fk, datePosted, timePosted, posting_body, title, duplicatePostId, locationFk1, locationFk2, locationFk3)"
-            + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            + "(state, city, address, phone_number, rating, latitude, longitude, rawhtml_fk, datePosted, timePosted, posting_body, title, duplicatePostId, locationFk1, locationFk2, locationFk3, url)"
+            + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private final DAOFactory daoFactory;
 
@@ -103,6 +103,11 @@ public class LocalBusinessDAOJDBC implements LocalBusinessDAO {
         business.setLocationFk3(resultSet.getInt("locationFk3"));
         if (resultSet.wasNull()) {
             business.setLocationFk3(null);
+        }
+        
+        business.setUrl(resultSet.getString("url"));
+        if (resultSet.wasNull()) {
+            business.setUrl(null);
         }
         
         return business;
@@ -201,7 +206,8 @@ public class LocalBusinessDAOJDBC implements LocalBusinessDAO {
                     business.getDuplicatePostId(),
                     business.getLocationFk1(),
                     business.getLocationFk2(),
-                    business.getLocationFk3()};
+                    business.getLocationFk3(),
+                    business.getUrl()};
 
             preparedStatement = DAOUtil.prepareStatement(connection, this.SQL_INSERT, false, values);
 

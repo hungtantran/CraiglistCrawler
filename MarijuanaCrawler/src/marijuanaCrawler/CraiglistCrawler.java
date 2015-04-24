@@ -161,7 +161,6 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 
 		final RawHTML rawHTML = new RawHTML();
 		rawHTML.setId(id);
-		rawHTML.setUrl(entryLink);
 		rawHTML.setHtml(htmlContent);
 		rawHTML.setPositive(positivePage);
 		rawHTML.setPredict1(predict1);
@@ -190,6 +189,7 @@ public class CraiglistCrawler implements IWebsiteCrawler {
     		    String postingBody = Helper.cleanPostingBody(postingBodies.get(0).html());
     		    location.setPosting_body(postingBody);
     		    location.setTitle(postingTitle);
+    		    location.setUrl(entryLink);
     		    
     		    if (!this.postingLocationDAO.create(location)) {
     		        Globals.crawlerLogManager.writeLog("Fails to insert location for " + entryLink + " into posting_location table");

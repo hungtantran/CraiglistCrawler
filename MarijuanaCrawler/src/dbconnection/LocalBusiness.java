@@ -26,6 +26,7 @@ public class LocalBusiness {
     Integer locationFk1 = null;
     Integer locationFk2 = null;
     Integer locationFk3 = null;
+    String url = null;
     
     // Getters/setters
     // ----------------------------------------------------------------------------
@@ -156,6 +157,14 @@ public class LocalBusiness {
 
 	public void setLocationFk3(Integer locationFk3) {
 		this.locationFk3 = locationFk3;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
     
     // Object overrides

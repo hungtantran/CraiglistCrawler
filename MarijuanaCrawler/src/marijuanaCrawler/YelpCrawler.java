@@ -159,7 +159,6 @@ public class YelpCrawler implements IWebsiteCrawler {
 
 		final RawHTML rawHTML = new RawHTML();
 		rawHTML.setId(id);
-		rawHTML.setUrl(entryLink);
 		rawHTML.setHtml(htmlContent);
 		rawHTML.setPositive(positivePage);
 		rawHTML.setPredict1(predict1);
@@ -187,6 +186,7 @@ public class YelpCrawler implements IWebsiteCrawler {
 		    business.setLocationFk1(location.getId());
 		    business.setLocationFk2(null);
 		    business.setLocationFk3(null);
+		    business.setUrl(entryLink);
 		    
 		    if (!this.localBusinessDAO.create(business)) {
 		        Globals.crawlerLogManager.writeLog("Fails to insert location for " + entryLink + " into local_business table");
@@ -270,8 +270,15 @@ public class YelpCrawler implements IWebsiteCrawler {
 			this.urlsQueue.add(locationDB);
 		}
         
+        int index = 0;
 		while (!this.urlsQueue.isEmpty()) {
 			final LocationDB locationDB = this.urlsQueue.remove();
+			
+			++index;
+			if (index < 130) {
+				continue;
+			}
+
 			System.out.println("Process location " + locationDB.toString());
 			final boolean processLocLinkSuccess = this.processOneLocationLink(locationDB);
 			
