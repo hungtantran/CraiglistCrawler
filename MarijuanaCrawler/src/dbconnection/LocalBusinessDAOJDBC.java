@@ -15,6 +15,10 @@ public class LocalBusinessDAOJDBC implements LocalBusinessDAO {
     private final String SQL_INSERT = "INSERT INTO local_business"
             + "(state, city, address, phone_number, rating, latitude, longitude, rawhtml_fk, datePosted, timePosted, posting_body, title, duplicatePostId, locationFk1, locationFk2, locationFk3, url)"
             + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String SQL_UPDATE = "UPDATE local_business SET "
+            + "state = ?, city = ?, address = ?, phone_number = ?, rating = ?, latitude = ?, longitude = ?, datePosted = ?, timePosted = ?, posting_body = ?, title = ?,"
+            + "duplicatePostId = ?, locationFk1 = ?, locationFk2 = ?, locationFk3 = ?, url = ? "
+            + " WHERE rawhtml_fk = ?";
 
     private final DAOFactory daoFactory;
 
@@ -225,4 +229,53 @@ public class LocalBusinessDAOJDBC implements LocalBusinessDAO {
             DAOUtil.close(connection, preparedStatement, resultSet);
         }
     }
+
+	@Override
+	public boolean updateLocalBusiness(LocalBusiness business) throws SQLException {
+		if (!business.isValid()) {
+            return false;
+        }
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = this.daoFactory.getConnection();
+
+            final Object[] values = {
+            		business.getState(),
+            		business.getCity(),
+            		business.getAddress(),
+            		business.getPhone_number(),
+            		business.getRating(),
+            		business.getLatitude(),
+            		business.getLongitude(),
+            		business.getDatePosted(),
+            		business.getTimePosted(),
+                    business.getPosting_body(),
+                    business.getTitle(),
+                    business.getDuplicatePostId(),
+                    business.getLocationFk1(),
+                    business.getLocationFk2(),
+                    business.getLocationFk3(),
+                    business.getUrl(),
+            		business.getRawhtml_fk()};
+
+            preparedStatement = DAOUtil.prepareStatement(connection, this.SQL_UPDATE, false, values);
+
+            Globals.crawlerLogManager.writeLog(preparedStatement.toString());
+
+            preparedStatement.executeUpdate();
+
+            return true;
+        } catch (final SQLException e) {
+            Globals.crawlerLogManager.writeLog("Update table local_business fails");
+            Globals.crawlerLogManager.writeLog(e.getMessage());
+
+            return false;
+        } finally {
+            DAOUtil.close(connection, preparedStatement, resultSet);
+        }
+	}
 }

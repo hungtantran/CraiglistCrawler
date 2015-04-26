@@ -9,4 +9,6 @@ public interface LocalBusinessDAO {
     public LocalBusiness get(int locationId) throws Exception;
     
     public boolean create(LocalBusiness business) throws SQLException;
+    
+    public boolean updateLocalBusiness(LocalBusiness business) throws SQLException;
 }

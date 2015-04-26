@@ -4,23 +4,18 @@ import java.util.List;
 
 import commonlib.Globals;
 import commonlib.HTMLCompressor;
-
 import dbconnection.DAOFactory;
 import dbconnection.RawHTML;
+import dbconnection.RawHTMLDAO;
 import dbconnection.RawHTMLDAOJDBC;
 
 public class CompressRawHtml {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
         int lowerBound = 0;
         final int maxNumResult = 200;
 
         DAOFactory daoFactory = null;
-        try {
-            daoFactory = DAOFactory.getInstance(Globals.username, Globals.password, Globals.server + Globals.database);
-        } catch (final ClassNotFoundException e) {
-            e.printStackTrace();
-            return;
-        }
+        daoFactory = DAOFactory.getInstance(Globals.username, Globals.password, Globals.server + Globals.database);
 
         if (daoFactory == null) {
             return;
@@ -28,8 +23,8 @@ public class CompressRawHtml {
 
         while (true) {
             try {
-                final RawHTMLDAOJDBC rawHTMLDAOJDBC = new RawHTMLDAOJDBC(daoFactory);
-                final List<RawHTML> htmls = rawHTMLDAOJDBC.get(lowerBound, maxNumResult);
+                final RawHTMLDAO rawHTMLDAO = new RawHTMLDAOJDBC(daoFactory);
+                final List<RawHTML> htmls = rawHTMLDAO.get(lowerBound, maxNumResult);
 
                 if (htmls == null) {
                     break;
@@ -46,7 +41,7 @@ public class CompressRawHtml {
                     if (compressHtml.length() < htmlContent.length()) {
 	                    System.out.println(rawHTML.getId() + " Compress html length from " + htmlContent.length() + " donw to " + compressHtml.length());
 	                    
-	                    rawHTMLDAOJDBC.update(rawHTML);
+	                    rawHTMLDAO.update(rawHTML);
                     }
                 }
 

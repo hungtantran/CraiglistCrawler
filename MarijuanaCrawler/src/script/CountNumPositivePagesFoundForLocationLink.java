@@ -15,7 +15,7 @@ import dbconnection.LocationLinkDAO;
 import dbconnection.LocationLinkDAOJDBC;
 
 public class CountNumPositivePagesFoundForLocationLink {
-    public static final String SQL_SELECT_SUM = "SELECT COUNT(*) AS SUM FROM rawhtml WHERE (predict1 = 1 OR positive = 1) AND url LIKE ?";
+    public static final String SQL_SELECT_SUM = "SELECT COUNT(*) AS SUM FROM posting_location WHERE url LIKE ?";
     public static final String SQL_UPDATE_LOCATION_LINK = "UPDATE location_link SET num_positive_pages_found = ? WHERE id = ?";
             
     public static void main(String[] args) {

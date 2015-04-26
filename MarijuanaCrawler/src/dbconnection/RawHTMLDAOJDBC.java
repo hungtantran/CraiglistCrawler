@@ -70,7 +70,7 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 	}
 
 	@Override
-	public RawHTML find(int id) throws SQLException {
+	public RawHTML get(int id) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;

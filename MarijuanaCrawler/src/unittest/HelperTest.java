@@ -10,6 +10,7 @@ public class HelperTest {
 
     @Test
     public void test() {
+    	System.out.println("latitude&#34;: ");
         TestCleanNonCharacterDigit();
         TestGetTime();
         TestCleanTag();

@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface RawHTMLDAO {
-	public RawHTML find(int id) throws SQLException;
+	public RawHTML get(int id) throws SQLException;
 	
 	public List<RawHTML> get() throws SQLException;
 	
