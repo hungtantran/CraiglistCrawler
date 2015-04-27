@@ -10,7 +10,12 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+// Helper is just a collection of utility function
 public class Helper {
+	private Helper() {
+		throw new AssertionError();
+	}
+
 	public static String[] splitString(String string, String delimiter) {
 		if (string == null || delimiter == null)
 			return null;

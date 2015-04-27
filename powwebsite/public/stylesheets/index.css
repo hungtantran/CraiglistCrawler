@@ -54,11 +54,14 @@ body {
     overflow-y: scroll;
 }
 
-#latest_prices_content {
+#table_body_local_business {
+    overflow-y: hidden;
+    font-size: 0.75em;
 }
 
-#table_body {
+#table_body_posting {
     overflow-y: hidden;
+    font-size: 0.75em;
 }
 
 #locations {

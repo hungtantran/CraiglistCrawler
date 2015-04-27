@@ -174,7 +174,11 @@ public class LocalBusiness {
          */
     @Override
     public boolean equals(Object other) {
-        // TODO implement this
+    	LocalBusiness otherBusiness = (LocalBusiness)other;
+        if (this.address != null && otherBusiness.address != null && this.address.equals(otherBusiness.address)) {
+        	return true;
+        }
+
         return false;
     }
 

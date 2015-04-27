@@ -2,6 +2,8 @@ var PostingLocationProvider = require('./postinglocationprovider').PostingLocati
 var postingLocationProvider = new PostingLocationProvider();
 var PricesProvider = require('./pricesprovider').PricesProvider;
 var pricesProvider = new PricesProvider();
+var LocalBusinessProvider = require('./localBusinessProvider').LocalBusinessProvider;
+var localBusinessProvider = new LocalBusinessProvider();
 var CommonHelper = require('./commonHelper').CommonHelper;
 var commonHelper = new CommonHelper();
 
@@ -64,6 +66,12 @@ function RefreshCache() {
         UpdatePostingCache(error, docs);
         console.log("Postings cache has " + postings.length + " entries")
         exports.postings = postings;
+    })
+
+    localBusinessProvider.getAllLocalBusinesses(function(error, docs) {
+        localBusinesses = docs;
+        console.log("Local business cache has " + localBusinesses.length + " entries")
+        exports.localBusinesses = localBusinesses;
     })
 
     pricesProvider.getAllPrices(function(error, docs) {

@@ -68,17 +68,3 @@ block content
               a(href=nextPageLink)
                 | Next Page &raquo;
     div(id='left-padding'            class='hidden-xs col-sm-2 col-md-3 col-lg-3')
-
-    script(type='text/javascript')
-      | var map = null;
-      | var markerArray = [];
-
-      | var cache = [];
-
-      | var stateFilter = null;
-      | var geocoder = null;
-      | var lat_ = !{JSON.stringify(latitude)};
-      | var long_ = !{JSON.stringify(longitude)};
-      | var state_ = !{JSON.stringify(state)};
-      | var city_ = !{JSON.stringify(city)};
-      | window.onload = loadData();

@@ -20,8 +20,8 @@ router.get('/', function(req, res) {
   res.render('index', {
     title: 'LeafyExchange: The Best Marijuana Prices and Information',
     stylesheet: '/stylesheets/index.css',
-    markers: globals.locations,
     postings: globals.postings,
+    localBusinesses: globals.localBusinesses,
     states: globals.states,
     pricesString: globals.commonHelper.constructPriceStringArray(globals.postings),
     quantitiesString: globals.commonHelper.constructQuantityStringArray(globals.postings),
@@ -66,10 +66,17 @@ router.get('/state/:state', function(req, res){
         return;
     }
 
-    stateInfo = [];
+    postingStateInfo = [];
     for (var i = 0; i < globals.postings.length; ++i) {
         if (globals.postings[i]['state'].toUpperCase() === state.toUpperCase()) {
-            stateInfo.push(globals.postings[i]);
+            postingStateInfo.push(globals.postings[i]);
+        }
+    }
+
+    localBusinessStateInfo = [];
+    for (var i = 0; i < globals.localBusinesses.length; ++i) {
+        if (globals.localBusinesses[i]['state'].toUpperCase() === state.toUpperCase()) {
+            localBusinessStateInfo.push(globals.localBusinesses[i]);
         }
     }
 
@@ -78,12 +85,12 @@ router.get('/state/:state', function(req, res){
     res.render('index', {
         title: 'LeafyExchange: The Best Marijuana Prices and Information in ' + state,
         stylesheet: '/stylesheets/index.css',
-        markers: stateInfo,
-        postings: stateInfo,
+        postings: postingStateInfo,
+        localBusinesses: localBusinessStateInfo,
         states: globals.states,
         stateChosen: state,
-        pricesString: globals.commonHelper.constructPriceStringArray(stateInfo),
-        quantitiesString: globals.commonHelper.constructQuantityStringArray(stateInfo),
+        pricesString: globals.commonHelper.constructPriceStringArray(postingStateInfo),
+        quantitiesString: globals.commonHelper.constructQuantityStringArray(postingStateInfo),
         description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot in ' + state,
         keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
         icon: '/images/leafyexchange.jpg',

@@ -1,7 +1,7 @@
 function codeLatLng(lat, lng) {
   var latlng = new google.maps.LatLng(lat, lng);
   geocoder.geocode({'latLng': latlng}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
+    if (status === google.maps.GeocoderStatus.OK) {
       console.log(results);
     } else {
       console.log("Geocoder failed due to: " + status);
@@ -18,14 +18,20 @@ function updateDisplay(displayInfo, initializeParams) {
   var isInitializePosting = true;
   var isInitializeMap = true;
   var isInitializePrice = true;
+  var isInitializeLocalBusiness = true;
   if (initializeParams !== undefined) {
     isInitializePosting = initializeParams[0];
     isInitializeMap = initializeParams[1];
     isInitializePrice = initializeParams[2];
+    isInitializeLocalBusiness = initializeParams[3];
   }
 
-  if (isInitializePosting === undefined ||  isInitializePosting) {
+  if (isInitializePosting === undefined || isInitializePosting) {
     initializePostings(displayInfo['postings']);
+  }
+
+  if (isInitializeLocalBusiness === undefined || isInitializeLocalBusiness) {
+    initializeLocalBusinesses(displayInfo['localBusinesses']);
   }
 
   if (isInitializeMap === undefined || isInitializeMap) {
@@ -251,7 +257,7 @@ function newPriceBin(divId, prices) {
 
 // Callback function to handle change in map
 function handleMapChange() {
-  if(typeof timeoutID == "number") {
+  if(typeof timeoutID === "number") {
     window.clearTimeout(timeoutID);
     delete timeoutID;
   }
@@ -259,7 +265,7 @@ function handleMapChange() {
   timeoutID = window.setTimeout(function() {
     var newMapBound = map.getBounds();
     // Only update when map bound change
-    if (mapBound == null || !newMapBound.equals(mapBound)) {
+    if (mapBound === null || !newMapBound.equals(mapBound)) {
       mapBound = newMapBound;
       updateDisplay();
     }
@@ -351,7 +357,7 @@ function initializePostings(postings) {
     return;
   }
 
-  var table = document.getElementById('table_body');
+  var table = document.getElementById('table_body_posting');
   for(var i = table.rows.length - 1; i >= 0; --i)
   {
       table.deleteRow(i);
@@ -460,6 +466,97 @@ function initializePostings(postings) {
   }
 }
 
+function initializeLocalBusinesses(localBusinesses) {
+  if (localBusinesses === null || localBusinesses === undefined) {
+    return;
+  }
+
+  var table = document.getElementById('table_body_local_business');
+  for(var i = table.rows.length - 1; i >= 0; --i)
+  {
+      table.deleteRow(i);
+  }
+
+  var totalLocalBusinesses = 0;
+
+  // Chrome, safara and ie has different order or json array
+  var startIndex = 0;
+  var endIndex = localBusinesses.length;
+  var step = 1;
+  if (localBusinesses.length > 1) {
+    if (localBusinesses[localBusinesses.length-1]['rating'] < localBusinesses[0]['rating']) {
+      startIndex = localBusinesses.length - 1;
+      endIndex = -1;
+      step = -1;
+    }
+  }
+
+  for (var i = startIndex; i !== endIndex; i += step)
+  {
+    if (stateFilter != null && localBusinesses[i]['state'] != stateFilter) {
+      console.log("here1");
+      continue;
+    }
+
+    if (!localBusinesses[i]['city']) {
+      console.log("there");
+      continue;
+    }
+
+    lat = localBusinesses[i]['lat'];
+    lng = localBusinesses[i]['lng'];
+
+    var postingLocation = new google.maps.LatLng(lat, lng);
+
+    if (mapBound !== undefined && !mapBound.contains(postingLocation)) {
+      console.log("here");
+      continue;
+    }
+
+    var row = table.insertRow(table.length);
+    console.log(i);
+    var index = 0;
+
+    // Address cell
+    var dateLocationPosted = row.insertCell(index++);
+    dateLocationPosted.innerHTML = localBusinesses[i]['address'];
+    dateLocationPosted.setAttribute('class','col-xs-6 col-sm-6 col-md-4 col-lg-4');
+
+    // Title cell
+    var title = row.insertCell(index++);
+    title.innerHTML = '<strong>' + localBusinesses[i]['title'] + '</strong>';
+    title.setAttribute('class','col-xs-6 col-sm-6 col-md-4 col-lg-4 text-center');
+
+    // Code for query with grouping
+    // Quantity cell
+    var rating = row.insertCell(index++);
+    if (localBusinesses[i]['rating'] === null || localBusinesses[i]['rating'] === -1) {
+      rating.innerHTML = "No rating";
+    } else {
+      rating.innerHTML = localBusinesses[i]['rating'];
+    }
+    rating.setAttribute('class','hidden-xs hidden-sm col-md-2 col-lg-2 text-center');
+
+    // Phone number cell
+    var title = row.insertCell(index++);
+    if (localBusinesses[i]['phone_number'] === null || localBusinesses[i]['phone_number'] === -1) {
+      title.innerHTML = "No number";
+    } else {
+      title.innerHTML = localBusinesses[i]['phone_number'];
+    }
+    title.setAttribute('class','hidden-xs hidden-sm col-md-2 col-lg-2');
+
+    ++totalLocalBusinesses;
+  }
+
+  if (totalLocalBusinesses === 0) {
+    var row = table.insertRow(table.length);
+    var noLocalBusinessLink = row.insertCell(0);
+    noLocalBusinessLink.innerHTML = '<a href=\'/state/all\'>No marijuana business here now. Checkout other cannabis businesses around the US</a>';
+    noLocalBusinessLink.setAttribute('class','col-xs-12 col-sm-12 col-md-12 col-lg-12');
+  }
+}
+
 function newXMLRequest(func, cacheEntry, extraParams) {
   var xmlhttp;
 
@@ -504,10 +601,12 @@ function loadData() {
 
   // Postings xml request
   var params = location.pathname.split('/');
-  var postUrl = "/postings/";
+  var postingUrl = "/postings/";
+  var localBusinessUrl = "/localBusinesses/";
   var priceUrl = "/prices/";
   if (params.length > 2 && params[1] === 'state') {
-    postUrl += params[2];
+    postingUrl += params[2];
+    localBusinessUrl += params[2];
     priceUrl += params[2];
     state = params[2]
   }
@@ -515,14 +614,21 @@ function loadData() {
   var xmlhttpPostings = new newXMLRequest(
     updateDisplay,
     'postings',
-    [false, true, false]);
-  xmlhttpPostings.open("POST", postUrl, true);
+    [false, true, false, false]);
+  xmlhttpPostings.open("POST", postingUrl, true);
+  xmlhttpPostings.send();
+
+  var xmlhttpPostings = new newXMLRequest(
+    updateDisplay,
+    'localBusinesses',
+    [false, true, false, false]);
+  xmlhttpPostings.open("POST", localBusinessUrl, true);
   xmlhttpPostings.send();
 
   var xmlhttpPostings = new newXMLRequest(
     updateDisplay,
     'prices',
-    [false, false, true]);
+    [false, false, true, false]);
   xmlhttpPostings.open("POST", priceUrl, true);
   xmlhttpPostings.send();
 }

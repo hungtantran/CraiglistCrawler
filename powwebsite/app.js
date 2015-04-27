@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var prices = require('./routes/prices');
 var postings = require('./routes/postings');
+var localBusinesses = require('./routes/localBusinesses');
 var posting = require('./routes/posting');
 var search = require('./routes/search');
 
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/search', search);
 app.use('/postings', postings);
+app.use('/localBusinesses', localBusinesses);
 app.use('/prices', prices);
 app.use('/posting', posting);
 
