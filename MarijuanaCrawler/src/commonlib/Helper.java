@@ -3,7 +3,10 @@ package commonlib;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -84,48 +87,26 @@ public class Helper {
 	}
 	
 	// Return the current date, e.g: 2014-05-23
-	@SuppressWarnings("deprecation")
 	public static String getCurrentDate() {
-		Date currentDate = new Date();
-
-		StringBuilder dateString = new StringBuilder();
-		dateString.append(1900 + currentDate.getYear());
-		dateString.append("-");
-		
-		String monthString = "" + (currentDate.getMonth() + 1);
-		monthString = Helper.AddZeros(monthString, 2);
-		dateString.append(monthString);
-		dateString.append("-");
-		
-		String dayString = "" + currentDate.getDate();
-		dayString = Helper.AddZeros(dayString, 2);
-		dateString.append(dayString);
-
-		return dateString.toString();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 0);    
+        return dateFormat.format(cal.getTime());
 	}
 
 	// Return the current time 22:11:30
-	@SuppressWarnings("deprecation")
 	public static String getCurrentTime() {
-		Date currentDate = new Date();
-
-		StringBuilder timeString = new StringBuilder();
-		
-		String hourString = "" + currentDate.getHours();
-		hourString = Helper.AddZeros(hourString, 2);
-		timeString.append(hourString);
-		timeString.append(":");
-		
-		String minuteString = "" + currentDate.getMinutes();
-		minuteString = Helper.AddZeros(minuteString, 2);
-		timeString.append(minuteString);
-		timeString.append(":");
-		
-		String secondString = "" + currentDate.getSeconds();
-		secondString = Helper.AddZeros(secondString, 2);
-		timeString.append(secondString);
-
-		return timeString.toString();
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 0);    
+        return dateFormat.format(cal.getTime());
+	}
+	
+	public static String getPastDate(int pastDays) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -pastDays);    
+        return dateFormat.format(cal.getTime());
 	}
 
 	// Make the current thread wait for a random amount of time between

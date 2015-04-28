@@ -32,6 +32,11 @@ public class ParseYelp {
         List<LocalBusiness> localBusinesses = localBusinessDAO.get();
         
         for (LocalBusiness localBusiness : localBusinesses) {
+        	// Skip already parsed entry
+        	if (localBusiness.getRating() != null) {
+        		continue;
+        	}
+
         	int id = localBusiness.getRawhtml_fk();
 
         	RawHTML rawHTML = rawHTMLDAO.get(id);

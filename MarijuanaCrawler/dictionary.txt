@@ -32,6 +32,7 @@ indica
 kush
 marijuana
 marijuna
+meds
 medical
 medicine
 mmj
@@ -67,4 +68,6 @@ super
 wax
 waxes
 weed
-
+delivery
+deliver
+delivered

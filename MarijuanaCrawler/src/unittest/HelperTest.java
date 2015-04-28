@@ -32,6 +32,10 @@ public class HelperTest {
     	String currentTime = Helper.getCurrentTime();
     	System.out.println(currentTime);
     	assertEquals(currentTime.length(), 8);
+    	
+    	String pastTime = Helper.getPastDate(10);
+    	System.out.println(pastTime);
+    	assertEquals(pastTime.length(), 10);
     }
     
     public void TestCleanTag() {

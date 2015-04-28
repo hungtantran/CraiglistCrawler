@@ -39,9 +39,11 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 //    private static final int maxTimeCrawlInSec = 60;  // 1 min
 //    private static final int maxTimeCrawlInSec = 3600;  // 1 hours
 //	  private static final int maxTimeCrawlInSec = 7200;  // 2 hours
-	private static final int maxTimeCrawlInSec = 14400; // 4 hours
+	  private static final int maxTimeCrawlInSec = 14400; // 4 hours
 //    private static final int maxTimeCrawlInSec = 21600; // 6 hours
 //    private static final int maxTimeCrawlInSec = 43200; // 12 hours
+	  
+	private static final int MAX_POSTING_AGE_VALIDITY = 14;
             
 	private Map<String, Location> linkToLocationMap = null;
 	private Set<LocationLink> locationLinkLists = null;
@@ -190,6 +192,8 @@ public class CraiglistCrawler implements IWebsiteCrawler {
     		    location.setPosting_body(postingBody);
     		    location.setTitle(postingTitle);
     		    location.setUrl(entryLink);
+    		    location.setActive(1);
+    		    location.setEmail(null);
     		    
     		    if (!this.postingLocationDAO.create(location)) {
     		        Globals.crawlerLogManager.writeLog("Fails to insert location for " + entryLink + " into posting_location table");
@@ -209,9 +213,12 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 		if (curLocation == null) {
 			throw new Exception("Unexpected error: location link " + locationUrl + " is not poresent in the map");
 		}
-
-		final IEntryLinkCrawler crawler = new CraiglistEntryLinkCrawl(
-				locationUrl);
+		
+		// Deactivate too old post
+		// BUGBUG: reactive if the crawler stop in the middle
+		this.postingLocationDAO.deActivate(locationUrl, MAX_POSTING_AGE_VALIDITY);
+		
+		final IEntryLinkCrawler crawler = new CraiglistEntryLinkCrawl(locationUrl);
 
 		// Process each search term at a time
 		for (final String term : this.searchTerms) {
@@ -231,8 +238,10 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 					Helper.waitSec(Globals.DEFAULTLOWERBOUNDWAITTIMESEC, Globals.DEFAULTUPPERBOUNDWAITTIMESEC);
 					break;
 				}
-
+				
+				// If we already see this link, reactivate it in posting location
 				if (this.urlsCrawled.contains(nextEntryLink)) {
+					this.postingLocationDAO.activate(nextEntryLink);
 					continue;
 				}
 
@@ -300,8 +309,7 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 			// Reach maximum timeslot, stop
             long currentTimeInSec = System.currentTimeMillis()/1000;
             if (currentTimeInSec - this.startTimeInSec > CraiglistCrawler.maxTimeCrawlInSec) {
-                Globals.crawlerLogManager.writeLog(
-                        "Crawler reaches maximum time allowable. Start time = " + this.startTimeInSec + ". End time = " + currentTimeInSec);
+                Globals.crawlerLogManager.writeLog("Crawler reaches maximum time allowable. Start time = " + this.startTimeInSec + ". End time = " + currentTimeInSec);
                 break;
             }
 			
