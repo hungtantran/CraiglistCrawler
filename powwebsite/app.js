@@ -22,6 +22,14 @@ app.use(compression());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.get('/*', function(req, res, next) {
+    if(/^www\./.test(req.headers.host)) {
+        res.redirect(req.protocol+'://'+req.headers.host.replace(/^www\./,'')+req.url,301);
+    } else {
+        next();
+    }
+});
+
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -42,14 +50,6 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
-
-app.get('/*', function(req, res, next) {
-  if (req.headers.host.match(/^www/) !== null ) {
-    res.redirect('http://' + req.headers.host.replace(/^www\./, '') + req.url);
-  } else {
-    next();
-  }
-})
 
 /// error handlers
 
