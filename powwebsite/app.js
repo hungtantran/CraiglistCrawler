@@ -23,6 +23,17 @@ app.use(compression());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// Redirect 301 to www version only if it's not dev environment
+if (app.get('env') !== 'dev') {
+    app.get('/*', function(req, res, next) {
+        if(/^www\./.test(req.headers.host)) {
+            next();
+        } else {
+            res.redirect(req.protocol+'://www.'+req.headers.host+req.url,301);
+        }
+    });
+}
+
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -45,19 +56,11 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-app.get('/*', function(req, res, next) {
-  if (req.headers.host.match(/^www/) !== null ) {
-    res.redirect('http://' + req.headers.host.replace(/^www\./, '') + req.url);
-  } else {
-    next();
-  }
-})
-
 /// error handlers
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
+if (app.get('env') === 'dev') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {

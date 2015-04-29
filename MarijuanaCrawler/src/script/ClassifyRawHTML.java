@@ -45,18 +45,17 @@ public class ClassifyRawHTML {
                     htmlCount++;
 
                     final int id = rawHTML.getId();
-                    final String link = rawHTML.getUrl();
                     final String htmlContent = rawHTML.getHtml();
 
                     if (Globals.DEBUG) {
-                        System.out.println("(" + htmlCount + ") Check HTML id " + id + ": " + link);
+                        System.out.println("(" + htmlCount + ") Check HTML id " + id);
                     }
 
                     // Classify the page
                     final Short predict1 = Classifier.classify(htmlContent);
-
-                    rawHTML.setPredict1(predict1);
-                    rawHTMLDAOJDBC.update(rawHTML);
+                    System.out.println(predict1 + " " + id);
+                    //rawHTML.setPredict1(predict1);
+                    //rawHTMLDAOJDBC.update(rawHTML);
                 }
 
                 if (count == 0) {

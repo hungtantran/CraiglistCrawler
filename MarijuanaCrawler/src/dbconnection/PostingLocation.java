@@ -23,6 +23,8 @@ public class PostingLocation {
     String alt_prices = null;
     String alt_quantities = null;
     String url = null;
+    Integer active = null;
+    String email = null;
     
     // Getters/setters
     // ----------------------------------------------------------------------------
@@ -129,6 +131,22 @@ public class PostingLocation {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public Integer getActive() {
+		return active;
+	}
+
+	public void setActive(Integer active) {
+		this.active = active;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
     
     // Object overrides

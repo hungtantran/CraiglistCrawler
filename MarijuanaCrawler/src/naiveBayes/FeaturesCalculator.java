@@ -53,8 +53,7 @@ public class FeaturesCalculator {
 		
 		try {
 			StringBuffer fileData = new StringBuffer();
-	        BufferedReader reader = new BufferedReader(
-	                new FileReader("positive.html"));
+	        BufferedReader reader = new BufferedReader(new FileReader("positive.html"));
 	        char[] buf = new char[1024];
 	        int numRead=0;
 	        while((numRead=reader.read(buf)) != -1){

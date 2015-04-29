@@ -8,13 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import commonlib.Globals;
+import commonlib.Helper;
 
 public class PostingLocationDAOJDBC implements PostingLocationDAO {
     private final String SQL_SELECT_ALL = "SELECT * FROM posting_location";
     private final String SQL_SELECT_BY_ID = "SELECT * FROM posting_location WHERE location_fk = ?";
     private final String SQL_INSERT = "INSERT INTO posting_location"
-            + "(state, city, latitude, longitude, location_fk, location_link_fk, datePosted, timePosted, posting_body, title, url)"
-            + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            + "(state, city, latitude, longitude, location_fk, location_link_fk, datePosted, timePosted, posting_body, title, url, active, email)"
+            + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String SQL_ACTIVATE = "UPDATE posting_location SET active = 1 WHERE url = ?";
+    private final String SQL_DEACTIVATE = "UPDATE posting_location SET active = 0 WHERE url LIKE ? AND datePosted < ?";
 
     private final DAOFactory daoFactory;
 
@@ -88,6 +91,16 @@ public class PostingLocationDAOJDBC implements PostingLocationDAO {
 		location.setUrl(resultSet.getString("url"));
 		if (resultSet.wasNull()) {
 			location.setUrl(null);
+		}
+		
+		location.setActive(resultSet.getInt("active"));
+		if (resultSet.wasNull()) {
+			location.setActive(null);
+		}
+		
+		location.setEmail(resultSet.getString("email"));
+		if (resultSet.wasNull()) {
+			location.setEmail(null);
 		}
         
         return location;
@@ -181,7 +194,9 @@ public class PostingLocationDAOJDBC implements PostingLocationDAO {
                     location.getTimePosted(),
                     location.getPosting_body(),
                     location.getTitle(),
-                    location.getUrl()};
+                    location.getUrl(),
+                    location.getActive(),
+                    location.getEmail()};
 
             preparedStatement = DAOUtil.prepareStatement(connection, this.SQL_INSERT, false, values);
 
@@ -199,4 +214,70 @@ public class PostingLocationDAOJDBC implements PostingLocationDAO {
             DAOUtil.close(connection, preparedStatement, resultSet);
         }
     }
+
+	@Override
+	public boolean activate(String url) throws SQLException {
+		if (url == null) {
+            return false;
+        }
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = this.daoFactory.getConnection();
+
+            final Object[] values = { url };
+
+            preparedStatement = DAOUtil.prepareStatement(connection, this.SQL_ACTIVATE, false, values);
+
+            Globals.crawlerLogManager.writeLog(preparedStatement.toString());
+
+            preparedStatement.executeUpdate();
+
+            return true;
+        } catch (final SQLException e) {
+            Globals.crawlerLogManager.writeLog("Fails to activate link " + url + " in posting_location");
+            Globals.crawlerLogManager.writeLog(e.getMessage());
+
+            return false;
+        } finally {
+            DAOUtil.close(connection, preparedStatement, resultSet);
+        }
+	}
+
+	@Override
+	public boolean deActivate(String locationUrl, int maxLinkAge) throws SQLException {
+		if (locationUrl == null) {
+            return false;
+        }
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = this.daoFactory.getConnection();
+            
+            String matchLocationLinkString = locationUrl + "%";
+            String pastDate = Helper.getPastDate(maxLinkAge);
+            final Object[] values = { matchLocationLinkString, pastDate };
+
+            preparedStatement = DAOUtil.prepareStatement(connection, this.SQL_DEACTIVATE, false, values);
+
+            Globals.crawlerLogManager.writeLog(preparedStatement.toString());
+
+            preparedStatement.executeUpdate();
+
+            return true;
+        } catch (final SQLException e) {
+            Globals.crawlerLogManager.writeLog("Fails to deactivate link " + locationUrl + " in posting_location");
+            Globals.crawlerLogManager.writeLog(e.getMessage());
+
+            return false;
+        } finally {
+            DAOUtil.close(connection, preparedStatement, resultSet);
+        }
+	}
 }

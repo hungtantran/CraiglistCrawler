@@ -275,7 +275,7 @@ public class YelpCrawler implements IWebsiteCrawler {
 			final LocationDB locationDB = this.urlsQueue.remove();
 			
 			++index;
-			if (index < 230) {
+			if (index < 280) {
 				continue;
 			}
 

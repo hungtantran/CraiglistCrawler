@@ -127,8 +127,7 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 	}
 
 	@Override
-	public List<RawHTML> get(int lowerBound, int maxNumResult)
-			throws SQLException {
+	public List<RawHTML> get(int lowerBound, int maxNumResult) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -237,6 +236,44 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 		} finally {
 			DAOUtil.close(connection, preparedStatement, resultSet);
 		}
+	}
+
+	@Override
+	public List<RawHTML> getNegative(int lowerBound, int maxNumResult) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = this.daoFactory.getConnection();
+
+			if (lowerBound > 0 || maxNumResult > 0) {
+				preparedStatement = DAOUtil.prepareStatement(connection,
+						this.SQL_SELECT_WITH_LIMIT, false, lowerBound,
+						maxNumResult);
+			} else {
+				preparedStatement = DAOUtil.prepareStatement(connection,
+						this.SQL_SELECT_ALL, false);
+			}
+
+			resultSet = preparedStatement.executeQuery();
+
+			final ArrayList<RawHTML> htmls = new ArrayList<RawHTML>();
+			while (resultSet.next()) {
+				final RawHTML rawHTML = this.constructRawHTMLObject(resultSet);
+				htmls.add(rawHTML);
+			}
+
+			return htmls;
+		} catch (final SQLException e) {
+			Globals.crawlerLogManager.writeLog("Get RawHTML fails");
+			Globals.crawlerLogManager.writeLog(e.getMessage());
+		} finally {
+			DAOUtil.close(connection, preparedStatement, resultSet);
+		}
+
+		return null;
+		return null;
 	}
 
 }

@@ -68,8 +68,7 @@ public class ModelTrainer {
 		this.numFeatureOccurencePositive = null;
 		
 		try {
-			BufferedReader br = new BufferedReader(
-					new FileReader(filePath));
+			BufferedReader br = new BufferedReader(new FileReader(filePath));
 			
 			// Read num positive entries
 			String line = br.readLine();

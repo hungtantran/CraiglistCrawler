@@ -210,7 +210,7 @@ FROM \
       WHERE \
         location_link_fk = C.id AND \
         datePosted IS NOT NULL AND \
-        datePosted >= "' + dateString + '" \
+        (datePosted >= "' + dateString + '" OR active = 1) \
     ) AS D \
   ORDER BY \
   datePosted DESC, quantity DESC';

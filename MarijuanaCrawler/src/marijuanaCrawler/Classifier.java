@@ -18,8 +18,7 @@ public class Classifier {
 
 		htmlBody = Helper.pruneWords(htmlBody, Globals.stopWords);
 
-		final int numImportantWordsOccur = Helper.numWordsOccur(htmlBody,
-				Globals.importantWords);
+		final int numImportantWordsOccur = Helper.numWordsOccur(htmlBody,Globals.importantWords);
 
 		short predict1 = 1;
 

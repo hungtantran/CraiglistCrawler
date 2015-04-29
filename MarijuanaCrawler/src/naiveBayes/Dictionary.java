@@ -31,12 +31,12 @@ public class Dictionary {
 	}
 
 	public boolean GenerateDictionary() {
-		if (this.dictionary == null)
+		if (this.dictionary == null) {
 			return false;
+		}
 
 		try {
-			BufferedReader br = new BufferedReader(
-					new FileReader(this.filePath));
+			BufferedReader br = new BufferedReader(new FileReader(this.filePath));
 
 			String line = null;
 			while ((line = br.readLine()) != null) {
@@ -54,8 +54,9 @@ public class Dictionary {
 	}
 
 	public boolean AddWord(String word) {
-		if (this.dictionary == null)
+		if (this.dictionary == null) {
 			return false;
+		}
 
 		this.dictionary.add(word);
 
@@ -67,18 +68,21 @@ public class Dictionary {
 	}
 
 	public int GetSize() {
-		if (this.dictionary == null)
+		if (this.dictionary == null) {
 			return 0;
+		}
 
 		return this.dictionary.size();
 	}
 
 	public boolean WordExists(String word) {
-		if (word == null)
+		if (word == null) {
 			return false;
+		}
 
-		if (this.dictionary == null)
+		if (this.dictionary == null) {
 			return false;
+		}
 
 		return this.dictionary.contains(word);
 	}
@@ -95,8 +99,9 @@ public class Dictionary {
 				RawHTMLDAOJDBC rawHTMLDAO = new RawHTMLDAOJDBC(DAOFactory.getInstance(
 						Globals.username, Globals.password, Globals.server + Globals.database));
 				List<RawHTML> htmls = rawHTMLDAO.get(lowerBound, maxNumResult);
-				if (htmls == null)
+				if (htmls == null) {
 					break;
+				}
 	
 				int count = 0;
 				// Iterate through the result set to populate the information
@@ -108,8 +113,7 @@ public class Dictionary {
 
 					String htmlContent = rawHTML.getHtml();
 
-					String htmlBody = Helper
-							.getPostingBodyFromHtmlContent(htmlContent);
+					String htmlBody = Helper.getPostingBodyFromHtmlContent(htmlContent);
 					if (htmlBody == null) {
 						continue;
 					}
@@ -126,8 +130,9 @@ public class Dictionary {
 					}
 				}
 
-				if (count == 0)
+				if (count == 0) {
 					break;
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				break;

@@ -10,6 +10,8 @@ public interface RawHTMLDAO {
 	
 	public List<RawHTML> get(int lowerBound, int maxNumResult) throws SQLException;
 	
+	public List<RawHTML> getNegative(int lowerBound, int maxNumResult) throws SQLException;
+	
 	public int create(RawHTML rawHTML) throws SQLException;
 	
 	public boolean update(RawHTML rawHTML) throws SQLException;
