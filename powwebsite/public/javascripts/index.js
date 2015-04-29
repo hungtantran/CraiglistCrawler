@@ -9,6 +9,10 @@ function codeLatLng(lat, lng) {
   });
 }
 
+function updateNewDisplay(displayInfo, intializeParams) {
+
+}
+
 // Function that reupdate the display with the newest filter
 function updateDisplay(displayInfo, initializeParams) {
   if (displayInfo === undefined) {
@@ -509,12 +513,10 @@ function initializeLocalBusinesses(localBusinesses) {
     var postingLocation = new google.maps.LatLng(lat, lng);
 
     if (mapBound !== undefined && !mapBound.contains(postingLocation)) {
-      console.log("here");
       continue;
     }
 
     var row = table.insertRow(table.length);
-    console.log(i);
     var index = 0;
 
     // Address cell

@@ -95,6 +95,37 @@ html
               button.btn.btn-default(type='button', data-dismiss='modal') Close
               button.btn.btn-primary(type='button') Sign Up
 
+    .modal.fade.purchase-modal-lg(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+      .modal-dialog
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') &times;
+              h4.modal-title Purchase Order
+            .modal-body
+              form(name='purchase', action='/purchase', method='post')
+                .form-group
+                  label.control-label(for='email') Email:
+                  input.form-control(type='text', id='email', placeholder='@', name='email')
+                .form-group
+                  label.control-label(for='message-text') Low Price (per-gram):
+                  input.form-control(type='number', id='lowPrice', name='lowPrice')
+                .form-group
+                  label.control-label(for='message-text') High Price (per-gram):
+                  input.form-control(type='number', id='highPrice', name='highPrice')
+                .form-group
+                  label.control-label(for='message-text') Quantity (grams):
+                  input.form-control(type='number', id='quantity', name='quantity')
+                .form-group
+                  label.control-label(for='message-text') Delivery Zip Code:
+                  input.form-control(type='number', id='zipcode', name='zipcode')
+                .form-group
+                  label.control-label(for='message-text') Delivery Date:
+                  input.form-control(type='date', id='deliveryDate', name='deliveryDate')
+                .modal-footer
+                  button.btn.btn-default(type='button', data-dismiss='modal') Close
+                  button.btn.btn-primary(type='submit') Place Order
+
     div(id='header' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
       nav(class='navbar navbar-inverse navbar-fixed-top')
         div(class='container')
@@ -130,6 +161,9 @@ html
           li(style='display: inline-block')
             a(href='#' data-toggle='modal' data-target='.signup-modal-lg')
               | SIGN UP
+          li(style='display: inline-block')
+            a(href='#' data-toggle='modal' data-target='.purchase-modal-lg')
+              | PURCHASE
           li(style='display: inline-block')
             a(href='/search/')
               | ALL SALES
