@@ -3,6 +3,13 @@ var format          = require('string-format');
 var globals         = require('./globals');
 var router          = express.Router();
 
+var geocoderProvider = 'google';
+var httpAdapter = 'http';
+var extra = {
+//   apiKey: 'what is our API key?'
+}
+var geocoder            = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
+
 var MySQLConnectionProvider  = require("./mysqlConnectionProvider.js").MySQLConnectionProvider;
 var connectionProvider = new MySQLConnectionProvider();
 
@@ -22,8 +29,6 @@ router.post('/', function(req, res) {
         "CURDATE()",
         req.body['zipcode']);
 
-    console.log(purchaseQuery);
-
     var connection = connectionProvider.getConnection();
     connection.query(purchaseQuery, function(err, rows) {
       if (err) {
@@ -34,14 +39,15 @@ router.post('/', function(req, res) {
             res.end();
             return;
       } else {
-        console.log(rows);
-        getSellers(rows['insertId']);
+        geocoder.geocode(req.body['zipcode'], function(err, res) {
+          getSellers(rows['insertId'], res[0]['latitude'], res[0]['longitude'], req.body['lowPrice'], req.body['highPrice']);
+        });
       }
     });
     console.log("purchase query completed");
 });
 
-function getSellers(purchaseOrderId) {
+function getSellers(purchaseOrderId, purchaseLatitude, purchaseLongitude, lowPrice, highPrice) {
   var sellersQuery =
     "SELECT \
       `subquery`.`price` / `subquery`.`quantity (grams)` AS `price (grams)`, \
@@ -52,6 +58,7 @@ function getSellers(purchaseOrderId) {
       `location_fk`, \
       `location_link_fk`, \
       `datePosted`, \
+      `distance`, \
       `timePosted`, \
       `duplicatePostId`, \
       `url`, \
@@ -81,12 +88,18 @@ function getSellers(purchaseOrderId) {
         `prices`.`price` AS `price`, \
         `prices`.`quantity` AS `quantity`, \
         `prices`.`unit` AS `unit`, \
-        CASE WHEN `unit`='oz' THEN `quantity`*28.3495 ELSE `quantity` END AS `quantity (grams)` \
+        CASE WHEN `unit`='oz' THEN `quantity`*28.3495 ELSE `quantity` END AS `quantity (grams)`, \
+        SQRT( POW(`latitude`-({0}),2) + POW(`longitude`-({1}),2) ) AS `distance` \
       FROM `posting_location` \
-        INNER JOIN `prices` ON (`posting_location`.`location_fk` = `prices`.`price_id`) \
-      WHERE `datePosted` IS NOT NULL AND `state`='Washington') AS subquery \
-    ORDER BY `datePosted` DESC \
-    LIMIT 10";
+        INNER JOIN `prices` ON (`posting_location`.`location_fk` = `prices`.`price_fk`) \
+      WHERE `active`=1 AND `latitude` IS NOT NULL AND `longitude` IS NOT NULL AND `datePosted` IS NOT NULL) AS subquery \
+    WHERE `subquery`.`price` / `subquery`.`quantity (grams)` < {2} \
+    AND `subquery`.`price` / `subquery`.`quantity (grams)` > {3} \
+    ORDER BY `datePosted` DESC, `distance` \
+    LIMIT 10".format(purchaseLatitude, purchaseLongitude, highPrice, lowPrice);
+  console.log(highPrice);
+  console.log(lowPrice);
+  console.log(sellersQuery);
 
   var connection = connectionProvider.getConnection();
   connection.query(sellersQuery, function(err, rows) {
@@ -111,9 +124,10 @@ function createSellerOrders(sellers, purchaseOrderId) {
       email = sellers[i]['email'];
     }
 
-    var saleQuery = "INSERT INTO sale_orders (purchaseOrderId, email)" +
-      "VALUE (\"{0}\",\"{1}\");".format(
+    var saleQuery = "INSERT INTO sale_orders (purchaseOrderId, postingId, email)" +
+      " VALUE (\"{0}\",{1},\"{2}\");".format(
         purchaseOrderId.toString(),
+        sellers[i]['price_fk'],
         email);
 
   var connection = connectionProvider.getConnection();
