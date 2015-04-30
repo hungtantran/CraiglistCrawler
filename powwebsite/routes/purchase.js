@@ -2,6 +2,7 @@ var express         = require('express');
 var format          = require('string-format');
 var globals         = require('./globals');
 var router          = express.Router();
+var nodemailer      = require('nodemailer');
 
 var geocoderProvider = 'google';
 var httpAdapter = 'http';
@@ -9,6 +10,13 @@ var extra = {
 //   apiKey: 'what is our API key?'
 }
 var geocoder            = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
+var smtpTransport = nodemailer.createTransport('SMTP', {
+  service: 'Gmail',
+  auth: {
+    user: 'leafyexchange@gmail.com',
+    pass: '420pontius'
+  }
+});
 
 var MySQLConnectionProvider  = require("./mysqlConnectionProvider.js").MySQLConnectionProvider;
 var connectionProvider = new MySQLConnectionProvider();
@@ -130,22 +138,34 @@ function createSellerOrders(sellers, purchaseOrderId) {
         sellers[i]['price_fk'],
         email);
 
-  var connection = connectionProvider.getConnection();
-  connection.query(saleQuery, function(err, rows) {
-    if (err) {
-      console.log(err);
+    var connection = connectionProvider.getConnection();
+    connection.query(saleQuery, function(err, rows) {
+      if (err) {
+        console.log(err);
 
-      res.statusCode = 302;
-            res.setHeader('Purchase', '/');
-            res.end();
-            return;
-    } else {
-      console.log(rows);
-      // createSellerOrders(rows, purchaseOrderId)
-    }
-  });
+        res.statusCode = 302;
+              res.setHeader('Purchase', '/');
+              res.end();
+              return;
+      } else {
+        console.log(rows);
+      }
+    });
 
     console.log(saleQuery);
+
+    smtpTransport.sendMail({
+     from: "Leafy Exchange <leafyexchange@gmail.com>", // sender address
+     to: "hungtantran@gmail.com>", // comma separated list of receivers
+     subject: "Someone is interested in your posting!", // Subject line
+     text: "Hi I am interested in your posting!" // plaintext body
+    }, function(error, response){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Message sent:" + response.message);
+      }
+    });
   }
 }
 
