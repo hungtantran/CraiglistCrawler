@@ -112,25 +112,12 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 
 	private boolean processOneEntryLink(String entryLink, Location loc) throws SQLException, IOException {
 		final Document htmlDoc = NetworkingFunctions.downloadHtmlContentToDoc(entryLink, this.numRetriesDownloadLink);
-		
+
 		if (htmlDoc == null) {
 			Globals.crawlerLogManager.writeLog("Fail to download link " + entryLink);
 			return false;
 		}
-		
-		Elements postingBodies = htmlDoc.select("section[id=postingBody]");
-		if (postingBodies.size() != 1) {
-		    Globals.crawlerLogManager.writeLog("Can't parse posting body for link " + entryLink);
-            return false;
-		}
-		
-		Elements postingTitles = htmlDoc.select("h2[class=postingtitle]");
-		if (postingTitles.size() != 1) {
-            Globals.crawlerLogManager.writeLog("Can't parse posting title for link " + entryLink);
-            return false;
-        }
-		String postingTitle = Helper.cleanNonCharacterDigit(postingTitles.get(0).text());
-		
+
 		final String htmlContent = HTMLCompressor.compressHtmlContent(htmlDoc.outerHtml());
 
 		final LinkCrawled linkCrawled = new LinkCrawled();
@@ -180,6 +167,19 @@ public class CraiglistCrawler implements IWebsiteCrawler {
                 (predict2 != null && predict2 == 1) ||
                 (positivePage != null && positivePage == 1))
 		    {
+		    	Elements postingBodies = htmlDoc.select("section[id=postingBody]");
+				if (postingBodies.size() != 1) {
+				    Globals.crawlerLogManager.writeLog("Can't parse posting body for link " + entryLink);
+		            return false;
+				}
+				
+				Elements postingTitles = htmlDoc.select("h2[class=postingtitle]");
+				if (postingTitles.size() != 1) {
+		            Globals.crawlerLogManager.writeLog("Can't parse posting title for link " + entryLink);
+		            return false;
+		        }
+				String postingTitle = Helper.cleanNonCharacterDigit(postingTitles.get(0).text());
+				
     		    PostingLocation location = new PostingLocation();
     		    location.setState(loc.state);
     		    location.setCity(loc.city);
