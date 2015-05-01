@@ -11,7 +11,9 @@ import java.util.Queue;
 import java.util.Set;
 
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
+
+import parser.CraiglistParser;
+import parser.IPostingLocationParser;
 
 import commonlib.Globals;
 import commonlib.Globals.Domain;
@@ -20,6 +22,7 @@ import commonlib.Helper;
 import commonlib.Location;
 import commonlib.LocationLinkComparator;
 import commonlib.NetworkingFunctions;
+
 import dbconnection.DAOFactory;
 import dbconnection.LinkCrawled;
 import dbconnection.LinkCrawledDAO;
@@ -56,6 +59,8 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 	private LocationLinkDAO locationLinkDAO = null;
 	private PostingLocationDAO postingLocationDAO = null;
 	
+	private IPostingLocationParser postingLocationParser = null;
+	
 	private long startTimeInSec = 0;
 
 	private final String[] searchTerms = { "420 weed", "marijuana" };
@@ -68,12 +73,11 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 		final DAOFactory daoFactory = DAOFactory.getInstance(Globals.username, Globals.password, Globals.server + Globals.database);
 
 		this.rawHTMLDAO = new RawHTMLDAOJDBC(daoFactory);
-
 		this.linkCrawledDAO = new LinkCrawledDAOJDBC(daoFactory);
-
 		this.locationLinkDAO = new LocationLinkDAOJDBC(daoFactory);
-		
 		this.postingLocationDAO = new PostingLocationDAOJDBC(daoFactory);
+		
+		this.postingLocationParser = new CraiglistParser();
 
 		// Get start urls (location links for now)
 		this.linkToLocationMap = new HashMap<String, Location>();
@@ -110,7 +114,7 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 		return true;
 	}
 
-	private boolean processOneEntryLink(String entryLink, Location loc) throws SQLException, IOException {
+	private boolean processOneEntryLink(String locationUrl, String entryLink, Location loc) throws SQLException, IOException {
 		final Document htmlDoc = NetworkingFunctions.downloadHtmlContentToDoc(entryLink, this.numRetriesDownloadLink);
 
 		if (htmlDoc == null) {
@@ -167,19 +171,20 @@ public class CraiglistCrawler implements IWebsiteCrawler {
                 (predict2 != null && predict2 == 1) ||
                 (positivePage != null && positivePage == 1))
 		    {
-		    	Elements postingBodies = htmlDoc.select("section[id=postingBody]");
-				if (postingBodies.size() != 1) {
-				    Globals.crawlerLogManager.writeLog("Can't parse posting body for link " + entryLink);
-		            return false;
-				}
-				
-				Elements postingTitles = htmlDoc.select("h2[class=postingtitle]");
-				if (postingTitles.size() != 1) {
-		            Globals.crawlerLogManager.writeLog("Can't parse posting title for link " + entryLink);
-		            return false;
-		        }
-				String postingTitle = Helper.cleanNonCharacterDigit(postingTitles.get(0).text());
-				
+				this.postingLocationParser.SetDoc(locationUrl, htmlDoc);
+		    	
+		    	String postingBody = this.postingLocationParser.ParsePostingBody();
+		    	if (postingBody == null) {
+		    		Globals.crawlerLogManager.writeLog("Can't parse posting body for link " + entryLink);
+		    		return false;
+		    	}
+		    	
+		    	String postingTitle = this.postingLocationParser.ParsePostingTitle();
+		    	if (postingTitle == null) {
+		    		Globals.crawlerLogManager.writeLog("Can't parse posting title for link " + entryLink);
+		    		return false;
+		    	}
+
     		    PostingLocation location = new PostingLocation();
     		    location.setState(loc.state);
     		    location.setCity(loc.city);
@@ -187,8 +192,6 @@ public class CraiglistCrawler implements IWebsiteCrawler {
     		    location.setLocation_link_fk(loc.id);
     		    location.setDatePosted(currentDate);
     		    location.setTimePosted(currentTime);
-    		    
-    		    String postingBody = Helper.cleanPostingBody(postingBodies.get(0).html());
     		    location.setPosting_body(postingBody);
     		    location.setTitle(postingTitle);
     		    location.setUrl(entryLink);
@@ -249,7 +252,7 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 				this.urlsCrawled.add(nextEntryLink);
 
 				// Classify the link and add relevant information into the database
-				final boolean processLinkSuccess = this.processOneEntryLink(nextEntryLink, curLocation);
+				final boolean processLinkSuccess = this.processOneEntryLink(locationUrl, nextEntryLink, curLocation);
 				if (!processLinkSuccess) {
 					continue;
 				}

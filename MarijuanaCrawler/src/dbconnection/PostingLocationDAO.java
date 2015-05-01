@@ -8,9 +8,13 @@ public interface PostingLocationDAO {
     
     public PostingLocation get(int locationId) throws Exception;
     
+    public List<PostingLocation> getActive(int active) throws Exception;
+    
     public boolean create(PostingLocation location) throws SQLException;
     
     public boolean activate(String url) throws SQLException;
     
     public boolean deActivate(String locationUrl, int maxLinkAge) throws SQLException;
+
+	public boolean update(PostingLocation postingLocation) throws SQLException;
 }

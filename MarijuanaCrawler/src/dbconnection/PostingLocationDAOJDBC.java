@@ -13,11 +13,13 @@ import commonlib.Helper;
 public class PostingLocationDAOJDBC implements PostingLocationDAO {
     private final String SQL_SELECT_ALL = "SELECT * FROM posting_location";
     private final String SQL_SELECT_BY_ID = "SELECT * FROM posting_location WHERE location_fk = ?";
+    private final String SQL_SELECT_BY_ACTIVE = "SELECT * FROM posting_location WHERE active = ?";
     private final String SQL_INSERT = "INSERT INTO posting_location"
             + "(state, city, latitude, longitude, location_fk, location_link_fk, datePosted, timePosted, posting_body, title, url, active, email)"
             + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String SQL_ACTIVATE = "UPDATE posting_location SET active = 1 WHERE url = ?";
     private final String SQL_DEACTIVATE = "UPDATE posting_location SET active = 0 WHERE url LIKE ? AND datePosted < ?";
+    private final String SQL_UPDATE = "UPDATE posting_location SET email = ? WHERE location_fk = ?";
 
     private final DAOFactory daoFactory;
 
@@ -170,6 +172,37 @@ public class PostingLocationDAOJDBC implements PostingLocationDAO {
         }
     }
 
+	@Override
+	public List<PostingLocation> getActive(int active) throws Exception {
+		Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = this.daoFactory.getConnection();
+            
+            final Object[] values = { active };
+            
+            preparedStatement = DAOUtil.prepareStatement(connection, this.SQL_SELECT_BY_ACTIVE, false, values);
+            resultSet = preparedStatement.executeQuery();
+
+            final List<PostingLocation> locations = new ArrayList<PostingLocation>();
+            while (resultSet.next()) {
+                final PostingLocation location = this.constructPostingLocationObject(resultSet);
+                locations.add(location);
+            }
+
+            return locations;
+        } catch (final SQLException e) {
+            Globals.crawlerLogManager.writeLog("Get posting_location where active = " + active +" fails");
+            Globals.crawlerLogManager.writeLog(e.getMessage());
+
+            return null;
+        } finally {
+            DAOUtil.close(connection, preparedStatement, resultSet);
+        }
+	}
+
     @Override
     public boolean create(PostingLocation location) throws SQLException {
         if (!location.isValid()) {
@@ -273,6 +306,38 @@ public class PostingLocationDAOJDBC implements PostingLocationDAO {
             return true;
         } catch (final SQLException e) {
             Globals.crawlerLogManager.writeLog("Fails to deactivate link " + locationUrl + " in posting_location");
+            Globals.crawlerLogManager.writeLog(e.getMessage());
+
+            return false;
+        } finally {
+            DAOUtil.close(connection, preparedStatement, resultSet);
+        }
+	}
+
+	@Override
+	public boolean update(PostingLocation postingLocation) throws SQLException {
+		if (postingLocation == null) {
+            return false;
+        }
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = this.daoFactory.getConnection();
+
+            final Object[] values = { postingLocation.getEmail(), postingLocation.getLocation_fk() };
+
+            preparedStatement = DAOUtil.prepareStatement(connection, this.SQL_UPDATE, false, values);
+
+            Globals.crawlerLogManager.writeLog(preparedStatement.toString());
+
+            preparedStatement.executeUpdate();
+
+            return true;
+        } catch (final SQLException e) {
+            Globals.crawlerLogManager.writeLog("Fails to update email " + postingLocation.getEmail() + " in posting_location for id " + postingLocation.getLocation_fk());
             Globals.crawlerLogManager.writeLog(e.getMessage());
 
             return false;

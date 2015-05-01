@@ -248,12 +248,9 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 			connection = this.daoFactory.getConnection();
 
 			if (lowerBound > 0 || maxNumResult > 0) {
-				preparedStatement = DAOUtil.prepareStatement(connection,
-						this.SQL_SELECT_WITH_LIMIT, false, lowerBound,
-						maxNumResult);
+				preparedStatement = DAOUtil.prepareStatement(connection, this.SQL_SELECT_WITH_LIMIT, false, lowerBound, maxNumResult);
 			} else {
-				preparedStatement = DAOUtil.prepareStatement(connection,
-						this.SQL_SELECT_ALL, false);
+				preparedStatement = DAOUtil.prepareStatement(connection, this.SQL_SELECT_ALL, false);
 			}
 
 			resultSet = preparedStatement.executeQuery();
@@ -272,7 +269,6 @@ public class RawHTMLDAOJDBC implements RawHTMLDAO {
 			DAOUtil.close(connection, preparedStatement, resultSet);
 		}
 
-		return null;
 		return null;
 	}
 

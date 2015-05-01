@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import commonlib.Globals;
-
 import dbconnection.DAOFactory;
 import dbconnection.RawHTML;
+import dbconnection.RawHTMLDAO;
 import dbconnection.RawHTMLDAOJDBC;
 
 public class PopulateRawHTMLPositiveData {
@@ -33,7 +33,7 @@ public class PopulateRawHTMLPositiveData {
 		// Get 2000 articles at a time, until exhaust all the articles
 		while (true) {
 			try {
-				RawHTMLDAOJDBC rawHTMLDAOJDBC = new RawHTMLDAOJDBC(DAOFactory.getInstance(
+				RawHTMLDAO rawHTMLDAOJDBC = new RawHTMLDAOJDBC(DAOFactory.getInstance(
 						Globals.username, Globals.password, Globals.server + Globals.database));
 				List<RawHTML> htmls = rawHTMLDAOJDBC.get(lowerBound,
 						maxNumResult);
