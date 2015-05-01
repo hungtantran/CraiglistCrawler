@@ -129,7 +129,9 @@ router.post('/', function(req, res) {
       connection.end();
     }
 
-    res.json(responseJson);
+    res.statusCode = 302;
+    res.setHeader('Location','http://leafyexchange.com');
+    res.end();
 });
 
 function getSellers(buyerEmail, purchaseOrderId, purchaseLatitude, purchaseLongitude, lowPrice, highPrice) {
@@ -233,6 +235,7 @@ function sendSellerEmails(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail)
       // log in the database for 
       var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, fromEmail, toEmail, datetime, messageHash) VALUES (?, ?, ?, ?, ?, CURDATE(), ?)';
 
+      var connection = connectionProvider.getConnection();
       var insertMessage = connection.query(messageQuery, [
         purchaseOrderId,
         saleOrderId,
@@ -243,17 +246,14 @@ function sendSellerEmails(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail)
         function(err, rows) {
         if (err) {
           console.log(err);
-          /* TODO log error here */
-          connection.end();
           return;
         } else {
           var saleOrderId = rows['insertId'];
-          sendSellerEmails(purchaseOrderId, saleOrderId, buyerEmail, email);
+          sendSellerEmails(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail);
         }
       });
 
       console.log(insertMessage.sql);
-      connection.end();
     }
   });
 }
