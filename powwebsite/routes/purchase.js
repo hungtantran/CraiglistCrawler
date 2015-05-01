@@ -48,19 +48,20 @@ router.post('/', function(req, res) {
             return;
       } else {
         geocoder.geocode(req.body['zipcode'], function(err, res) {
-          getSellers(rows['insertId'], res[0]['latitude'], res[0]['longitude'], req.body['lowPrice'], req.body['highPrice']);
+          getSellers(req.body['email'], rows['insertId'], res[0]['latitude'], res[0]['longitude'], req.body['lowPrice'], req.body['highPrice']);
         });
       }
     });
     console.log("purchase query completed");
 });
 
-function getSellers(purchaseOrderId, purchaseLatitude, purchaseLongitude, lowPrice, highPrice) {
+function getSellers(buyerEmail, purchaseOrderId, purchaseLatitude, purchaseLongitude, lowPrice, highPrice) {
   var sellersQuery =
     "SELECT \
       `subquery`.`price` / `subquery`.`quantity (grams)` AS `price (grams)`, \
       `state`, \
       `city`, \
+      `email`, \
       `latitude`, \
       `longitude`, \
       `location_fk`, \
@@ -120,13 +121,13 @@ function getSellers(purchaseOrderId, purchaseLatitude, purchaseLongitude, lowPri
             return;
     } else {
       // console.log(rows);
-      createSellerOrders(rows, purchaseOrderId)
+      createSellerOrders(buyerEmail, rows, purchaseOrderId)
     }
   });
 }
 
-function createSellerOrders(sellers, purchaseOrderId) {
-  for (var i=0; i<sellers.length; ++i) {
+function createSellerOrders(buyerEmail, sellers, purchaseOrderId) {
+  for (var i=0; i</*sellers.length*/1; ++i) {
     var email = "leafyexchange@gmail.com";
     if (sellers[i]['email'] != null) {
       email = sellers[i]['email'];
@@ -140,6 +141,7 @@ function createSellerOrders(sellers, purchaseOrderId) {
 
     var connection = connectionProvider.getConnection();
     connection.query(saleQuery, function(err, rows) {
+      console.log(saleQuery);
       if (err) {
         console.log(err);
 
@@ -149,24 +151,46 @@ function createSellerOrders(sellers, purchaseOrderId) {
               return;
       } else {
         console.log(rows);
-      }
-    });
-
-    console.log(saleQuery);
-
-    smtpTransport.sendMail({
-     from: "Leafy Exchange <leafyexchange@gmail.com>", // sender address
-     to: "hungtantran@gmail.com>", // comma separated list of receivers
-     subject: "Someone is interested in your posting!", // Subject line
-     text: "Hi I am interested in your posting!" // plaintext body
-    }, function(error, response){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Message sent:" + response.message);
+        var saleOrderId = rows['insertId'];
+        sendSellerEmails(purchaseOrderId, saleOrderId, buyerEmail, email);
       }
     });
   }
+}
+
+function sendSellerEmails(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail) {
+  var messageBody = "Hi I am interested in your posting!";
+
+  smtpTransport.sendMail({
+   from: "Leafy Exchange <leafyexchange@gmail.com>", // sender address
+   to: "hungtantran@gmail.com>", // comma separated list of receivers
+   subject: "Someone is interested in your posting!", // Subject line
+   text: messageBody // plaintext body
+  }, function(error, response){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Message sent:" + response.message);
+
+      // log in the database for 
+      var messageQuery = "INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, fromEmail, toEmail, datetime, messageHash)" +
+      "VALUE (\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",{5},\"{6}\");".format(
+        purchaseOrderId,
+        saleOrderId,
+        messageBody,
+        buyerEmail,
+        sellerEmail,
+        "CURDATE()",
+        purchaseOrderId.toString() + saleOrderId.toString());
+
+      console.log(messageQuery);
+    }
+  });
+
+}
+
+function createMessageRows() {
+
 }
 
 module.exports = router;
