@@ -3,6 +3,7 @@ var format          = require('string-format');
 var globals         = require('./globals');
 var router          = express.Router();
 var nodemailer      = require('nodemailer');
+var crypto          = require('crypto');
 
 var geocoderProvider = 'google';
 var httpAdapter = 'http';
@@ -18,179 +19,246 @@ var smtpTransport = nodemailer.createTransport('SMTP', {
   }
 });
 
-var MySQLConnectionProvider  = require("./mysqlConnectionProvider.js").MySQLConnectionProvider;
+var MySQLConnectionProvider  = require('./mysqlConnectionProvider.js').MySQLConnectionProvider;
 var connectionProvider = new MySQLConnectionProvider();
 
 format.extend(String.prototype);
 
+// Santity check purchase order request
+function sanityCheckRequest(request) {
+  if (request === null || request === undefined) {
+    return false;
+  }
+
+  if (!('lowPrice' in request) ||
+    !('highPrice' in request) ||
+    !('quantity' in request) ||
+    !('zipcode' in request) ||
+    !('deliveryDate' in request) ||
+    !('zipcode' in request)) {
+    return false;
+  }
+
+  if (!globals.commonHelper.IsIntValue(request['lowPrice'])) {
+    console.log('Request low price invalid');
+    return false;
+  }
+
+  if (!globals.commonHelper.IsIntValue(request['highPrice'])) {
+    console.log('Request high price invalid');
+    return false;
+  }
+
+  if (!globals.commonHelper.IsIntValue(request['quantity'])) {
+    console.log('Request quantity invalid');
+    return false;
+  }
+
+  if (!globals.commonHelper.IsIntValue(request['zipcode'])) {
+    console.log('Request zipcode invalid');
+    return false;
+  }
+
+  if (!globals.commonHelper.IsIntValue(request['lowPrice'])) {
+    console.log('Request low price invalid');
+    return false;
+  }
+  
+  if (parseInt(request['highPrice']) < parseInt(request['lowPrice'])) {
+    console.log('Request high price smaller than low price');
+    return false;
+  }
+
+  return true;
+}
+
+// Hash message
+function hashMessage(message) {
+  if (message === null || message === undefined) {
+    return null;
+  }
+
+  var hashedMessage = crypto.createHash('md5').update(message).digest('hex');
+  return hashedMessage;
+}
 
 router.post('/', function(req, res) {
-    console.log(req.body);
+    var responseJson = {};
 
-    var purchaseQuery = "INSERT INTO purchase_orders (email, lowPrice, highPrice, quantity, deliveryDate, requestDate, deliveryLocation)" +
-      "VALUE (\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",{5},\"{6}\");".format(
-        req.body['email'],
+    // Sanity check
+    if (!sanityCheckRequest(req.body))
+    {
+      console.log('Request format invalid');
+      responseJson['result'] = false;
+      responseJson['message'] = 'Request format invalid';
+    } else {
+      var purchaseQuery = 'INSERT INTO purchase_orders (email, lowPrice, highPrice, quantity, deliveryDate, requestDate, deliveryLocation) VALUES (?, ?, ?, ?, ?, CURDATE(), ?)';
+
+      var connection = connectionProvider.getConnection();
+      var insertPurchaseOrder = connection.query(purchaseQuery,
+        [req.body['email'],
         req.body['lowPrice'],
         req.body['highPrice'],
         req.body['quantity'],
         req.body['deliveryDate'],
-        "CURDATE()",
-        req.body['zipcode']);
+        req.body['zipcode']],
+        function(err, rows) {
+          if (err) {
+            console.log('Request to create purchase order failed ' + err);
+            responseJson['result'] = false;
+            responseJson['message'] = 'Request to create purchase order failed';
+          } else {
+            responseJson['result'] = true;
+            responseJson['message'] = 'Successfully create purchase order';
 
-    var connection = connectionProvider.getConnection();
-    connection.query(purchaseQuery, function(err, rows) {
-      if (err) {
-        console.log(err);
+            // TODO: make this a consumer-producer pattern, processing
+            // purchase order in a different thread instead of right here
+            geocoder.geocode(req.body['zipcode'], function(err, res) {
+              getSellers(
+                req.body['email'],
+                rows['insertId'],
+                res[0]['latitude'],
+                res[0]['longitude'],
+                req.body['lowPrice'],
+                req.body['highPrice']);
+            });
+          }
+      });
 
-        res.statusCode = 302;
-            res.setHeader('Purchase', '/');
-            res.end();
-            return;
-      } else {
-        geocoder.geocode(req.body['zipcode'], function(err, res) {
-          getSellers(req.body['email'], rows['insertId'], res[0]['latitude'], res[0]['longitude'], req.body['lowPrice'], req.body['highPrice']);
-        });
-      }
-    });
-    console.log("purchase query completed");
+      console.log(insertPurchaseOrder.sql);
+      connection.end();
+    }
+
+    res.json(responseJson);
 });
 
 function getSellers(buyerEmail, purchaseOrderId, purchaseLatitude, purchaseLongitude, lowPrice, highPrice) {
   var sellersQuery =
-    "SELECT \
-      `subquery`.`price` / `subquery`.`quantity (grams)` AS `price (grams)`, \
-      `state`, \
-      `city`, \
+    'SELECT DISTINCT \
       `email`, \
-      `latitude`, \
-      `longitude`, \
-      `location_fk`, \
-      `location_link_fk`, \
-      `datePosted`, \
-      `distance`, \
-      `timePosted`, \
-      `duplicatePostId`, \
-      `url`, \
-      `active`, \
-      `email`, \
-      `price_id`, \
-      `price_fk`, \
-      `price`, \
-      `quantity`, \
-      `unit`, \
-      `quantity (grams)` \
+      `price_fk` \
     FROM \
-      (SELECT `posting_location`.`state` AS `state`, \
-        `posting_location`.`city` AS `city`, \
-        `posting_location`.`latitude` AS `latitude`, \
+      (SELECT `posting_location`.`latitude` AS `latitude`, \
         `posting_location`.`longitude` AS `longitude`, \
         `posting_location`.`location_fk` AS `location_fk`, \
-        `posting_location`.`location_link_fk` AS `location_link_fk`, \
         `posting_location`.`datePosted` AS `datePosted`, \
-        `posting_location`.`timePosted` AS `timePosted`, \
-        `posting_location`.`duplicatePostId` AS `duplicatePostId`, \
-        `posting_location`.`url` AS `url`, \
         `posting_location`.`active` AS `active`, \
         `posting_location`.`email` AS `email`, \
-        `prices`.`price_id` AS `price_id`, \
         `prices`.`price_fk` AS `price_fk`, \
         `prices`.`price` AS `price`, \
         `prices`.`quantity` AS `quantity`, \
         `prices`.`unit` AS `unit`, \
-        CASE WHEN `unit`='oz' THEN `quantity`*28.3495 ELSE `quantity` END AS `quantity (grams)`, \
-        SQRT( POW(`latitude`-({0}),2) + POW(`longitude`-({1}),2) ) AS `distance` \
+        CASE WHEN `unit`=\'oz\' THEN `quantity`*28.3495 ELSE `quantity` END AS `quantity (grams)`, \
+        SQRT( POW(`latitude`-(?),2) + POW(`longitude`-(?),2) ) AS `distance` \
       FROM `posting_location` \
         INNER JOIN `prices` ON (`posting_location`.`location_fk` = `prices`.`price_fk`) \
-      WHERE `active`=1 AND `latitude` IS NOT NULL AND `longitude` IS NOT NULL AND `datePosted` IS NOT NULL) AS subquery \
-    WHERE `subquery`.`price` / `subquery`.`quantity (grams)` < {2} \
-    AND `subquery`.`price` / `subquery`.`quantity (grams)` > {3} \
+      WHERE `active`=1 AND `latitude` IS NOT NULL AND `longitude` IS NOT NULL AND `datePosted` IS NOT NULL AND email IS NOT NULL) AS subquery \
+    WHERE `subquery`.`price` / `subquery`.`quantity (grams)` < ? \
+    AND `subquery`.`price` / `subquery`.`quantity (grams)` > ? \
     ORDER BY `datePosted` DESC, `distance` \
-    LIMIT 10".format(purchaseLatitude, purchaseLongitude, highPrice, lowPrice);
-  console.log(highPrice);
-  console.log(lowPrice);
-  console.log(sellersQuery);
+    LIMIT 5';
 
   var connection = connectionProvider.getConnection();
-  connection.query(sellersQuery, function(err, rows) {
-    if (err) {
-      console.log(err);
-
-      res.statusCode = 302;
-            res.setHeader('Purchase', '/');
-            res.end();
-            return;
-    } else {
-      // console.log(rows);
-      createSellerOrders(buyerEmail, rows, purchaseOrderId)
-    }
+  var selectSellersQuery = connection.query(sellersQuery, [
+    purchaseLatitude,
+    purchaseLongitude,
+    highPrice,
+    lowPrice],
+    function(err, rows) {
+      if (err) {
+        console.log(err);
+        /* TODO log error here */
+      } else {
+        createSellerOrders(buyerEmail, rows, purchaseOrderId)
+      }
   });
+
+  console.log(selectSellersQuery.sql);
+  connection.end();
 }
 
 function createSellerOrders(buyerEmail, sellers, purchaseOrderId) {
-  for (var i=0; i</*sellers.length*/1; ++i) {
-    var email = "leafyexchange@gmail.com";
-    if (sellers[i]['email'] != null) {
+  var connection = connectionProvider.getConnection();
+
+  for (var i = 0; i < sellers.length; ++i) {
+    var email = 'leafyexchange@gmail.com';
+
+    if (sellers[i]['email'] !== null) {
       email = sellers[i]['email'];
+    } else {
+      continue;
     }
 
-    var saleQuery = "INSERT INTO sale_orders (purchaseOrderId, postingId, email)" +
-      " VALUE (\"{0}\",{1},\"{2}\");".format(
-        purchaseOrderId.toString(),
-        sellers[i]['price_fk'],
-        email);
+    var saleQuery = 'INSERT INTO sale_orders (purchaseOrderId, postingId, email) VALUES (?, ?, ?)';
 
-    var connection = connectionProvider.getConnection();
-    connection.query(saleQuery, function(err, rows) {
-      console.log(saleQuery);
+    var insertSaleOrderQuery = connection.query(saleQuery, [
+      purchaseOrderId.toString(),
+      sellers[i]['price_fk'],
+      email],
+      function(err, rows) {
       if (err) {
         console.log(err);
-
-        res.statusCode = 302;
-              res.setHeader('Purchase', '/');
-              res.end();
-              return;
+        /* TODO log error here */
+        connection.end();
+        return;
       } else {
         console.log(rows);
         var saleOrderId = rows['insertId'];
         sendSellerEmails(purchaseOrderId, saleOrderId, buyerEmail, email);
       }
     });
+
+    console.log(insertSaleOrderQuery.sql);
   }
+
+  connection.end();
 }
 
 function sendSellerEmails(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail) {
-  var messageBody = "Hi I am interested in your posting!";
+  var messageBody = 'Hi I am interested in your posting!';
+  var hashedMessage = hashMessage(messageBody);
 
   smtpTransport.sendMail({
-   from: "Leafy Exchange <leafyexchange@gmail.com>", // sender address
-   to: "hungtantran@gmail.com>", // comma separated list of receivers
-   subject: "Someone is interested in your posting!", // Subject line
+   from: 'Leafy Exchange <leafyexchange@gmail.com>', // sender address
+   to: 'hungtantran@gmail.com', // comma separated list of receivers
+   subject: 'Someone is interested in your posting!', // Subject line
    text: messageBody // plaintext body
   }, function(error, response){
     if (error) {
       console.log(error);
+      return;
     } else {
-      console.log("Message sent:" + response.message);
+      console.log('Message sent:' + response.message);
 
       // log in the database for 
-      var messageQuery = "INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, fromEmail, toEmail, datetime, messageHash)" +
-      "VALUE (\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",{5},\"{6}\");".format(
+      var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, fromEmail, toEmail, datetime, messageHash) VALUES (?, ?, ?, ?, ?, CURDATE(), ?)';
+
+      var insertMessage = connection.query(messageQuery, [
         purchaseOrderId,
         saleOrderId,
         messageBody,
         buyerEmail,
         sellerEmail,
-        "CURDATE()",
-        purchaseOrderId.toString() + saleOrderId.toString());
+        hashedMessage],
+        function(err, rows) {
+        if (err) {
+          console.log(err);
+          /* TODO log error here */
+          connection.end();
+          return;
+        } else {
+          var saleOrderId = rows['insertId'];
+          sendSellerEmails(purchaseOrderId, saleOrderId, buyerEmail, email);
+        }
+      });
 
-      console.log(messageQuery);
+      console.log(insertMessage.sql);
+      connection.end();
     }
   });
-
 }
 
 function createMessageRows() {
-
 }
 
 module.exports = router;

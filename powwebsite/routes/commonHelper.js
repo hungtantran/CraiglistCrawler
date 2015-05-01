@@ -74,7 +74,7 @@ CommonHelper.prototype.ParseQuantities = function(quantities) {
 }
 
 CommonHelper.prototype.IsIntValue = function(value) {
-    if ((parseFloat(value) == parseInt(value)) && !isNaN(value)){
+    if ((parseFloat(value) == parseInt(value)) && !isNaN(value)) {
       return true;
     }
 
