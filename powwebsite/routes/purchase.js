@@ -130,7 +130,7 @@ router.post('/', function(req, res) {
     }
 
     res.statusCode = 302;
-    res.setHeader('Location','http://leafyexchange.com');
+    res.setHeader('Location','/');
     res.end();
 });
 
@@ -217,8 +217,15 @@ function createSellerOrders(buyerEmail, sellers, purchaseOrderId) {
 }
 
 function sendSellerEmails(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail) {
+  if (purchaseOrderId === null || purchaseOrderId === undefined ||
+    saleOrderId === null || saleOrderId === undefined ||
+    buyerEmail === null || buyerEmail === undefined ||
+    sellerEmail === null || sellerEmail === undefined) {
+    return;
+  }
+
   var messageBody = 'Hi I am interested in your posting!';
-  var hashedMessage = hashMessage(messageBody);
+  var hashedMessage = hashMessage(purchaseOrderId + saleOrderId + buyerEmail + sellerEmail + messageBody);
 
   smtpTransport.sendMail({
    from: 'Leafy Exchange <leafyexchange@gmail.com>', // sender address
@@ -233,7 +240,7 @@ function sendSellerEmails(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail)
       console.log('Message sent:' + response.message);
 
       // log in the database for 
-      var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, fromEmail, toEmail, datetime, messageHash) VALUES (?, ?, ?, ?, ?, CURDATE(), ?)';
+      var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, fromEmail, toEmail, datetime, messageHash) VALUES (?, ?, ?, ?, ?, NOW(), ?)';
 
       var connection = connectionProvider.getConnection();
       var insertMessage = connection.query(messageQuery, [
@@ -246,6 +253,7 @@ function sendSellerEmails(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail)
         function(err, rows) {
         if (err) {
           console.log(err);
+          connection.end();
           return;
         } else {
           var saleOrderId = rows['insertId'];
@@ -254,6 +262,7 @@ function sendSellerEmails(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail)
       });
 
       console.log(insertMessage.sql);
+      connection.end();
     }
   });
 }

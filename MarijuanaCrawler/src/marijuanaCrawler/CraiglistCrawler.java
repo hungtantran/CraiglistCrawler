@@ -1,6 +1,5 @@
 package marijuanaCrawler;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -114,7 +113,7 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 		return true;
 	}
 
-	private boolean processOneEntryLink(String locationUrl, String entryLink, Location loc) throws SQLException, IOException {
+	private boolean processOneEntryLink(String locationUrl, String entryLink, Location loc) throws Exception {
 		final Document htmlDoc = NetworkingFunctions.downloadHtmlContentToDoc(entryLink, this.numRetriesDownloadLink);
 
 		if (htmlDoc == null) {

@@ -1,6 +1,5 @@
 package marijuanaCrawler;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,7 +32,7 @@ public class CityDataLocationCrawler {
 		return this.locationSet;
 	}
 	
-	public Set<String> getCityFromLink(String link) throws IOException {
+	public Set<String> getCityFromLink(String link) throws Exception {
 		Document doc = NetworkingFunctions.downloadHtmlContentToDoc(link, this.numRetryDownloadPage);
 		
 		Set<String> cities = new HashSet<String>();
@@ -61,7 +60,7 @@ public class CityDataLocationCrawler {
 		return cities;
 	}
 	
-	public boolean getLink() throws IOException, SQLException {
+	public boolean getLink() throws Exception {
 		Document doc = NetworkingFunctions.downloadHtmlContentToDoc(this.startLink, this.numRetryDownloadPage);
 
 		if (doc == null) {
@@ -124,7 +123,7 @@ public class CityDataLocationCrawler {
             if (!crawler.getLink()) {
             	return;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             Globals.crawlerLogManager.writeLog("Throw Exception " + e.getMessage());
             return;
         }

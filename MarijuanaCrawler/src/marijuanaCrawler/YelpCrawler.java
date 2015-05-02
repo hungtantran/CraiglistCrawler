@@ -1,6 +1,5 @@
 package marijuanaCrawler;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -15,6 +14,7 @@ import commonlib.Globals.Domain;
 import commonlib.HTMLCompressor;
 import commonlib.Helper;
 import commonlib.NetworkingFunctions;
+
 import dbconnection.DAOFactory;
 import dbconnection.LinkCrawled;
 import dbconnection.LinkCrawledDAO;
@@ -117,7 +117,7 @@ public class YelpCrawler implements IWebsiteCrawler {
 		return true;
 	}
 
-	private boolean processOneEntryLink(String entryLink, LocationDB location) throws SQLException, IOException {
+	private boolean processOneEntryLink(String entryLink, LocationDB location) throws Exception {
 		final Document htmlDoc = NetworkingFunctions.downloadHtmlContentToDoc(entryLink, this.numRetriesDownloadLink);
 		
 		if (htmlDoc == null) {

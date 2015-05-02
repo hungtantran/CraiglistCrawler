@@ -15,5 +15,5 @@ public interface IPostingLocationParser {
 
 	public String ParsePostingTitle();
 	
-	public String ParseEmail();
+	public String ParseEmail() throws Exception;
 }

@@ -2,15 +2,15 @@ package commonlib;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Random;
 
-import org.jsoup.Jsoup;
 import org.jsoup.Connection.Response;
+import org.jsoup.HttpStatusException;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class NetworkingFunctions {
@@ -56,7 +56,7 @@ public class NetworkingFunctions {
     };
     
 	// Download the html content into a private Document variable "doc"
-	public static Document downloadHtmlContentToDoc(String url, int numRetries) throws IOException {
+	public static Document downloadHtmlContentToDoc(String url, int numRetries) throws Exception {
 	    Random rand = new Random(); 
 	    int ranIndex = rand.nextInt(NetworkingFunctions.userAgents.length); 
 	    
@@ -70,10 +70,14 @@ public class NetworkingFunctions {
 				Globals.crawlerLogManager.writeLog("Download successfully link " + url + " after " + i + " retries with user agent " + NetworkingFunctions.userAgents[ranIndex]);
 				
 				return response.parse();
-			} catch (IOException e) {
+			} catch (Exception e) {
 				// Only print out fail on the last fail
 				if (i == numRetries - 1) {
-				    Globals.crawlerLogManager.writeLog("Fail to download link " + url + " after " + i + " retries with user agent " + NetworkingFunctions.userAgents[ranIndex]);
+					if (e instanceof HttpStatusException) {
+						Globals.crawlerLogManager.writeLog("Fail to download link " + url + " after " + i + " retries with user agent " + NetworkingFunctions.userAgents[ranIndex] + " with status code " + ((HttpStatusException) e).getStatusCode());
+					} else {
+						Globals.crawlerLogManager.writeLog("Fail to download link " + url + " after " + i + " retries with user agent " + NetworkingFunctions.userAgents[ranIndex]);
+					}
 					Globals.crawlerLogManager.writeLog(e.getMessage());
 					throw e;
 				}
@@ -84,7 +88,10 @@ public class NetworkingFunctions {
 	}
 	
 	// Download the html content into a private Document variable "doc"
-	public static String downloadHtmlContentToString(String url, int numRetries) {
+	public static String downloadHtmlContentToString(String url, int numRetries) throws Exception {
+		Random rand = new Random(); 
+	    int ranIndex = rand.nextInt(NetworkingFunctions.userAgents.length); 
+
 		for (int i = 0; i < numRetries; i++) {
 			try {
 				Response response = Jsoup
@@ -93,10 +100,17 @@ public class NetworkingFunctions {
 								"Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
 						.timeout(10000).followRedirects(true).execute();
 				return response.body();
-			} catch (IOException e) {
+			} catch (Exception e) {
 				// Only print out fail on the last fail
-				if (i == numRetries - 1) 
+				if (i == numRetries - 1) {
+					if (e instanceof HttpStatusException) {
+						Globals.crawlerLogManager.writeLog("Fail to download link " + url + " after " + i + " retries with user agent " + NetworkingFunctions.userAgents[ranIndex] + " with status code " + ((HttpStatusException) e).getStatusCode());
+					} else {
+						Globals.crawlerLogManager.writeLog("Fail to download link " + url + " after " + i + " retries with user agent " + NetworkingFunctions.userAgents[ranIndex]);
+					}
 					Globals.crawlerLogManager.writeLog(e.getMessage());
+					throw e;
+				}
 			}
 		}
 

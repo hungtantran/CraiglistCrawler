@@ -1,7 +1,6 @@
 package marijuanaCrawler;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +11,7 @@ import org.jsoup.select.Elements;
 import commonlib.Globals;
 import commonlib.Location;
 import commonlib.NetworkingFunctions;
+
 import dbconnection.DAOFactory;
 import dbconnection.LocationLink;
 import dbconnection.LocationLinkDAO;
@@ -31,7 +31,7 @@ public class CraiglistLocationLinkCrawl {
 		return this.linkToLocationMap;
 	}
 
-	public boolean getLink() throws IOException {
+	public boolean getLink() throws Exception {
 		Document doc = NetworkingFunctions.downloadHtmlContentToDoc(this.startLink, this.numRetryDownloadPage);
 
 		if (doc == null) {
@@ -91,7 +91,7 @@ public class CraiglistLocationLinkCrawl {
 		return true;
 	}
 
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+	public static void main(String[] args) throws Exception {
 		CraiglistLocationLinkCrawl crawler = new CraiglistLocationLinkCrawl();
 
 		// Fail to get the craiglist location links

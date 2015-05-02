@@ -1,7 +1,5 @@
 package marijuanaCrawler;
 
-import java.io.IOException;
-
 // General interface for all customer crawlers whose jobs is to query list of links
 // to entry page that have the actual posting of interest.
 
@@ -15,5 +13,5 @@ public interface IEntryLinkCrawler {
 
 	// Return the next entry link.
 	// Return null if there is no more entry link.
-	public String getNextEntryLink() throws IOException;
+	public String getNextEntryLink() throws Exception;
 }
