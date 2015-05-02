@@ -6,6 +6,8 @@ var LocalBusinessProvider = require('./localBusinessProvider').LocalBusinessProv
 var localBusinessProvider = new LocalBusinessProvider();
 var CommonHelper = require('./commonHelper').CommonHelper;
 var commonHelper = new CommonHelper();
+var PeriodicProcess = require('./periodicProcess').PeriodicProcess;
+var periodicProcess = new PeriodicProcess();
 
 var postings = [];
 var prices = [];
@@ -100,5 +102,6 @@ exports.states = states;
 exports.pricesProvider = pricesProvider;
 exports.postingLocationProvider = postingLocationProvider;
 exports.commonHelper = commonHelper;
+exports.periodicProcess = periodicProcess;
 
 
