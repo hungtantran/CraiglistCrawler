@@ -13,13 +13,13 @@ import commonlib.Helper;
 public class PostingLocationDAOJDBC implements PostingLocationDAO {
     private final String SQL_SELECT_ALL = "SELECT * FROM posting_location";
     private final String SQL_SELECT_BY_ID = "SELECT * FROM posting_location WHERE location_fk = ?";
-    private final String SQL_SELECT_BY_ACTIVE = "SELECT * FROM posting_location WHERE active = ?";
+    private final String SQL_SELECT_BY_ACTIVE = "SELECT * FROM posting_location WHERE active = ? ORDER BY datePosted DESC, timePosted DESC";
     private final String SQL_INSERT = "INSERT INTO posting_location"
             + "(state, city, latitude, longitude, location_fk, location_link_fk, datePosted, timePosted, posting_body, title, url, active, email)"
             + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String SQL_ACTIVATE = "UPDATE posting_location SET active = 1 WHERE url = ?";
     private final String SQL_DEACTIVATE = "UPDATE posting_location SET active = 0 WHERE url LIKE ? AND datePosted < ?";
-    private final String SQL_UPDATE = "UPDATE posting_location SET email = ? WHERE location_fk = ?";
+    private final String SQL_UPDATE = "UPDATE posting_location SET email = ?, active = ? WHERE location_fk = ?";
 
     private final DAOFactory daoFactory;
 
@@ -327,7 +327,7 @@ public class PostingLocationDAOJDBC implements PostingLocationDAO {
         try {
             connection = this.daoFactory.getConnection();
 
-            final Object[] values = { postingLocation.getEmail(), postingLocation.getLocation_fk() };
+            final Object[] values = { postingLocation.getEmail(), postingLocation.getActive(), postingLocation.getLocation_fk() };
 
             preparedStatement = DAOUtil.prepareStatement(connection, this.SQL_UPDATE, false, values);
 

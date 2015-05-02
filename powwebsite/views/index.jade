@@ -99,25 +99,21 @@ block content
                           = posting['datePosted'] + " - " + posting['city']
                         td(class="col-xs-8 col-sm-8 col-md-6 col-lg-6 text-center")
                           strong
+                            != '<a href="/posting/'
+                            = posting['url']
+                            != '">'
                             = posting['title']
+                            != '</a>'
                         td(class="col-xs-2 col-sm-2 col-md-2 col-lg-2")
-                          != '<a href="/posting/'
-                          = posting['url']
-                          != '">'
                           if (posting['quantity'] == null)
                             | Check Quantity!
                           else
                             = quantityString
-                          != '</a>'
                         td(class="hidden-xs hidden-sm col-md-2 col-lg-2")
-                          != '<a href="/posting/'
-                          = posting['url']
-                          != '">'
                           if (posting['price'] == null)
                             | Check Price!
                           else
                             = priceString
-                          != '</a>'
                   - }
 
     script(type='text/javascript')

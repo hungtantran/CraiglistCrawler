@@ -412,7 +412,7 @@ function initializePostings(postings) {
 
     // Title cell
     var title = row.insertCell(index++);
-    title.innerHTML = '<strong>' + postings[i]['title'] + '</strong>';
+    title.innerHTML = '<strong><a href="' + url + '">' + postings[i]['title'] + '</a></strong>';
     title.setAttribute('class','col-xs-8 col-sm-8 col-md-6 col-lg-6 text-center');
 
     // Code for query with grouping
@@ -437,7 +437,7 @@ function initializePostings(postings) {
       }
     }
 
-    quantity.innerHTML = '<a href="' + url + '">' + quantityString + '</a>';
+    quantity.innerHTML = quantityString;
     quantity.setAttribute('class','col-xs-2 col-sm-2 col-md-2 col-lg-2');
 
     // Price cell
@@ -456,7 +456,7 @@ function initializePostings(postings) {
       }
     }
 
-    price.innerHTML = '<a href="' + url + '">' + priceString + '</a>';
+    price.innerHTML = priceString;
     price.setAttribute('class','hidden-xs hidden-sm col-md-2 col-lg-2');
 
     ++totalSalePosts;
