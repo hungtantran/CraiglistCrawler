@@ -67,11 +67,11 @@ def parse_row(rowId, alt_quantities, alt_prices):
 
 def guess_prices():
   cursor = db.cursor()
-  cursor.execute("SELECT * FROM rawhtml where alt_prices IS NOT NULL and rawhtml.id NOT IN (SELECT prices.price_fk from prices)")
+  cursor.execute("SELECT location_fk, alt_quantities, alt_prices FROM posting_location where alt_prices IS NOT NULL and posting_location.location_fk NOT IN (SELECT prices.price_fk from prices)")
   for row in cursor.fetchall():
     rowId = row[0]
-    alt_quantities = row[9]
-    alt_prices = row[10]
+    alt_quantities = row[1]
+    alt_prices = row[2]
     parse_row(rowId, alt_quantities, alt_prices)
 
 def main():
