@@ -70,7 +70,7 @@ router.get('/:id', function(req, res) {
             latitude: doc['latitude'],
             longitude: doc['longitude'],
             states: globals.states,
-            description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot in ' + doc['city'] + ', ' + doc['state'],
+            description: 'Looking for weed? ' + doc['title'] + '. LeafyExchange has the best prices of weed, marijuana pot in ' + doc['city'] + ', ' + doc['state'],
             keywords: 'price of weed, price of marijuana, price of pot, 420, green, weed, pot, marijuana, legalize, medical, medicinal, herb, herbal',
             icon: '/images/leafyexchange.jpg',
             javascriptSrcs:
