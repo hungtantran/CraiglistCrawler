@@ -229,7 +229,7 @@ function sendSellerEmails(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail)
 
   smtpTransport.sendMail({
    from: 'Leafy Exchange <leafyexchange@gmail.com>', // sender address
-   to: 'hungtantran@gmail.com', // comma separated list of receivers
+   to: 'roger.l.hau@gmail.com, hungtantran@gmail.com', // receivers
    subject: 'Someone is interested in your posting!', // Subject line
    text: messageBody // plaintext body
   }, function(error, response){
