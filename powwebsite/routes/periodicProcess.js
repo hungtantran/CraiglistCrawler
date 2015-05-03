@@ -1,6 +1,7 @@
 var format          = require('string-format');
 var nodemailer      = require('nodemailer');
-var crypto          = require('crypto');
+var CommonHelper    = require('./commonHelper').CommonHelper;
+var commonHelper    = new CommonHelper();
 
 var MySQLConnectionProvider  = require('./mysqlConnectionProvider.js').MySQLConnectionProvider;
 var connectionProvider = new MySQLConnectionProvider();
@@ -20,26 +21,16 @@ var httpAdapter = 'http';
 var extra = { /* apiKey: 'what is our API key?' */ }
 var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 
-var MIN_PER_PERIODIC_PROCESS_PURCHASE_ORDER = 0.2;
+var MIN_PER_PERIODIC_PROCESS_PURCHASE_ORDER = 1;
 var MAX_PURCHASE_ORDER_PROCESS_EACH_TIME = 3;
 var MAX_EMAIL_SENT_PER_PURCHASE_ORDER = 3;
 
-var MIN_PER_PERIODIC_SENT_MESSAGE = 0.5;
+var MIN_PER_PERIODIC_SENT_MESSAGE = 60;
 var MAX_MESSAGES_SENT_EACH_TIME = 1;
 
 
 PeriodicProcess = function() {
 };
-
-// Hash message
-function hashMessage(message) {
-  if (message === null || message === undefined) {
-    return null;
-  }
-
-  var hashedMessage = crypto.createHash('md5').update(message).digest('hex');
-  return hashedMessage;
-}
 
 function geocodeAndGetSeller(order) {
   geocoder.geocode(order['deliveryLocation'], function(err, res) {
@@ -187,7 +178,7 @@ function createMessage(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail) {
     return;
   }
 
-  var hashedMessage = hashMessage(purchaseOrderId + saleOrderId + buyerEmail + sellerEmail + Math.random());
+  var hashedMessage = commonHelper.HashString(purchaseOrderId + saleOrderId + buyerEmail + sellerEmail + Math.random());
   var messageBody = "Hi I am interested in your posting! Please click here to contact the buyer http://www.leafyexchange.com/sale/{0}".format(hashedMessage);
   var messageHTML = "<html><body>Hi I am interested in your posting! <a href=\'http://www.leafyexchange.com/sale/{0}\'>Click here to contact the buyer</a></body></html>".format(hashedMessage);
 

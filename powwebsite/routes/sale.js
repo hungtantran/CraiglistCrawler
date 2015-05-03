@@ -1,6 +1,8 @@
 var express         = require('express');
 var globals         = require('./globals');
 var router          = express.Router();
+var CommonHelper    = require('./commonHelper').CommonHelper;
+var commonHelper    = new CommonHelper();
 
 var MySQLConnectionProvider  = require('./mysqlConnectionProvider.js').MySQLConnectionProvider;
 var connectionProvider = new MySQLConnectionProvider();
@@ -30,7 +32,7 @@ router.get('/:messageId', function(req, res) {
                     icon: '/images/leafyexchange.jpg'
                 });
             } else {
-                messageContent = '\n\n\n______________________\nFrom:\nTo:\nSubject:\n\n' + rows[0]['messageBody'];
+                messageContent = '\n\n\n______________________\nFrom: ' + rows[0]['fromEmail'] + '\nTo: ' + rows[0]['toEmail']  + '\nSubject:\n\n' + rows[0]['messageBody'];
 
                 res.render('sale', {
                     title: 'LeafyExchange: The Best Marijuana Prices and Information in the US',
@@ -50,26 +52,80 @@ router.get('/:messageId', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-    var purchaseQuery = 'INSERT INTO purchase_orders (email, lowPrice, highPrice, quantity, deliveryDate, requestDate, deliveryLocation) VALUES (?, ?, ?, ?, ?, CURDATE(), ?)';
+    if (!('messageId' in req.body) ||
+        !('reply' in req.body) ||
+        !('name' in req.body) ||
+        !('email' in req.body)) {
+        // This shouldn't happen
+        res.statusCode = 404;
+        res.setHeader('Location','/');
+        res.end();
+        return;
+    }
+
+    console.log('Receive new message');
+    console.log(req.body);
+    var messageId = req.body['messageId'];
+    var messageSelect = 'SELECT * FROM message WHERE messageHash = ?';
 
     var connection = connectionProvider.getConnection();
-    var insertPurchaseOrder = connection.query(purchaseQuery,
-        [req.body['email'],
-        req.body['lowPrice'],
-        req.body['highPrice'],
-        req.body['quantity'],
-        req.body['deliveryDate'],
-        req.body['zipcode']],
+    var messageQuery = connection.query(messageSelect,
+        [messageId],
         function(err, rows) {
-          if (err) {
-            console.log('Request to create purchase order failed ' + err);
-            responseJson['result'] = false;
-            responseJson['message'] = 'Request to create purchase order failed';
-        }
-    });
+            if (err) {
+                res.statusCode = 404;
+                res.setHeader('Location','/');
+                res.end();
+                return;
+            } else {
+                console.log('Find ' + rows.length + ' messages with hash ' + messageId);
+                if (rows.length == 0) {
+                    // This shouldn't happen
+                    res.statusCode = 404;
+                    res.setHeader('Location','/');
+                    res.end();
+                    return;
+                } else if (rows.length == 1) {
+                    // The normal case
 
-    console.log(insertPurchaseOrder.sql);
-    connection.end();
-});
+                    var message = rows[0];
+                    var hashedMessage = commonHelper.HashString(message['purchaseOrderId'] + message['saleOrderId'] + req.body['email'] + message['fromEmail'] + Math.random());
+                    // Insert the new message into database to be sent
+                    var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, messageHTML, fromEmail, toEmail, datetime, messageHash, replyTo) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?, ?)';
+
+                    var connection = connectionProvider.getConnection();
+                    var insertMessage = connection.query(messageQuery, [
+                        message['purchaseOrderId'],
+                        message['saleOrderId'],
+                        req.body['reply'], /* Message body */
+                        req.body['reply'], /* Message html */
+                        req.body['email'],
+                        message['fromEmail'],
+                        hashedMessage,
+                        message['id']],
+                        function(err, rows) {
+                        if (err) {
+                          console.log('Fail to insert into message table ' + err);
+                          connection.end();
+                          return;
+                        }
+                    });
+
+                    console.log(insertMessage.sql);
+                    connection.end();
+
+                    res.statusCode = 200;
+                    res.end();
+                    return;
+                } else {
+                    // Very unexpected case
+                    res.statusCode = 404;
+                    res.setHeader('Location','/');
+                    res.end();
+                    return;
+                }
+            }
+        });
+    });
 
 module.exports = router;
