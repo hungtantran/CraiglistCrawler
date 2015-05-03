@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  .row(id ='content')
+    .leftMargin(class='hidden-xs hidden-xs col-md-2 col-lg-3')
+    .message(class='col-xs-12 col-sm-12 col-md-8 col-lg-6')
+        h2
+            | Message
+        form(name='sale', action='/sale', method='post')
+            .form-group
+                label.control-label(for='email') Email:
+                input.form-control(type='email', id='email', placeholder='@', name='email')
+            .form-group
+                label.control-label(for='message-text') Name:
+                input.form-control(type='text', id='name', name='name')
+            .form-group
+                label.control-label(for='message-text') Reply Message:
+                textarea.form-control(rows='20', id='reply', name='reply')
+                    = messageContent
+            .form-group
+                input.form-control(type='hidden', id='messageId', name='messageId', value=messageId)
+            button.btn.btn-primary(type='submit') Reply
+    .rightMargin(class='hidden-xs hidden-xs col-md-2 col-lg-3')

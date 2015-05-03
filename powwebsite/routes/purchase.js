@@ -88,7 +88,7 @@ router.post('/', function(req, res) {
       connection.end();
     }
 
-    res.statusCode = 302;
+    res.statusCode = 200;
     res.setHeader('Location','/');
     res.end();
 });

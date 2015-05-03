@@ -12,6 +12,7 @@ var localBusinesses = require('./routes/localBusinesses');
 var posting = require('./routes/posting');
 var search = require('./routes/search');
 var purchase = require('./routes/purchase');
+var sale = require('./routes/sale');
 
 var app = express();
 
@@ -48,6 +49,7 @@ app.use('/localBusinesses', localBusinesses);
 app.use('/prices', prices);
 app.use('/posting', posting);
 app.use('/purchase', purchase);
+app.use('/sale', sale);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

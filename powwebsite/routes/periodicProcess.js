@@ -1,8 +1,11 @@
+var format          = require('string-format');
 var nodemailer      = require('nodemailer');
 var crypto          = require('crypto');
 
 var MySQLConnectionProvider  = require('./mysqlConnectionProvider.js').MySQLConnectionProvider;
 var connectionProvider = new MySQLConnectionProvider();
+
+format.extend(String.prototype);
 
 var smtpTransport = nodemailer.createTransport('SMTP', {
   service: 'Gmail',
@@ -17,9 +20,13 @@ var httpAdapter = 'http';
 var extra = { /* apiKey: 'what is our API key?' */ }
 var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 
-var MAX_PURCHASE_ORDER_PROCESS_EACH_TIME = 1;
-var MAX_EMAIL_SENT_PER_PURCHASE_ORDER = 1;
-var MIN_PER_PERIODIC_PROCESS = 1;
+var MIN_PER_PERIODIC_PROCESS_PURCHASE_ORDER = 0.2;
+var MAX_PURCHASE_ORDER_PROCESS_EACH_TIME = 3;
+var MAX_EMAIL_SENT_PER_PURCHASE_ORDER = 3;
+
+var MIN_PER_PERIODIC_SENT_MESSAGE = 0.5;
+var MAX_MESSAGES_SENT_EACH_TIME = 1;
+
 
 PeriodicProcess = function() {
 };
@@ -32,6 +39,33 @@ function hashMessage(message) {
 
   var hashedMessage = crypto.createHash('md5').update(message).digest('hex');
   return hashedMessage;
+}
+
+function geocodeAndGetSeller(order) {
+  geocoder.geocode(order['deliveryLocation'], function(err, res) {
+    if (err) {
+      console.log('Fail to geocode zipcode ' + order['deliveryLocation'] + ' for id ' + order['purchaseOrderId']);
+      // TODO: log some sort of error here
+    } else {
+      getSellers(
+        order['email'],
+        order['purchaseOrderId'],
+        res[0]['latitude'],
+        res[0]['longitude'],
+        order['lowPrice'],
+        order['highPrice']);
+
+      var connection2 = connectionProvider.getConnection();
+
+      var setProcessedPurchaseOrder = 'UPDATE purchase_orders SET processed = 1 WHERE purchaseOrderId = ' + order['purchaseOrderId'];
+
+      connection2.query(setProcessedPurchaseOrder, function(err, rows) {
+        console.log('Finished processing purchase order ' + order['purchaseOrderId']);
+      });
+
+      connection2.end();
+    }
+  });
 }
 
 function ProcessPurchaseOrders() {
@@ -48,31 +82,9 @@ function ProcessPurchaseOrders() {
             for (var i = 0; i < rows.length; ++i) {
                 var order = rows[i];
 
-                geocoder.geocode(order['deliveryLocation'], function(err, res) {
-                  if (err) {
-                    console.log('Fail to geocode zipcode ' + order['deliveryLocation'] + ' for id ' + order['purchaseOrderId']);
-                    // TODO: log some sort of error here
-                  } else {
-                    var id = order['purchaseOrderId'];
-                    getSellers(
-                      order['email'],
-                      id,
-                      res[0]['latitude'],
-                      res[0]['longitude'],
-                      order['lowPrice'],
-                      order['highPrice']);
+                console.log('Attempt to process order ' + order['purchaseOrderId']);
 
-                    var connection2 = connectionProvider.getConnection();
-
-                    var setProcessedPurchaseOrder = 'UPDATE purchase_orders SET processed = 1 WHERE purchaseOrderId = ' + id + ';';
-
-                    connection2.query(setProcessedPurchaseOrder, function(err, rows) {
-                      console.log('Finished processing purchase order ' + id);
-                    });
-
-                    connection2.end();
-                  }
-                });
+                geocodeAndGetSeller(order);
             }
         }
     });
@@ -81,6 +93,8 @@ function ProcessPurchaseOrders() {
 }
 
 function getSellers(buyerEmail, purchaseOrderId, purchaseLatitude, purchaseLongitude, lowPrice, highPrice) {
+  console.log('Get sellers for purchase order id ' + purchaseOrderId);
+
   var sellersQuery =
     'SELECT DISTINCT \
       `email`, \
@@ -117,60 +131,16 @@ function getSellers(buyerEmail, purchaseOrderId, purchaseLatitude, purchaseLongi
         console.log(err);
         /* TODO log error here */
       } else {
-        createSellerOrders(buyerEmail, rows, purchaseOrderId)
+        if (rows.length == 0) {
+          console.log('Found no seller');
+        } else {
+          createSellerOrders(buyerEmail, rows, purchaseOrderId);
+        }
       }
   });
 
   console.log(selectSellersQuery.sql);
   connection.end();
-}
-
-function sendSellerEmails(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail) {
-  if (purchaseOrderId === null || purchaseOrderId === undefined ||
-    saleOrderId === null || saleOrderId === undefined ||
-    buyerEmail === null || buyerEmail === undefined ||
-    sellerEmail === null || sellerEmail === undefined) {
-    return;
-  }
-
-  var messageBody = 'Hi I am interested in your posting!';
-  var hashedMessage = hashMessage(purchaseOrderId + saleOrderId + buyerEmail + sellerEmail + messageBody);
-
-  smtpTransport.sendMail({
-   from: 'Leafy Exchange <leafyexchange@gmail.com>', // sender address
-   to: 'roger.l.hau@gmail.com, hungtantran@gmail.com', // receivers
-   subject: 'Someone is interested in your posting!', // Subject line
-   text: messageBody // plaintext body
-  }, function(error, response){
-    if (error) {
-      console.log(error);
-      return;
-    } else {
-      console.log('Message sent:' + response.message);
-
-      // log in the database for 
-      var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, fromEmail, toEmail, datetime, messageHash) VALUES (?, ?, ?, ?, ?, NOW(), ?)';
-
-      var connection = connectionProvider.getConnection();
-      var insertMessage = connection.query(messageQuery, [
-        purchaseOrderId,
-        saleOrderId,
-        messageBody,
-        buyerEmail,
-        sellerEmail,
-        hashedMessage],
-        function(err, rows) {
-        if (err) {
-          console.log('Fail to insert into message table ' + err);
-          connection.end();
-          return;
-        }
-      });
-
-      console.log(insertMessage.sql);
-      connection.end();
-    }
-  });
 }
 
 function createSellerOrders(buyerEmail, sellers, purchaseOrderId) {
@@ -199,7 +169,7 @@ function createSellerOrders(buyerEmail, sellers, purchaseOrderId) {
         return;
       } else {
         var saleOrderId = rows['insertId'];
-        sendSellerEmails(purchaseOrderId, saleOrderId, buyerEmail, email);
+        createMessage(purchaseOrderId, saleOrderId, buyerEmail, email);
       }
     });
 
@@ -209,11 +179,102 @@ function createSellerOrders(buyerEmail, sellers, purchaseOrderId) {
   connection.end();
 }
 
-ProcessPurchaseOrders();
+function createMessage(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail) {
+  if (purchaseOrderId === null || purchaseOrderId === undefined ||
+    saleOrderId === null || saleOrderId === undefined ||
+    buyerEmail === null || buyerEmail === undefined ||
+    sellerEmail === null || sellerEmail === undefined) {
+    return;
+  }
 
-// Periodically process purchase order every 1 minute
+  var hashedMessage = hashMessage(purchaseOrderId + saleOrderId + buyerEmail + sellerEmail + Math.random());
+  var messageBody = "Hi I am interested in your posting! Please click here to contact the buyer http://www.leafyexchange.com/sale/{0}".format(hashedMessage);
+  var messageHTML = "<html><body>Hi I am interested in your posting! <a href=\'http://www.leafyexchange.com/sale/{0}\'>Click here to contact the buyer</a></body></html>".format(hashedMessage);
+
+  // Insert the message into database to be sent
+  var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, messageHTML, fromEmail, toEmail, datetime, messageHash) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)';
+
+  var connection = connectionProvider.getConnection();
+  var insertMessage = connection.query(messageQuery, [
+    purchaseOrderId,
+    saleOrderId,
+    messageBody,
+    messageHTML,
+    buyerEmail,
+    sellerEmail,
+    hashedMessage],
+    function(err, rows) {
+    if (err) {
+      console.log('Fail to insert into message table ' + err);
+      connection.end();
+      return;
+    }
+  });
+
+  console.log(insertMessage.sql);
+  connection.end();
+}
+
+function sendMail(messageId, sender, recipients, subject, messageBody, messageHTML) {
+  smtpTransport.sendMail({
+    from: sender,
+    to: recipients,
+    subject: subject,
+    text: messageBody, // plaintext body
+    html: messageHTML // html body
+  }, function(error, response) {
+    if (error) {
+      console.log('Can\'t send email');
+      console.log(error);
+      return;
+    } else {
+        var setMessageSentStatus = 'UPDATE message SET sentStatus = 1 WHERE id = ' + messageId;
+
+        var connection2 = connectionProvider.getConnection();
+        connection2.query(setMessageSentStatus, function(err, rows) {
+          console.log('Finished sending message ' + messageId);
+        });
+        connection2.end();
+    }
+  });
+}
+
+function SentUnsentMessage() {
+  var getUnsentMessage = 'SELECT * FROM message WHERE sentStatus = 0 ORDER BY datetime ASC LIMIT ' + MAX_MESSAGES_SENT_EACH_TIME;
+
+  var connection = connectionProvider.getConnection();
+  var getUnsentMessageQuery = connection.query(getUnsentMessage, function(err, rows) {
+    if (err) {
+      console.log('Can\'t query for unsent message ' + err);
+      return;
+    } else {
+      console.log('Attempting to send ' + rows.length + ' messages.');
+
+      for (var i = 0; i < rows.length; ++i) {
+        var message = rows[i];
+        var sender = 'Leafy Exchange <leafyexchange@gmail.com>';
+        var recipients = 'roger.l.hau@gmail.com, hungtantran@gmail.com';
+        var subject = 'Someone is interested in your posting!';
+
+        console.log('Send message ' + message['id'] + ' from ' + sender + ' to ' + recipients + ' with subject ' + subject);
+
+        sendMail(message['id'], sender, recipients, subject, message['messageBody'], message['messageHTML']);
+      }
+    }
+  });
+
+  console.log(getUnsentMessageQuery.sql);
+  connection.end();
+}
+
+// Periodically process purchase order every MIN_PER_PERIODIC_PROCESS_PURCHASE_ORDER minute
 setInterval(function() {
     ProcessPurchaseOrders();
-}, MIN_PER_PERIODIC_PROCESS * 60000);
+}, MIN_PER_PERIODIC_PROCESS_PURCHASE_ORDER * 60000);
+
+// Periodically sent un-sent messages every MIN_PER_PERIODIC_SENT_MESSAGE minute
+setInterval(function() {
+  SentUnsentMessage();
+}, MIN_PER_PERIODIC_SENT_MESSAGE * 60000);
 
 exports.PeriodicProcess = PeriodicProcess;
