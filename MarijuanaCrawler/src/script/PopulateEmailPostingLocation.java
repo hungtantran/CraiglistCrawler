@@ -60,10 +60,20 @@ public class PopulateEmailPostingLocation {
 	    		continue;
 	    	}
 	    	
-	    	String email = craiglistParser.ParseEmail();
-	    	postingLocation.setEmail(email);
-	    	
-	    	postingLocationDAO.update(postingLocation);
+	    	try {
+		    	String email = craiglistParser.ParseEmail();
+		    	postingLocation.setEmail(email);
+		    	
+		    	// If email is "Expired", the post is already disappear 404
+		    	if (email != null && email.equals("Expired")) {
+		    		postingLocation.setActive(0);
+		    	}
+		    	
+		    	postingLocationDAO.update(postingLocation);
+	    	} catch (Exception e) {
+	    		Globals.crawlerLogManager.writeLog(e.getMessage());
+	    		return;
+	    	}
 	    }
 	}
 }

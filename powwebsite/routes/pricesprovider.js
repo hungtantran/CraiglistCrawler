@@ -78,7 +78,6 @@ PricesProvider.prototype.getPostings = function(callback) {
   var d = new Date();
   d.setDate(d.getDate() - maxPostTimeValidInDays);
   var dateString = commonHelper.FormatDate(d);
-  console.log(dateString);
 
   var queryWithoutPriceGrouping =
     'SELECT * \

@@ -1,7 +1,6 @@
 package parser;
 
-import java.io.IOException;
-
+import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -9,6 +8,7 @@ import org.jsoup.select.Elements;
 import commonlib.Globals;
 import commonlib.Helper;
 import commonlib.NetworkingFunctions;
+
 import dbconnection.PostingLocation;
 
 public class CraiglistParser implements IPostingLocationParser {
@@ -65,29 +65,41 @@ public class CraiglistParser implements IPostingLocationParser {
 	}
 
 	@Override
-	public String ParseEmail() {
+	public String ParseEmail() throws Exception {
 		Elements replyLinks = this.doc.select("a[id=replylink]");
 		if (replyLinks.size() != 1) {
-	        return null;
+			Globals.crawlerLogManager.writeLog("Found no contact");
+	        return "NoEmail";
 	    }
 		
 		String replyLink = this.domain + replyLinks.get(0).attr("href");
 		Globals.crawlerLogManager.writeLog("Try to parse reply email for " + replyLink);
 		Helper.waitSec(Globals.DEFAULTLOWERBOUNDWAITTIMESEC, Globals.DEFAULTUPPERBOUNDWAITTIMESEC);
-		
+
 		try {
 			final Document replyDoc = NetworkingFunctions.downloadHtmlContentToDoc(replyLink, NUM_RETRIES_DOWNLOAD_REPLY_LINK);
 			Elements emailElems = replyDoc.select("div[class=anonemail]");
 			if (emailElems.size() != 1) {
-				return null;
+				Globals.crawlerLogManager.writeLog("Found no email");
+				return "NoEmail";
 			}
 			
 			String email = emailElems.get(0).text();
 			Globals.crawlerLogManager.writeLog("Found email " + email);
 			return email;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			Globals.crawlerLogManager.writeLog(e.getMessage());
-			return null;
+			
+			if (e instanceof HttpStatusException) {
+				int statusCode = ((HttpStatusException) e).getStatusCode();
+				// If the page doesn't exists, email is "None"
+				if (statusCode == 404) {
+					Globals.crawlerLogManager.writeLog("Post expired");
+					return "Expired";
+				}
+			}
+			
+			throw e;
 		}
 	}
 }

@@ -1,6 +1,5 @@
 package marijuanaCrawler;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -53,7 +52,7 @@ public class CraiglistEntryLinkCrawl implements IEntryLinkCrawler {
 	}
 
 	@Override
-	public String getNextEntryLink() throws IOException {
+	public String getNextEntryLink() throws Exception {
 		this.curLinkListIndex++;
 
 		if (this.curLinkListIndex < this.entryLinkList.size()) {
@@ -106,8 +105,7 @@ public class CraiglistEntryLinkCrawl implements IEntryLinkCrawler {
 	}
 
 	// Return the number of links found
-	private List<String> parseEntryLinksOnePage(String searchTerm, int pageNum)
-			throws IOException {
+	private List<String> parseEntryLinksOnePage(String searchTerm, int pageNum) throws Exception {
 		final List<String> linksFound = new ArrayList<String>();
 
 		if (searchTerm == null) {
@@ -204,11 +202,8 @@ public class CraiglistEntryLinkCrawl implements IEntryLinkCrawler {
 					break;
 				}
 			}
-		} catch (final MalformedURLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Fail to create craiglist entry link crawl");
-		} catch (final IOException e) {
-		    e.printStackTrace();
             System.out.println("Fail to create craiglist entry link crawl");
 		}
 	}

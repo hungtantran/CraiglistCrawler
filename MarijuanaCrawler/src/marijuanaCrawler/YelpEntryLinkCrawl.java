@@ -1,7 +1,5 @@
 package marijuanaCrawler;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +47,7 @@ public class YelpEntryLinkCrawl implements IEntryLinkCrawler {
 	}
 
 	@Override
-	public String getNextEntryLink() throws IOException {
+	public String getNextEntryLink() throws Exception {
 		this.curLinkListIndex++;
 
 		if (this.curLinkListIndex < this.entryLinkList.size()) {
@@ -60,12 +58,7 @@ public class YelpEntryLinkCrawl implements IEntryLinkCrawler {
 		this.curPage++;
 
 		List<String> curPageLink = null;
-		try {
-			curPageLink = this.parseEntryLinksOnePage(this.searchTerm, this.curPage);
-		} catch (final MalformedURLException e) {
-			e.printStackTrace();
-			return null;
-		}
+		curPageLink = this.parseEntryLinksOnePage(this.searchTerm, this.curPage);
 
 		if (curPageLink == null || curPageLink.size() == 0) {
 			Globals.crawlerLogManager.writeLog("Found no link for location:"
@@ -104,7 +97,7 @@ public class YelpEntryLinkCrawl implements IEntryLinkCrawler {
 	}
 
 	// Return the number of links found
-	private List<String> parseEntryLinksOnePage(String searchTerm, int pageNum) throws IOException {
+	private List<String> parseEntryLinksOnePage(String searchTerm, int pageNum) throws Exception {
 		final List<String> linksFound = new ArrayList<String>();
 
 		if (searchTerm == null) {

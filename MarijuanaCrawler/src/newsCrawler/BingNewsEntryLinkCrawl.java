@@ -1,6 +1,5 @@
 package newsCrawler;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +20,7 @@ public class BingNewsEntryLinkCrawl {
 	public BingNewsEntryLinkCrawl() {
 	}
 
-	public Map<String, String> getLink(int pageNum) throws IOException {
+	public Map<String, String> getLink(int pageNum) throws Exception {
 		if (pageNum < 1)
 			return null;
 
@@ -72,7 +71,7 @@ public class BingNewsEntryLinkCrawl {
     				System.out.println(entry.getValue()+" : "+entry.getValue());
     			}
     		}
-	    } catch (IOException e) {
+	    } catch (Exception e) {
 	        e.printStackTrace();
 	        Globals.crawlerLogManager.writeLog("Throw Exception " + e.getMessage());
             return;

@@ -1,5 +1,26 @@
+var crypto          = require('crypto');
+
 CommonHelper = function() {
 };
+
+// Hash string
+CommonHelper.prototype.HashString = function(str) {
+  if (str === null || str === undefined) {
+    return null;
+  }
+
+  var hashedStr = crypto.createHash('md5').update(str).digest('hex');
+  return hashedStr;
+}
+
+// Hash message
+CommonHelper.prototype.HashMessage = function(message) {
+  if (message === null || message === undefined) {
+    return null;
+  }
+
+  return this.HashString(message['purchaseOrderId'] + message['saleOrderId'] + message['fromEmail'] + message['toEmail'] + Math.random());
+}
 
 CommonHelper.prototype.FormatNumber = function(number, numDigits) {
   while (number.length < numDigits) {

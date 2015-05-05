@@ -1,0 +1,52 @@
+DROP TABLE message;
+DROP TABLE sale_orders;
+DROP TABLE purchase_orders;
+
+CREATE TABLE `purchase_orders` (
+  `purchaseOrderId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `userId` int(10) unsigned DEFAULT NULL,
+  `email` varchar(128) NOT NULL,
+  `lowPrice` int(11) unsigned NOT NULL,
+  `highPrice` int(11) unsigned NOT NULL,
+  `quantity` int(11) unsigned NOT NULL,
+  `deliveryDate` date NOT NULL,
+  `requestDate` date NOT NULL,
+  `deliveryLocation` int(11) unsigned NOT NULL,
+  `processed` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`purchaseOrderId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `sale_orders` (
+  `saleOrderId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `purchaseOrderId` int(10) unsigned NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `postingId` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`saleOrderId`),
+  KEY `purchaseOrderId_fk` (`purchaseOrderId`),
+  KEY `postingId_fk` (`postingId`),
+  CONSTRAINT `postingId_fk` FOREIGN KEY (`postingId`) REFERENCES `posting_location` (`location_fk`),
+  CONSTRAINT `purchaseOrderId_fk` FOREIGN KEY (`purchaseOrderId`) REFERENCES `purchase_orders` (`purchaseOrderId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `message` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `purchaseOrderId` int(10) unsigned NOT NULL,
+  `saleOrderId` int(10) unsigned NOT NULL,
+  `messageBody` text NOT NULL,
+  `messageHTML` text NOT NULL,
+  `fromEmail` varchar(128) NOT NULL,
+  `toEmail` varchar(128) NOT NULL,
+  `datetime` datetime NOT NULL,
+  `messageHash` varchar(128) NOT NULL,
+  `replyTo` int(10) unsigned DEFAULT NULL,
+  `sentStatus` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `purchaseOrderId_fk` (`purchaseOrderId`),
+  KEY `saleOrderId_fk` (`saleOrderId`),
+  KEY `fromEmail_fk` (`fromEmail`),
+  KEY `toEmail_fk` (`toEmail`),
+  KEY `fk_replyTo` (`replyTo`),
+  CONSTRAINT `fk_replyTo` FOREIGN KEY (`replyTo`) REFERENCES `message` (`id`),
+  CONSTRAINT `purchaseOrderId_fk2` FOREIGN KEY (`purchaseOrderId`) REFERENCES `purchase_orders` (`purchaseOrderId`),
+  CONSTRAINT `saleOrderId_fk2` FOREIGN KEY (`saleOrderId`) REFERENCES `sale_orders` (`saleOrderId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
