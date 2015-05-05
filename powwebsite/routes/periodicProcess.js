@@ -21,11 +21,11 @@ var httpAdapter = 'http';
 var extra = { /* apiKey: 'what is our API key?' */ }
 var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 
-var MIN_PER_PERIODIC_PROCESS_PURCHASE_ORDER = 1;
+var MIN_PER_PERIODIC_PROCESS_PURCHASE_ORDER = 0.5;
 var MAX_PURCHASE_ORDER_PROCESS_EACH_TIME = 3;
 var MAX_EMAIL_SENT_PER_PURCHASE_ORDER = 3;
 
-var MIN_PER_PERIODIC_SENT_MESSAGE = 60;
+var MIN_PER_PERIODIC_SENT_MESSAGE = 0.5;
 var MAX_MESSAGES_SENT_EACH_TIME = 1;
 
 
