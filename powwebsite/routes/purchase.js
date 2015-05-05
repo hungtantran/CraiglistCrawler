@@ -86,17 +86,6 @@ router.post('/', function(req, res) {
 
       console.log(insertPurchaseOrder.sql);
 
-      var sellersQuery =
-        "SELECT `sale_orders`.`saleOrderId` AS `saleOrderId`, \ 
-          `posting_location`.`url` AS `url`, \ 
-        FROM `sale_orders` \ 
-          INNER JOIN `purchase_orders` ON (`sale_orders`.`purchaseOrderId` = `purchase_orders`.`purchaseOrderId`) \ 
-          INNER JOIN `posting_location` ON (`sale_orders`.`postingId` = `posting_location`.`location_fk`) \ 
-        WHERE \ 
-          `sale_orders`.`purchaseOrderId`={0}".format(insertId.toString());
-      console.log(sellersQuery);
-      connection.end();
-
       res.render('purchase', {
       title: "We've reached out to sellers in your area!",
       stylesheet: '/stylesheets/index.css',
