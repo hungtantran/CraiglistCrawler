@@ -25,6 +25,7 @@ public class LocationLink {
     Integer locationFk1 = null;
     Integer locationFk2 = null;
     Integer locationFk3 = null;
+    String dateUpdated;
 
 	// Getters/setters
 	// ----------------------------------------------------------------------------
@@ -147,6 +148,14 @@ public class LocationLink {
 
 	public void setLocationFk3(Integer locationFk3) {
 		this.locationFk3 = locationFk3;
+	}
+
+	public String getDateUpdated() {
+		return dateUpdated;
+	}
+
+	public void setDateUpdated(String dateUpdated) {
+		this.dateUpdated = dateUpdated;
 	}
 
 	// Object overrides

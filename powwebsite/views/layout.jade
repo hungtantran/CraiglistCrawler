@@ -149,24 +149,24 @@ html
                   button(type='submit' class='btn btn-success')
                     | Search
 
-    nav(class='navbar navbar-default text-center col-xs-12 col-sm-12 col-md-12 col-lg-12' role='navigation' style='overflow-x:hidden')
+    nav(class='navbar navbar-default text-center col-xs-12 col-sm-12 col-md-12 col-lg-12' role='navigation' style='overflow-x:hidden; font-size:1em')
       .container
-        ul(class='nav navbar-nav text-center' style='white-space: nowrap; font-size:medium; font-weight:bold')
+        ul(class='nav navbar-nav text-center' style='font-weight:bold')
           li(style='display: inline-block')
             a(href='#' data-toggle='modal' data-target='.state-modal-lg')
               if (typeof(stateChosen) !== 'undefined')
                 = stateChosen.toUpperCase()
               else
-                | CHOOSE STATE
-          li(style='display: inline-block')
-            a(href='#' data-toggle='modal' data-target='.signup-modal-lg')
-              | SIGN UP
+                | STATE
           li(style='display: inline-block')
             a(href='#' data-toggle='modal' data-target='.purchase-modal-lg')
               | PURCHASE
           li(style='display: inline-block')
             a(href='/search/')
-              | ALL SALES
+              | SALES
+          //- li(style='display: inline-block')
+          //-   a(href='#' data-toggle='modal' data-target='.signup-modal-lg')
+          //-     | SIGN UP
 
     div(id='title' class='col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center')
       h1(style='font-size:2em; font-weight:bold; color:#369844')
