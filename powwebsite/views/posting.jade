@@ -18,18 +18,19 @@ block content
         div(class='col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center')
           h3(style='underlined')
             | Related weed postings from !{city}
+        table(id='latest_prices_content' class='table table-striped table-condensed table-responsive')
+              thead
+                tr
+                  th(class="col-xs-3 col-sm-2 col-md-2 col-lg-2 text-center")
+                    | Date/Locations
+                  th(class="col-xs-9 col-sm-8 col-md-6 col-lg-6 text-center")
+                    | Post title
+                  th(class="hidden-xs col-sm-2 col-md-2 col-lg-2 text-center")
+                    | Quantities
+                  th(class="hidden-xs hidden-sm col-md-2 col-lg-2 text-center")
+                    | Prices
         div(id='right_pane_content')
-          table(id='latest_prices_content' class='table table-striped table-condensed table-responsive')
-            thead
-              tr
-                th(class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center")
-                  | Date/Locations
-                th(class="col-xs-8 col-sm-8 col-md-6 col-lg-6 text-center")
-                  | Post title
-                th(class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center")
-                  | Quantities
-                th(class="hidden-xs hidden-sm col-md-2 col-lg-2 text-center")
-                  | Prices
+          table(id='latest_prices_content' class='table table-striped table-condensed table-responsive' style='table-layout: fixed; overflow-x: hidden')
             tbody(id='table_body')
               - for (var i = 0; i < relatedPosts.length; ++i) {
                 - if (i > 10) {
@@ -40,16 +41,16 @@ block content
                 - quantityString = quantitiesString[i]
                 if (posting['city'])
                   tr
-                    td(class="col-xs-2 col-sm-2 col-md-2 col-lg-2")
+                    td(class="col-xs-3 col-sm-2 col-md-2 col-lg-2")
                       = posting['datePosted'] + " - " + posting['city']
-                    td(class="col-xs-8 col-sm-8 col-md-6 col-lg-6 text-center")
+                    td(class="col-xs-9 col-sm-8 col-md-6 col-lg-6 text-center")
                       strong
                         != '<a href="/posting/'
                         = posting['url']
                         != '">'
                         = posting['title']
                         != '</a>'
-                    td(class="col-xs-2 col-sm-2 col-md-2 col-lg-2")
+                    td(class="hidden-xs col-sm-2 col-md-2 col-lg-2")
                       if (posting['quantity'] == null)
                         | Check Quantity!
                       else

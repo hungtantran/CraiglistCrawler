@@ -45,7 +45,7 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 //    private static final int maxTimeCrawlInSec = 21600; // 6 hours
 //    private static final int maxTimeCrawlInSec = 43200; // 12 hours
 	  
-	private static final int MAX_POSTING_AGE_VALIDITY = 14;
+	private static final int MAX_POSTING_AGE_VALIDITY = 7;
             
 	private Map<String, Location> linkToLocationMap = null;
 	private Set<LocationLink> locationLinkLists = null;
