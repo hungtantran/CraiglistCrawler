@@ -171,6 +171,11 @@ function createSellerOrders(buyerEmail, sellers, purchaseOrderId) {
   connection.end();
 }
 
+function parseMessageBody(messageBody) {
+  var messageParts = messageBody.split("<MessageElem>");
+  
+}
+
 function createMessage(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail) {
   if (purchaseOrderId === null || purchaseOrderId === undefined ||
     saleOrderId === null || saleOrderId === undefined ||
@@ -180,14 +185,10 @@ function createMessage(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail) {
   }
 
   var hashedMessage = commonHelper.HashString(purchaseOrderId + saleOrderId + buyerEmail + sellerEmail + Math.random());
-  var messageBody = "Hi I am interested in your posting! Please click here to contact the buyer http://www.leafyexchange.com/sale/{0}".format(hashedMessage);
+  var messageBody = "<MessageElem>A Leafy Exchanger is interested in your post!<MessageElem>Our algorithms have identified a customer that is interested in your posting. If you'd like to continue the exchange, click on the link below:<MessageElem>http://www.leafyexchange.com/sale/{0}".format(hashedMessage);
 
-  var messageHTML = "<html><body>Hi I am interested in your posting! <a href=\'http://www.leafyexchange.com/sale/{0}\'>Click here to contact the buyer</a></body></html>".format(hashedMessage);
-  console.log("TESTTESTTEST");
-  console.log(__dirname + "/sellerEmail.html");
   filesystem.readFile(__dirname + "/sellerEmail.html", "utf-8", function(error, data) {
-    html = data.replace('{0}', "http://www.leafyexchange.com/sale/" + hashedMessage);
-    messageHTML = html;
+    var messageHTML = data.replace('{0}', "http://www.leafyexchange.com/sale/" + hashedMessage);
 
     // Insert the message into database to be sent
     var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, messageHTML, fromEmail, toEmail, datetime, messageHash) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)';
