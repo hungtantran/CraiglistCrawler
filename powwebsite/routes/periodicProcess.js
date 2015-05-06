@@ -186,7 +186,12 @@ function createMessage(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail) {
   console.log("TESTTESTTEST");
   console.log(__dirname + "/sellerEmail.html");
   filesystem.readFile(__dirname + "/sellerEmail.html", "utf-8", function(error, data) {
-    html = data.replace('{0}', "http://www.leafyexchange.com/sale/" + hashedMessage);
+    if (error) {
+      console.log("WTF");
+    }
+    html = data.replace('{0}', "http://www.leafyexchange.com/sale/" + hashedMessage)
+    html = html.replace('{1}', "http://www.leafyexchange.com/sale/email/" + hashedMessage);
+
     messageHTML = html;
 
     // Insert the message into database to be sent
