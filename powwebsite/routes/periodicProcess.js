@@ -1,4 +1,5 @@
 var format          = require('string-format');
+var filesystem      = require('fs')
 var nodemailer      = require('nodemailer');
 var CommonHelper    = require('./commonHelper').CommonHelper;
 var commonHelper    = new CommonHelper();
@@ -180,30 +181,36 @@ function createMessage(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail) {
 
   var hashedMessage = commonHelper.HashString(purchaseOrderId + saleOrderId + buyerEmail + sellerEmail + Math.random());
   var messageBody = "Hi I am interested in your posting! Please click here to contact the buyer http://www.leafyexchange.com/sale/{0}".format(hashedMessage);
+
   var messageHTML = "<html><body>Hi I am interested in your posting! <a href=\'http://www.leafyexchange.com/sale/{0}\'>Click here to contact the buyer</a></body></html>".format(hashedMessage);
+  console.log("TESTTESTTEST");
+  console.log(__dirname + "/sellerEmail.html");
+  filesystem.readFile(__dirname + "/sellerEmail.html", "utf-8", function(error, data) {
+    html = data.replace('{0}', "http://www.leafyexchange.com/sale/" + hashedMessage);
+    messageHTML = html;
 
-  // Insert the message into database to be sent
-  var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, messageHTML, fromEmail, toEmail, datetime, messageHash) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)';
+    // Insert the message into database to be sent
+    var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, messageHTML, fromEmail, toEmail, datetime, messageHash) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)';
 
-  var connection = connectionProvider.getConnection();
-  var insertMessage = connection.query(messageQuery, [
-    purchaseOrderId,
-    saleOrderId,
-    messageBody,
-    messageHTML,
-    buyerEmail,
-    sellerEmail,
-    hashedMessage],
-    function(err, rows) {
-    if (err) {
-      console.log('Fail to insert into message table ' + err);
-      connection.end();
-      return;
-    }
+    var connection = connectionProvider.getConnection();
+    var insertMessage = connection.query(messageQuery, [
+      purchaseOrderId,
+      saleOrderId,
+      messageBody,
+      messageHTML,
+      buyerEmail,
+      sellerEmail,
+      hashedMessage],
+      function(err, rows) {
+      if (err) {
+        console.log('Fail to insert into message table ' + err);
+        connection.end();
+        return;
+      }
+    });
+    console.log(insertMessage.sql);
+    connection.end();
   });
-
-  console.log(insertMessage.sql);
-  connection.end();
 }
 
 function sendMail(messageId, sender, recipients, subject, messageBody, messageHTML) {
@@ -230,7 +237,7 @@ function sendMail(messageId, sender, recipients, subject, messageBody, messageHT
   });
 }
 
-function SentUnsentMessage() {
+function SendUnsentMessage() {
   var getUnsentMessage = 'SELECT * FROM message WHERE sentStatus = 0 ORDER BY datetime ASC LIMIT ' + MAX_MESSAGES_SENT_EACH_TIME;
 
   var connection = connectionProvider.getConnection();
@@ -265,7 +272,8 @@ setInterval(function() {
 
 // Periodically sent un-sent messages every MIN_PER_PERIODIC_SENT_MESSAGE minute
 setInterval(function() {
-  SentUnsentMessage();
+  console.log("Sending unsent messages");
+  SendUnsentMessage();
 }, MIN_PER_PERIODIC_SENT_MESSAGE * 60000);
 
 exports.PeriodicProcess = PeriodicProcess;
