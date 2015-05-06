@@ -128,4 +128,23 @@ router.post('/', function(req, res) {
         });
     });
 
+router.get('/email/:messageHash', function(req, res) {
+
+    var messageHash = req.params.messageHash;
+    console.log("received request for messageHash:" + messageHash);
+
+    var messageViewQuery = 'INSERT INTO message_views (messageHash, viewTimeStamp) \
+        VALUES (?, CURRENT_TIMESTAMP())';
+    var connection = connectionProvider.getConnection();
+    var insertMessageView = connection.query(messageViewQuery,
+        [messageHash], function(err, rows) {
+            if (err) {
+                console.log("Error for receiving view for messageHash " + messageHash);
+                responseJson['result'] = false;
+                responseJson['message'] = 'Request to create purchase order failed';
+            }
+        })
+
+    res.json([]);
+})
 module.exports = router;
