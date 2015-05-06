@@ -32,7 +32,9 @@ router.get('/:messageId', function(req, res) {
                     icon: '/images/leafyexchange.jpg'
                 });
             } else {
-                messageContent = '\n\n\n______________________\nFrom: ' + rows[0]['fromEmail'] + '\nTo: ' + rows[0]['toEmail']  + '\nSubject:\n\n' + rows[0]['messageBody'];
+                var messageText = commonHelper.convertMessageBodyToMessageText(rows[0]['messageBody']);
+                console.log('text = ' + messageText);
+                messageContent = '\n\n\n______________________\n' + messageText;
 
                 res.render('sale', {
                     title: 'LeafyExchange: The Best Marijuana Prices and Information in the US',
@@ -54,7 +56,6 @@ router.get('/:messageId', function(req, res) {
 router.post('/', function(req, res) {
     if (!('messageId' in req.body) ||
         !('reply' in req.body) ||
-        !('name' in req.body) ||
         !('email' in req.body)) {
         // This shouldn't happen
         res.statusCode = 404;
@@ -87,18 +88,19 @@ router.post('/', function(req, res) {
                     return;
                 } else if (rows.length == 1) {
                     // The normal case
-
                     var message = rows[0];
                     var hashedMessage = commonHelper.HashString(message['purchaseOrderId'] + message['saleOrderId'] + req.body['email'] + message['fromEmail'] + Math.random());
                     // Insert the new message into database to be sent
                     var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, messageHTML, fromEmail, toEmail, datetime, messageHash, replyTo) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?, ?)';
 
+                    var messageBody = "<MessageElem>You got a new message on Leafy Exchange!<MessageElem>{0}<MessageElem>http://www.leafyexchange.com/sale/{1}<MessageElem>".format(req.body['reply'], hashedMessage);
+
                     var connection = connectionProvider.getConnection();
                     var insertMessage = connection.query(messageQuery, [
                         message['purchaseOrderId'],
                         message['saleOrderId'],
-                        req.body['reply'], /* Message body */
-                        req.body['reply'], /* Message html */
+                        messageBody, /* Message body */
+                        '', /* Message html */
                         req.body['email'],
                         message['fromEmail'],
                         hashedMessage,
@@ -128,8 +130,8 @@ router.post('/', function(req, res) {
         });
     });
 
+// Tracking email
 router.get('/email/:messageHash', function(req, res) {
-
     var messageHash = req.params.messageHash;
     console.log("received request for messageHash:" + messageHash);
 

@@ -1,5 +1,5 @@
+var globals         = require('./globals');
 var format          = require('string-format');
-var filesystem      = require('fs')
 var nodemailer      = require('nodemailer');
 var CommonHelper    = require('./commonHelper').CommonHelper;
 var commonHelper    = new CommonHelper();
@@ -23,8 +23,8 @@ var extra = { /* apiKey: 'what is our API key?' */ }
 var geocoder = require('node-geocoder')(geocoderProvider, httpAdapter, extra);
 
 var MIN_PER_PERIODIC_PROCESS_PURCHASE_ORDER = 0.5;
-var MAX_PURCHASE_ORDER_PROCESS_EACH_TIME = 3;
-var MAX_EMAIL_SENT_PER_PURCHASE_ORDER = 3;
+var MAX_PURCHASE_ORDER_PROCESS_EACH_TIME = 2;
+var MAX_EMAIL_SENT_PER_PURCHASE_ORDER = 2;
 
 var MIN_PER_PERIODIC_SENT_MESSAGE = 0.5;
 var MAX_MESSAGES_SENT_EACH_TIME = 1;
@@ -34,6 +34,8 @@ PeriodicProcess = function() {
 };
 
 function geocodeAndGetSeller(order) {
+  console.log('geocode and get seller');
+
   geocoder.geocode(order['deliveryLocation'], function(err, res) {
     if (err) {
       console.log('Fail to geocode zipcode ' + order['deliveryLocation'] + ' for id ' + order['purchaseOrderId']);
@@ -71,6 +73,8 @@ function ProcessPurchaseOrders() {
             console.log('Fail to query for unprocessed purchase orders ' + err);
             return;
         } else {
+            console.log('Process ' + rows.length + ' purchase orders');
+
             for (var i = 0; i < rows.length; ++i) {
                 var order = rows[i];
 
@@ -81,6 +85,7 @@ function ProcessPurchaseOrders() {
         }
     });
 
+    console.log(getPurchaseQuery.sql);
     connection.end();
 }
 
@@ -171,26 +176,6 @@ function createSellerOrders(buyerEmail, sellers, purchaseOrderId) {
   connection.end();
 }
 
-function convertMessageBodyToMessageText(messageBody) {
-  var messageText = messageBody.replace(/<MessageElem>/g, '\n');
-  return messageText;
-}
-
-function convertMessageBodyToMessageHTML(messageBody, htmlTemplate, hashedMessage) {
-  var messageParts = messageBody.split("<MessageElem>");
-
-  var messageHTML = htmlTemplate;
-  for (var i = 1; i < messageParts.length; ++i) {
-    var matchStr = '{' + (i-1) + '}';
-    messageHTML = messageHTML.replace(matchStr, messageParts[i]);
-  }
-
-  var matchStr = '{' + (messageParts.length - 1) + '}';
-  messageHTML = messageHTML.replace(matchStr, "http://www.leafyexchange.com/sale/email/" + hashedMessage);
-
-  return messageHTML;
-}
-
 function createMessage(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail) {
   if (purchaseOrderId === null || purchaseOrderId === undefined ||
     saleOrderId === null || saleOrderId === undefined ||
@@ -200,49 +185,41 @@ function createMessage(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail) {
   }
 
   var hashedMessage = commonHelper.HashString(purchaseOrderId + saleOrderId + buyerEmail + sellerEmail + Math.random());
-  var messageBody = "<MessageElem>A Leafy Exchanger is interested in your post!<MessageElem>Our algorithms have identified a customer that is interested in your posting. If you'd like to continue the exchange, click on the link below:<MessageElem>http://www.leafyexchange.com/sale/{0}".format(hashedMessage);
+  var messageBody = "<MessageElem>A Leafy Exchanger is interested in your post!<MessageElem>Our algorithms have identified a customer that is interested in your posting. If you'd like to continue the exchange, click on the link below:<MessageElem>http://www.leafyexchange.com/sale/{0}<MessageElem>".format(hashedMessage);
 
-  filesystem.readFile(__dirname + "/sellerEmail.html", "utf-8", function(error, data) {
-    if (error) {
-      // TODO: log error
-    } else {
-      var messageText = convertMessageBodyToMessageText(messageBody);
-      var messageHTML = convertMessageBodyToMessageHTML(messageBody, data, hashedMessage);
+  // Insert the message into database to be sent
+  var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, messageHTML, fromEmail, toEmail, datetime, messageHash) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)';
 
-      console.log(messageText);
-      console.log('\n\n\n\n');
-      console.log(messageHTML);
-      // Insert the message into database to be sent
-      // var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, messageHTML, fromEmail, toEmail, datetime, messageHash) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)';
-
-      // var connection = connectionProvider.getConnection();
-      // var insertMessage = connection.query(messageQuery, [
-      //   purchaseOrderId,
-      //   saleOrderId,
-      //   messageBody,
-      //   messageHTML,
-      //   buyerEmail,
-      //   sellerEmail,
-      //   hashedMessage],
-      //   function(err, rows) {
-      //   if (err) {
-      //     console.log('Fail to insert into message table ' + err);
-      //     connection.end();
-      //     return;
-      //   }
-      // });
-      // console.log(insertMessage.sql);
-      // connection.end();
+  var connection = connectionProvider.getConnection();
+  var insertMessage = connection.query(messageQuery, [
+    purchaseOrderId,
+    saleOrderId,
+    messageBody,
+    '',
+    buyerEmail,
+    sellerEmail,
+    hashedMessage],
+    function(err, rows) {
+    if (err) {
+      console.log('Fail to insert into message table ' + err);
+      connection.end();
+      return;
     }
   });
+
+  console.log(insertMessage.sql);
+  connection.end();
 }
 
-function sendMail(messageId, sender, recipients, subject, messageBody, messageHTML) {
+function sendMail(messageId, sender, recipients, subject, messageBody, messageHTML, hashedMessage) {
+  var messageText = commonHelper.convertMessageBodyToMessageText(messageBody);
+  var messageHTML = commonHelper.convertMessageBodyToMessageHTML(messageBody, globals.emailTemplate, hashedMessage);
+
   smtpTransport.sendMail({
     from: sender,
     to: recipients,
     subject: subject,
-    text: messageBody, // plaintext body
+    text: messageText, // plaintext body
     html: messageHTML // html body
   }, function(error, response) {
     if (error) {
@@ -280,7 +257,7 @@ function SendUnsentMessage() {
 
         console.log('Send message ' + message['id'] + ' from ' + sender + ' to ' + recipients + ' with subject ' + subject);
 
-        sendMail(message['id'], sender, recipients, subject, message['messageBody'], message['messageHTML']);
+        sendMail(message['id'], sender, recipients, subject, message['messageBody'], message['messageHTML'], message['messageHash']);
       }
     }
   });

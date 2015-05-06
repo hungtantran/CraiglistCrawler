@@ -3,6 +3,28 @@ var crypto          = require('crypto');
 CommonHelper = function() {
 };
 
+CommonHelper.prototype.convertMessageBodyToMessageText = function(messageBody) {
+  var messageText = messageBody.replace(/<MessageElem>/g, '\n');
+  return messageText;
+}
+
+CommonHelper.prototype.convertMessageBodyToMessageHTML = function(messageBody, htmlTemplate, hashedMessage) {
+  var messageParts = messageBody.split("<MessageElem>");
+
+  var messageHTML = htmlTemplate;
+  for (var i = 1; i < messageParts.length; ++i) {
+    var matchStr = '{' + (i-1) + '}';
+    messageHTML = messageHTML.replace(matchStr, messageParts[i]);
+  }
+
+  var matchStr = '{' + (messageParts.length - 1) + '}';
+  messageHTML = messageHTML.replace(matchStr, "http://www.leafyexchange.com/sale/email/" + hashedMessage);
+
+  messageHTML = messageHTML.replace(/______________________/g, '<br/><br/><br/>______________________<br/>');
+
+  return messageHTML;
+}
+
 // Hash string
 CommonHelper.prototype.HashString = function(str) {
   if (str === null || str === undefined) {
