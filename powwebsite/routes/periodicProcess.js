@@ -34,7 +34,7 @@ PeriodicProcess = function() {
 };
 
 function geocodeAndGetSeller(order) {
-  console.log('geocode and get seller');
+  console.log('geocodeAndGetSeller');
 
   geocoder.geocode(order['deliveryLocation'], function(err, res) {
     if (err) {
@@ -47,7 +47,9 @@ function geocodeAndGetSeller(order) {
         res[0]['latitude'],
         res[0]['longitude'],
         order['lowPrice'],
-        order['highPrice']);
+        order['highPrice'],
+        order['quantity'],
+        order['deliveryDate']);
 
       var connection2 = connectionProvider.getConnection();
 
@@ -63,7 +65,7 @@ function geocodeAndGetSeller(order) {
 }
 
 function ProcessPurchaseOrders() {
-    console.log("Process purchase order");
+    console.log("ProcessPurchaseOrders");
 
     var getPurchaseOrders = 'SELECT * FROM purchase_orders WHERE processed = 0 AND deliveryDate >= CURDATE() ORDER BY deliveryDate ASC, requestDate DESC LIMIT ' + MAX_PURCHASE_ORDER_PROCESS_EACH_TIME;
 
@@ -89,8 +91,8 @@ function ProcessPurchaseOrders() {
     connection.end();
 }
 
-function getSellers(buyerEmail, purchaseOrderId, purchaseLatitude, purchaseLongitude, lowPrice, highPrice) {
-  console.log('Get sellers for purchase order id ' + purchaseOrderId);
+function getSellers(buyerEmail, purchaseOrderId, purchaseLatitude, purchaseLongitude, lowPrice, highPrice, quantity, deliveryDate) {
+  console.log('getSellers ' + purchaseOrderId);
 
   var sellersQuery =
     'SELECT DISTINCT \
@@ -103,6 +105,7 @@ function getSellers(buyerEmail, purchaseOrderId, purchaseLatitude, purchaseLongi
         `posting_location`.`datePosted` AS `datePosted`, \
         `posting_location`.`active` AS `active`, \
         `posting_location`.`email` AS `email`, \
+        `posting_location`.`url` AS `url`, \
         `prices`.`price_fk` AS `price_fk`, \
         `prices`.`price` AS `price`, \
         `prices`.`quantity` AS `quantity`, \
@@ -131,7 +134,7 @@ function getSellers(buyerEmail, purchaseOrderId, purchaseLatitude, purchaseLongi
         if (rows.length == 0) {
           console.log('Found no seller');
         } else {
-          createSellerOrders(buyerEmail, rows, purchaseOrderId);
+          createSellerOrders(buyerEmail, rows, purchaseOrderId, lowPrice, highPrice, quantity, deliveryDate);
         }
       }
   });
@@ -140,43 +143,55 @@ function getSellers(buyerEmail, purchaseOrderId, purchaseLatitude, purchaseLongi
   connection.end();
 }
 
-function createSellerOrders(buyerEmail, sellers, purchaseOrderId) {
+function insertSaleAndCreateMessage(buyerEmail, email, seller, purchaseOrderId, lowPrice, highPrice, quantity, deliveryDate)
+{
+  console.log('insertSaleAndCreateMessage');
+
   var connection = connectionProvider.getConnection();
 
-  for (var i = 0; i < sellers.length; ++i) {
-    var email = 'leafyexchange@gmail.com';
+  var saleQuery = 'INSERT INTO sale_orders (purchaseOrderId, postingId, email) VALUES (?, ?, ?)';
 
-    if (sellers[i]['email'] !== null) {
-      email = sellers[i]['email'];
+  var insertSaleOrderQuery = connection.query(saleQuery, [
+    purchaseOrderId.toString(),
+    seller['price_fk'],
+    email],
+    function(err, rows) {
+    if (err) {
+      console.log(err);
+      /* TODO log error here */
+      connection.end();
+      return;
     } else {
-      continue;
+      var saleOrderId = rows['insertId'];
+      createMessage(purchaseOrderId, saleOrderId, buyerEmail, email, seller['url'], lowPrice, highPrice, quantity, deliveryDate);
     }
+  });
 
-    var saleQuery = 'INSERT INTO sale_orders (purchaseOrderId, postingId, email) VALUES (?, ?, ?)';
-
-    var insertSaleOrderQuery = connection.query(saleQuery, [
-      purchaseOrderId.toString(),
-      sellers[i]['price_fk'],
-      email],
-      function(err, rows) {
-      if (err) {
-        console.log(err);
-        /* TODO log error here */
-        connection.end();
-        return;
-      } else {
-        var saleOrderId = rows['insertId'];
-        createMessage(purchaseOrderId, saleOrderId, buyerEmail, email);
-      }
-    });
-
-    console.log(insertSaleOrderQuery.sql);
-  }
+  console.log(insertSaleOrderQuery.sql);
 
   connection.end();
 }
 
-function createMessage(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail) {
+function createSellerOrders(buyerEmail, sellers, purchaseOrderId, lowPrice, highPrice, quantity, deliveryDate) {
+  console.log('createSellerOrders');
+
+  for (var i = 0; i < sellers.length; ++i) {
+    var email = 'leafyexchange@gmail.com';
+    var seller = sellers[i];
+
+    if (seller !== null) {
+      email = seller['email'];
+    } else {
+      continue;
+    }
+
+    insertSaleAndCreateMessage(buyerEmail, email, seller, purchaseOrderId, lowPrice, highPrice, quantity, deliveryDate);
+  }
+}
+
+function createMessage(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail, sellerUrl, lowPrice, highPrice, quantity, deliveryDate) {
+  console.log(createMessage);
+
   if (purchaseOrderId === null || purchaseOrderId === undefined ||
     saleOrderId === null || saleOrderId === undefined ||
     buyerEmail === null || buyerEmail === undefined ||
@@ -184,8 +199,14 @@ function createMessage(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail) {
     return;
   }
 
+  console.log('Insert message');
+
   var hashedMessage = commonHelper.HashString(purchaseOrderId + saleOrderId + buyerEmail + sellerEmail + Math.random());
-  var messageBody = "<MessageElem>A Leafy Exchanger is interested in your post!<MessageElem>Our algorithms have identified a customer that is interested in your posting. If you'd like to continue the exchange, click on the link below:";
+  var messageBody = "<MessageElem>A Leafy Exchanger is interested in your post!<MessageElem>Our algorithms have identified a customer that is interested in your posting {0}.<~~>The customer would like to purchase {1} grams before {2}. If you'd like to continue the exchange, click on the link below:".format(sellerUrl, quantity, deliveryDate);
+  console.log(messageBody);
+  console.log(sellerUrl);
+  console.log(quantity);
+  console.log(deliveryDate);
 
   // Insert the message into database to be sent
   var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, messageHTML, fromEmail, toEmail, datetime, messageHash) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)';
@@ -212,6 +233,8 @@ function createMessage(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail) {
 }
 
 function sendMail(messageId, sender, recipients, subject, messageBody, messageHTML, hashedMessage) {
+  console.log('sendMail');
+
   var messageText = commonHelper.convertMessageBodyToMessageText(messageBody, hashedMessage);
   var messageHTML = commonHelper.convertMessageBodyToMessageHTML(messageBody, globals.emailTemplate, hashedMessage);
 
@@ -239,6 +262,8 @@ function sendMail(messageId, sender, recipients, subject, messageBody, messageHT
 }
 
 function SendUnsentMessage() {
+  console.log('SendUnsentMessage');
+
   var getUnsentMessage = 'SELECT * FROM message WHERE sentStatus = 0 ORDER BY datetime ASC LIMIT ' + MAX_MESSAGES_SENT_EACH_TIME;
 
   var connection = connectionProvider.getConnection();

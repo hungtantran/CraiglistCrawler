@@ -5,6 +5,7 @@ CommonHelper = function() {
 
 CommonHelper.prototype.convertMessageBodyToMessageText = function(messageBody, hashedMessage) {
   var messageText = messageBody.replace(/<MessageElem>/g, '\n');
+  messageText = messageBody.replace(/<~~>/g, '\n');
   // messageText += "\nhttp://www.leafyexchange.com/sale/" + hashedMessage;
   return messageText;
 }
@@ -25,6 +26,8 @@ CommonHelper.prototype.convertMessageBodyToMessageHTML = function(messageBody, h
   messageHTML = messageHTML.replace(matchStr, "http://www.leafyexchange.com/sale/email/" + hashedMessage);
 
   messageHTML = messageHTML.replace(/______________________/g, '<br/><br/><br/>______________________<br/>');
+
+  messageHTML = messageHTML.replace(/<~~>/g, '<br/>');
 
   return messageHTML;
 }
