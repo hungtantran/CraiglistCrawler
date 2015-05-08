@@ -24,17 +24,34 @@ router.get('/:messageId', function(req, res) {
             res.end();
         } else {
             if (rows.length == 0) {
-                res.render('sale', {
-                    title: 'LeafyExchange: The Best Marijuana Prices and Information in the US',
+                res.render('index', {
+                    title: 'LeafyExchange: The Best Marijuana Prices and Information',
                     stylesheet: '/stylesheets/index.css',
-                    description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot',
+                    postings: globals.postings,
+                    localBusinesses: globals.localBusinesses,
+                    states: globals.states,
+                    pricesString: globals.commonHelper.constructPriceStringArray(globals.postings),
+                    quantitiesString: globals.commonHelper.constructQuantityStringArray(globals.postings),
+                    description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot in your area!',
                     keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
-                    icon: '/images/leafyexchange.jpg'
-                });
+                    icon: '/images/icon.png',
+                    javascriptSrcs: 
+                        ['http://maps.googleapis.com/maps/api/js',
+                         'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js',
+                         'http://cdn.jsdelivr.net/d3js/3.3.9/d3.min.js',
+                         'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel_packed.js',
+                         '/javascripts/index.js']
+                  });
             } else {
                 var messageText = commonHelper.convertMessageBodyToMessageText(rows[0]['messageBody'], rows[0]['messageHash']);
                 console.log('text = ' + messageText);
                 messageContent = '\n\n\n______________________\n' + messageText;
+
+                // Only request email for the first reply
+                var requestEmail = false;
+                if (!rows[0]['replyTo']) {
+                    requestEmail = true;
+                }
 
                 res.render('sale', {
                     title: 'LeafyExchange: The Best Marijuana Prices and Information in the US',
@@ -43,7 +60,8 @@ router.get('/:messageId', function(req, res) {
                     keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
                     icon: '/images/leafyexchange.jpg',
                     messageContent: messageContent,
-                    messageId: messageId
+                    messageId: messageId,
+                    requestEmail: requestEmail
                 });
             }
         }
@@ -55,8 +73,7 @@ router.get('/:messageId', function(req, res) {
 
 router.post('/', function(req, res) {
     if (!('messageId' in req.body) ||
-        !('reply' in req.body) ||
-        !('email' in req.body)) {
+        !('reply' in req.body)) {
         // This shouldn't happen
         res.statusCode = 404;
         res.setHeader('Location','/');
@@ -89,7 +106,14 @@ router.post('/', function(req, res) {
                 } else if (rows.length == 1) {
                     // The normal case
                     var message = rows[0];
-                    var hashedMessage = commonHelper.HashString(message['purchaseOrderId'] + message['saleOrderId'] + req.body['email'] + message['fromEmail'] + Math.random());
+
+                    var email = 'NoEmail';
+                    if ('email' in req.body)
+                    {
+                        email = req.body['email'];
+                    }
+
+                    var hashedMessage = commonHelper.HashString(message['purchaseOrderId'] + message['saleOrderId'] + email + message['fromEmail'] + Math.random());
                     // Insert the new message into database to be sent
                     var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, messageHTML, fromEmail, toEmail, datetime, messageHash, replyTo) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?, ?)';
 
@@ -101,7 +125,7 @@ router.post('/', function(req, res) {
                         message['saleOrderId'],
                         messageBody, /* Message body */
                         '', /* Message html */
-                        req.body['email'],
+                        email,
                         message['fromEmail'],
                         hashedMessage,
                         message['id']],
@@ -128,6 +152,25 @@ router.post('/', function(req, res) {
                 }
             }
         });
+
+        res.render('index', {
+            title: 'LeafyExchange: The Best Marijuana Prices and Information',
+            stylesheet: '/stylesheets/index.css',
+            postings: globals.postings,
+            localBusinesses: globals.localBusinesses,
+            states: globals.states,
+            pricesString: globals.commonHelper.constructPriceStringArray(globals.postings),
+            quantitiesString: globals.commonHelper.constructQuantityStringArray(globals.postings),
+            description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot in your area!',
+            keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
+            icon: '/images/icon.png',
+            javascriptSrcs: 
+                ['http://maps.googleapis.com/maps/api/js',
+                 'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js',
+                 'http://cdn.jsdelivr.net/d3js/3.3.9/d3.min.js',
+                 'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel_packed.js',
+                 '/javascripts/index.js']
+          });
     });
 
 // Tracking email

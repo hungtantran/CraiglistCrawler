@@ -7,9 +7,13 @@ block content
         h2
             | Message
         form(name='sale', action='/sale', method='post')
-            .form-group
-                label.control-label(for='email') Email:
-                input.form-control(type='email', id='email', placeholder='@', name='email')
+
+            - if (requestEmail) {
+                .form-group
+                    label.control-label(for='email') Email:
+                    input.form-control(type='email', id='email', placeholder='@', name='email')
+            - }
+
             .form-group
                 label.control-label(for='message-text') Reply Message:
                 textarea.form-control(rows='20', id='reply', name='reply')

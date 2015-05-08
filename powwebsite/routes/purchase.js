@@ -87,18 +87,18 @@ router.post('/', function(req, res) {
       console.log(insertPurchaseOrder.sql);
 
       res.render('purchase', {
-      title: "We've reached out to sellers in your area!",
-      stylesheet: '/stylesheets/index.css',
-      description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot in your area!',
-      keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
-      icon: '/images/leafyexchange.jpg',
-      javascriptSrcs: 
-          ['http://maps.googleapis.com/maps/api/js',
-           'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js',
-           'http://cdn.jsdelivr.net/d3js/3.3.9/d3.min.js',
-           'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel_packed.js',
-           '/javascripts/index.js']});
-      res.end();
+        title: "We've reached out to sellers in your area!",
+        stylesheet: '/stylesheets/index.css',
+        description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot in your area!',
+        keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
+        icon: '/images/leafyexchange.jpg',
+        javascriptSrcs: 
+            ['http://maps.googleapis.com/maps/api/js',
+             'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js',
+             'http://cdn.jsdelivr.net/d3js/3.3.9/d3.min.js',
+             'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel_packed.js',
+             '/javascripts/index.js']});
+        res.end();
     }
 });
 
