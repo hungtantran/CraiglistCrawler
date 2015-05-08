@@ -93,10 +93,10 @@ function RefreshCache() {
 
 RefreshCache();
 
-// Periodically refresh cache every 5 minutes
+// Periodically refresh cache every 1 hours
 setInterval(function() {
     RefreshCache();
-}, 300000);
+}, 3600000);
 
 function GetEmailTemplate() {
     filesystem.readFile(__dirname + "/sellerEmail.html", "utf-8", function(error, data) {

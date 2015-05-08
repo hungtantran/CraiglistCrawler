@@ -32,7 +32,7 @@ router.get('/:messageId', function(req, res) {
                     icon: '/images/leafyexchange.jpg'
                 });
             } else {
-                var messageText = commonHelper.convertMessageBodyToMessageText(rows[0]['messageBody']);
+                var messageText = commonHelper.convertMessageBodyToMessageText(rows[0]['messageBody'], rows[0]['messageHash']);
                 console.log('text = ' + messageText);
                 messageContent = '\n\n\n______________________\n' + messageText;
 
@@ -93,7 +93,7 @@ router.post('/', function(req, res) {
                     // Insert the new message into database to be sent
                     var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, messageHTML, fromEmail, toEmail, datetime, messageHash, replyTo) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?, ?)';
 
-                    var messageBody = "<MessageElem>You got a new message on Leafy Exchange!<MessageElem>{0}<MessageElem>http://www.leafyexchange.com/sale/{1}<MessageElem>".format(req.body['reply'], hashedMessage);
+                    var messageBody = "<MessageElem>You got a new message on Leafy Exchange!<MessageElem>{0}".format(req.body['reply']);
 
                     var connection = connectionProvider.getConnection();
                     var insertMessage = connection.query(messageQuery, [

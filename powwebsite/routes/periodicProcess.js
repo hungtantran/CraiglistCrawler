@@ -185,7 +185,7 @@ function createMessage(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail) {
   }
 
   var hashedMessage = commonHelper.HashString(purchaseOrderId + saleOrderId + buyerEmail + sellerEmail + Math.random());
-  var messageBody = "<MessageElem>A Leafy Exchanger is interested in your post!<MessageElem>Our algorithms have identified a customer that is interested in your posting. If you'd like to continue the exchange, click on the link below:<MessageElem>http://www.leafyexchange.com/sale/{0}<MessageElem>".format(hashedMessage);
+  var messageBody = "<MessageElem>A Leafy Exchanger is interested in your post!<MessageElem>Our algorithms have identified a customer that is interested in your posting. If you'd like to continue the exchange, click on the link below:";
 
   // Insert the message into database to be sent
   var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, messageHTML, fromEmail, toEmail, datetime, messageHash) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)';
@@ -212,7 +212,7 @@ function createMessage(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail) {
 }
 
 function sendMail(messageId, sender, recipients, subject, messageBody, messageHTML, hashedMessage) {
-  var messageText = commonHelper.convertMessageBodyToMessageText(messageBody);
+  var messageText = commonHelper.convertMessageBodyToMessageText(messageBody, hashedMessage);
   var messageHTML = commonHelper.convertMessageBodyToMessageHTML(messageBody, globals.emailTemplate, hashedMessage);
 
   smtpTransport.sendMail({
