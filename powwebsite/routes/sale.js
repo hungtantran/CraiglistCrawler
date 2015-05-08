@@ -57,7 +57,7 @@ router.post('/', function(req, res) {
     if (!('messageId' in req.body) ||
         !('reply' in req.body) ||
         !('email' in req.body)) {
-        // This shouldn't happen
+        console.log("This shouldn't happen");
         res.statusCode = 404;
         res.setHeader('Location','/');
         res.end();
@@ -117,6 +117,7 @@ router.post('/', function(req, res) {
                     connection.end();
 
                     res.statusCode = 200;
+                    res.setHeader('Location','/');
                     res.end();
                     return;
                 } else {
@@ -128,7 +129,10 @@ router.post('/', function(req, res) {
                 }
             }
         });
-    });
+    res.statusCode = 200;
+    res.setHeader('Location','www.leafyexchange.com');
+    res.end();
+});
 
 // Tracking email
 router.get('/email/:messageHash', function(req, res) {
