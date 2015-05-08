@@ -3,8 +3,9 @@ var crypto          = require('crypto');
 CommonHelper = function() {
 };
 
-CommonHelper.prototype.convertMessageBodyToMessageText = function(messageBody) {
+CommonHelper.prototype.convertMessageBodyToMessageText = function(messageBody, hashedMessage) {
   var messageText = messageBody.replace(/<MessageElem>/g, '\n');
+  // messageText += "\nhttp://www.leafyexchange.com/sale/" + hashedMessage;
   return messageText;
 }
 
@@ -18,6 +19,9 @@ CommonHelper.prototype.convertMessageBodyToMessageHTML = function(messageBody, h
   }
 
   var matchStr = '{' + (messageParts.length - 1) + '}';
+  messageHTML = messageHTML.replace(matchStr, "http://www.leafyexchange.com/sale/" + hashedMessage);
+
+  matchStr = '{' + (messageParts.length) + '}';
   messageHTML = messageHTML.replace(matchStr, "http://www.leafyexchange.com/sale/email/" + hashedMessage);
 
   messageHTML = messageHTML.replace(/______________________/g, '<br/><br/><br/>______________________<br/>');
