@@ -97,7 +97,8 @@ function getSellers(buyerEmail, purchaseOrderId, purchaseLatitude, purchaseLongi
   var sellersQuery =
     'SELECT DISTINCT \
       `email`, \
-      `price_fk` \
+      `price_fk`, \
+      `url` \
     FROM \
       (SELECT `posting_location`.`latitude` AS `latitude`, \
         `posting_location`.`longitude` AS `longitude`, \
@@ -178,6 +179,7 @@ function createSellerOrders(buyerEmail, sellers, purchaseOrderId, lowPrice, high
   for (var i = 0; i < sellers.length; ++i) {
     var email = 'leafyexchange@gmail.com';
     var seller = sellers[i];
+    console.log(seller);
 
     if (seller !== null) {
       email = seller['email'];
@@ -190,7 +192,7 @@ function createSellerOrders(buyerEmail, sellers, purchaseOrderId, lowPrice, high
 }
 
 function createMessage(purchaseOrderId, saleOrderId, buyerEmail, sellerEmail, sellerUrl, lowPrice, highPrice, quantity, deliveryDate) {
-  console.log(createMessage);
+  console.log("createMessage");
 
   if (purchaseOrderId === null || purchaseOrderId === undefined ||
     saleOrderId === null || saleOrderId === undefined ||
