@@ -102,7 +102,7 @@ router.post('/', function(req, res) {
                     // The normal case
                     var message = rows[0];
 
-                    var email = 'NoEmail';
+                    var email = message['toEmail'];
                     if ('email' in req.body)
                     {
                         email = req.body['email'];
@@ -120,8 +120,8 @@ router.post('/', function(req, res) {
                         message['saleOrderId'],
                         messageBody, /* Message body */
                         '', /* Message html */
-                        email,
-                        message['fromEmail'],
+                        email, /* fromEmail */
+                        message['fromEmail'], /* toEmail */
                         hashedMessage,
                         message['id']],
                         function(err, rows) {
