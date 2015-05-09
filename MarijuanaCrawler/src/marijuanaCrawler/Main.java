@@ -34,9 +34,26 @@ public class Main {
 			return;
 		}
 	}
+	
+	public static void crawlLeafly() {
+		IWebsiteCrawler crawler = null;
+
+		try {
+			crawler = new LeaflyCrawler();
+
+			if (!crawler.crawl()) {
+				Globals.crawlerLogManager.writeLog("Fail to crawl leafly");
+			}
+		} catch (Exception e) {
+			Globals.crawlerLogManager.writeLog("Fail to create LeaflyCrawler object and crawl " + e.getMessage());
+			e.printStackTrace();
+			return;
+		}
+	}
 
 	public static void main(String[] args) {
 		crawlCraigList();
 		// crawlYelp();
+		// crawlLeafly();
 	}
 }
