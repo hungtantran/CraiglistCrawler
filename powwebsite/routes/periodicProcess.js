@@ -277,7 +277,7 @@ function SendUnsentMessage() {
       for (var i = 0; i < rows.length; ++i) {
         var message = rows[i];
         var sender = 'Leafy Exchange <leafyexchange@gmail.com>';
-        var recipients = 'roger.l.hau@gmail.com, hungtantran@gmail.com';
+        var recipients = message['toEmail'];
         var subject = 'Someone is interested in your posting!';
 
         console.log('Send message ' + message['id'] + ' from ' + sender + ' to ' + recipients + ' with subject ' + subject);
