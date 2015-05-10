@@ -75,18 +75,18 @@ router.get('/:typeName', function(req, res) {
     }
 
     res.render('type', {
-        title: 'LeafyExchange: The Best ' + type['name'] + ' Prices and Information',
+        title: 'LeafyExchange: The Best ' + type['name'] + ' Weed Prices and Information',
         stylesheet: '/stylesheets/type.css',
         type: type,
         postings: postingTagsInfo,
         pricesString: globals.commonHelper.constructPriceStringArray(postingTagsInfo),
         quantitiesString: globals.commonHelper.constructQuantityStringArray(postingTagsInfo),
-        description: 'Looking for ' + type['name'] + '? LeafyExchange has the best prices of ' + type['name'] + ' in the US',
-        keywords: type['name'] + ', price of ' + type['name'] + ', buy ' + type['name'] + ' , sell' + type['name'] +', 420, green, weed, pot, marijuana, legalize, medical, medicinal, herb, herbal',
+        states: globals.states,
+        description: 'Looking for ' + type['name'] + ' Weed? LeafyExchange has the best prices of ' + type['name'] + ' Weed in the US',
+        keywords: type['name'] + ' Weed, price of ' + type['name'] + ' Weed, buy ' + type['name'] + ' Weed, sell ' + type['name'] +' Weed, 420, green, weed, pot, marijuana, legalize, medical, medicinal, herb, herbal',
         icon: '/images/icon.png',
         javascriptSrcs:
-            ['http://maps.googleapis.com/maps/api/js',
-             'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js',
+            ['http://maps.googleapis.com/maps/api/js',,
              'http://cdn.jsdelivr.net/d3js/3.3.9/d3.min.js',
              'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel_packed.js',
              '/javascripts/type.js']

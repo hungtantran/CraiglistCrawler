@@ -8,7 +8,7 @@ b {
     font-size: 13px;
 }
 
-h1,h3 {
+h1 {
     font-size: 20px;
     font-weight: bold;
 }
@@ -26,6 +26,8 @@ h2 {
 }
 
 #content {
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #original_button {
@@ -67,6 +69,21 @@ h2 {
     padding: 20px; 
     background: #dddddd;
     border-radius: 25px;
+}
+
+#tag {
+    border: 2px solid #AF0000;
+    padding: 10px; 
+    background: #FF5050;
+    border-radius: 25px;
+    font-size: 1.15em;
+    font-weight: bold;
+    color: white;
+}
+
+#tag a {
+    color: white;
+    text-decoration: underline;
 }
 
 .axis path,
@@ -129,7 +146,7 @@ h2 {
 ------------------------- */
 
 .featurette-divider {
-  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+  margin: 40px 0; /* Space out the Bootstrap <hr> more */
 }
 
 /* Thin out the marketing headings */
