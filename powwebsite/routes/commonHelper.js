@@ -131,13 +131,22 @@ CommonHelper.prototype.IsIntValue = function(value) {
     return false;
 }
 
-CommonHelper.prototype.constructPriceString = function(prices) {
+CommonHelper.prototype.constructPriceString = function(prices, maxElem) {
     if (!prices) {
         return prices;
     }
 
+    var numElem = prices.length;
+    if (maxElem === undefined) {
+      maxElem = 5;
+    }
+
+    if (numElem > maxElem) {
+      numElem = maxElem;
+    }
+
     var priceString = "";
-    for (var i = 0; i < prices.length; ++i) {
+    for (var i = 0; i < numElem; ++i) {
         priceString += "$" + prices[i] + ", "
     }
 

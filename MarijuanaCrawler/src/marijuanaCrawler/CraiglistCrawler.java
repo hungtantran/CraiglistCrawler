@@ -308,7 +308,7 @@ public class CraiglistCrawler implements IWebsiteCrawler {
 
 			final String locationUrl = this.urlsQueue.remove().getLink();
 			++index;
-			if (index < 3) {
+			if (index < 6) {
 				continue;
 			}
 
