@@ -413,7 +413,7 @@ function initializePostings(postings) {
     // Title cell
     var title = row.insertCell(index++);
     title.innerHTML = '<strong><a href="' + url + '">' + postings[i]['title'] + '</a></strong>';
-    title.setAttribute('class','col-xs-8 col-sm-8 col-md-6 col-lg-6 text-center');
+    title.setAttribute('class','col-xs-8 col-sm-8 col-md-6 col-lg-6');
 
     // Code for query with grouping
     // Quantity cell
@@ -527,7 +527,7 @@ function initializeLocalBusinesses(localBusinesses) {
     // Title cell
     var title = row.insertCell(index++);
     title.innerHTML = '<strong>' + localBusinesses[i]['title'] + '</strong>';
-    title.setAttribute('class','col-xs-6 col-sm-6 col-md-4 col-lg-4 text-center');
+    title.setAttribute('class','col-xs-6 col-sm-6 col-md-4 col-lg-4');
 
     // Code for query with grouping
     // Quantity cell
