@@ -13,6 +13,8 @@ var posting = require('./routes/posting');
 var search = require('./routes/search');
 var purchase = require('./routes/purchase');
 var sale = require('./routes/sale');
+var strain = require('./routes/strain');
+var type = require('./routes/type');
 
 var app = express();
 
@@ -50,6 +52,7 @@ app.use('/prices', prices);
 app.use('/posting', posting);
 app.use('/purchase', purchase);
 app.use('/sale', sale);
+app.use('/type', type);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

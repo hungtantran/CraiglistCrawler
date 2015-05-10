@@ -6,6 +6,11 @@ var PricesProvider = require('./pricesprovider').PricesProvider;
 var pricesProvider = new PricesProvider();
 var LocalBusinessProvider = require('./localBusinessProvider').LocalBusinessProvider;
 var localBusinessProvider = new LocalBusinessProvider();
+var TypeProvider = require('./typeProvider').TypeProvider;
+var typeProvider = new TypeProvider();
+var StrainProvider = require('./strainProvider').StrainProvider;
+var strainProvider = new StrainProvider();
+
 var CommonHelper = require('./commonHelper').CommonHelper;
 var commonHelper = new CommonHelper();
 var PeriodicProcess = require('./periodicProcess').PeriodicProcess;
@@ -70,25 +75,31 @@ function RefreshCache() {
         UpdatePostingCache(error, docs);
         console.log("Postings cache has " + postings.length + " entries")
         exports.postings = postings;
-    })
+    });
 
     localBusinessProvider.getAllLocalBusinesses(function(error, docs) {
         localBusinesses = docs;
         console.log("Local business cache has " + localBusinesses.length + " entries")
         exports.localBusinesses = localBusinesses;
-    })
+    });
 
     pricesProvider.getAllPrices(function(error, docs) {
         prices = docs;
         console.log("Prices cache has " + prices.length + " entries");
         exports.prices = prices;
-    })
+    });
 
     pricesProvider.getAllPostingLocations(function(error, docs) {
         postingLocations = docs;
         console.log("PostingLocations cache has " + postingLocations.length + " entries");
         exports.postingLocations = postingLocations;
-    })
+    });
+
+    strainProvider.getAllActivePostStrain(function(error, docs) {
+        postingTags = docs;
+        console.log("postingTags cache has " + postingTags.length + " entries");
+        exports.postingTags = postingTags;
+    });
 }
 
 RefreshCache();
@@ -109,6 +120,15 @@ function GetEmailTemplate() {
 }
 GetEmailTemplate();
 
+function GetAllTypes() {
+    typeProvider.getAllTypes(function(error, docs) {
+        allTypes = docs;
+        console.log("AllTypes has " + allTypes.length + " entries")
+        exports.allTypes = allTypes;
+    });
+}
+GetAllTypes();
+
 var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'];
 exports.states = states;
 
@@ -116,5 +136,3 @@ exports.pricesProvider = pricesProvider;
 exports.postingLocationProvider = postingLocationProvider;
 exports.commonHelper = commonHelper;
 exports.periodicProcess = periodicProcess;
-
-

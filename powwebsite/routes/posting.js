@@ -38,7 +38,6 @@ router.get('/:id', function(req, res) {
             return;
         }
 
-
         // Related posts from the same city
         var info = [];
         var city = doc['city'];
@@ -55,7 +54,19 @@ router.get('/:id', function(req, res) {
         }
         title += " - LeafyExchange";
 
-        console.log(doc['url']);
+        // Calculate type and strains of post
+        var types = {};
+        for (var i = 0; i < globals.postingTags.length; ++i) {
+            if (globals.postingTags[i]['id'] == id) {
+                types[globals.postingTags[i]['type_id']] = true;
+            }
+        }
+
+        for (var i = 0; i < globals.allTypes.length; ++i) {
+            if (globals.allTypes[i]['id'] in types) {
+                types[globals.allTypes[i]['id']] = globals.allTypes[i]['name'];
+            }
+        }
 
         res.render('posting', {
             title: title,
@@ -70,9 +81,10 @@ router.get('/:id', function(req, res) {
             latitude: doc['latitude'],
             longitude: doc['longitude'],
             states: globals.states,
+            types: types,
             description: 'Looking for weed? ' + doc['title'] + '. LeafyExchange has the best prices of weed, marijuana pot in ' + doc['city'] + ', ' + doc['state'],
             keywords: 'price of weed, price of marijuana, price of pot, 420, green, weed, pot, marijuana, legalize, medical, medicinal, herb, herbal',
-            icon: '/images/leafyexchange.jpg',
+            icon: '/images/icon.png',
             javascriptSrcs:
                 ['http://maps.googleapis.com/maps/api/js',
                  'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js',

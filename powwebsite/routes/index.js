@@ -66,7 +66,7 @@ router.get('/state/:state', function(req, res){
         return;
     }
 
-    postingStateInfo = [];
+    var postingStateInfo = [];
     for (var i = 0; i < globals.postings.length; ++i) {
         if (globals.postings[i]['state'].toUpperCase() === state.toUpperCase()) {
             postingStateInfo.push(globals.postings[i]);
@@ -93,7 +93,7 @@ router.get('/state/:state', function(req, res){
         quantitiesString: globals.commonHelper.constructQuantityStringArray(postingStateInfo),
         description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot in ' + state,
         keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
-        icon: '/images/leafyexchange.jpg',
+        icon: '/images/icon.png',
         javascriptSrcs: 
             ['http://maps.googleapis.com/maps/api/js',
              'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js',
@@ -111,7 +111,7 @@ router.get('/privacy', function(req, res) {
     states: globals.states,
     description: 'Looking for the price of weed? LeafyExchange can help you find the prices of pot in your area!',
     keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
-    icon: '/images/leafyexchange.jpg'
+    icon: '/images/icon.png'
   });
 });
 
@@ -123,7 +123,7 @@ router.get('/aboutus', function(req, res) {
     states: globals.states,
     description: 'Looking for the price of weed? LeafyExchange can help you find the prices of pot in your area!',
     keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
-    icon: '/images/leafyexchange.jpg'
+    icon: '/images/icon.png'
   });
 });
 
@@ -135,7 +135,7 @@ router.get('/terms', function(req, res) {
     states: globals.states,
     description: 'Looking for the price of weed? LeafyExchange can help you find the prices of pot in your area!',
     keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
-    icon: '/images/leafyexchange.jpg'
+    icon: '/images/icon.png'
   });
 });
 
