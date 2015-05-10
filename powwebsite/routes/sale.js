@@ -58,7 +58,7 @@ router.get('/:messageId', function(req, res) {
                     stylesheet: '/stylesheets/index.css',
                     description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot',
                     keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
-                    icon: '/images/leafyexchange.jpg',
+                    icon: '/images/icon.png',
                     messageContent: messageContent,
                     messageId: messageId,
                     requestEmail: requestEmail

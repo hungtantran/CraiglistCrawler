@@ -84,7 +84,7 @@ router.get('/:id', function(req, res) {
             types: types,
             description: 'Looking for weed? ' + doc['title'] + '. LeafyExchange has the best prices of weed, marijuana pot in ' + doc['city'] + ', ' + doc['state'],
             keywords: 'price of weed, price of marijuana, price of pot, 420, green, weed, pot, marijuana, legalize, medical, medicinal, herb, herbal',
-            icon: '/images/leafyexchange.jpg',
+            icon: '/images/icon.png',
             javascriptSrcs:
                 ['http://maps.googleapis.com/maps/api/js',
                  'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js',
