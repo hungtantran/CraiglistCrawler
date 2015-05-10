@@ -77,7 +77,7 @@ function initializePrices(prices) {
 
 function newPriceBin(divId, prices) {
   var binNames = ['0-5', '5-10', '10-15', '15-20', '20-25', '25-30', '30-35', '35-40','40-45','45+'];
-  data = {}
+  var data = {}
   for (var i=0; i<prices.length; ++i)
   {
     var entry = prices[i];
@@ -104,17 +104,26 @@ function newPriceBin(divId, prices) {
     bins[binKey] = bins[binKey] + 1;
   }
 
+  var numTotalBins = 0;
+  var numEmptyBins = 0;
   arr = [];
   for (k in data) {
     data[k]['state'] = k;
     data[k]['bins'] = binNames.map( function(name) { return {name:name, value:data[k][name], state:k} });
 
     arr.push(data[k]);
+
+    for (var i=0; i<data[k]['bins'].length; ++i) {
+      if (data[k]['bins'][i]['value'] == 0) {
+        numEmptyBins++;
+      }
+      numTotalBins++;
+    }
   }
 
-  var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = $('#' + divId).width()- margin.left - margin.right,
-    height = 250*arr.length;//250 - margin.top - margin.bottom;
+  var margin = {top: 20, right: 40, bottom: 30, left: 40},
+    width = $('#' + divId).width()- margin.left*2.5 - margin.right*2.5,
+    height = 250*arr.length * ((numTotalBins-numEmptyBins) / numTotalBins);
   
   var y0 = d3.scale.ordinal()
     .rangeRoundBands([0, height], .1);
@@ -186,10 +195,30 @@ function newPriceBin(divId, prices) {
         .attr("class", "g")
         .attr("transform", function(d) { return "translate(100," + y0(d.state) + ")"; });
 
+  var axisFunc = function(d, binNames, y0, y1, data) {
+    var bins = [];
+    var __data__ = d[0][0]["__data__"];
+    var state = __data__["state"];
+    for (var i=0; i<binNames.length; ++i) {
+      var binName = binNames[i];
+      if (__data__[binName] > 0) {
+        bins.push(binName);
+      }
+    }
+
+    var yAxisBins = d3.svg.axis()
+      .scale(y1)
+      .orient("left")
+      .tickSize(0);
+    y1.domain(bins).rangeRoundBands([0, y0.rangeBand()]);
+
+    return yAxisBins(d);
+  }
+
   state.append("g")
     .attr("class", "y axis")
     .attr("transform", "translate(0,0)")
-    .call(yAxisBins);
+    .call(axisFunc, binNames, y0, y1, data);
 
   state.selectAll("rect")
     .data(function(d) {
@@ -226,11 +255,17 @@ function newPriceBin(divId, prices) {
           return x(d.value);
         }
       })
-      .attr("x", 0)
+      .attr("x", 1)
       .attr("y", function(d) {
+        console.log(y1.domain());
         return y1(d.name)+2;
       })
-      .attr("height", y1.rangeBand()-4)
+      .attr("height", function(d) {
+        console.log(y0.rangeBand());
+        console.log(y1.rangeBand());
+        // return 10;
+        return y1.rangeBand()-4;
+      })//y1.rangeBand()-4)
       .on('mouseover', function(d) {
         var xPosition = parseInt(d3.select(this).attr("x") );
         var yPosition = parseInt(d3.select(this).attr("y") );
