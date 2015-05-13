@@ -53,6 +53,7 @@ app.use('/posting', posting);
 app.use('/purchase', purchase);
 app.use('/sale', sale);
 app.use('/type', type);
+app.use('/strain', strain);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

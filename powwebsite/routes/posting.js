@@ -56,15 +56,23 @@ router.get('/:id', function(req, res) {
 
         // Calculate type and strains of post
         var types = {};
+        var strains = {};
         for (var i = 0; i < globals.postingTags.length; ++i) {
             if (globals.postingTags[i]['id'] == id) {
                 types[globals.postingTags[i]['type_id']] = true;
+                strains[globals.postingTags[i]['strain_id']] = true;
             }
         }
 
         for (var i = 0; i < globals.allTypes.length; ++i) {
             if (globals.allTypes[i]['id'] in types) {
                 types[globals.allTypes[i]['id']] = globals.allTypes[i]['name'];
+            }
+        }
+
+        for (var i = 0; i < globals.allStrains.length; ++i) {
+            if (globals.allStrains[i]['id'] in strains) {
+                strains[globals.allStrains[i]['id']] = [globals.allStrains[i]['name'], globals.allStrains[i]['name'].replace(/ /g, '-')];
             }
         }
 
@@ -82,6 +90,7 @@ router.get('/:id', function(req, res) {
             longitude: doc['longitude'],
             states: globals.states,
             types: types,
+            strains: strains,
             description: 'Looking for weed? ' + doc['title'] + '. LeafyExchange has the best prices of weed, marijuana pot in ' + doc['city'] + ', ' + doc['state'],
             keywords: 'price of weed, price of marijuana, price of pot, 420, green, weed, pot, marijuana, legalize, medical, medicinal, herb, herbal',
             icon: '/images/icon.png',

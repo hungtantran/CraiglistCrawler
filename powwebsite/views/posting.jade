@@ -27,6 +27,9 @@ block content
           - for (var key in types) {
               | <a href='/type/!{types[key]}'>!{types[key]},</a>  
           - }
+          - for (var key in strains) {
+              | <a href='/strain/!{strains[key][1]}'>!{strains[key][0]},</a>  
+          - }
 
       div(id='right_pane'              class='col-xs-12 col-sm-4 col-md-4 col-lg-4')
         div(class='col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center')

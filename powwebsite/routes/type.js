@@ -82,11 +82,11 @@ router.get('/:typeName', function(req, res) {
         pricesString: globals.commonHelper.constructPriceStringArray(postingTagsInfo),
         quantitiesString: globals.commonHelper.constructQuantityStringArray(postingTagsInfo),
         states: globals.states,
-        description: 'Looking for ' + type['name'] + ' Weed? LeafyExchange has the best prices of ' + type['name'] + ' Weed in the US',
+        description: 'Looking for ' + type['name'] + ' Weed? LeafyExchange has the best prices of ' + type['name'] + ' Weed in the US. ' + type['description'],
         keywords: type['name'] + ' Weed, price of ' + type['name'] + ' Weed, buy ' + type['name'] + ' Weed, sell ' + type['name'] +' Weed, 420, green, weed, pot, marijuana, legalize, medical, medicinal, herb, herbal',
         icon: '/images/icon.png',
         javascriptSrcs:
-            ['http://maps.googleapis.com/maps/api/js',,
+            ['http://maps.googleapis.com/maps/api/js',
              'http://cdn.jsdelivr.net/d3js/3.3.9/d3.min.js',
              'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel_packed.js',
              '/javascripts/type.js']
