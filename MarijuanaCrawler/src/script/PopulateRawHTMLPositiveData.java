@@ -70,19 +70,15 @@ public class PopulateRawHTMLPositiveData {
 
 	public static void main(String[] args) {
 		String negativePath = "testingSet" + File.separator + "negative";
-		PopulateRawHTMLPositiveData.populateRawHTMLPositiveDataGivenPath(
-				negativePath, (short) 0);
+		PopulateRawHTMLPositiveData.populateRawHTMLPositiveDataGivenPath(negativePath, (short) 0);
 
 		negativePath = "trainingSet" + File.separator + "negative";
-		PopulateRawHTMLPositiveData.populateRawHTMLPositiveDataGivenPath(
-				negativePath, (short) 0);
+		PopulateRawHTMLPositiveData.populateRawHTMLPositiveDataGivenPath(negativePath, (short) 0);
 
 		String positivePath = "testingSet" + File.separator + "positive";
-		PopulateRawHTMLPositiveData.populateRawHTMLPositiveDataGivenPath(
-				positivePath, (short) 1);
+		PopulateRawHTMLPositiveData.populateRawHTMLPositiveDataGivenPath(positivePath, (short) 1);
 
 		positivePath = "trainingSet" + File.separator + "positive";
-		PopulateRawHTMLPositiveData.populateRawHTMLPositiveDataGivenPath(
-				positivePath, (short) 1);
+		PopulateRawHTMLPositiveData.populateRawHTMLPositiveDataGivenPath(positivePath, (short) 1);
 	}
 }
