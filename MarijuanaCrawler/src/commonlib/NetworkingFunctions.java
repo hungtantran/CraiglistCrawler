@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Random;
 
+import org.jsoup.Connection;
 import org.jsoup.Connection.Response;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
@@ -15,6 +16,9 @@ import org.jsoup.nodes.Document;
 
 public class NetworkingFunctions {
     public static final String[] userAgents = {
+        "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36" };
+
+    public static final String[] userAgent2s = {
         "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6",
         "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)",
         "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)",
@@ -62,11 +66,18 @@ public class NetworkingFunctions {
 	    
 		for (int i = 0; i < numRetries; i++) {
 			try {
-				Response response = Jsoup
+				Connection connection= Jsoup
 					.connect(url)
 					.userAgent(NetworkingFunctions.userAgents[ranIndex])
-					.timeout(10000).followRedirects(true).execute();
+					.header("Proxy-Connection", "keep-alive")
+					.header("Cache-Control", "max-age=0")
+					.header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8")
+					.header("Accept-Encoding", "gzip, deflate, sdch")
+					.header("Accept-Language", "en-US,en;q=0.8,de;q=0.6,vi;q=0.4")
+					.header("Cookie", "cl_b=mAqo5vfg5BG2A_Lt3WzWGw2dXR8; cl_def_lang=en; cl_def_hp=detroit; cl_tocmode=sss%3Agrid%2Csso%3Alist%2Chhh%3Alist")
+					.timeout(10000).followRedirects(true);
 				
+				Response response = connection.execute();
 				Globals.crawlerLogManager.writeLog("Download successfully link " + url + " after " + i + " retries with user agent " + NetworkingFunctions.userAgents[ranIndex]);
 				
 				return response.parse();
@@ -96,8 +107,12 @@ public class NetworkingFunctions {
 			try {
 				Response response = Jsoup
 						.connect(url)
-						.userAgent(
-								"Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+						.header("Proxy-Connection", "keep-alive")
+                        .header("Cache-Control", "max-age=0")
+                        .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8")
+                        .header("Accept-Encoding", "gzip, deflate, sdch")
+                        .header("Accept-Language", "en-US,en;q=0.8,de;q=0.6,vi;q=0.4")
+						.userAgent(NetworkingFunctions.userAgents[ranIndex])
 						.timeout(10000).followRedirects(true).execute();
 				return response.body();
 			} catch (Exception e) {

@@ -75,7 +75,7 @@ router.get('/:typeName', function(req, res) {
     }
 
     res.render('type', {
-        title: 'LeafyExchange: The Best ' + type['name'] + ' Weed Prices and Information',
+        title: 'LeafyExchange: The Best ' + type['name'] + ' Prices and Delivery Source',
         stylesheet: '/stylesheets/type.css',
         type: type,
         postings: postingTagsInfo,

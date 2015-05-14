@@ -25,7 +25,7 @@ router.get('/:messageId', function(req, res) {
         } else {
             if (rows.length == 0) {
                 res.render('index', {
-                    title: 'LeafyExchange: The Best Marijuana Prices and Information',
+                    title: 'LeafyExchange: The Best Weed Prices and Delivery Source',
                     stylesheet: '/stylesheets/index.css',
                     postings: globals.postings,
                     localBusinesses: globals.localBusinesses,
@@ -54,7 +54,7 @@ router.get('/:messageId', function(req, res) {
                 }
 
                 res.render('sale', {
-                    title: 'LeafyExchange: The Best Marijuana Prices and Information in the US',
+                    title: 'LeafyExchange: The Best Weed Prices and Delivery Source',
                     stylesheet: '/stylesheets/index.css',
                     description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot',
                     keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
@@ -145,7 +145,7 @@ router.post('/', function(req, res) {
         });
 
       res.render('index', {
-        title: 'LeafyExchange: The Best Marijuana Prices and Information',
+        title: 'LeafyExchange: The Best Weed Prices and Delivery Source',
         stylesheet: '/stylesheets/index.css',
         postings: globals.postings,
         localBusinesses: globals.localBusinesses,

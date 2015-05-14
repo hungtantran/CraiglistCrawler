@@ -18,7 +18,7 @@ router.get('/', function(req, res) {
   }
 
   res.render('index', {
-    title: 'LeafyExchange: The Best Marijuana Prices and Information',
+    title: 'LeafyExchange: The Best Weed Prices and Delivery Source',
     stylesheet: '/stylesheets/index.css',
     postings: globals.postings,
     localBusinesses: globals.localBusinesses,
@@ -83,7 +83,7 @@ router.get('/state/:state', function(req, res){
     res.cookie('state', state);
 
     res.render('index', {
-        title: 'LeafyExchange: The Best Marijuana Prices and Information in ' + state,
+        title: 'LeafyExchange: The Best Weed Prices and Delivery Source in ' + state,
         stylesheet: '/stylesheets/index.css',
         postings: postingStateInfo,
         localBusinesses: localBusinessStateInfo,
