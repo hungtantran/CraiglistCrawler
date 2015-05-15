@@ -3,10 +3,17 @@ package naiveBayes;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import commonlib.Globals;
 import commonlib.Helper;
+
+import dbconnection.DAOFactory;
+import dbconnection.LocationLink;
+import dbconnection.LocationLinkDAO;
+import dbconnection.LocationLinkDAOJDBC;
 
 public class NaiveBayesClassifier {
 	private double probPositive = 0;
@@ -15,8 +22,36 @@ public class NaiveBayesClassifier {
 	private double[] probFeatureGivenPositive = null;
 	private double[] probFeatureGivenNegative = null;
 	private FeaturesCalculator cal = null;
+	private Map<String, Integer> locationLinkToNumPositive = null;
+	private Integer avgNumPositive = null;
 	
 	public NaiveBayesClassifier(ModelTrainer model, FeaturesCalculator cal, Dictionary dic) {
+	    try {
+    	    final DAOFactory daoFactory = DAOFactory.getInstance(Globals.username, Globals.password, Globals.server + Globals.database);
+            LocationLinkDAO locationLinkDAO = new LocationLinkDAOJDBC(daoFactory);
+            List<LocationLink> locationLinks = locationLinkDAO.get();
+            
+            this.locationLinkToNumPositive = new HashMap<String, Integer>();
+            int total = 0;
+            int numLinkWithPositive = 0;
+            for (LocationLink locationLink : locationLinks) {
+                int numPositivePage = locationLink.getNumPositivePagesFound();
+
+                total += numPositivePage;                
+                if (numPositivePage > 0) {
+                    numLinkWithPositive++;
+                }
+
+                this.locationLinkToNumPositive.put(locationLink.getLink(), numPositivePage);
+            }
+            
+            this.avgNumPositive = Math.round(total / numLinkWithPositive);
+            Globals.crawlerLogManager.writeLog("Average num positive = " + this.avgNumPositive);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        Globals.crawlerLogManager.writeLog(e.getMessage());
+	    }
+	        
 		if (model == null) {
 			return;
 		}
@@ -47,10 +82,18 @@ public class NaiveBayesClassifier {
 		}
 	}
 
-	public short ClassifyContent(String content) {
-		if (content == null) {
+	public short ClassifyContent(String html) {
+		if (html == null) {
 			return -1;
 		}
+		
+		String content = Helper.getPostingBodyFromHtmlContent(html);
+
+        if (content == null) {
+            return -1;
+        }
+
+        content = Helper.pruneWords(content, Globals.stopWords);
 
 		int[] featureVector = cal.calculateFeatures(content);
 
@@ -73,6 +116,20 @@ public class NaiveBayesClassifier {
 		double probContentPositive = numerator / (denominator1 + denominator2);
 		System.out.println("Prob = "+probContentPositive + " deno1 = "+denominator1+" deno2 = "+denominator2+" num = "+numerator);
 		if (probContentPositive < 0.5) {
+		    for (Map.Entry<String, Integer> entry : locationLinkToNumPositive.entrySet()) {
+		        if (html.indexOf(entry.getKey()) != -1) {
+		            if (entry.getValue() > this.avgNumPositive) {
+		                double extraProb = 0.35;
+		                extraProb = Math.min(extraProb, (double)((double)(entry.getValue()-this.avgNumPositive)/entry.getValue()));
+		                System.out.println("Extra Prob = " + extraProb +" probContentPositive = " + probContentPositive + " link = " + entry.getKey() + "\n");
+		                if (extraProb + probContentPositive >= 0.5) {
+		                    Globals.crawlerLogManager.writeLog("Categorize as positive with extra prob of " + extraProb);
+		                    return 1;
+		                }
+		            }
+		            break;
+		        }
+		    }
 			return 0;
 		}
 

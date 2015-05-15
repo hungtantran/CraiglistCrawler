@@ -1,0 +1,35 @@
+extends layout
+
+block content
+    img(src='/images/news.jpg' id='banner' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
+
+    div(id='banner-top' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
+      h2(class='text-center' id='type_name')
+        | Marijuana News & Information
+      div(class='hidden-xs col-sm-2 col-md-2 col-lg-2')
+      div(class='col-xs-12 col-sm-8 col-md-8 col-lg-8' style='text-align:justify; font-size:1.25em; color:#4a3828')
+      div(class='hidden-xs col-sm-2 col-md-2 col-lg-2')
+    
+    div(class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
+      hr(class='featurette-divider')
+
+    - for (var i = 0; i < allNews.length; ++i) {
+      - var news = allNews[i];
+        div(class='hidden-xs hidden-sm col-md-2 col-lg-2' id ='left-margin')
+
+        a(href=news['url'] title=news['title'])
+          img(src=news['main_image'] class='col-xs-12 col-sm-4 col-md-3 col-lg-3' id ='news-photo')
+
+        div(class='col-xs-12 col-sm-8 col-md-5 col-lg-5' id ='news-content')
+          a(id='news_title' href=news['url'] title=news['title'])
+            p
+              strong
+                = news['title']
+          p(id='news_date')
+            = news['datePosted']
+          - if (news['summary'] != null) {
+            != news['summary']
+          - }
+
+        div(class='hidden-xs hidden-sm col-md-2 col-lg-2' id ='right-margin')
+    - }

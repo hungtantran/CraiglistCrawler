@@ -10,6 +10,8 @@ var TypeProvider = require('./typeProvider').TypeProvider;
 var typeProvider = new TypeProvider();
 var StrainProvider = require('./strainProvider').StrainProvider;
 var strainProvider = new StrainProvider();
+var NewsProvider = require('./newsProvider').NewsProvider;
+var newsProvider = new NewsProvider();
 
 var CommonHelper = require('./commonHelper').CommonHelper;
 var commonHelper = new CommonHelper();
@@ -99,6 +101,15 @@ function RefreshCache() {
         postingTags = docs;
         console.log("postingTags cache has " + postingTags.length + " entries");
         exports.postingTags = postingTags;
+    });
+
+    newsProvider.getAllNews(function(error, docs) {
+        news = docs;
+        for (var i = 0; i < news.length; i++) {
+            news[i]['url'] = 'news/' + news[i]['title'].replace(/ /g, '-') + '-' + news[i]['id'];
+        }
+        console.log("news cache has " + news.length + " entries");
+        exports.news = news;
     });
 }
 

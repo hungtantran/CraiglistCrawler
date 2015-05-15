@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    div(class='hidden-xs col-sm-1 col-md-3 col-lg-3' id ='left-margin')
+
+    div(class='col-xs-12 col-sm-10 col-md-6 col-lg-6' id ='content')
+      img(src=news['main_image'] class='col-xs-12 col-sm-12 col-md-12 col-lg-12' id='news_image')
+      p
+        h2(class='text-center' class='col-xs-12 col-sm-12 col-md-12 col-lg-12' id='news_title')
+          = news['title']
+      div(class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
+        hr(class='featurette-divider')
+      div(class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
+        != news['content']
+
+    div(class='hidden-xs col-sm-1 col-md-3 col-lg-3' id ='right-margin')

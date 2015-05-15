@@ -15,6 +15,7 @@ var purchase = require('./routes/purchase');
 var sale = require('./routes/sale');
 var strain = require('./routes/strain');
 var type = require('./routes/type');
+var news = require('./routes/news');
 
 var app = express();
 
@@ -54,6 +55,7 @@ app.use('/purchase', purchase);
 app.use('/sale', sale);
 app.use('/type', type);
 app.use('/strain', strain);
+app.use('/news', news);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

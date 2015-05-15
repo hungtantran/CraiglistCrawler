@@ -8,7 +8,7 @@ router.post('/postingbody/:id', function(req, res) {
     var params = req.params.id.split('-');
     var id = params[params.length-1];
 
-    if (isNan(id)) {
+    if (isNaN(id)) {
         res.json("");
         return;
     }

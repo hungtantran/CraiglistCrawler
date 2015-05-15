@@ -5,7 +5,6 @@ import commonlib.Helper;
 
 public class Classifier {
 	public Classifier() {
-
 	}
 
 	public static Short classify(String htmlContent) {
@@ -24,7 +23,7 @@ public class Classifier {
 
 		if (numImportantWordsOccur < 3) {
 			// TODO don't use Global classifier
-			predict1 = Globals.classifier.ClassifyContent(htmlBody);
+			predict1 = Globals.classifier.ClassifyContent(htmlContent);
 			System.out.println("Classify as " + predict1);
 		}
 
