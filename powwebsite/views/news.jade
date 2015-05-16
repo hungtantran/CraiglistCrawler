@@ -14,6 +14,10 @@ block content
       hr(class='featurette-divider')
 
     - for (var i = 0; i < allNews.length; ++i) {
+      div(class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
+        - if (i > 0) {
+            hr(class='featurette-divider')
+        - }
       - var news = allNews[i];
         div(class='hidden-xs hidden-sm col-md-2 col-lg-2' id ='left-margin')
 
