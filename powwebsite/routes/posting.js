@@ -52,7 +52,6 @@ router.get('/:id', function(req, res) {
         if (title === undefined || title === null || title.length === 0) {
             title = 'Weed Posting Page';
         }
-        title += " - LeafyExchange";
 
         // Calculate type and strains of post
         var types = {};
@@ -82,6 +81,7 @@ router.get('/:id', function(req, res) {
             content: doc['posting_body'],
             url: doc['url'],
             state: doc['state'],
+            datePosted: doc['datePosted'],
             city: city,
             relatedPosts: info,
             pricesString: globals.commonHelper.constructPriceStringArray(info),
