@@ -140,7 +140,8 @@ function initializePostings(postings) {
     var quantity = row.insertCell(index++);
     var quantityString = "";
     if (!postings[i]['quantity']) {
-      quantityString = 'Check Quantity!'
+      // quantityString = 'Check Quantity!'
+      quantityString = '.........';
     } else {
       var gramArray = postings[i]['quantity'][0];
       if (gramArray) {
@@ -165,7 +166,8 @@ function initializePostings(postings) {
 
     var priceString = "";
     if (!postings[i]['price']) {
-      priceString = 'Check Price!'
+      // priceString = 'Check Price!'
+      priceString = '.........';
     } else {
       for (var j = 0; j < postings[i]['price'].length; ++j) {
         if (j > 6) {

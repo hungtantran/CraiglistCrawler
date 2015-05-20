@@ -72,12 +72,10 @@ block content
                             != '</a>'
                         td(class="hidden-xs col-sm-2 col-md-2 col-lg-2")
                           if (posting['quantity'] == null)
-                            | Check Quantity!
                           else
                             = quantityString
                         td(class="hidden-xs hidden-sm col-md-2 col-lg-2")
                           if (posting['price'] == null)
-                            | Check Price!
                           else
                             = priceString
                   - }
