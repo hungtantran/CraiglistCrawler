@@ -7,7 +7,7 @@ var globals         = require('./globals');
 var postingLocationProvider   = globals.postingLocationProvider;
 var commonHelper = globals.commonHelper;
 
-var MAX_RESULT_PER_PAGE = 15;
+var MAX_RESULT_PER_PAGE = 25;
 
 // Get all posts in history
 router.get('/', function(req, res) {
@@ -55,7 +55,7 @@ router.get('/', function(req, res) {
 
         res.render('search', {
             title: "Search results for all marijuana sale posts",
-            stylesheet: '/stylesheets/posting.css',
+            stylesheet: '/stylesheets/search.css',
             results: docs,
             pricesString: pricesString,
             quantitiesString: quantitiesString,

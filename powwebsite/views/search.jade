@@ -19,7 +19,7 @@ block content
                   | Date/Locations
                 th(class="col-xs-8 col-sm-8 col-md-6 col-lg-6 text-center")
                   | Post title
-                th(class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center")
+                th(class="hidden-xs col-sm-2 col-md-2 col-lg-2 text-center")
                   | Quantities
                 th(class="hidden-xs hidden-sm col-md-2 col-lg-2 text-center")
                   | Prices
@@ -31,23 +31,23 @@ block content
               - quantityString = quantitiesString[i]
               if (posting['city'])
                 tr
-                  td(class="col-xs-2 col-sm-2 col-md-2 col-lg-2")
+                  td(class="col-xs-3 col-sm-2 col-md-2 col-lg-2" style='font-size:0.9em')
                     = posting['datePosted'] + " - " + posting['city']
-                  td(class="col-xs-8 col-sm-8 col-md-6 col-lg-6 text-center")
+                  td(class="col-xs-9 col-sm-8 col-md-6 col-lg-6")
                     strong
                       != '<a href="/posting/'
                       = posting['url']
                       != '">'
                       = posting['title']
                       != '</a>'
-                  td(class="col-xs-2 col-sm-2 col-md-2 col-lg-2")
+                  td(class="hidden-xs col-sm-2 col-md-2 col-lg-2")
                     if (posting['quantity'] == null)
-                      | Check Quantity!
+                      | ........
                     else
                       = quantityString
                   td(class="hidden-xs hidden-sm col-md-2 col-lg-2")
                     if (posting['price'] == null)
-                      | Check Price!
+                      | ........
                     else
                       = priceString
             - }
@@ -56,12 +56,12 @@ block content
             - if (page > 1) {
               li
                 a(href=previousPageLink)
-                  | &laquo; Previous Page
+                  | &laquo; Previous
             - }
             li(class='active')
               a(href='#')
                 | Page !{page}
             li
               a(href=nextPageLink)
-                | Next Page &raquo;
+                | Next &raquo;
     div(id='left-padding'            class='hidden-xs col-sm-2 col-md-3 col-lg-3')

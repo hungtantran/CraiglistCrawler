@@ -8,7 +8,7 @@ NewsProvider = function() {
 NewsProvider.prototype.getAllNews = function(callback) {
   var connection = connectionProvider.getConnection();
 
-  var query = 'SELECT * FROM news';
+  var query = 'SELECT * FROM news ORDER BY datePosted DESC';
 
   connection.query(query, function(err, rows) {
     if (err) {
