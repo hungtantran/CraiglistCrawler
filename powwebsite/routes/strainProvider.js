@@ -38,7 +38,7 @@ StrainProvider.prototype.getAllActivePostStrain = function(callback) {
 StrainProvider.prototype.getAllStrains = function(callback) {
   var connection = connectionProvider.getConnection();
 
-  var query = 'SELECT * FROM strains';
+  var query = 'SELECT * FROM strains ORDER BY num_sales DESC';
 
   connection.query(query, function(err, rows) {
     if (err) {

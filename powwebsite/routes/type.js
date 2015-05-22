@@ -74,6 +74,21 @@ router.get('/:typeName', function(req, res) {
         }
     }
 
+    var topStrains = [];
+    var numStrain = 0;
+    for (var i = 0; i < globals.allStrains.length; ++i) {
+        if (globals.allStrains[i]['type'] === type['id']) {
+            ++numStrain;
+            if (numStrain > 4) {
+                break;
+            }
+
+            var strain = globals.allStrains[i];
+            strain['url'] = '/strain/' + strain['name'].replace(/ /g, '-');
+            topStrains.push(globals.allStrains[i]);
+        }
+    }
+
     res.render('type', {
         title: 'LeafyExchange: The Best ' + type['name'] + ' Prices and Delivery Source',
         stylesheet: '/stylesheets/type.css',
@@ -81,6 +96,7 @@ router.get('/:typeName', function(req, res) {
         postings: postingTagsInfo,
         pricesString: globals.commonHelper.constructPriceStringArray(postingTagsInfo),
         quantitiesString: globals.commonHelper.constructQuantityStringArray(postingTagsInfo),
+        topStrains: topStrains,
         states: globals.states,
         description: 'Looking for ' + type['name'] + ' Weed? LeafyExchange has the best prices of ' + type['name'] + ' Weed in the US. ' + type['description'],
         keywords: type['name'] + ' Weed, price of ' + type['name'] + ' Weed, buy ' + type['name'] + ' Weed, sell ' + type['name'] +' Weed, 420, green, weed, pot, marijuana, legalize, medical, medicinal, herb, herbal',

@@ -19,6 +19,22 @@ body {
     */url(../images/bg.png) repeat-x top;
 }
 
+#top_strains {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: green;
+}
+
+#type_image {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+#strain_title {
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
 #banner-top {
     padding-left: 5px;
     padding-right: 5px;

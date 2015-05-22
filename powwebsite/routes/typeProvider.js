@@ -10,7 +10,7 @@ TypeProvider = function() {
 TypeProvider.prototype.getAllTypes = function(callback) {
   var connection = connectionProvider.getConnection();
 
-  var query = 'SELECT * FROM types';
+  var query = 'SELECT * FROM types ORDER BY num_sales DESC';
 
   connection.query(query, function(err, rows) {
     if (err) {
