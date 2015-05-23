@@ -25,9 +25,15 @@ body {
     color: green;
 }
 
+#type_image_holder {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
 #type_image {
     padding-left: 2px;
     padding-right: 2px;
+    height: 15%;
 }
 
 #strain_title {
@@ -56,7 +62,6 @@ body {
 }
 
 #banner {
-    height:40%;
     padding-left: 0px;
     padding-right: 0px;
 }
