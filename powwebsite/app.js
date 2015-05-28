@@ -18,6 +18,8 @@ var type = require('./routes/type');
 var news = require('./routes/news');
 
 var app = express();
+var https = require('https');
+var http = require('http');
 
 // gzip/deflate outgoing responses
 var compression = require('compression');
@@ -98,4 +100,18 @@ app.use(function(err, req, res, next) {
     // res.end();
 });
 
-app.listen(3000);
+var fs         = require("fs");
+var key_file   = "certificate\\private-key.pem";
+var cert_file  = "certificate\\www_leafyexchange_com.crt";
+var passphrase = "420pontius";
+var config     = {
+  key: fs.readFileSync(key_file),
+  cert: fs.readFileSync(cert_file)
+};
+
+if(passphrase) {
+  config.passphrase = passphrase;
+}
+
+http.createServer(app).listen(3000);
+https.createServer(config, app).listen(443);
