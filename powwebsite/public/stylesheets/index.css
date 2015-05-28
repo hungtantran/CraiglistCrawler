@@ -1,6 +1,6 @@
 *{padding:0px;}
 p{margin:0px;}
-a{ text-decoration:none;color:#545454;}
+a{ text-decoration:none;color:#CCCCCC;}
 img{ border:none;}
 .clear{ clear:both;}
 .line { clear:both; background:#ccc; height:1px; /*margin:10px 0px 10px 0px;*/}
@@ -107,6 +107,41 @@ body {
     height: 100%;
     max-height: inherit;
     overflow-y: scroll;
+}
+
+#original_button {
+    background-color:#1A1A1A;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    border:1px solid #797979;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:'Segoe UI';
+    font-size:1em;
+    padding:5px 10px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #2f6627;
+    text-align: center;
+}
+
+#navbar_button {
+    background-color:#1A1A1A;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    border:1px solid #797979;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:'Segoe UI';
+    font-size:12;
+    padding:5px 10px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #2f6627;
+    text-align: center;
+    
 }
 
 /* Featurettes
@@ -346,7 +381,7 @@ body {
 
 /*-----------------------------HEADER---------------------------*/
 #logo{
-    float:left;
+    float:center;
     width:187px;
     height:46px;
     margin-top:15px;
@@ -355,11 +390,11 @@ body {
 }
 #logo img{ border:0px;}
 #slogan{
-    float:left;
+    float:center;
     width:500px;
     margin-top:42px;
     padding:0px 0px 0px 7px;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:'Segoe UI';
     font-size:18px;
     line-height:18px;
     font-weight:100;
@@ -367,7 +402,7 @@ body {
 }
 #slogan a{ text-decoration:none;}
 #menu_Top{
-    float:right;
+    float:center;
     width:150px;
     height:30px;
     margin-top:14px;

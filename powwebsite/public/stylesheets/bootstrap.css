@@ -1074,7 +1074,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Segoe UI";
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
@@ -4055,6 +4055,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 @media (min-width: 768px) {
   .navbar-header {
     float: left;
+    text-align: center;
+    width: 50%;
   }
 }
 .navbar-collapse {
@@ -4151,11 +4153,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-width: 1px 0 0;
 }
 .navbar-brand {
-  float: left;
+  float: center;
   height: 50px;
   padding: 15px 15px;
   font-size: 18px;
-  line-height: 20px;
+  line-height: 50px;
 }
 
 .navbar:link {
@@ -4475,11 +4477,11 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-  background-color: #369844;
+  background-color: #1A1A1A;
   border-color: #080808;
 }
 .navbar-inverse .navbar-brand {
-  color: white;
+  color: #CCCCCC;
 }
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
