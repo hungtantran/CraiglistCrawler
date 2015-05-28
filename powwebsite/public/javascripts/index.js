@@ -373,7 +373,40 @@ function initializeMap(markers, redrawMap) {
 
     mapBound = map.getBounds();
   }
+
+  // Add Search box
+  var input = document.getElementById('pac-input');
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+  var searchBox = new google.maps.places.SearchBox(input);
+
+  // Listen for the event fired when the user selects an item from the
+  // pick list. Retrieve the matching places for that item.
+  google.maps.event.addListener(searchBox, 'places_changed', function() {
+    var places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+      return;
+    }
+
+    map.panTo(places[0].geometry.location)
+  });
+
+  // Bias the SearchBox results towards places that are within the bounds of the
+  // current map's viewport.
+  google.maps.event.addListener(map, 'bounds_changed', function() {
+    var bounds = map.getBounds();
+    searchBox.setBounds(bounds);
+  });
+
+  // Add Purchase Controls
+  var purchaseControls = document.getElementById('purchase-input-box');
+  google.maps.event.addDomListener(purchaseControls, 'click', function() {
+    console.log("map action registered");
+  });
+  map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(purchaseControls);
 }
+
+google.maps.event.addDomListener(window, 'load', initialize);
 
 // Function to create a new map
 function newMap(latitude, longtitude, zoom, divId, draggable) {

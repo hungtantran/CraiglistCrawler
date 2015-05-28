@@ -2,27 +2,24 @@ extends layout
 
 block content
     div(class='row' id ='content')
-      div(id='left_pane' class='col-xs-12 col-sm-12 col-md-7 col-lg-8')
-        div(id='map-canvas')
-
-        div(id='price_bin' class='hidden-xs')
-          div(id='price_bin_dist_by_state')
-
-      div(class='clearfix visible-xs-block')
-
-      div(id='right_pane' class='col-xs-12 col-sm-12 col-md-5 col-lg-4')
-        ul(class="nav nav-tabs")
-          li(class="active")
+      ul(class="nav nav-tabs")
+          li(class="active" style="width:50%")
             a(data-toggle="tab" href="#sectionA")
-              h2(style='font-size:0.9em; font-weight:bold')
-                | Cannabis Business
-          li
+              h2(style='font-family:Segoe UI; font-size:16; font-weight:bold; color:#CCCCCC; text-align:center')
+                | M A P
+          li(class style="width:50%")
             a(data-toggle="tab" href="#sectionB")
-              h2(style='font-size:0.9em; font-weight:bold')
-                | Marijuana Sales
+              h2(style='font-family:Segoe UI; font-size:16; font-weight:bold; color:#CCCCCC; text-align:center')
+                | L I S T I N G
+        
 
         div(class="tab-content")
           div(id="sectionA" class="tab-pane fade in active")
+
+            div(id='map-canvas')
+            input(id='pac-input' class='controls' type='text' placeholder='Search Box')
+
+          div(id="sectionB" class="tab-pane fade")
             table(id='cannabis_business_content' class='table table-striped table-condensed table-responsive')
               thead
                 tr
@@ -66,53 +63,14 @@ block content
                             = localBusiness['phone_number']
                   - }
 
-          div(id="sectionB" class="tab-pane fade")
-            table(id='latest_prices_content' class='table table-striped table-condensed table-responsive')
-              thead
-                tr
-                  th(class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center")
-                    | Date/Locations
-                  th(class="col-xs-8 col-sm-8 col-md-6 col-lg-6 text-center")
-                    | Post title
-                  th(class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center")
-                    | Quantities
-                  th(class="hidden-xs hidden-sm col-md-2 col-lg-2 text-center")
-                    | Prices
-            div(id='right_pane_content')
-              table(id='latest_prices_content' class='table table-striped table-condensed table-responsive' style='table-layout: fixed; overflow-x: hidden')
-                tbody(id='table_body_posting')
-                  - if (postings.length == 0) {
-                      | <tr><td class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><a href='/state/all'>No marijuana sales here now. Checkout other sales around the US</a></td></tr>
-                  - }
-
-                  - for (var i = 0; i < postings.length; ++i) {
-                    - if (i > 50) {
-                        | <tr><td class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><a href='javascript:void' onclick='updateDisplay();'>See more</a></td></tr>
-                    -   break
-                    - }
-                    - posting = postings[i]
-                    - priceString = pricesString[i]
-                    - quantityString = quantitiesString[i]
-                    if (posting['city'])
-                      tr
-                        td(class="col-xs-2 col-sm-2 col-md-2 col-lg-2")
-                          = posting['datePosted'] + " - " + posting['city']
-                        td(class="col-xs-8 col-sm-8 col-md-6 col-lg-6")
-                          strong
-                            != '<a href="/posting/'
-                            = posting['url']
-                            != '">'
-                            = posting['title']
-                            != '</a>'
-                        td(class="col-xs-2 col-sm-2 col-md-2 col-lg-2")
-                          if (posting['quantity'] == null)
-                          else
-                            = quantityString
-                        td(class="hidden-xs hidden-sm col-md-2 col-lg-2")
-                          if (posting['price'] == null)
-                          else
-                            = priceString
-                  - }
+    div(id='purchase-input-box')
+      ul(class='nav nav-justified' id='header-bar')
+        li(class='list-unstyled' style="width: 50%; float:left; text-align:center;")
+          a(href='/privacy' id='purchase_button')
+            | Purchase (as guest)
+        li(class='list-unstyled' style="width:50%; float:right; text-align:center")
+          a(href='/terms' id='sign_in_button')
+            | SIGN IN
 
     script(type='text/javascript')
       | var map = null;
