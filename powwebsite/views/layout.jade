@@ -129,7 +129,7 @@ html
     div(id='header' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
       nav(class='navbar navbar-inverse navbar-fixed-top')
         div(class='container')
-          div(class='navbar-header')
+          div(class='navbar-header' id='real_header')
             button(type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar' aria-expanded='false' aria-controls='navbar')
               span(class='sr-only')
                 | Toggle navigation
@@ -175,3 +175,10 @@ html
 
       div(class='clearfix')
         | &copy; 2015 LeafyExchange, Inc. &middot;
+
+    script
+      | function changeHeight() {
+      |   var $realHeader = $('#real_header');
+      |   $('#header').height($realHeader.outerHeight());
+      | }
+      | window.onload = changeHeight();
