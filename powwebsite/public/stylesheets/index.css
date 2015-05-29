@@ -19,6 +19,15 @@ body {
     */url(../images/bg.png) repeat-x top;
 }
 
+#tab_header {
+    font-family:Segoe UI;
+    font-size:1.25em;
+    font-weight:bold;
+    text-align:center;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 #header {
     float: left;
     height: 7%;

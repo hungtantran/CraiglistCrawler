@@ -476,7 +476,7 @@ function initializePostings(postings) {
     var dateLocationPosted = row.insertCell(index++);
     var url = '/posting/' + postings[i]['url'];
     dateLocationPosted.innerHTML = postings[i]['datePosted'] + " - " + postings[i]['city'];
-    dateLocationPosted.setAttribute('class','col-xs-2 col-sm-2 col-md-2 col-lg-2');
+    dateLocationPosted.setAttribute('class','col-xs-4 col-sm-4 col-md-2 col-lg-2');
 
     // Title cell
     var title = row.insertCell(index++);
@@ -507,7 +507,7 @@ function initializePostings(postings) {
     }
 
     quantity.innerHTML = quantityString;
-    quantity.setAttribute('class','col-xs-2 col-sm-2 col-md-2 col-lg-2');
+    quantity.setAttribute('class','hidden-xs hidden-sm col-md-2 col-lg-2');
 
     // Price cell
     var price = row.insertCell(index++);
