@@ -20,7 +20,7 @@ block content
             div(id='map-canvas')
             input(id='pac-input' class='controls' type='text' placeholder='Search Box')
 
-          div(id="sectionB" class="tab-pane fade")
+          div(id="sectionB" class="tab-pane fade" style='height:80%')
              table(id='latest_prices_content' class='table table-striped table-condensed table-responsive')
                thead
                  tr
@@ -67,7 +67,7 @@ block content
                              = priceString
                    - }
 
-          div(id='sectionC' class='tab-pane fade')
+          div(id='sectionC' class='tab-pane fade' style='height:80%')
             table(id='cannabis_business_content' class='table table-striped table-condensed table-responsive')
               thead
                 tr
@@ -113,12 +113,44 @@ block content
 
     div(id='purchase-input-box')
       ul(class='nav nav-justified' id='header-bar')
-        li(class='list-unstyled' style='width: 50%; float:left; text-align:center;')
+        li(class='list-unstyled')
           a(href='/privacy' id='purchase_button')
-            | Purchase (as guest)
-        li(class='list-unstyled' style='width:50%; float:right; text-align:center')
+            | PURCHASE
+        li(class='list-unstyled')
           a(href='/terms' id='sign_in_button')
             | SIGN IN
+
+    div(id='news' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
+      h2(class='text-center' style='font-size:2em')
+        | WEED  TYPES
+      div(class='hidden-xs hidden-sm col-md-2 col-lg-2')
+      div(id='type_image' class='col-xs-6 col-sm-6 col-md-4 col-lg-4 text-center')
+        a(href='/type/Sativa')
+          img(id='type_image' src='/images/sativa_square.jpg' class='col-xs-12 col-sm-12 col-md-12 col-lg-12 img-responsive' alt='Sativa')
+        h3
+          | Sativa
+      div(id='type_image' class='col-xs-6 col-sm-6 col-md-4 col-lg-4 text-center')
+        a(href='/type/Indica')
+          img(id='type_image' src='/images/indica_square.jpg' class='col-xs-12 col-sm-12 col-md-12 col-lg-12 img-responsive' alt='Indica')
+        h3
+          | Indica
+      div(class='hidden-xs hidden-sm col-md-2 col-lg-2')
+      div(class='clearfix')
+      
+      br
+
+      div(class='hidden-xs hidden-sm col-md-2 col-lg-2')
+      div(id='type_image' class='col-xs-6 col-sm-6 col-md-4 col-lg-4 text-center')
+        a(href='/type/Hybrid')
+          img(id='type_image' src='/images/hybrid_square.jpg' class='col-xs-12 col-sm-12 col-md-12 col-lg-12 img-responsive' alt='Hybrid')
+        h3
+          | Hybrid
+      div(id='type_image' class='col-xs-6 col-sm-6 col-md-4 col-lg-4 text-center')
+        a(href='/type/Ruderalis')
+          img(id='type_image' src='/images/ruderalis_square.jpg' class='col-xs-12 col-sm-12 col-md-12 col-lg-12 img-responsive' alt='Ruderalis')
+        h3
+          | Ruderalis
+      div(class='hidden-xs hidden-sm col-md-2 col-lg-2')
 
     script(type='text/javascript')
       | var map = null;

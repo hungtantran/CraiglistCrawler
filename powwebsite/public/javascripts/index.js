@@ -257,12 +257,9 @@ function newPriceBin(divId, prices) {
       })
       .attr("x", 1)
       .attr("y", function(d) {
-        console.log(y1.domain());
         return y1(d.name)+2;
       })
       .attr("height", function(d) {
-        console.log(y0.rangeBand());
-        console.log(y1.rangeBand());
         // return 10;
         return y1.rangeBand()-4;
       })//y1.rangeBand()-4)
@@ -401,7 +398,6 @@ function initializeMap(markers, redrawMap) {
   // Add Purchase Controls
   var purchaseControls = document.getElementById('purchase-input-box');
   google.maps.event.addDomListener(purchaseControls, 'click', function() {
-    console.log("map action registered");
   });
   map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(purchaseControls);
 }
@@ -568,12 +564,10 @@ function initializeLocalBusinesses(localBusinesses) {
   for (var i = startIndex; i !== endIndex; i += step)
   {
     if (stateFilter != null && localBusinesses[i]['state'] != stateFilter) {
-      console.log("here1");
       continue;
     }
 
     if (!localBusinesses[i]['city']) {
-      console.log("there");
       continue;
     }
 
