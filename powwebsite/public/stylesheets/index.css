@@ -123,23 +123,6 @@ body {
     overflow-y: scroll;
 }
 
-#navbar_button {
-    background-color:#1A1A1A;
-    -moz-border-radius:5px;
-    -webkit-border-radius:5px;
-    border-radius:5px;
-    border:1px solid #797979;
-    display:inline-block;
-    cursor:pointer;
-    color:#ffffff;
-    font-family:'Segoe UI';
-    font-size:12;
-    padding:5px 10px;
-    text-decoration:none;
-    text-shadow:0px 1px 0px #2f6627;
-    text-align: center;
-}
-
 #purchase_button {
     background-color:#1FBAD6;
     -moz-border-radius:5px;
