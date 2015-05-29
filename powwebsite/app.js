@@ -114,4 +114,4 @@ if(passphrase) {
 }
 
 http.createServer(app).listen(3000);
-https.createServer(config, app).listen(443);
+https.createServer(config, app).listen(8080);
