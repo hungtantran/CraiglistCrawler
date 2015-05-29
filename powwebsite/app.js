@@ -100,7 +100,7 @@ app.use(function(err, req, res, next) {
     // res.end();
 });
 
-var fs         = require("fs");
+/* var fs         = require("fs");
 var key_file   = "certificate\\private-key.pem";
 var cert_file  = "certificate\\www_leafyexchange_com.crt";
 var passphrase = "420pontius";
@@ -111,7 +111,8 @@ var config     = {
 
 if(passphrase) {
   config.passphrase = passphrase;
-}
+
+https.createServer(config, app).listen(8080);
+}*/
 
 http.createServer(app).listen(3000);
-https.createServer(config, app).listen(8080);
