@@ -111,13 +111,46 @@ block content
                             = localBusiness['phone_number']
                   - }
 
+
+
+    .modal.fade.purchase-modal-lg(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+      .modal-dialog
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') &times;
+              h4.modal-title Purchase Order
+            .modal-body
+              form(name='purchase', action='/purchase', method='post')
+                .form-group
+                  label.control-label(for='email') Email:
+                  input.form-control(type='email', id='email', placeholder='@', name='email')
+                .form-group
+                  label.control-label(for='message-text') Low Price (per-gram):
+                  input.form-control(type='number', id='lowPrice', name='lowPrice')
+                .form-group
+                  label.control-label(for='message-text') High Price (per-gram):
+                  input.form-control(type='number', id='highPrice', name='highPrice')
+                .form-group
+                  label.control-label(for='message-text') Quantity (grams):
+                  input.form-control(type='number', id='quantity', name='quantity')
+                .form-group
+                  label.control-label(for='message-text') Delivery Zip Code:
+                  input.form-control(type='number', id='zipcode', name='zipcode')
+                .form-group
+                  label.control-label(for='message-text') Delivery Date:
+                  input.form-control(type='date', id='deliveryDate', name='deliveryDate')
+                .modal-footer
+                  button.btn.btn-default(type='button', data-dismiss='modal') Close
+                  button.btn.btn-primary(type='submit') Place Order
+
     div(id='purchase-input-box')
       ul(class='nav nav-justified' id='header-bar')
         li(class='list-unstyled')
-          a(href='/privacy' id='purchase_button')
+          a(href='#' data-toggle='modal' data-target='.purchase-modal-lg' title='Sign In' id='purchase_button')
             | PURCHASE
         li(class='list-unstyled')
-          a(href='/terms' id='sign_in_button')
+          a(href='#' data-toggle='modal' data-target='.login-modal-lg' title='Sign In' id='sign_in_button')
             | SIGN IN
 
     div(id='news' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')

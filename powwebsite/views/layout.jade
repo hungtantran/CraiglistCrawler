@@ -76,9 +76,9 @@ html
             .modal-header
               button.close(type='button', data-dismiss='modal', aria-label='Close')
                 span(aria-hidden='true') &times;
-              h4.modal-title Sign Up To Post on LeafyExchange!
+              h4.modal-title Sign Up for LeafyExchange!
             .modal-body
-              form
+              form(name='purchase', action='', method='')
                 .form-group
                   label.control-label(for='email') Email:
                   input.form-control(type='text')
@@ -95,36 +95,24 @@ html
               button.btn.btn-default(type='button', data-dismiss='modal') Close
               button.btn.btn-primary(type='button') Sign Up
 
-    .modal.fade.purchase-modal-lg(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+    .modal.fade.login-modal-lg(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
       .modal-dialog
           .modal-content
             .modal-header
               button.close(type='button', data-dismiss='modal', aria-label='Close')
                 span(aria-hidden='true') &times;
-              h4.modal-title Purchase Order
+              h4.modal-title Log In
             .modal-body
-              form(name='purchase', action='/purchase', method='post')
+              form(name='purchase', action='', method='')
                 .form-group
-                  label.control-label(for='email') Email:
-                  input.form-control(type='email', id='email', placeholder='@', name='email')
+                  label.control-label(for='username') Username:
+                  input.form-control(type='text')
                 .form-group
-                  label.control-label(for='message-text') Low Price (per-gram):
-                  input.form-control(type='number', id='lowPrice', name='lowPrice')
-                .form-group
-                  label.control-label(for='message-text') High Price (per-gram):
-                  input.form-control(type='number', id='highPrice', name='highPrice')
-                .form-group
-                  label.control-label(for='message-text') Quantity (grams):
-                  input.form-control(type='number', id='quantity', name='quantity')
-                .form-group
-                  label.control-label(for='message-text') Delivery Zip Code:
-                  input.form-control(type='number', id='zipcode', name='zipcode')
-                .form-group
-                  label.control-label(for='message-text') Delivery Date:
-                  input.form-control(type='date', id='deliveryDate', name='deliveryDate')
-                .modal-footer
-                  button.btn.btn-default(type='button', data-dismiss='modal') Close
-                  button.btn.btn-primary(type='submit') Place Order
+                  label.control-label(for='message-text') Password:
+                  input.form-control(type='password')
+            .modal-footer
+              button.btn.btn-default(type='button', data-dismiss='modal') Close
+              button.btn.btn-primary(type='button') Sign in
 
     div(id='header' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
       nav(class='navbar navbar-inverse navbar-fixed-top')
@@ -146,10 +134,10 @@ html
            div(id='navbar' class='navbar-collapse collapse')
             ul(class='nav nav-justified' id='header-bar')
               li(class='list-unstyled' style="float:right; text-align:center")
-                a(href='/privacy' id='navbar_button')
+                a(href='#' data-toggle='modal' data-target='.login-modal-lg' title='Sign In' id='navbar_button')
                   | LOG IN
               li(class='list-unstyled' style="float:right; text-align:center")
-                a(href='/terms' id='navbar_button')
+                a(href='#' data-toggle='modal' data-target='.signup-modal-lg' title='Sign Up' id='navbar_button')
                   | SIGN UP
 
 
