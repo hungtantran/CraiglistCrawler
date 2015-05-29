@@ -310,9 +310,6 @@ function handleMapChange() {
 
 // Function that draw marker on map
 function drawMarker(map, markers) {
-  if (markerClusterer != null) {
-    markerClusterer.clearMarkers();
-  }
 
   // Clear all existing markers first
   for (var i = 0; i < markerArray.length; i++) {
@@ -344,8 +341,6 @@ function drawMarker(map, markers) {
       markerArray.push(marker);
     }
   }
-
-  markerClusterer = new MarkerClusterer(map, markerArray);
 }
 
 // Reinitialize the map, call to redraw the map
@@ -353,7 +348,6 @@ function initializeMap(markers, redrawMap) {
   // Initialize maps
   if (map === null || (redrawMap != null && redrawMap === true)) {
     map = newMap(42.2030543,-98.602256, 4, 'map-canvas');
-    google.maps.event.addListener(map, 'zoom_changed', handleMapChange);
   }
 
   // Initialize markers
