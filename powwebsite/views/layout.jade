@@ -29,19 +29,41 @@ html
       | ga('create', 'UA-60747888-1', 'auto');
       | ga('send', 'pageview');
 
-    | <style type="text/css">
-    | .labels {
-    | color: red;
-    | background-color: white;
-    | font-family: "Lucida Grande", "Arial", sans-serif;
-    | font-size: 10px;
-    | font-weight: bold;
-    | text-align: center;
-    | width: 40px;     
-    | border: 2px solid black;
-    | white-space: nowrap;
-    | }
-    | </style>
+    style(type="text/css")
+      | .labels {
+      | color: red;
+      | background-color: white;
+      | font-family: "Lucida Grande", "Arial", sans-serif;
+      | font-size: 10px;
+      | font-weight: bold;
+      | text-align: center;
+      | width: 40px;     
+      | border: 2px solid black;
+      | white-space: nowrap;
+      | }
+
+      | #original_button {
+      | background-color:#1A1A1A;
+      | -moz-border-radius:5px;
+      | -webkit-border-radius:5px;
+      | border-radius:5px;
+      | border:1px solid #797979;
+      | display:inline-block;
+      | cursor:pointer;
+      | color:#ffffff;
+      | font-family:'Segoe UI';
+      | font-size:1em;
+      | padding:5px 10px;
+      | text-decoration:none;
+      | text-shadow:0px 1px 0px #2f6627;
+      | text-align: center;
+      | }
+
+      | #bottom_list {
+      | background-color: #1A1A1A;
+      | padding-top:4px;
+      | padding-bottom:4px;
+      | }
 
   body
     div(class='modal fade state-modal-lg' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true')
@@ -148,17 +170,17 @@ html
       hr(class='featurette-divider')
 
       ul(class='list-unstyled' style="list-style-type:none")
-        li(class='list-unstyled col-xs-3')
-          a(href='mailto:leafyexchange@gmail.com' id='original_button')
+        li(id='bottom_list' class='list-unstyled col-xs-6 col-sm-3 col-md-3 col-lg-3')
+          a(href='mailto:leafyexchange@gmail.com' id='original_button' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
             | Email
-        li(class='list-unstyled col-xs-3 col-sm-12 col-md-12 col-lg-12')
-          a(href='/aboutus' id='original_button')
+        li(id='bottom_list' class='list-unstyled col-xs-6 col-sm-3 col-md-3 col-lg-3')
+          a(href='/aboutus' id='original_button' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
             | About Us
-        li(class='list-unstyled col-xs-3 col-sm-12 col-md-12 col-lg-12')
-          a(href='/privacy' id='original_button')
+        li(id='bottom_list' class='list-unstyled col-xs-6 col-sm-3 col-md-3 col-lg-3')
+          a(href='/privacy' id='original_button' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
             | Privacy Policy
-        li(class='list-unstyled col-xs-3 col-sm-12 col-md-12 col-lg-12')
-          a(href='/terms' id='original_button')
+        li(id='bottom_list' class='list-unstyled col-xs-6 col-sm-3 col-md-3 col-lg-3')
+          a(href='/terms' id='original_button' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
             | Terms of Use
 
       div(class='clearfix')
