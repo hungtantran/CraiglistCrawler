@@ -168,8 +168,8 @@ body {
     color:#FFFFFF;
     font-family:'Segoe UI';
     font-size:11;
-    padding:10px 50px;
-    width:200px;
+    padding:10px 40px;
+    max-width:200px;
     text-decoration:none;
     text-shadow:0px 0px 0px #2f6627;
     text-align: center;
@@ -187,8 +187,8 @@ body {
     color:#9E9EA4;
     font-family:'Segoe UI';
     font-size:11;
-    padding:10px 50px;
-    width:200px;
+    padding:10px 40px;
+    max-width:200px;
     text-decoration:none;
     text-shadow:0px 0px 0px #2f6627;
     text-align: center;
@@ -202,14 +202,13 @@ body {
     font-weight: 300;
     margin-left: 12px;
     padding: 0 11px 0 13px;
-    text-overflow: ellipsis;
-    width: 400px;
+    width: 300px;
 }
 
 #purchase-input-box {
     background-color: #fff;
     border: 1px solid #797979;
-    width: 450px;
+    max-width: 450px;
     height: 60px;
 }
 
