@@ -42,9 +42,9 @@ function updateDisplay(displayInfo, initializeParams) {
     initializeMap(displayInfo['postings']);
   }
 
-  if (isInitializePrice === undefined || isInitializePrice) {
+  /* if (isInitializePrice === undefined || isInitializePrice) {
     initializePrices(displayInfo['prices']);
-  }
+  } */
 }
 
 function initializePrices(prices) {
@@ -303,7 +303,7 @@ function handleMapChange() {
     // Only update when map bound change
     if (mapBound === null || !newMapBound.equals(mapBound)) {
       mapBound = newMapBound;
-      updateDisplay();
+      updateDisplay(cache, [true, false, true, true]);
     }
   }, 1000);
 }
@@ -332,8 +332,8 @@ function drawMarker(map, markers) {
         position: new google.maps.LatLng(lat, lng),
         map: map,
         title: markers[i]['title'],
-        labelContent: i,
-        labelClass: "labels" // the CSS class for the label
+        // labelContent: i,
+        // labelClass: "labels" // the CSS class for the label
       });
 
       google.maps.event.addListener(marker, 'click', handleMapChange);
@@ -348,6 +348,7 @@ function initializeMap(markers, redrawMap) {
   // Initialize maps
   if (map === null || (redrawMap != null && redrawMap === true)) {
     map = newMap(42.2030543,-98.602256, 4, 'map-canvas');
+    google.maps.event.addListener(map, 'zoom_changed', handleMapChange);
 
     // Add Purchase Controls
     var purchaseControls = document.getElementById('purchase-input-box');
