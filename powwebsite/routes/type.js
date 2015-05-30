@@ -92,6 +92,7 @@ router.get('/:typeName', function(req, res) {
     res.render('type', {
         title: 'LeafyExchange: The Best ' + type['name'] + ' Prices and Delivery Source',
         stylesheet: '/stylesheets/type.css',
+        session: req.session,
         type: type,
         postings: postingTagsInfo,
         pricesString: globals.commonHelper.constructPriceStringArray(postingTagsInfo),

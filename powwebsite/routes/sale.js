@@ -27,6 +27,7 @@ router.get('/:messageId', function(req, res) {
                 res.render('index', {
                     title: 'LeafyExchange: The Best Weed Prices and Delivery Source',
                     stylesheet: '/stylesheets/index.css',
+                    session: req.session,
                     postings: globals.postings,
                     localBusinesses: globals.localBusinesses,
                     states: globals.states,
@@ -56,6 +57,7 @@ router.get('/:messageId', function(req, res) {
                 res.render('sale', {
                     title: 'LeafyExchange: The Best Weed Prices and Delivery Source',
                     stylesheet: '/stylesheets/index.css',
+                    session: req.session,
                     description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot',
                     keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
                     icon: '/images/icon.png',
@@ -110,7 +112,6 @@ router.post('/', function(req, res) {
 
                     var hashedMessage = commonHelper.HashString(message['purchaseOrderId'] + message['saleOrderId'] + email + message['fromEmail'] + Math.random());
                     // Insert the new message into database to be sent
-                    console.log("insert into message wtf here");
                     var messageQuery = 'INSERT INTO message (purchaseOrderId, saleOrderId, messageBody, messageHTML, fromEmail, toEmail, datetime, messageHash, replyTo) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?, ?)';
 
                     var messageBody = "<MessageElem>You got a new message on Leafy Exchange!<MessageElem>{0}".format(req.body['reply']);
@@ -147,6 +148,7 @@ router.post('/', function(req, res) {
       res.render('index', {
         title: 'LeafyExchange: The Best Weed Prices and Delivery Source',
         stylesheet: '/stylesheets/index.css',
+        session: req.session,
         postings: globals.postings,
         localBusinesses: globals.localBusinesses,
         states: globals.states,

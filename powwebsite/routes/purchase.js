@@ -89,6 +89,8 @@ router.post('/', function(req, res) {
       res.render('purchase', {
         title: "We've reached out to sellers in your area!",
         stylesheet: '/stylesheets/index.css',
+        session: req.session,
+        session: req.session,
         description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot in your area!',
         keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
         icon: '/images/icon.png',
@@ -106,6 +108,7 @@ router.get('/', function(req, res) {
       res.render('purchase', {
       title: "We've reached out to sellers in your area!",
       stylesheet: '/stylesheets/index.css',
+      session: req.session,
       description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot in your area!',
       keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
       icon: '/images/icon.png',
