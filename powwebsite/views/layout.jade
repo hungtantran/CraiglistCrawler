@@ -117,22 +117,22 @@ html
                 span(aria-hidden='true') &times;
               h4.modal-title Sign Up for LeafyExchange!
             .modal-body
-              form(name='purchase', action='', method='')
+              form(name='signup', action='/user', method='post')
                 .form-group
                   label.control-label(for='email') Email:
-                  input.form-control(type='text')
+                  input.form-control(type='email', id='email', placeholder='@', name='email')
                 .form-group
                   label.control-label(for='username') Username:
-                  input.form-control(type='text')
+                  input.form-control(type='text', id='username', placeholder='username', name='username')
                 .form-group
-                  label.control-label(for='message-text') Password:
-                  input.form-control(type='password')
+                  label.control-label(for='password') Password:
+                  input.form-control(type='password', id='password', name='password')
                 .form-group
-                  label.control-label(for='message-text') Re-typed Password:
-                  input.form-control(type='password')
-            .modal-footer
-              button.btn.btn-default(type='button', data-dismiss='modal') Close
-              button.btn.btn-primary(type='button') Sign Up
+                  label.control-label(for='retypedPassword') Re-typed Password:
+                  input.form-control(type='password', id='retypedPassword', name='retypedPassword')
+                .modal-footer
+                  button.btn.btn-default(type='button', data-dismiss='modal') Close
+                  button.btn.btn-primary(type='submit') Sign Up
 
     .modal.fade.login-modal-lg(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
       .modal-dialog
@@ -142,7 +142,7 @@ html
                 span(aria-hidden='true') &times;
               h4.modal-title Log In
             .modal-body
-              form(name='purchase', action='', method='')
+              form(name='purchase', action='/purchase', method='post')
                 .form-group
                   label.control-label(for='username') Username:
                   input.form-control(type='text')

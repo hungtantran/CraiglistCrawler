@@ -4,6 +4,7 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var stormpath = require('stormpath')
 
 var index = require('./routes/index');
 var prices = require('./routes/prices');
@@ -16,6 +17,7 @@ var sale = require('./routes/sale');
 var strain = require('./routes/strain');
 var type = require('./routes/type');
 var news = require('./routes/news');
+var user = require('./routes/user')
 
 var app = express();
 var https = require('https');
@@ -58,6 +60,7 @@ app.use('/sale', sale);
 app.use('/type', type);
 app.use('/strain', strain);
 app.use('/news', news);
+app.use('/user', user);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -114,5 +117,6 @@ if(passphrase) {
 
 https.createServer(config, app).listen(8080);
 }*/
+
 
 http.createServer(app).listen(3000);
