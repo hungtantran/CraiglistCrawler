@@ -4,6 +4,9 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session')
+var https = require('https');
+var http = require('http');
 
 var index = require('./routes/index');
 var prices = require('./routes/prices');
@@ -19,8 +22,17 @@ var news = require('./routes/news');
 var user = require('./routes/user')
 
 var app = express();
-var https = require('https');
-var http = require('http');
+
+app.use(session({
+    secret: 'keyboard cat',
+    cookie: {
+        path    : '/',
+        httpOnly: false,
+        maxAge  : 24*60*60*1000
+    },
+    resave: false,
+    saveUninitialized: true
+}))
 
 // gzip/deflate outgoing responses
 var compression = require('compression');

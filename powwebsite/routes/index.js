@@ -20,6 +20,7 @@ router.get('/', function(req, res) {
   res.render('index', {
     title: 'The Best Weed Prices and Delivery Source - LeafyExchange',
     stylesheet: '/stylesheets/index.css',
+    session: req.session,
     postings: globals.postings,
     localBusinesses: globals.localBusinesses,
     states: globals.states,
@@ -85,6 +86,7 @@ router.get('/state/:state', function(req, res){
     res.render('index', {
         title: 'The Best Weed Delivery Source in ' + state + ' - LeafyExchange',
         stylesheet: '/stylesheets/index.css',
+        session: req.session,
         postings: postingStateInfo,
         localBusinesses: localBusinessStateInfo,
         states: globals.states,
@@ -108,6 +110,7 @@ router.get('/privacy', function(req, res) {
   res.render('privacy', {
     title: 'Privacy - LeafyExchange',
     stylesheet: '/stylesheets/index.css',
+    session: req.session,
     states: globals.states,
     description: 'Looking for the price of weed? LeafyExchange can help you find the prices of pot in your area!',
     keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
@@ -120,6 +123,7 @@ router.get('/aboutus', function(req, res) {
   res.render('aboutus', {
     title: 'About Us - LeafyExchange',
     stylesheet: '/stylesheets/index.css',
+    session: req.session,
     states: globals.states,
     description: 'Looking for the price of weed? LeafyExchange can help you find the prices of pot in your area!',
     keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
@@ -132,6 +136,7 @@ router.get('/terms', function(req, res) {
   res.render('terms', {
     title: 'Terms and Conditions - LeafyExchange',
     stylesheet: '/stylesheets/index.css',
+    session: req.session,
     states: globals.states,
     description: 'Looking for the price of weed? LeafyExchange can help you find the prices of pot in your area!',
     keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',

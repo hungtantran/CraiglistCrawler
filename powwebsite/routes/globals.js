@@ -12,6 +12,8 @@ var StrainProvider = require('./strainProvider').StrainProvider;
 var strainProvider = new StrainProvider();
 var NewsProvider = require('./newsProvider').NewsProvider;
 var newsProvider = new NewsProvider();
+var UserProvider = require('./userProvider').UserProvider;
+var userProvider = new UserProvider();
 
 var CommonHelper = require('./commonHelper').CommonHelper;
 var commonHelper = new CommonHelper();
@@ -151,5 +153,6 @@ exports.states = states;
 
 exports.pricesProvider = pricesProvider;
 exports.postingLocationProvider = postingLocationProvider;
+exports.userProvider = userProvider;
 exports.commonHelper = commonHelper;
 exports.periodicProcess = periodicProcess;
