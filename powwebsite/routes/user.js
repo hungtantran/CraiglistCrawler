@@ -68,7 +68,7 @@ router.post('/signup', function(req, res) {// Sanity check
 // Log In
 router.post('/login', function(req, res) {
   if (req.session.logged) {
-    // TODO sth 
+    res.status(400).send('Already login an account. Please logout of the current account first.');
   } else {
     userProvider.getUser(
       req.body['username'],
@@ -80,16 +80,11 @@ router.post('/login', function(req, res) {
           if (doc && doc.length == 1) {
             req.session.logged = true;
             req.session.user = doc[0];
-            console.log('log in successfully');
+            res.status(200).send('Login account successfully');
           } else {
-            console.log(doc);
-            console.log('log in fail');
+            res.status(400).send('Either username or password is incorrect. Please try again');
           }
         }
-
-        res.statusCode = 302;
-        res.setHeader('Location', '/');
-        res.end();
       }
     );
   }
