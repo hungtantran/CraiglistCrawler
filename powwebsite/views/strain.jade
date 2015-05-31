@@ -16,6 +16,7 @@ block content
       hr(class='featurette-divider')
 
     div(class='hidden-xs hidden-sm col-md-2 col-lg-2' id ='left-margin')
+      br
 
     div(id ='content' class='col-xs-12 col-sm-12 col-md-8 col-lg-8')
 
@@ -37,13 +38,13 @@ block content
             table(id='latest_prices_content' class='table table-striped table-condensed table-responsive')
               thead
                 tr
-                  th(class="col-xs-4 col-sm-2 col-md-2 col-lg-2 text-center")
+                  th(class="col-xs-4 col-sm-4 col-md-4 col-lg-2 text-center")
                     | Date/Locations
-                  th(class="col-xs-8 col-sm-8 col-md-6 col-lg-6 text-center")
+                  th(class="col-xs-8 col-sm-8 col-md-8 col-lg-6 text-center")
                     | Post title
-                  th(class="hidden-xs col-sm-2 col-md-2 col-lg-2 text-center")
+                  th(class="hidden-xs hidden-sm hidden-md col-lg-2 text-center")
                     | Quantities
-                  th(class="hidden-xs hidden-sm col-md-2 col-lg-2 text-center")
+                  th(class="hidden-xs hidden-sm hidden-md col-lg-2 text-center")
                     | Prices
             div(id='right_pane_content')
               table(id='latest_prices_content' class='table table-striped table-condensed table-responsive' style='table-layout: fixed; overflow-x: hidden')
@@ -62,20 +63,20 @@ block content
                     - quantityString = quantitiesString[i]
                     if (posting['city'])
                       tr
-                        td(class="col-xs-4 col-sm-2 col-md-2 col-lg-2")
+                        td(class="col-xs-4 col-sm-4 col-md-4 col-lg-2")
                           = posting['datePosted'] + " - " + posting['city']
-                        td(class="col-xs-8 col-sm-8 col-md-6 col-lg-6")
+                        td(class="col-xs-8 col-sm-8 col-md-8 col-lg-6")
                           strong
                             != '<a href="/posting/'
                             = posting['url']
                             != '">'
                             = posting['title']
                             != '</a>'
-                        td(class="hidden-xs col-sm-2 col-md-2 col-lg-2")
+                        td(class="hidden-xs hidden-sm hidden-md col-lg-2")
                           if (posting['quantity'] == null)
                           else
                             = quantityString
-                        td(class="hidden-xs hidden-sm col-md-2 col-lg-2")
+                        td(class="hidden-xs hidden-sm hidden-md col-lg-2")
                           if (posting['price'] == null)
                           else
                             = priceString

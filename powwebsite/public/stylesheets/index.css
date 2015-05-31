@@ -19,6 +19,20 @@ body {
     */url(../images/bg.png) repeat-x top;
 }
 
+.nav-tabs > li > a {
+    margin-right: 0px;
+    background-color: #484848;
+    border: 1px solid #ddd;
+    border-radius: 0px 0px 0 0;
+}
+
+.nav-tabs > li.active > a:focus {
+    color: #555;
+    cursor: default;
+    background-color: #484848;
+    border: 1px solid #1FBAD6;
+}
+
 #type_image {
     padding-left: 1px;
     padding-right: 1px;

@@ -128,12 +128,12 @@ function initializePostings(postings) {
     var dateLocationPosted = row.insertCell(index++);
     var url = '/posting/' + postings[i]['url'];
     dateLocationPosted.innerHTML = postings[i]['datePosted'] + " - " + postings[i]['city'];
-    dateLocationPosted.setAttribute('class','col-xs-4 col-sm-2 col-md-2 col-lg-2');
+    dateLocationPosted.setAttribute('class','col-xs-4 col-sm-4 col-md-4 col-lg-2');
 
     // Title cell
     var title = row.insertCell(index++);
     title.innerHTML = '<strong><a href="' + url + '">' + postings[i]['title'] + '</a></strong>';
-    title.setAttribute('class','col-xs-8 col-sm-8 col-md-6 col-lg-6');
+    title.setAttribute('class','col-xs-8 col-sm-8 col-md-8 col-lg-6');
 
     // Code for query with grouping
     // Quantity cell
@@ -159,7 +159,7 @@ function initializePostings(postings) {
     }
 
     quantity.innerHTML = quantityString;
-    quantity.setAttribute('class','hidden-xs col-sm-2 col-md-2 col-lg-2');
+    quantity.setAttribute('class','hidden-xs hidden-sm hidden-md col-lg-2');
 
     // Price cell
     var price = row.insertCell(index++);
@@ -179,7 +179,7 @@ function initializePostings(postings) {
     }
 
     price.innerHTML = priceString;
-    price.setAttribute('class','hidden-xs hidden-sm col-md-2 col-lg-2');
+    price.setAttribute('class','hidden-xs hidden-sm hidden-md col-lg-2');
 
     ++totalSalePosts;
   }
