@@ -26,19 +26,22 @@ function sanityCheckRequest(request) {
     return false;
   }
 
+  var emailRegex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+  if (emailRegex.test(request['email']) === false) {
+    console.log('Email invalid ' + request['email']);
+    return false;
+  }
+
   return true;
 }
 
 // Sign Up
-router.post('/signup', function(req, res) {
-    var responseJson = {};
-
-    // Sanity check
+router.post('/signup', function(req, res) {// Sanity check
     if (!sanityCheckRequest(req.body))
     {
       console.log('Request format invalid');
-      responseJson['result'] = false;
-      responseJson['message'] = 'Request format invalid';
+      res.status(400).send('Signup Information Invalid. Please retry again.');
+      res.end();
     } else {
       userProvider.insertUser(
         req.body['email'],
@@ -47,13 +50,18 @@ router.post('/signup', function(req, res) {
         function(error, doc) {
           if (error) {
             console.log(error);
+            if (error.errno === 1062) {
+              res.status(400).send('Email or username has already exists, please choose another one');
+            } else {
+              res.status(400).send('Fails to signup for new user');
+            }
+            res.end();
+          } else {
+            res.status(200).send('Signup successfully');
+            res.end();
           }
         }
       );
-
-      res.statusCode = 302;
-      res.setHeader('Location', '/');
-      res.end();
     }
 });
 

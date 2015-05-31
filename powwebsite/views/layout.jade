@@ -132,8 +132,9 @@ html
               button.close(type='button', data-dismiss='modal', aria-label='Close')
                 span(aria-hidden='true') &times;
               h4.modal-title Sign Up for LeafyExchange!
-            .modal-body
+            .modal-body(id='signUpBody')
               form(id='signup' name='signup')
+                span(class="notice-block" data-alertid="signUpResult")
                 .form-group
                   label.control-label(for='email') Email:
                   input.form-control(type='email', id='email', placeholder='@', name='email')
@@ -249,6 +250,7 @@ html
       |     $(document).trigger("clear-alert-id.username");
       |     $(document).trigger("clear-alert-id.password");
       |     $(document).trigger("clear-alert-id.retypedPassword");
+      |     $(document).trigger("clear-alert-id.signUpResult");
       |     if (email.length === 0 || emailRegex.test(email) === false) {
       |       $(document).trigger("set-alert-id-email", [
       |         {
@@ -277,5 +279,24 @@ html
       |           priority: "error"
       |         }
       |       ]);
+      |     } else {
+      |       var loginCall = $.ajax({
+      |         method: "POST",
+      |         url: "/user/signup",
+      |         data: {email: email, username: username, password: password, retypedPassword: retypedPassword }
+      |       })
+      |       .done(function(msg) {
+      |         $('#signUpBody').html('Sign Up successfully');
+      |       })
+      |       .fail(function(jqXHR, textStatus) {
+      |         $(document).trigger("set-alert-id-retypedPassword", [
+      |           {
+      |             message: jqXHR.responseText,
+      |             priority: "error"
+      |           }
+      |         ]);
+      |       })
+      |       .always(function() { // TODO sth
+      |       });
       |     }
       | }
