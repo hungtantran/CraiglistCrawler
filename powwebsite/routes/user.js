@@ -63,19 +63,45 @@ router.post('/', function(req, res) {
 });
 
 router.get('/', function(req, res) {
-      res.render('purchase', {
-      title: "We've reached out to sellers in your area!",
-      stylesheet: '/stylesheets/index.css',
-      description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot in your area!',
-      keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
-      icon: '/images/icon.png',
-      javascriptSrcs: 
-          ['http://maps.googleapis.com/maps/api/js',
-           'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js',
-           'http://cdn.jsdelivr.net/d3js/3.3.9/d3.min.js',
-           'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel_packed.js',
-           '/javascripts/index.js']});
-      res.end();
+  var transactionsQuery = 'INSERT INTO users (email, username, password) VALUES (?, ?, ?)';
+
+  var connection = connectionProvider.getConnection();
+  var insertUser = connection.query(userQuery,
+    [req.body['email'],
+    req.body['username'],
+    req.body['password']],
+    function(err, rows) {
+      if (err) {
+        console.log('Request to create user failed ' + err);
+        responseJson['result'] = false;
+        responseJson['message'] = 'Request to user failed';
+      }
+  });
+
+  console.log(insertUser.sql);
+
+  res.statusCode = 302;
+  res.setHeader('Location', '/');
+  res.end();
+
+  res.render('user', {
+    title: 'The Best Weed Prices and Delivery Source - LeafyExchange',
+    stylesheet: '/stylesheets/user.css',
+    postings: globals.postings,
+    localBusinesses: globals.localBusinesses,
+    states: globals.states,
+    pricesString: globals.commonHelper.constructPriceStringArray(globals.postings),
+    quantitiesString: globals.commonHelper.constructQuantityStringArray(globals.postings),
+    description: 'Looking to buy weed? LeafyExchange can help you find the best prices of weed, marijuana pot in your area!',
+    keywords: '420,weed,pot,marijuana,green,price of weed, price of pot, price of marijuana, legalize, medical, medicinal, herb, herbal',
+    icon: '/images/icon.png',
+    javascriptSrcs: 
+        ['http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false',
+         'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js',
+         'http://cdn.jsdelivr.net/d3js/3.3.9/d3.min.js',
+         'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel_packed.js',
+         '/javascripts/index.js']
+  });
 });
 
 module.exports = router;
