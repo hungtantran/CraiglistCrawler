@@ -15,6 +15,7 @@ html
 
     script(type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js' charset='utf-8')
     script(type='text/javascript' src='http://getbootstrap.com/dist/js/bootstrap.min.js')
+    script(type='text/javascript' src='/javascripts/formAlert.js')
 
     if (javascriptSrcs !== undefined)
       each jsSrc in javascriptSrcs
@@ -82,6 +83,21 @@ html
       | text-align: center;
       | }
 
+      | .notice-block .warning {
+      | color: #c09853;
+      | }
+      | .notice-block .error {
+      | color: #b94a48;
+      | margin-left: 10px;
+      | }
+      | .notice-block .success {
+      | color: #468847;
+      | }
+      | .notice-block .info {
+      | color: #3a87ad;
+      | }
+
+
   body
     div(class='modal fade state-modal-lg' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true')
       div(class='modal-dialog modal-lg')
@@ -117,7 +133,7 @@ html
                 span(aria-hidden='true') &times;
               h4.modal-title Sign Up for LeafyExchange!
             .modal-body
-              form(name='signup', action='/user/signup', method='post')
+              form(id='signup' name='signup')
                 .form-group
                   label.control-label(for='email') Email:
                   input.form-control(type='email', id='email', placeholder='@', name='email')
@@ -130,9 +146,10 @@ html
                 .form-group
                   label.control-label(for='retypedPassword') Re-typed Password:
                   input.form-control(type='password', id='retypedPassword', name='retypedPassword')
+                  span(class="notice-block" data-alertid="retypedPassword")
                 .modal-footer
                   button.btn.btn-default(type='button', data-dismiss='modal') Close
-                  button.btn.btn-primary(type='submit') Sign Up
+                  button.btn.btn-primary(type='button', onclick='signUpValidation()') Sign Up
 
     .modal.fade.login-modal-lg(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
       .modal-dialog
@@ -218,3 +235,17 @@ html
       |   $('#header').height($realHeader.outerHeight());
       | }
       | window.onload = changeHeight();
+
+      | function signUpValidation() {
+      |     var retypedPassword = $("#retypedPassword").val();
+      |     var password = $("#password").val();
+      |     $(document).trigger("clear-alert-id.retypedPassword");
+      |     if (password !== retypedPassword) {
+      |       $(document).trigger("set-alert-id-retypedPassword", [
+      |         {
+      |           message: "Retype password needs to be the same as password",
+      |           priority: "error"
+      |         }
+      |       ]);
+      |     }
+      | }
