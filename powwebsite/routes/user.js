@@ -57,7 +57,7 @@ router.post('/signup', function(req, res) {// Sanity check
             }
             res.end();
           } else {
-            res.status(200).send('Signup successfully');
+            res.status(200).send('Signup successfully. Please login to your new account.');
             res.end();
           }
         }
