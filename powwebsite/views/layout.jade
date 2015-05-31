@@ -137,12 +137,15 @@ html
                 .form-group
                   label.control-label(for='email') Email:
                   input.form-control(type='email', id='email', placeholder='@', name='email')
+                  span(class="notice-block" data-alertid="email")
                 .form-group
                   label.control-label(for='username') Username:
                   input.form-control(type='text', id='username', placeholder='username', name='username')
+                  span(class="notice-block" data-alertid="username")
                 .form-group
                   label.control-label(for='password') Password:
                   input.form-control(type='password', id='password', name='password')
+                  span(class="notice-block" data-alertid="password")
                 .form-group
                   label.control-label(for='retypedPassword') Re-typed Password:
                   input.form-control(type='password', id='retypedPassword', name='retypedPassword')
@@ -237,10 +240,37 @@ html
       | window.onload = changeHeight();
 
       | function signUpValidation() {
-      |     var retypedPassword = $("#retypedPassword").val();
+      |     var emailRegex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+      |     var email = $("#email").val();
+      |     var username = $("#username").val();
       |     var password = $("#password").val();
+      |     var retypedPassword = $("#retypedPassword").val();
+      |     $(document).trigger("clear-alert-id.email");
+      |     $(document).trigger("clear-alert-id.username");
+      |     $(document).trigger("clear-alert-id.password");
       |     $(document).trigger("clear-alert-id.retypedPassword");
-      |     if (password !== retypedPassword) {
+      |     if (email.length === 0 || emailRegex.test(email) === false) {
+      |       $(document).trigger("set-alert-id-email", [
+      |         {
+      |           message: "Please enter a valid email",
+      |           priority: "error"
+      |         }
+      |       ]);
+      |     } else if (username.length === 0) {
+      |       $(document).trigger("set-alert-id-username", [
+      |         {
+      |           message: "Please enter a username",
+      |           priority: "error"
+      |         }
+      |       ]);
+      |     } else if (password.length < 6) {
+      |       $(document).trigger("set-alert-id-password", [
+      |         {
+      |           message: "Please enter a password of at least 6 characters",
+      |           priority: "error"
+      |         }
+      |       ]);
+      |     } else if (password !== retypedPassword) {
       |       $(document).trigger("set-alert-id-retypedPassword", [
       |         {
       |           message: "Retype password needs to be the same as password",
