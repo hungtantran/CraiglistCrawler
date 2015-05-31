@@ -85,6 +85,7 @@ router.get('/:strainName', function(req, res) {
     res.render('strain', {
         title: 'LeafyExchange: The Best ' + strain['name'] + ' Prices and Delivery Source',
         stylesheet: '/stylesheets/strain.css',
+        session: req.session,
         strain: strain,
         postings: postingTagsInfo,
         pricesString: globals.commonHelper.constructPriceStringArray(postingTagsInfo),

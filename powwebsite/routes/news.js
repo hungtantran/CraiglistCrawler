@@ -33,6 +33,7 @@ router.get('/:id', function(req, res) {
     res.render('news_page', {
         title: globals.news[index]['title'] + ' - LeafyExchange',
         stylesheet: '/stylesheets/news_page.css',
+        session: req.session,
         states: globals.states,
         news: globals.news[index],
         description: globals.news[index]['summary'],
@@ -47,6 +48,7 @@ router.get('/', function(req, res) {
     res.render('news', {
         title: 'LeafyExchange: Marijuana News & Information',
         stylesheet: '/stylesheets/news.css',
+        session: req.session,
         states: globals.states,
         allNews: globals.news,
         description: 'Marijuana news, information, and culture by LeafyExchange, The Best Weed Prices and Delivery Source',

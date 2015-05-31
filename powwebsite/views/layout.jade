@@ -117,7 +117,7 @@ html
                 span(aria-hidden='true') &times;
               h4.modal-title Sign Up for LeafyExchange!
             .modal-body
-              form(name='signup', action='/user', method='post')
+              form(name='signup', action='/user/signup', method='post')
                 .form-group
                   label.control-label(for='email') Email:
                   input.form-control(type='email', id='email', placeholder='@', name='email')
@@ -142,16 +142,16 @@ html
                 span(aria-hidden='true') &times;
               h4.modal-title Log In
             .modal-body
-              form(name='purchase', action='/purchase', method='post')
+              form(name='login', action='/user/login', method='post')
                 .form-group
                   label.control-label(for='username') Username:
-                  input.form-control(type='text')
+                  input.form-control(type='text', id='username', placeholder='username', name='username')
                 .form-group
                   label.control-label(for='message-text') Password:
-                  input.form-control(type='password')
-            .modal-footer
-              button.btn.btn-default(type='button', data-dismiss='modal') Close
-              button.btn.btn-primary(type='button') Sign in
+                  input.form-control(type='password', id='password', placeholder='password', name='password')
+                .modal-footer
+                  button.btn.btn-default(type='button', data-dismiss='modal') Close
+                  button.btn.btn-primary(type='submit') Sign in
 
     div(id='header' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
       nav(class='navbar navbar-inverse navbar-fixed-top')
@@ -172,12 +172,21 @@ html
 
            div(id='navbar' class='navbar-collapse collapse')
             ul(class='nav nav-justified' id='header-bar')
-              li(class='list-unstyled' style="float:right; text-align:center")
-                a(href='#' data-toggle='modal' data-target='.login-modal-lg' title='Sign In' id='navbar_button')
-                  | LOG IN
-              li(class='list-unstyled' style="float:right; text-align:center")
-                a(href='#' data-toggle='modal' data-target='.signup-modal-lg' title='Sign Up' id='navbar_button')
-                  | SIGN UP
+              - if (session === undefined || session === null || session.logged === false || session.user === undefined) {
+                li(class='list-unstyled' style="float:right; text-align:center")
+                  a(href='#' data-toggle='modal' data-target='.login-modal-lg' title='Sign In' id='navbar_button')
+                    | LOG IN
+                li(class='list-unstyled' style="float:right; text-align:center")
+                  a(href='#' data-toggle='modal' data-target='.signup-modal-lg' title='Sign Up' id='navbar_button')
+                    | SIGN UP
+              - } else {
+                  li(class='list-unstyled' style="float:right; text-align:center")
+                    a(href='/user/logout' title='log out' id='navbar_button')
+                      | LOG OUT
+                  li(class='list-unstyled' style="float:right; text-align:center; color:white")
+                    a(href='' id='navbar_button')
+                      | HELLO !{session.user['username']}
+              - }
 
 
     block content

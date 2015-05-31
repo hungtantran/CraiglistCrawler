@@ -56,6 +56,7 @@ router.get('/', function(req, res) {
         res.render('search', {
             title: "Search results for all marijuana sale posts",
             stylesheet: '/stylesheets/search.css',
+            session: req.session,
             results: docs,
             pricesString: pricesString,
             quantitiesString: quantitiesString,

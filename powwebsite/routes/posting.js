@@ -78,6 +78,7 @@ router.get('/:id', function(req, res) {
         res.render('posting', {
             title: title,
             stylesheet: '/stylesheets/posting.css',
+            session: req.session,
             content: doc['posting_body'],
             url: doc['url'],
             state: doc['state'],
