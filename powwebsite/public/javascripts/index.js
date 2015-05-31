@@ -406,7 +406,8 @@ function newMap(latitude, longtitude, zoom, divId, draggable) {
   var mapOptions = {
     center: { lat: latitude, lng: longtitude},
     zoom: zoom,
-    draggable: draggable_
+    draggable: draggable_,
+    streetViewControl: false,
   };
 
   map = new google.maps.Map(document.getElementById(divId),

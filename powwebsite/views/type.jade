@@ -15,40 +15,42 @@ block content
       hr(class='featurette-divider')
       | Top Strains
 
-    div(class='hidden-xs col-sm-2 col-md-2 col-lg-2')
-    div(id='type_image_holder' class='col-xs-4 col-sm-2 col-md-2 col-lg-2')
-      br
-      a(href=topStrains[0]['url'])
-        img(id='type_image' src=topStrains[0]['photo'] class='col-xs-12 col-sm-12 col-md-12 col-lg-12 img-responsive' alt=topStrains[0]['name'])
-      div(id='strain_title' class='col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center')
+    - if (topStrains.length >= 4) {
+      div(class='hidden-xs col-sm-2 col-md-2 col-lg-2')
+      div(id='type_image_holder' class='col-xs-4 col-sm-2 col-md-2 col-lg-2')
         br
-        strong
-          = topStrains[0]['name']
-    div(id='type_image_holder' class='col-xs-4 col-sm-2 col-md-2 col-lg-2')
-      br
-      a(href=topStrains[1]['url'])
-        img(id='type_image' src=topStrains[1]['photo'] class='col-xs-12 col-sm-12 col-md-12 col-lg-12 img-responsive' alt=topStrains[1]['name'])
-      div(id='strain_title' class='col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center')
+        a(href=topStrains[0]['url'])
+          img(id='type_image' src=topStrains[0]['photo'] class='col-xs-12 col-sm-12 col-md-12 col-lg-12 img-responsive' alt=topStrains[0]['name'])
+        div(id='strain_title' class='col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center')
+          br
+          strong
+            = topStrains[0]['name']
+      div(id='type_image_holder' class='col-xs-4 col-sm-2 col-md-2 col-lg-2')
         br
-        strong
-          = topStrains[1]['name']
-    div(id='type_image_holder' class='col-xs-4 col-sm-2 col-md-2 col-lg-2')
-      br
-      a(href=topStrains[2]['url'])
-        img(id='type_image' src=topStrains[2]['photo'] class='col-xs-12 col-sm-12 col-md-12 col-lg-12 img-responsive' alt=topStrains[2]['name'])
-      div(id='strain_title' class='col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center')
+        a(href=topStrains[1]['url'])
+          img(id='type_image' src=topStrains[1]['photo'] class='col-xs-12 col-sm-12 col-md-12 col-lg-12 img-responsive' alt=topStrains[1]['name'])
+        div(id='strain_title' class='col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center')
+          br
+          strong
+            = topStrains[1]['name']
+      div(id='type_image_holder' class='col-xs-4 col-sm-2 col-md-2 col-lg-2')
         br
-        strong
-          = topStrains[2]['name']
-    div(id='type_image_holder' class='hidden-xs col-sm-2 col-md-2 col-lg-2')
-      br
-      a(href=topStrains[3]['url'])
-        img(id='type_image' src=topStrains[3]['photo'] class='col-xs-12 col-sm-12 col-md-12 col-lg-12 img-responsive' alt=topStrains[3]['name'])
-      div(id='strain_title' class='col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center')
+        a(href=topStrains[2]['url'])
+          img(id='type_image' src=topStrains[2]['photo'] class='col-xs-12 col-sm-12 col-md-12 col-lg-12 img-responsive' alt=topStrains[2]['name'])
+        div(id='strain_title' class='col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center')
+          br
+          strong
+            = topStrains[2]['name']
+      div(id='type_image_holder' class='hidden-xs col-sm-2 col-md-2 col-lg-2')
         br
-        strong
-          = topStrains[3]['name']
-    div(class='hidden-xs col-sm-2 col-md-2 col-lg-2')
+        a(href=topStrains[3]['url'])
+          img(id='type_image' src=topStrains[3]['photo'] class='col-xs-12 col-sm-12 col-md-12 col-lg-12 img-responsive' alt=topStrains[3]['name'])
+        div(id='strain_title' class='col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center')
+          br
+          strong
+            = topStrains[3]['name']
+      div(class='hidden-xs col-sm-2 col-md-2 col-lg-2')
+    - }
 
     div(class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
       hr(class='featurette-divider')

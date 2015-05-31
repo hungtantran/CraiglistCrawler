@@ -7,7 +7,9 @@ var bodyParser = require('body-parser');
 var session = require('express-session')
 var https = require('https');
 var http = require('http');
+var knexSessionStore = require('connect-session-knex')(session);
 
+var configs    = require("./routes/config");
 var index = require('./routes/index');
 var prices = require('./routes/prices');
 var postings = require('./routes/postings');
@@ -23,15 +25,33 @@ var user = require('./routes/user')
 
 var app = express();
 
+var knex = require('knex');
+var knex = knex({
+  client: 'mysql',
+  connection: {
+    host     : configs.dbhost,
+    port     : configs.dbport,
+    user     : configs.dbuser,
+    password : configs.dbpassword,
+    database : configs.dbdatabase
+  }
+});
+
+var store = new knexSessionStore({
+  knex: knex,
+  tablename: 'sessions'
+});
+
 app.use(session({
-    secret: 'keyboard cat',
+    secret: '420pontius',
     cookie: {
         path    : '/',
         httpOnly: false,
         maxAge  : 24*60*60*1000
     },
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: store,
 }))
 
 // gzip/deflate outgoing responses
