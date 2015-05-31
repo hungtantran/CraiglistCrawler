@@ -15,6 +15,7 @@ html
 
     script(type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js' charset='utf-8')
     script(type='text/javascript' src='http://getbootstrap.com/dist/js/bootstrap.min.js')
+    script(type='text/javascript' src='/javascripts/formAlert.js')
 
     if (javascriptSrcs !== undefined)
       each jsSrc in javascriptSrcs
@@ -82,6 +83,21 @@ html
       | text-align: center;
       | }
 
+      | .notice-block .warning {
+      | color: #c09853;
+      | }
+      | .notice-block .error {
+      | color: #b94a48;
+      | margin-left: 10px;
+      | }
+      | .notice-block .success {
+      | color: #468847;
+      | }
+      | .notice-block .info {
+      | color: #3a87ad;
+      | }
+
+
   body
     div(class='modal fade state-modal-lg' tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel' aria-hidden='true')
       div(class='modal-dialog modal-lg')
@@ -116,23 +132,28 @@ html
               button.close(type='button', data-dismiss='modal', aria-label='Close')
                 span(aria-hidden='true') &times;
               h4.modal-title Sign Up for LeafyExchange!
-            .modal-body
-              form(name='signup', action='/user/signup', method='post')
+            .modal-body(id='signUpBody')
+              form(id='signup' name='signup')
+                span(class="notice-block" data-alertid="signUpResult")
                 .form-group
                   label.control-label(for='email') Email:
                   input.form-control(type='email', id='email', placeholder='@', name='email')
+                  span(class="notice-block" data-alertid="email")
                 .form-group
                   label.control-label(for='username') Username:
                   input.form-control(type='text', id='username', placeholder='username', name='username')
+                  span(class="notice-block" data-alertid="username")
                 .form-group
                   label.control-label(for='password') Password:
                   input.form-control(type='password', id='password', name='password')
+                  span(class="notice-block" data-alertid="password")
                 .form-group
                   label.control-label(for='retypedPassword') Re-typed Password:
                   input.form-control(type='password', id='retypedPassword', name='retypedPassword')
+                  span(class="notice-block" data-alertid="retypedPassword")
                 .modal-footer
                   button.btn.btn-default(type='button', data-dismiss='modal') Close
-                  button.btn.btn-primary(type='submit') Sign Up
+                  button.btn.btn-primary(type='button', onclick='signUpValidation()') Sign Up
 
     .modal.fade.login-modal-lg(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
       .modal-dialog
@@ -141,17 +162,20 @@ html
               button.close(type='button', data-dismiss='modal', aria-label='Close')
                 span(aria-hidden='true') &times;
               h4.modal-title Log In
-            .modal-body
-              form(name='login', action='/user/login', method='post')
+            .modal-body(id='loginBody')
+              form(id='login' name='login')
+                span(class="notice-block" data-alertid="loginResult")
                 .form-group
                   label.control-label(for='username') Username:
-                  input.form-control(type='text', id='username', placeholder='username', name='username')
+                  input.form-control(type='text', id='username2', placeholder='username', name='username')
+                  span(class="notice-block" data-alertid="username2")
                 .form-group
                   label.control-label(for='message-text') Password:
-                  input.form-control(type='password', id='password', placeholder='password', name='password')
+                  input.form-control(type='password', id='password2', placeholder='password', name='password')
+                  span(class="notice-block" data-alertid="password2")
                 .modal-footer
                   button.btn.btn-default(type='button', data-dismiss='modal') Close
-                  button.btn.btn-primary(type='submit') Sign in
+                  button.btn.btn-primary(type='button', onclick='loginValidation()') Sign in
 
     div(id='header' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
       nav(class='navbar navbar-inverse navbar-fixed-top')
@@ -218,3 +242,108 @@ html
       |   $('#header').height($realHeader.outerHeight());
       | }
       | window.onload = changeHeight();
+
+      | function signUpValidation() {
+      |     var emailRegex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+      |     var email = $("#email").val();
+      |     var username = $("#username").val();
+      |     var password = $("#password").val();
+      |     var retypedPassword = $("#retypedPassword").val();
+      |     $(document).trigger("clear-alert-id.email");
+      |     $(document).trigger("clear-alert-id.username");
+      |     $(document).trigger("clear-alert-id.password");
+      |     $(document).trigger("clear-alert-id.retypedPassword");
+      |     $(document).trigger("clear-alert-id.signUpResult");
+      |     if (email.length === 0 || emailRegex.test(email) === false) {
+      |       $(document).trigger("set-alert-id-email", [
+      |         {
+      |           message: "Please enter a valid email",
+      |           priority: "error"
+      |         }
+      |       ]);
+      |     } else if (username.length === 0) {
+      |       $(document).trigger("set-alert-id-username", [
+      |         {
+      |           message: "Please enter a username",
+      |           priority: "error"
+      |         }
+      |       ]);
+      |     } else if (password.length < 6) {
+      |       $(document).trigger("set-alert-id-password", [
+      |         {
+      |           message: "Please enter a password of at least 6 characters",
+      |           priority: "error"
+      |         }
+      |       ]);
+      |     } else if (password !== retypedPassword) {
+      |       $(document).trigger("set-alert-id-retypedPassword", [
+      |         {
+      |           message: "Retype password needs to be the same as password",
+      |           priority: "error"
+      |         }
+      |       ]);
+      |     } else {
+      |       var signupCall = $.ajax({
+      |         method: "POST",
+      |         url: "/user/signup",
+      |         data: { email: email, username: username, password: password, retypedPassword: retypedPassword }
+      |       })
+      |       .done(function(msg) {
+      |         $('#signUpBody').html('Sign Up successfully');
+      |       })
+      |       .fail(function(jqXHR, textStatus) {
+      |         $(document).trigger("set-alert-id-signUpResult", [
+      |           {
+      |             message: jqXHR.responseText,
+      |             priority: "error"
+      |           }
+      |         ]);
+      |       })
+      |       .always(function() { // TODO sth
+      |       });
+      |     }
+      | }
+
+      | function loginValidation() {
+      |     var username = $("#username2").val();
+      |     var password = $("#password2").val();
+      |     $(document).trigger("clear-alert-id.username2");
+      |     $(document).trigger("clear-alert-id.password2");
+      |     if (username.length === 0) {
+      |       $(document).trigger("set-alert-id-username2", [
+      |         {
+      |           message: "Please enter a username",
+      |           priority: "error"
+      |         }
+      |       ]);
+      |     } else if (password.length < 6) {
+      |       $(document).trigger("set-alert-id-password2", [
+      |         {
+      |           message: "Please enter a password of at least 6 characters",
+      |           priority: "error"
+      |         }
+      |       ]);
+      |     } else {
+      |       var loginCall = $.ajax({
+      |         method: "POST",
+      |         url: "/user/login",
+      |         data: { username: username, password: password }
+      |       })
+      |       .done(function(msg) {
+      |         $('#loginBody').html('Login successfully');
+      |           setTimeout(function(){
+      |             window.location = '/';
+      |         }, 1000);
+      |       })
+      |       .fail(function(jqXHR, textStatus) {
+      |         $(document).trigger("set-alert-id-loginResult", [
+      |           {
+      |             message: jqXHR.responseText,
+      |             priority: "error"
+      |           }
+      |         ]);
+      |       })
+      |       .always(function() { // TODO sth
+      |       });
+      |     }
+      | }

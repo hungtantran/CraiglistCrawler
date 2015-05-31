@@ -31,8 +31,6 @@ router.get('/', function(req, res) {
     icon: '/images/icon.png',
     javascriptSrcs: 
         ['http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false',
-         'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer_compiled.js',
-         'http://cdn.jsdelivr.net/d3js/3.3.9/d3.min.js',
          'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel_packed.js',
          '/javascripts/index.js']
   });

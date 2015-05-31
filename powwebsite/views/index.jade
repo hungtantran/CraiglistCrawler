@@ -149,9 +149,11 @@ block content
         li(class='list-unstyled' style='text-align:center; padding-left:10px; padding-right:10px; display:inline')
           a(href='#' data-toggle='modal' data-target='.purchase-modal-lg' title='Sign In' id='purchase_button')
             | PURCHASE
-        li(class='list-unstyled' style='text-align:center; padding-left:10px; padding-right:10px; display:inline')
-          a(href='#' data-toggle='modal' data-target='.login-modal-lg' title='Sign In' id='sign_in_button')
-            | SIGN IN
+        - if (session === undefined || session === null || session.logged === false || session.user === undefined) {
+            li(class='list-unstyled' style='text-align:center; padding-left:10px; padding-right:10px; display:inline')
+              a(href='#' data-toggle='modal' data-target='.login-modal-lg' title='Sign In' id='sign_in_button')
+                | SIGN IN
+        - }
 
     div(id='news' class='col-xs-12 col-sm-12 col-md-12 col-lg-12')
       h2(class='text-center' style='font-size:2em')

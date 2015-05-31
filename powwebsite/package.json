@@ -20,6 +20,7 @@
     "string-format":  "~0.5.0",
     "compression": "~1.4.3",
     "node-geocoder": "~2.20.0",
-    "nodemailer": "~0.7.1"
+    "nodemailer": "~0.7.1",
+    "bsFormAlerts": "~0.1.3"
   }
 }

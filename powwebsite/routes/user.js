@@ -29,19 +29,22 @@ function sanityCheckRequest(request) {
     return false;
   }
 
+  var emailRegex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+  if (emailRegex.test(request['email']) === false) {
+    console.log('Email invalid ' + request['email']);
+    return false;
+  }
+
   return true;
 }
 
 // Sign Up
-router.post('/signup', function(req, res) {
-    var responseJson = {};
-
-    // Sanity check
+router.post('/signup', function(req, res) {// Sanity check
     if (!sanityCheckRequest(req.body))
     {
       console.log('Request format invalid');
-      responseJson['result'] = false;
-      responseJson['message'] = 'Request format invalid';
+      res.status(400).send('Signup Information Invalid. Please retry again.');
+      res.end();
     } else {
       userProvider.insertUser(
         req.body['email'],
@@ -50,13 +53,18 @@ router.post('/signup', function(req, res) {
         function(error, doc) {
           if (error) {
             console.log(error);
+            if (error.errno === 1062) {
+              res.status(400).send('Email or username has already exists, please choose another one');
+            } else {
+              res.status(400).send('Fails to signup for new user');
+            }
+            res.end();
+          } else {
+            res.status(200).send('Signup successfully. Please login to your new account.');
+            res.end();
           }
         }
       );
-
-      res.statusCode = 302;
-      res.setHeader('Location', '/');
-      res.end();
     }
 });
 
@@ -118,7 +126,7 @@ router.get('/', function(req, res) {
 // Log In
 router.post('/login', function(req, res) {
   if (req.session.logged) {
-    // TODO sth 
+    res.status(400).send('Already login an account. Please logout of the current account first.');
   } else {
     userProvider.getUser(
       req.body['username'],
@@ -130,16 +138,11 @@ router.post('/login', function(req, res) {
           if (doc && doc.length == 1) {
             req.session.logged = true;
             req.session.user = doc[0];
-            console.log('log in successfully');
+            res.status(200).send('Login account successfully');
           } else {
-            console.log(doc);
-            console.log('log in fail');
+            res.status(400).send('Either username or password is incorrect. Please try again');
           }
         }
-
-        res.statusCode = 302;
-        res.setHeader('Location', '/');
-        res.end();
       }
     );
   }
